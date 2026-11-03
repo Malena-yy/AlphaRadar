@@ -1,0 +1,17 @@
+# Agora/SJS：AI Trading's Alpha Singularity: Emergent Market Reasoning through Agent-to-Agent Self-Evolution
+
+> - 元数据：`papers.yaml` 中 `id: agora-sjs-2026`；路线：`llm-agent`；标签：`llm`, `multi-agent`, `self-play`。
+> - 针对问题：`P5 overfitting`、`P6 leakage`。
+> - 来源：首轮检索整理，检索截至 2026-07-11。
+
+* **作者单位：** 官方摘要页未展示单位信息；作者为 Yuqi Li、Siyuan Liu、Bingjun Liu。
+
+* **发表时间：** 2026.06（arXiv v1）。
+
+* **论文链接：** https://arxiv.org/abs/2606.29194
+
+* **开源项目：** 论文称将发布 Agora implementation、七个 baseline 配置和 LLM Wiki schema；论文中未给出明确仓库链接。
+
+* **主要工作/创新点：** 论文提出 Agora 多智能体交易研究环境和 SJS（Sealed Joint Search，密封联合搜索）框架，目标是在外部评估器对参与智能体不可见的前提下，让多个大语言模型智能体共同搜索交易信号和评分函数。Agora 将 SJS 实例化为智能体间协作系统：五类角色通过三类受控通信通道协作，分别提出 Alpha、评价 Alpha、生成研究报告、改进评价指标和做元评估；技能库可随轮次演化，但最终持有期评估数据对所有面向模型的输入保持密封。与 Alpha-GPT 一类人机交互系统不同，Agora 更强调智能体之间的自博弈和自改进；与传统公式因子强化学习不同，它的搜索对象可以同时包括策略逻辑、因子表达式、评价协议和研究过程。论文实验中也使用 AlphaGen 风格算子和基准，因此与公式化因子挖掘路线存在直接交集。
+
+* **可参考点：** 1）适合作为多 agent 因子研究平台的远期参考；2）SJS 可用于把生成器、评估器和批评器同时纳入搜索，而不是只优化单个 policy；3）对工程落地而言必须先固定 DSL、数据切分、回测协议和审计日志，否则自改进循环容易放大不可复现结果。

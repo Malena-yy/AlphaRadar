@@ -1,0 +1,110 @@
+# AlphaRadar 分类体系。papers.yaml 中的 problems / routes / tags / status 只能使用这里定义的取值。
+# 问题（problems）回答“这篇工作在解决什么”，路线（routes）回答“它用什么方法”；两者都是多标签。
+# 问题的完整说明见 README“出发点：因子挖掘面临的问题”。
+
+problems:
+  search-space:
+    code: P1
+    name: 表达空间巨大，有效因子稀少
+  expressiveness:
+    code: P2
+    name: 表达能力与可解释性的权衡
+  eval-cost:
+    code: P3
+    name: 评价成本高
+  learning-signal:
+    code: P4
+    name: 学习信号稀疏、延迟且不可微
+  overfitting:
+    code: P5
+    name: 低信噪比下的过拟合
+  leakage:
+    code: P6
+    name: 前视偏差与信息泄漏
+  redundancy:
+    code: P7
+    name: 因子同质化与冗余
+  objective-gap:
+    code: P8
+    name: 挖掘目标与实际使用脱节
+  decay:
+    code: P9
+    name: 非平稳与因子衰减
+  reproducibility:
+    code: P10
+    name: 评估口径不统一、难以复现
+
+routes:
+  formulaic:
+    name: 公式 / 符号因子挖掘
+    scope: 公式库、遗传规划与 AutoML、RL / MCTS / GFlowNet / 文法搜索等显式公式、DSL、AST 形式的因子生成。
+  llm-agent:
+    name: LLM / Agent 因子挖掘
+    scope: 以大语言模型或智能体完成假设生成、公式或代码实现、经验记忆、评价反馈和 RFT 的因子挖掘。
+  neural:
+    name: 神经 / 隐式因子
+    scope: 深度网络直接输出 alpha 信号或端到端学习因子表示，输出不是可解释公式。
+  pool-combination:
+    name: 因子池与组合
+    scope: 候选因子准入、去冗余、筛选启停、动态加权和面向下游投资目标的组合。
+  evaluation:
+    name: 评估与稳健性
+    scope: 因子评价口径、衰减、拥挤、样本外稳健性、基准数据集与评估框架。
+  data-space:
+    name: 数据与表达空间
+    scope: 算子空间、高频 / 分钟频数据、另类数据（文本、新闻等）和表达空间扩展。
+  adjacent:
+    name: 可借鉴的相邻方法
+    scope: 不是因子挖掘本身，但机制可迁移的方法，例如 Agentic RL 的信用分配与 advantage 设计。
+
+status:
+  inbox: 已发现、尚未判断是否收录
+  triaged: 已确认收录，尚未写速读卡
+  card: 已有速读卡
+  deep-read: 已有精读
+
+tags:
+  # 搜索与训练方法
+  - rl
+  - ppo
+  - reinforce
+  - grpo
+  - rft
+  - distributional-rl
+  - reward-shaping
+  - mcts
+  - gflownet
+  - genetic-programming
+  - evolutionary
+  - quality-diversity
+  - automl
+  - grammar
+  - program-search
+  - code-evolution
+  - generator-predictor
+  - self-play
+  # 表示与模型
+  - rpn
+  - gnn
+  - transformer
+  - neural-alpha
+  - llm
+  - multi-agent
+  - memory
+  - skills
+  - rag
+  - multimodal
+  - human-in-the-loop
+  # 因子池、组合与评价
+  - pool-reward
+  - dynamic-combination
+  - factor-screening
+  - factor-lineage
+  - factor-model-joint
+  - portfolio
+  - alpha-decay
+  - safety
+  # 数据与因子类型
+  - formula-library
+  - high-frequency
+  - risk-factor

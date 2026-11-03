@@ -1,0 +1,36 @@
+name: 新论文候选
+description: 登记一篇待收录的因子挖掘相关工作
+title: "[paper] <简称>"
+labels: ["paper"]
+body:
+  - type: input
+    id: link
+    attributes:
+      label: 论文链接
+      description: arXiv、会议或 OpenReview 页面
+    validations:
+      required: true
+  - type: input
+    id: code
+    attributes:
+      label: 代码仓库
+      description: 官方仓库链接；未见官方开源可留空
+  - type: checkboxes
+    id: routes
+    attributes:
+      label: 路线（可多选，定义见 taxonomy.yaml）
+      options:
+        - label: formulaic 公式 / 符号因子挖掘
+        - label: llm-agent LLM / Agent 因子挖掘
+        - label: neural 神经 / 隐式因子
+        - label: pool-combination 因子池与组合
+        - label: evaluation 评估与稳健性
+        - label: data-space 数据与表达空间
+        - label: adjacent 可借鉴的相邻方法
+  - type: textarea
+    id: why
+    attributes:
+      label: 收录理由
+      description: 一两句话说明它和因子挖掘的关系、值得关注的机制
+    validations:
+      required: true

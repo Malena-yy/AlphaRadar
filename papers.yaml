@@ -1,0 +1,730 @@
+# AlphaRadar 论文登记表：唯一事实源。字段说明见 AGENTS.md；README 索引由 scripts/build_index.py 生成。
+papers:
+- id: alpha101-2016
+  short: Alpha101
+  title: 101 Formulaic Alphas
+  first_public: 2016-01
+  published: '2016.01'
+  arxiv: '1601.00991'
+  url: https://arxiv.org/abs/1601.00991
+  code: null
+  code_note: 未见官方开源；社区有多种 Alpha101/WorldQuant 101 复现，但需要逐一校验算子定义、数据对齐和未来函数处理
+  affiliation: Quantigic Solutions LLC
+  problems: []
+  routes:
+  - formulaic
+  tags:
+  - formula-library
+  status: card
+  card: notes/cards/2016_Alpha101.md
+  deep: null
+  added: '2026-11-03'
+- id: autoalpha-2020
+  short: AutoAlpha
+  title: 'AutoAlpha: an Efficient Hierarchical Evolutionary Algorithm for Mining Alpha Factors in Quantitative Investment'
+  first_public: 2020-04
+  published: 2020.04（arXiv v2；v1 为 2020.02）
+  arxiv: '2002.08245'
+  url: https://arxiv.org/abs/2002.08245
+  code: null
+  code_note: 未见官方开源
+  affiliation: 清华大学交叉信息研究院
+  problems:
+  - search-space
+  - eval-cost
+  - redundancy
+  routes:
+  - formulaic
+  tags:
+  - genetic-programming
+  - quality-diversity
+  status: card
+  card: notes/cards/2020_AutoAlpha.md
+  deep: null
+  added: '2026-11-03'
+- id: alphaevolve-2021
+  short: AlphaEvolve
+  title: 'AlphaEvolve: A Learning Framework to Discover Novel Alphas in Quantitative Investment'
+  first_public: 2021-04
+  published: 2021.04（SIGMOD 2021 / arXiv v2）
+  arxiv: '2103.16196'
+  url: https://arxiv.org/abs/2103.16196
+  code: null
+  code_note: 未见官方开源
+  affiliation: 新加坡国立大学、北京理工大学、浙江大学
+  problems:
+  - expressiveness
+  - eval-cost
+  - redundancy
+  routes:
+  - formulaic
+  tags:
+  - automl
+  - evolutionary
+  status: card
+  card: notes/cards/2021_AlphaEvolve.md
+  deep: null
+  added: '2026-11-03'
+- id: alphagen-2023
+  short: AlphaGen
+  title: Generating Synergistic Formulaic Alpha Collections via Reinforcement Learning
+  first_public: 2023-05
+  published: 2023.05（KDD 2023）
+  arxiv: '2306.12964'
+  url: https://arxiv.org/abs/2306.12964
+  code: https://github.com/ICT-FinD-Lab/alphagen
+  code_note: https://github.com/ICT-FinD-Lab/alphagen
+  affiliation: 中国科学院计算技术研究所、中国科学院大学、华为 EI Innovation Lab
+  problems:
+  - search-space
+  - redundancy
+  - objective-gap
+  routes:
+  - formulaic
+  tags:
+  - rl
+  - ppo
+  - rpn
+  - pool-reward
+  status: card
+  card: notes/cards/2023_AlphaGen.md
+  deep: null
+  added: '2026-11-03'
+- id: synergisticrl-2024
+  short: Synergistic RL
+  title: Synergistic Formulaic Alpha Generation for Quantitative Trading based on Reinforcement Learning
+  first_public: 2024-01
+  published: 2024.01（arXiv v1；v2 为 2024.07）
+  arxiv: '2401.02710'
+  url: https://arxiv.org/abs/2401.02710
+  code: null
+  code_note: 未见官方开源
+  affiliation: 韩国光云大学机器人学部
+  problems:
+  - search-space
+  - expressiveness
+  routes:
+  - formulaic
+  tags:
+  - rl
+  - rpn
+  status: card
+  card: notes/cards/2024_SynergisticRL.md
+  deep: null
+  added: '2026-11-03'
+- id: riskminer-2024
+  short: RiskMiner
+  title: 'RiskMiner: Discovering Formulaic Alphas via Risk Seeking Monte Carlo Tree Search'
+  first_public: 2024-02
+  published: 2024.02（arXiv；ICAIF 2024 相关工作）
+  arxiv: '2402.07080'
+  url: https://arxiv.org/abs/2402.07080
+  code: null
+  code_note: 未见官方开源；非官方参考实现：https://github.com/carlosrod723/RiskMiner-Alpha-Discovery-MCTS
+  affiliation: 武汉人工智能研究院、北京大学光华管理学院、湘江实验室、哈尔滨工业大学、北京大学
+  problems:
+  - search-space
+  - learning-signal
+  - redundancy
+  routes:
+  - formulaic
+  tags:
+  - mcts
+  - rl
+  status: card
+  card: notes/cards/2024_RiskMiner.md
+  deep: null
+  added: '2026-11-03'
+- id: alpha2-2024
+  short: Alpha2
+  title: 'Alpha2: Discovering Logical Formulaic Alphas using Deep Reinforcement Learning'
+  first_public: 2024-06
+  published: '2024.06'
+  arxiv: '2406.16505'
+  url: https://arxiv.org/abs/2406.16505
+  code: https://github.com/x35f/alpha2
+  code_note: https://github.com/x35f/alpha2（仓库说明为伪代码和算法结构，不是完整可运行复现）
+  affiliation: 南京大学新型软件技术全国重点实验室、南京大学人工智能学院、香港大学
+  problems:
+  - search-space
+  routes:
+  - formulaic
+  tags:
+  - rl
+  - mcts
+  - program-search
+  status: card
+  card: notes/cards/2024_Alpha2.md
+  deep: null
+  added: '2026-11-03'
+- id: qfr-2024
+  short: QFR
+  title: 'QuantFactor REINFORCE: Mining Steady Formulaic Alpha Factors with Variance-bounded REINFORCE'
+  first_public: 2024-09
+  published: 2024.09（arXiv v1；v3 为 2025.06）
+  arxiv: '2409.05144'
+  url: https://arxiv.org/abs/2409.05144
+  code: null
+  code_note: 未见官方开源
+  affiliation: 南方科技大学、深圳裕锦私募证券基金管理有限公司、中国科学技术大学
+  problems:
+  - learning-signal
+  - overfitting
+  routes:
+  - formulaic
+  tags:
+  - rl
+  - reinforce
+  status: card
+  card: notes/cards/2024_QFR.md
+  deep: null
+  added: '2026-11-03'
+- id: alphaqcm-2025
+  short: AlphaQCM
+  title: 'AlphaQCM: Alpha Discovery with Distributional Reinforcement Learning'
+  first_public: 2025-05
+  published: 2025.05（ICML 2025 poster）
+  arxiv: null
+  url: https://openreview.net/forum?id=3sXMHlhBSs
+  code: null
+  code_note: 未见官方开源
+  affiliation: 厦门大学、香港大学
+  problems:
+  - learning-signal
+  routes:
+  - formulaic
+  tags:
+  - rl
+  - distributional-rl
+  status: card
+  card: notes/cards/2025_AlphaQCM.md
+  deep: null
+  added: '2026-11-03'
+- id: tlrs-2025
+  short: TLRS
+  title: 'Learning from Expert Factors: Trajectory-level Reward Shaping for Formulaic Alpha Mining'
+  first_public: 2025-07
+  published: 2025.07（arXiv v1）
+  arxiv: '2507.20263'
+  url: https://arxiv.org/abs/2507.20263
+  code: null
+  code_note: 未见官方开源
+  affiliation: 南方科技大学、悉尼大学、哈佛大学
+  problems:
+  - learning-signal
+  routes:
+  - formulaic
+  tags:
+  - rl
+  - reward-shaping
+  status: card
+  card: notes/cards/2025_TLRS.md
+  deep: null
+  added: '2026-11-03'
+- id: alphasage-2025
+  short: AlphaSAGE
+  title: 'AlphaSAGE: Structure-Aware Alpha Mining via GFlowNets for Robust Exploration'
+  first_public: 2025-09
+  published: 2025.09（arXiv v1；v3 为 2026.05）
+  arxiv: '2509.25055'
+  url: https://arxiv.org/abs/2509.25055
+  code: https://github.com/BerkinChen/AlphaSAGE
+  code_note: 官方仓库：https://github.com/BerkinChen/AlphaSAGE
+  affiliation: 官方摘要页未展示单位信息；作者为 Binqi Chen、Hongjun Ding、Ning Shen、Jinsheng Huang、Taian Guo、Luchen Liu、Ming Zhang
+  problems:
+  - learning-signal
+  - redundancy
+  routes:
+  - formulaic
+  tags:
+  - gflownet
+  - gnn
+  status: deep-read
+  card: notes/cards/2025_AlphaSAGE.md
+  deep: notes/deep/2025_AlphaSAGE.md
+  added: '2026-11-03'
+- id: alphacfg-2026
+  short: AlphaCFG
+  title: Alpha Discovery via Grammar-Guided Learning and Search
+  first_public: 2026-01
+  published: 2026.01（arXiv v1）
+  arxiv: '2601.22119'
+  url: https://arxiv.org/abs/2601.22119
+  code: https://github.com/HanYang544/AlphaCFG
+  code_note: 官方仓库：https://github.com/HanYang544/AlphaCFG
+  affiliation: 电子科技大学、King's College London、University of Southampton
+  problems:
+  - search-space
+  routes:
+  - formulaic
+  tags:
+  - grammar
+  - rl
+  - mcts
+  status: card
+  card: notes/cards/2026_AlphaCFG.md
+  deep: null
+  added: '2026-11-03'
+- id: alphaforge-2024
+  short: AlphaForge
+  title: 'AlphaForge: A Framework to Mine and Dynamically Combine Formulaic Alpha Factors'
+  first_public: 2024-06
+  published: 2024.06（arXiv v1；AAAI 2025）
+  arxiv: '2406.18394'
+  url: https://arxiv.org/abs/2406.18394
+  code: https://github.com/dulyhao/alphaforge
+  code_note: https://github.com/dulyhao/alphaforge
+  affiliation: 中国科学院大学、时代复兴投资管理有限公司、商丘师范学院、中国科学院计算技术研究所、York University、University of Toronto
+  problems:
+  - eval-cost
+  - learning-signal
+  - redundancy
+  - objective-gap
+  - decay
+  routes:
+  - formulaic
+  - pool-combination
+  tags:
+  - generator-predictor
+  - dynamic-combination
+  status: deep-read
+  card: notes/cards/2024_AlphaForge.md
+  deep: notes/deep/2024_AlphaForge.md
+  added: '2026-11-03'
+- id: alphagat-2025
+  short: AlphaGAT
+  title: 'AlphaGAT: A Two-Stage Learning Approach for Adaptive Portfolio Selection'
+  first_public: '2025'
+  published: 2025（IJCAI 2025，Proceedings pages 7500-7508）
+  arxiv: null
+  url: https://www.ijcai.org/proceedings/2025/834
+  code: null
+  code_note: 未见官方开源
+  affiliation: IJCAI 官方页面未展示单位信息；作者为 Shicheng Li、Jinshan Zhang、Feng Wang
+  problems:
+  - expressiveness
+  - redundancy
+  - objective-gap
+  routes:
+  - neural
+  - pool-combination
+  tags:
+  - neural-alpha
+  - gnn
+  - rl
+  - ppo
+  - dynamic-combination
+  status: deep-read
+  card: notes/cards/2025_AlphaGAT.md
+  deep: notes/deep/2025_AlphaGAT.md
+  added: '2026-11-03'
+- id: efs-2025
+  short: EFS
+  title: 'EFS: Evolutionary Factor Searching for Sparse Portfolio Optimization Using Large Language Models'
+  first_public: 2025-07
+  published: 2025.07（arXiv v1）
+  arxiv: '2507.17211'
+  url: https://arxiv.org/abs/2507.17211
+  code: null
+  code_note: 未见官方开源
+  affiliation: 官方摘要页未展示单位信息；作者为 Haochen Luo、Yuan Zhang、Chen Liu
+  problems:
+  - objective-gap
+  routes:
+  - llm-agent
+  - pool-combination
+  tags:
+  - llm
+  - evolutionary
+  - portfolio
+  status: card
+  card: notes/cards/2025_EFS.md
+  deep: null
+  added: '2026-11-03'
+- id: alpha-r1-2025
+  short: Alpha-R1
+  title: 'Alpha-R1: Alpha Screening with LLM Reasoning via Reinforcement Learning'
+  first_public: 2025-12
+  published: 2025.12（arXiv v1）
+  arxiv: '2512.23515'
+  url: https://arxiv.org/abs/2512.23515
+  code: https://github.com/FinStep-AI/Alpha-R1
+  code_note: 官方仓库：https://github.com/FinStep-AI/Alpha-R1
+  affiliation: 官方摘要页未展示单位信息；作者包含 Zuoyou Jiang、Li Zhao、Rui Sun、Ruohan Sun、Zhongjian Li、Jing Li、Daxin Jiang、Zuo Bai、Cheng Hua
+  problems:
+  - objective-gap
+  - decay
+  routes:
+  - llm-agent
+  - pool-combination
+  tags:
+  - llm
+  - grpo
+  - factor-screening
+  status: card
+  card: notes/cards/2025_Alpha-R1.md
+  deep: null
+  added: '2026-11-03'
+- id: alphaprobe-2026
+  short: AlphaPROBE
+  title: 'AlphaPROBE: Alpha Mining via Principled Retrieval and On-graph biased evolution'
+  first_public: 2026-02
+  published: 2026.02（arXiv v1）
+  arxiv: '2602.11917'
+  url: https://arxiv.org/abs/2602.11917
+  code: https://github.com/gta0804/AlphaPROBE
+  code_note: 官方仓库：https://github.com/gta0804/AlphaPROBE
+  affiliation: 官方摘要页未展示单位信息；作者包含 Taian Guo、Haiyang Shen、Junyu Luo、Binqi Chen、Hongjun Ding、Jinsheng Huang、Luchen Liu、Yun Ma、Ming Zhang
+  problems:
+  - search-space
+  - redundancy
+  routes:
+  - formulaic
+  - pool-combination
+  tags:
+  - evolutionary
+  - factor-lineage
+  status: card
+  card: notes/cards/2026_AlphaPROBE.md
+  deep: null
+  added: '2026-11-03'
+- id: alpha-gpt-2023
+  short: Alpha-GPT
+  title: 'Alpha-GPT: Human-AI Interactive Alpha Mining for Quantitative Investment'
+  first_public: 2023-07
+  published: 2023.07（arXiv）
+  arxiv: '2308.00016'
+  url: https://arxiv.org/abs/2308.00016
+  code: null
+  code_note: 未见官方开源
+  affiliation: 香港科技大学、IDEA Research、Columbia University、香港科技大学（广州）
+  problems:
+  - search-space
+  routes:
+  - llm-agent
+  tags:
+  - llm
+  - human-in-the-loop
+  status: card
+  card: notes/cards/2023_Alpha-GPT.md
+  deep: null
+  added: '2026-11-03'
+- id: quantagent-2024
+  short: QuantAgent
+  title: 'QuantAgent: Seeking Holy Grail in Trading by Self-Improving Large Language Model'
+  first_public: 2024-02
+  published: '2024.02'
+  arxiv: '2402.03755'
+  url: https://arxiv.org/abs/2402.03755
+  code: null
+  code_note: 未见官方开源
+  affiliation: 香港科技大学、IDEA Research、香港科技大学（广州）
+  problems:
+  - search-space
+  routes:
+  - llm-agent
+  tags:
+  - llm
+  - memory
+  status: card
+  card: notes/cards/2024_QuantAgent.md
+  deep: null
+  added: '2026-11-03'
+- id: alpha-gpt2-2024
+  short: Alpha-GPT 2.0
+  title: 'Alpha-GPT 2.0: Human-in-the-Loop AI for Quantitative Investment'
+  first_public: 2024-02
+  published: '2024.02'
+  arxiv: '2402.09746'
+  url: https://arxiv.org/abs/2402.09746
+  code: null
+  code_note: 未见官方开源
+  affiliation: 官方摘要页未展示单位信息；作者为 Hang Yuan、Saizhuo Wang、Jian Guo
+  problems:
+  - search-space
+  routes:
+  - llm-agent
+  tags:
+  - llm
+  - human-in-the-loop
+  status: card
+  card: notes/cards/2024_Alpha-GPT2.md
+  deep: null
+  added: '2026-11-03'
+- id: llmstrategyfinding-2024
+  short: LLM Strategy Finding
+  title: Automate Strategy Finding with LLM in Quant Investment
+  first_public: 2024-09
+  published: '2024.09'
+  arxiv: '2409.06289'
+  url: https://arxiv.org/abs/2409.06289
+  code: null
+  code_note: 未见官方开源
+  affiliation: 官方摘要页未展示单位信息；作者为 Zhizhuo Kou、Holam Yu、Jingshu Peng、Lei Chen
+  problems:
+  - expressiveness
+  - objective-gap
+  routes:
+  - llm-agent
+  tags:
+  - llm
+  - multimodal
+  status: card
+  card: notes/cards/2024_LLMStrategyFinding.md
+  deep: null
+  added: '2026-11-03'
+- id: alphaagent-2025
+  short: AlphaAgent
+  title: 'AlphaAgent: LLM-Driven Alpha Mining with Regularized Exploration to Counteract Alpha Decay'
+  first_public: 2025-02
+  published: 2025.02（arXiv v1；KDD 2025）
+  arxiv: '2502.16789'
+  url: https://arxiv.org/abs/2502.16789
+  code: https://github.com/RndmVariableQ/AlphaAgent
+  code_note: 官方仓库：https://github.com/RndmVariableQ/AlphaAgent
+  affiliation: 中山大学、新南威尔士大学、南洋理工大学、鹏城实验室、香港中文大学（深圳）
+  problems:
+  - expressiveness
+  - overfitting
+  - redundancy
+  - decay
+  routes:
+  - llm-agent
+  tags:
+  - llm
+  - alpha-decay
+  status: card
+  card: notes/cards/2025_AlphaAgent.md
+  deep: null
+  added: '2026-11-03'
+- id: alpha-jungle-2025
+  short: Alpha-Jungle
+  title: 'Navigating the Alpha Jungle: An LLM-Powered MCTS Framework for Formulaic Factor Mining'
+  first_public: 2025-05
+  published: 2025.05（arXiv v1；v3 为 2025.11；AAAI 2026）
+  arxiv: '2505.11122'
+  url: https://arxiv.org/abs/2505.11122
+  code: null
+  code_note: 未见官方开源
+  affiliation: 官方摘要页未展示单位信息；作者为 Yu Shi、Yitong Duan、Jian Li
+  problems:
+  - search-space
+  - overfitting
+  - redundancy
+  - objective-gap
+  routes:
+  - llm-agent
+  tags:
+  - llm
+  - mcts
+  status: card
+  card: notes/cards/2025_Alpha-Jungle.md
+  deep: null
+  added: '2026-11-03'
+- id: rd-agent-quant-2025
+  short: RD-Agent(Q)
+  title: 'R&D-Agent-Quant: A Multi-Agent Framework for Data-Centric Factors and Model Joint Optimization'
+  first_public: 2025-05
+  published: 2025.05（arXiv v1；NeurIPS 2025）
+  arxiv: '2505.15155'
+  url: https://arxiv.org/abs/2505.15155
+  code: https://github.com/microsoft/RD-Agent
+  code_note: 官方仓库：https://github.com/microsoft/RD-Agent
+  affiliation: Microsoft Research / Microsoft 相关团队（论文作者包含 Yuante Li、Xu Yang、Xiao Yang、Minrui Xu、Xisen Wang、Weiqing Liu、Jiang Bian）
+  problems:
+  - redundancy
+  - objective-gap
+  routes:
+  - llm-agent
+  tags:
+  - llm
+  - multi-agent
+  - factor-model-joint
+  status: card
+  card: notes/cards/2025_RD-Agent-Quant.md
+  deep: null
+  added: '2026-11-03'
+- id: cogalpha-2025
+  short: CogAlpha
+  title: Cognitive Alpha Mining via LLM-Driven Code-Based Evolution
+  first_public: 2025-11
+  published: 2025.11（arXiv v1；v3 为 2026.04）
+  arxiv: '2511.18850'
+  url: https://arxiv.org/abs/2511.18850
+  code: null
+  code_note: 论文称代码将发布；截至本次检索未见官方仓库
+  affiliation: 中国移动九天研究院、香港大学计算与数据科学学院、Grace Investment Machine
+  problems:
+  - expressiveness
+  - leakage
+  routes:
+  - llm-agent
+  tags:
+  - llm
+  - code-evolution
+  status: card
+  card: notes/cards/2025_CogAlpha.md
+  deep: null
+  added: '2026-11-03'
+- id: quantaalpha-2026
+  short: QuantaAlpha
+  title: 'QuantaAlpha: An Evolutionary Framework for LLM-Driven Alpha Mining'
+  first_public: 2026-02
+  published: 2026.02（arXiv v1；v3 为 2026.05）
+  arxiv: '2602.07085'
+  url: https://arxiv.org/abs/2602.07085
+  code: https://github.com/QuantaAlpha/QuantaAlpha
+  code_note: 官方仓库：https://github.com/QuantaAlpha/QuantaAlpha
+  affiliation: 官方摘要页未展示单位信息；作者包含 Jun Han、Shuo Zhang、Wei Li、Yifan Dong、Tu Hu、Yumo Zhu、Xiaomin Yu、Xin Guo、Zhaowei Liu、Kunyi Wang、Jingping Liu、Tianyi Jiang、Ruichuan An、Sen Hu、Zhi Yang、Ronghao Che、Huacan Wang
+  problems:
+  - expressiveness
+  - redundancy
+  routes:
+  - llm-agent
+  tags:
+  - llm
+  - evolutionary
+  status: card
+  card: notes/cards/2026_QuantaAlpha.md
+  deep: null
+  added: '2026-11-03'
+- id: factorminer-2026
+  short: FactorMiner
+  title: 'FactorMiner: A Self-Evolving Agent with Skills and Experience Memory for Financial Alpha Discovery'
+  first_public: 2026-02
+  published: 2026.02（arXiv v1）
+  arxiv: '2602.14670'
+  url: https://arxiv.org/abs/2602.14670
+  code: null
+  code_note: 未见官方开源
+  affiliation: 官方摘要页未展示单位信息；作者为 Yanlong Wang、Jian Xu、Hongkang Zhang、Shao-Lun Huang、Danny Dongning Sun、Xiao-Ping Zhang
+  problems:
+  - redundancy
+  - reproducibility
+  routes:
+  - llm-agent
+  tags:
+  - llm
+  - memory
+  - skills
+  status: card
+  card: notes/cards/2026_FactorMiner.md
+  deep: null
+  added: '2026-11-03'
+- id: factorengine-2026
+  short: FactorEngine
+  title: 'FactorEngine: A Program-level Knowledge-Infused Factor Mining Framework for Quantitative Investment'
+  first_public: 2026-03
+  published: 2026.03（arXiv v1；v2 为 2026.04）
+  arxiv: '2603.16365'
+  url: https://arxiv.org/abs/2603.16365
+  code: null
+  code_note: 未见官方开源；方法借鉴 OpenEvolve：https://github.com/algorithmicsuperintelligence/openevolve
+  affiliation: 官方摘要页未展示单位信息；作者包含 Qinhong Lin、Ruitao Feng、Yinglun Feng、Zhenxin Huang、Yukun Chen、Zhongliang Yang、Linna Zhou、Binjie Fei、Jiaqi Liu、Yu Li
+  problems:
+  - search-space
+  - expressiveness
+  routes:
+  - llm-agent
+  tags:
+  - llm
+  - code-evolution
+  status: card
+  card: notes/cards/2026_FactorEngine.md
+  deep: null
+  added: '2026-11-03'
+- id: hubble-2026
+  short: Hubble
+  title: 'Hubble: An LLM-Driven Agentic Framework for Safe, Diverse, and Reproducible Alpha Factor Discovery'
+  first_public: 2026-03
+  published: 2026.03（arXiv v1；v2 为 2026.04）
+  arxiv: '2604.09601'
+  url: https://arxiv.org/abs/2604.09601
+  code: null
+  code_note: 未见官方开源
+  affiliation: 官方摘要页未展示单位信息；作者为 Runze Shi、Shengyu Yan、Yuecheng Cai、Chengxi Lv
+  problems:
+  - search-space
+  - redundancy
+  - objective-gap
+  - decay
+  - reproducibility
+  routes:
+  - llm-agent
+  tags:
+  - llm
+  - rag
+  - safety
+  status: card
+  card: notes/cards/2026_Hubble.md
+  deep: null
+  added: '2026-11-03'
+- id: quantevolver-2026
+  short: QuantEvolver
+  title: 'From Feedback Loops to Policy Updates: Reinforcement Fine-Tuning for LLM-Based Alpha Factor Discovery'
+  first_public: 2026-05
+  published: 2026.05（arXiv v1）
+  arxiv: '2605.15412'
+  url: https://arxiv.org/abs/2605.15412
+  code: https://github.com/QuantLLM/QuantEvolver
+  code_note: 官方仓库：https://github.com/QuantLLM/QuantEvolver（仓库说明仅包含可复用框架代码，不含私有市场数据、训练 checkpoint、实验日志或论文专用复现实验脚本）
+  affiliation: 官方摘要页未展示单位信息；作者包含 Lingzhe Zhang、Tong Jia、Yunpeng Zhai、Zixuan Xie、Chiming Duan、Minghua He、Philip S. Yu、Ying Li
+  problems:
+  - eval-cost
+  - learning-signal
+  - redundancy
+  routes:
+  - llm-agent
+  tags:
+  - llm
+  - rft
+  - grpo
+  status: card
+  card: notes/cards/2026_QuantEvolver.md
+  deep: null
+  added: '2026-11-03'
+- id: agora-sjs-2026
+  short: Agora/SJS
+  title: 'AI Trading''s Alpha Singularity: Emergent Market Reasoning through Agent-to-Agent Self-Evolution'
+  first_public: 2026-06
+  published: 2026.06（arXiv v1）
+  arxiv: '2606.29194'
+  url: https://arxiv.org/abs/2606.29194
+  code: null
+  code_note: 论文称将发布 Agora implementation、七个 baseline 配置和 LLM Wiki schema；论文中未给出明确仓库链接
+  affiliation: 官方摘要页未展示单位信息；作者为 Yuqi Li、Siyuan Liu、Bingjun Liu
+  problems:
+  - overfitting
+  - leakage
+  routes:
+  - llm-agent
+  tags:
+  - llm
+  - multi-agent
+  - self-play
+  status: card
+  card: notes/cards/2026_Agora-SJS.md
+  deep: null
+  added: '2026-11-03'
+- id: hrft-2024
+  short: HRFT/IRFT
+  title: 'HRFT: Mining High-Frequency Risk Factor Collections End-to-End via Transformer'
+  first_public: 2024-08
+  published: 2024.08（arXiv v1；WWW Companion 2025）
+  arxiv: '2408.01271'
+  url: https://arxiv.org/abs/2408.01271
+  code: https://github.com/wencyxu/IRF-LLM-accepted-at-WWW25-
+  code_note: 官方仓库：https://github.com/wencyxu/IRF-LLM-accepted-at-WWW25-
+  affiliation: 中央财经大学统计与数学学院、腾讯 TiMi Studio、中国科学院计算机网络信息中心
+  problems:
+  - expressiveness
+  routes:
+  - data-space
+  tags:
+  - high-frequency
+  - risk-factor
+  - transformer
+  status: card
+  card: notes/cards/2024_HRFT.md
+  deep: null
+  added: '2026-11-03'
