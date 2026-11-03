@@ -2,6 +2,23 @@
 
 记录仓库结构、收录口径、模板和分类体系的变化。最新记录在前。
 
+## 2026-11-03 结构优化与首次状态核查
+
+- 原则：只有 `papers.yaml`、`taxonomy.yaml` 和手写分析是事实源；清单、计数和卡片元数据由脚本生成，手写分析中能核对的引用由脚本校验。
+- README：保留问题框架（目标、问题总表、易混淆边界、各问题说明与跟踪关注点）；问题总表和收录概况改为生成区块。论文索引移到生成的 `INDEX.md`（总表、问题 × 工作矩阵、按路线分组）；各问题下“已收录工作的应对”移到 `topics/problems.md`。
+- `papers.yaml`：新增 `summary`、`versions`（取代 `published`）、`venue`、`checked`；字段说明移到文件开头注释；`first_public` 统一为最早公开版本；有官方仓库时 `code_note` 不再重复链接。
+- `taxonomy.yaml`：问题新增 `tension`（核心矛盾）和 `stage`（所在环节）；开头注释改为“路线表示工作所属的研究板块”。
+- 速读卡：开头的元数据改由脚本生成；32 张卡按原 README 各问题下的机制描述补“针对问题与证据”；“局限”和多数卡片的“证据”标为待补，不凭空补写。
+- 精读：3 篇补“针对的问题”；精读模板改为必备章节加自由结构，证据统一为四级。
+- `topics/landscape.md`：逐篇清单压缩为分组导读，完整列表以 `INDEX.md` 为准。
+- `scripts/build_index.py`：生成 README 区块、`INDEX.md` 和卡片开头；新增问题专题、速读卡、精读和 `first_public` 校验。
+- AGENTS.md：字段说明移出，新增“事实源与生成物”“任务入口”，人工一致性规则改由脚本校验。Issue 模板改为引用 `taxonomy.yaml`，并增加“针对的问题”。
+- 状态核查（2026-11-03；arXiv API，AlphaSAGE 经 OpenReview，RiskMiner 经 Crossref）：
+  - 修正 `first_public`：AutoAlpha 2020-04 → 2020-02，AlphaEvolve 2021-04 → 2021-03，原值是 v2 日期。
+  - 新增或确认发表信息：Alpha101（Wilmott Magazine 2016）、Synergistic RL（ICOIN 2024）、RiskMiner（ICAIF 2024）、QFR（IEEE Transactions on Signal Processing 2025）、Alpha-GPT（EMNLP 2025 System Demonstrations）、AlphaSAGE（ICLR 2026 Poster）、FactorEngine（ICDM 2026）、HRFT/IRFT（WWW 2025 Industry Track）。
+  - 首轮检索（2026-07-11）之后出现的新版本：EFS v2、Alpha-R1 v2、FactorMiner v2、FactorEngine v3、CogAlpha v4。
+  - AlphaQCM（OpenReview 需要人机验证）和 AlphaGAT（没有 arXiv）未重新核查，`checked` 保持 2026-07-11；开源情况沿用 2026-07-11 的检索结论。
+
 ## 2026-11-03 以问题为出发点组织仓库
 
 - 目标：先固定因子挖掘面临的普遍问题，再用它们阅读和对照每篇工作，作为仓库的出发点。

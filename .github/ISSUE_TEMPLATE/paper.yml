@@ -1,7 +1,6 @@
 name: 新论文候选
 description: 登记一篇待收录的因子挖掘相关工作
 title: "[paper] <简称>"
-labels: ["paper"]
 body:
   - type: input
     id: link
@@ -15,18 +14,16 @@ body:
     attributes:
       label: 代码仓库
       description: 官方仓库链接；未见官方开源可留空
-  - type: checkboxes
+  - type: input
+    id: problems
+    attributes:
+      label: 针对的问题
+      description: P1-P10 中的编号，可多个，定义见 README“出发点：因子挖掘面临的问题”；不确定可留空
+  - type: input
     id: routes
     attributes:
-      label: 路线（可多选，定义见 taxonomy.yaml）
-      options:
-        - label: formulaic 公式 / 符号因子挖掘
-        - label: llm-agent LLM / Agent 因子挖掘
-        - label: neural 神经 / 隐式因子
-        - label: pool-combination 因子池与组合
-        - label: evaluation 评估与稳健性
-        - label: data-space 数据与表达空间
-        - label: adjacent 可借鉴的相邻方法
+      label: 路线
+      description: 取值见 taxonomy.yaml 的 routes，可多个，例如 formulaic、llm-agent
   - type: textarea
     id: why
     attributes:

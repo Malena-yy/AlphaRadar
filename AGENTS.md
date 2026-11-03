@@ -4,27 +4,21 @@
 
 AlphaRadar 是围绕“因子挖掘专题”的研究跟踪仓库：持续收录、阅读和横向比较 alpha 因子挖掘相关的公开工作。它不是代码实现仓库，也不记录任何项目的实验结果或开发流水。仓库计划公开：所有内容必须可以对外公开，独立成立，不依赖、不引用任何私有项目。
 
-## 目录职责
+## 事实源与生成物
+
+- 事实源：`papers.yaml`（论文登记，字段含义见文件开头注释）、`taxonomy.yaml`（问题、路线、标签和状态的取值），以及手写的笔记、专题和简报。
+- 生成物：README 中 `PROBLEMS`、`STATUS` 两个标记区块，`INDEX.md`，速读卡从文件开头到 `META:END` 的部分。改了事实源就运行 `python scripts/build_index.py`，不要手改生成内容。
+- 脚本同时校验：登记表取值、日期和路径；README 问题标题与 `taxonomy.yaml` 一致；`topics/problems.md` 每个问题下点名的工作与 `problems` 标注一致；速读卡四个字段齐全，且“针对问题与证据”中的 P 编号与标注一致；精读含必备章节。
+
+## 目录
 
 | 路径 | 内容 |
 | --- | --- |
-| `README.md` | 仓库入口：定位、路线说明、导航和论文索引。索引区块由脚本生成 |
-| `papers.yaml` | 论文登记表，唯一事实源 |
-| `taxonomy.yaml` | 路线、标签和状态的取值定义 |
-| `notes/cards/` | 单篇速读卡，按 `notes/_template_card.md` 撰写 |
-| `notes/deep/` | 单篇精读，按 `notes/_template_deep.md` 撰写 |
-| `topics/` | 横向专题：多篇工作的比较、路线脉络和方法对照 |
+| `notes/cards/`、`notes/deep/` | 单篇速读卡与精读 |
+| `topics/` | 横向专题；`topics/problems.md` 按问题汇总应对机制 |
 | `topics/adjacent/` | 不属于因子挖掘、但机制可迁移的相邻方法分析 |
-| `digests/` | 定期跟踪简报，按 `digests/_template.md` 撰写 |
-| `scripts/` | 校验与索引生成脚本 |
-| `CHANGELOG.md` | 仓库维护日志 |
-
-## 问题框架
-
-1. README“出发点：因子挖掘面临的问题”定义的 P1-P10 是本仓库的分析主线，取值登记在 `taxonomy.yaml` 的 `problems`。
-2. 每篇收录工作都要判断它针对哪些问题，写入 `papers.yaml` 的 `problems`，并在速读卡中说明机制与证据。只标注论文中有对应机制的问题，不按标题或宣传语标注；作为基线或背景收录的工作写 `[]`。
-3. 新工作引出现有框架覆盖不了的问题时，先在 `taxonomy.yaml` 和 README 中新增问题并记录到 `CHANGELOG.md`，再标注论文；不随意改动已有编号。
-4. README 各问题下的代表工作需与 `papers.yaml` 的 `problems` 保持一致。
+| `digests/` | 定期跟踪简报 |
+| `scripts/` | 生成与校验脚本 |
 
 ## 收录口径
 
@@ -33,46 +27,31 @@ AlphaRadar 是围绕“因子挖掘专题”的研究跟踪仓库：持续收录
 3. 不属于因子挖掘但机制可迁移的方法，收录到 `adjacent` 路线，并在正文说明迁移点。
 4. 每篇论文必须能给出公开链接；只有转述、没有原文的工作不收录。
 
-## 新增论文流程
+## 问题标注
 
-1. 在 `papers.yaml` 追加一条记录，状态从 `inbox` 或 `triaged` 开始；`id` 使用 `<小写简称>-<首次公开年份>`。
-2. 判断它针对的问题并填写 `problems`。写速读卡后，把状态改为 `card` 并填写 `card`；写精读后改为 `deep-read` 并填写 `deep`。
-3. 运行 `python scripts/build_index.py` 重新生成 README 索引，确保校验通过。
-4. 涉及路线脉络变化的，同步更新 `topics/` 中的对应专题。
+1. README“出发点”定义的 P1-P10 是分析主线。只标注论文中有对应机制的问题，不按标题或宣传语标注；作为基线或背景收录的工作写 `[]`。
+2. 新工作引出现有框架覆盖不了的问题时，先在 `taxonomy.yaml`、README 和 `topics/problems.md` 中新增问题并记入 `CHANGELOG.md`，再标注论文；已发布的编号不改。
 
-## papers.yaml 字段
+## 任务入口
 
-| 字段 | 说明 |
-| --- | --- |
-| `id` | 唯一标识，`<小写简称>-<年份>` |
-| `short` | 常用简称 |
-| `title` | 论文完整标题 |
-| `first_public` | 首次公开时间，`YYYY-MM` 或 `YYYY` |
-| `published` | 版本与会议信息原文，例如 `2024.06（arXiv v1；AAAI 2025）` |
-| `arxiv` | arXiv 编号；没有则为 `null` |
-| `url` | 论文主链接 |
-| `code` | 官方仓库链接；未见官方开源时为 `null` |
-| `code_note` | 开源情况说明，包括非官方实现和仓库完整性 |
-| `affiliation` | 作者单位 |
-| `problems` | 针对的问题，多选，取值见 `taxonomy.yaml`；基线或背景工作为 `[]` |
-| `routes` | 路线，多选，取值见 `taxonomy.yaml` |
-| `tags` | 标签，多选，取值见 `taxonomy.yaml`；新增标签先改 `taxonomy.yaml` |
-| `status` | `inbox` / `triaged` / `card` / `deep-read` |
-| `card` / `deep` | 速读卡和精读路径 |
-| `added` | 收录日期 |
+- 新增论文：在 `papers.yaml` 追加记录，`id` 为 `<小写简称>-<首次公开年份>`，状态从 `inbox` 或 `triaged` 开始，填写 `summary` 和 `problems`。
+- 写速读卡：按 `notes/_template_card.md` 新建卡片，在登记表填 `card` 并把状态改为 `card`，运行脚本生成卡片开头；同时在 `topics/problems.md` 对应问题下补上机制。
+- 写精读：按 `notes/_template_deep.md` 撰写，填 `deep` 并把状态改为 `deep-read`。
+- 定期跟踪：按 `digests/_template.md` 写简报，沿用上一期的检索口径，口径变化写入本期。
+- 状态核查：核查论文页、会议页或官方仓库，更新 `versions`、`venue`、`code`、`code_note`、`checked`，并把变化记入简报或 `CHANGELOG.md`。
+- 路线脉络变化：更新 `topics/landscape.md` 等专题；专题是综合分析，不维护完整清单。
 
 ## 写作规则
 
 1. 使用严谨、客观、中文优先的技术语言；术语、算子名和公式符号保持原文写法。
-2. 区分三类证据：论文明确内容、由公式直接推出的性质、论文未披露细节。官方源码口径与论文不一致时单独标注，不改写论文结论。
-3. 算法机制、创新点、局限和可参考点分开写；不把推断写成论文结论，不作收益承诺。
-4. 论文状态（版本、会议接收、开源情况）变化时，核查论文页、会议页或官方仓库，并在简报或日志中记录检索日期。
-5. 不写凭证、私有数据、内部系统信息或本地绝对路径；不引用、不对照任何私有项目或内部实现。“可参考点”只写面向公开读者的方法启示。
+2. 证据分四级：论文明确、公式推出、官方源码口径、未披露。源码与论文不一致时单独标注，不改写论文结论。
+3. 机制、创新点、局限和可参考点分开写；不把推断写成论文结论，不作收益承诺。没有依据的内容写“待补”，不凭空补写。
+4. 不写凭证、私有数据、内部系统信息或本地绝对路径；不引用、不对照任何私有项目或内部实现。“可参考点”只写面向公开读者的方法启示。
 
 ## 资料规则
 
-1. 论文 PDF 不进入仓库，只登记 arXiv 或官方页面链接。
-2. 仓库不保存图片，论文笔记和专题不附图；需要示意流程时，用 Markdown 表格、文本框图或 Mermaid。
+1. 论文 PDF 不入库，只登记 arXiv 或官方页面链接。
+2. 仓库不保存图片，笔记和专题不附图；需要示意流程时，用 Markdown 表格、文本框图或 Mermaid。
 3. 移动或重命名文件前先搜索引用，移动后再检查路径。
 
 ## 提交前检查
@@ -80,4 +59,4 @@ AlphaRadar 是围绕“因子挖掘专题”的研究跟踪仓库：持续收录
 1. `python scripts/build_index.py --check` 通过。
 2. `python scripts/check_links.py` 通过：相对链接都能打开，且没有图片引用。
 3. `git diff --check` 无输出。
-4. 结构、口径或模板变化记录到 `CHANGELOG.md`，最新记录在前。
+4. 结构、口径或模板变化记入 `CHANGELOG.md`，最新记录在前。

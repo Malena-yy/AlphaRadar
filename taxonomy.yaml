@@ -1,38 +1,59 @@
 # AlphaRadar 分类体系。papers.yaml 中的 problems / routes / tags / status 只能使用这里定义的取值。
-# 问题（problems）回答“这篇工作在解决什么”，路线（routes）回答“它用什么方法”；两者都是多标签。
-# 问题的完整说明见 README“出发点：因子挖掘面临的问题”。
+# 问题（problems）回答“这篇工作在解决什么”，路线（routes）表示工作所属的研究板块，标签（tags）记录具体技术手段；三者都是多标签。
+# 问题的说明和跟踪关注点见 README“出发点：因子挖掘面临的问题”，各问题的应对机制见 topics/problems.md。
+# problems 的 code 是对外编号，已发布的编号不改；tension（核心矛盾）和 stage（所在环节）用于生成 README 问题总表。
 
 problems:
   search-space:
     code: P1
     name: 表达空间巨大，有效因子稀少
+    tension: 空间随表达式长度组合爆炸，其中大多不合法、无意义或彼此语义等价
+    stage: 表达与搜索
   expressiveness:
     code: P2
     name: 表达能力与可解释性的权衡
+    tension: 公式可解释、可审计但表达受限；神经因子和任意代码表达更强，却难以解释和审计
+    stage: 表达
   eval-cost:
     code: P3
     name: 评价成本高
+    tension: 每个候选都要在全市场长周期面板上求值，评价次数直接决定搜索规模
+    stage: 评价
   learning-signal:
     code: P4
     name: 学习信号稀疏、延迟且不可微
+    tension: 只有完整因子才有奖励，IC 对生成过程没有梯度，奖励还随因子池变化
+    stage: 训练
   overfitting:
     code: P5
     name: 低信噪比下的过拟合
+    tension: 收益中可预测成分很小，大规模搜索等于大量多重检验
+    stage: 评价可信度
   leakage:
     code: P6
     name: 前视偏差与信息泄漏
+    tension: 一处时间对齐错误就能制造虚假的高 IC，且很难从结果上察觉
+    stage: 评价可信度
   redundancy:
     code: P7
     name: 因子同质化与冗余
+    tension: 搜索集中到少数高分模板，新因子与已有因子高度相关
+    stage: 入池
   objective-gap:
     code: P8
     name: 挖掘目标与实际使用脱节
+    tension: 单因子高 IC 不等于组合增益，也不等于扣除换手和成本后仍可交易
+    stage: 组合与交易
   decay:
     code: P9
     name: 非平稳与因子衰减
+    tension: 市场状态在变，因子被拥挤后失效，挖掘需要持续维护
+    stage: 持续使用
   reproducibility:
     code: P10
     name: 评估口径不统一、难以复现
+    tension: 各工作的股票池、切分、标签、指标和成本假设不同，很多未开源
+    stage: 研究方法
 
 routes:
   formulaic:

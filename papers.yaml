@@ -1,10 +1,31 @@
-# AlphaRadar 论文登记表：唯一事实源。字段说明见 AGENTS.md；README 索引由 scripts/build_index.py 生成。
+# AlphaRadar 论文登记表：唯一事实源。README 的生成区块、INDEX.md 和速读卡开头的元数据都由 scripts/build_index.py 据此生成。
+# 字段：
+#   id            唯一标识，<小写简称>-<首次公开年份>
+#   short         常用简称；在 topics/problems.md 中按简称识别论文，不能重复
+#   title         论文完整标题
+#   summary       中文一句话：做了什么、靠什么机制，约 40 字以内
+#   first_public  最早公开版本的年月 YYYY-MM（通常是 arXiv v1 的提交日期）；只知道年份时写 YYYY
+#   versions      版本说明，例如 "arXiv v1 2025-09；v3 2026-05"；没有 arXiv 时写论文集等信息
+#   venue         会议或期刊，例如 "ICLR 2026"；尚未发表为 null
+#   arxiv         arXiv 编号；没有为 null
+#   url           论文主链接
+#   code          官方仓库链接；未见官方开源为 null
+#   code_note     开源补充说明：未开源时写检索结论；有仓库时只写完整性等补充；没有则为 null
+#   affiliation   作者单位
+#   problems      针对的问题，取 taxonomy.yaml 中 problems 的键，多选；基线或背景工作为 []
+#   routes, tags  路线与标签，多选，取值见 taxonomy.yaml
+#   status        inbox / triaged / card / deep-read
+#   card, deep    速读卡与精读路径
+#   added         收录日期
+#   checked       最近一次核查版本与发表状态的日期；开源情况的检索日期写在 code_note 中
 papers:
 - id: alpha101-2016
   short: Alpha101
   title: 101 Formulaic Alphas
+  summary: 公开 101 个实盘使用过的公式 Alpha，是后续自动挖掘的基础因子库与基准。
   first_public: 2016-01
-  published: '2016.01'
+  versions: arXiv v1 2016-01；v3 2016-03
+  venue: Wilmott Magazine 2016
   arxiv: '1601.00991'
   url: https://arxiv.org/abs/1601.00991
   code: null
@@ -19,11 +40,14 @@ papers:
   card: notes/cards/2016_Alpha101.md
   deep: null
   added: '2026-11-03'
+  checked: '2026-11-03'
 - id: autoalpha-2020
   short: AutoAlpha
   title: 'AutoAlpha: an Efficient Hierarchical Evolutionary Algorithm for Mining Alpha Factors in Quantitative Investment'
-  first_public: 2020-04
-  published: 2020.04（arXiv v2；v1 为 2020.02）
+  summary: 从低阶根基因逐层扩展的遗传规划，配合 PCA 近似的质量-多样性搜索。
+  first_public: 2020-02
+  versions: arXiv v1 2020-02；v2 2020-04
+  venue: null
   arxiv: '2002.08245'
   url: https://arxiv.org/abs/2002.08245
   code: null
@@ -42,11 +66,14 @@ papers:
   card: notes/cards/2020_AutoAlpha.md
   deep: null
   added: '2026-11-03'
+  checked: '2026-11-03'
 - id: alphaevolve-2021
   short: AlphaEvolve
   title: 'AlphaEvolve: A Learning Framework to Discover Novel Alphas in Quantitative Investment'
-  first_public: 2021-04
-  published: 2021.04（SIGMOD 2021 / arXiv v2）
+  summary: AutoML 进化搜索，引入矩阵 / 向量算子与行业关系，并剪枝冗余表达式。
+  first_public: 2021-03
+  versions: arXiv v1 2021-03；v2 2021-04
+  venue: SIGMOD 2021（Data Science and Engineering Track）
   arxiv: '2103.16196'
   url: https://arxiv.org/abs/2103.16196
   code: null
@@ -65,15 +92,18 @@ papers:
   card: notes/cards/2021_AlphaEvolve.md
   deep: null
   added: '2026-11-03'
+  checked: '2026-11-03'
 - id: alphagen-2023
   short: AlphaGen
   title: Generating Synergistic Formulaic Alpha Collections via Reinforcement Learning
+  summary: 把 RPN 公式生成建模为 MDP，用因子池组合 IC 的边际贡献作为 PPO 奖励。
   first_public: 2023-05
-  published: 2023.05（KDD 2023）
+  versions: arXiv v1 2023-05
+  venue: KDD 2023（ADS Track）
   arxiv: '2306.12964'
   url: https://arxiv.org/abs/2306.12964
   code: https://github.com/ICT-FinD-Lab/alphagen
-  code_note: https://github.com/ICT-FinD-Lab/alphagen
+  code_note: null
   affiliation: 中国科学院计算技术研究所、中国科学院大学、华为 EI Innovation Lab
   problems:
   - search-space
@@ -90,11 +120,14 @@ papers:
   card: notes/cards/2023_AlphaGen.md
   deep: null
   added: '2026-11-03'
+  checked: '2026-11-03'
 - id: synergisticrl-2024
   short: Synergistic RL
   title: Synergistic Formulaic Alpha Generation for Quantitative Trading based on Reinforcement Learning
+  summary: 在 AlphaGen 上扩展算子与长窗口，并用优质种子公式引导探索。
   first_public: 2024-01
-  published: 2024.01（arXiv v1；v2 为 2024.07）
+  versions: arXiv v1 2024-01；v2 2024-07
+  venue: ICOIN 2024
   arxiv: '2401.02710'
   url: https://arxiv.org/abs/2401.02710
   code: null
@@ -112,11 +145,14 @@ papers:
   card: notes/cards/2024_SynergisticRL.md
   deep: null
   added: '2026-11-03'
+  checked: '2026-11-03'
 - id: riskminer-2024
   short: RiskMiner
   title: 'RiskMiner: Discovering Formulaic Alphas via Risk Seeking Monte Carlo Tree Search'
+  summary: 风险偏好 MCTS：合法中间表达式即时奖励，并惩罚与已有因子的重复。
   first_public: 2024-02
-  published: 2024.02（arXiv；ICAIF 2024 相关工作）
+  versions: arXiv v1 2024-02；v2 2024-02
+  venue: ICAIF 2024
   arxiv: '2402.07080'
   url: https://arxiv.org/abs/2402.07080
   code: null
@@ -135,15 +171,18 @@ papers:
   card: notes/cards/2024_RiskMiner.md
   deep: null
   added: '2026-11-03'
+  checked: '2026-11-03'
 - id: alpha2-2024
   short: Alpha2
   title: 'Alpha2: Discovering Logical Formulaic Alphas using Deep Reinforcement Learning'
+  summary: 把公式生成改为带寄存器的程序构造，搜索中做维度检查，由 RL 引导 MCTS。
   first_public: 2024-06
-  published: '2024.06'
+  versions: arXiv v1 2024-06；v2 2024-06
+  venue: null
   arxiv: '2406.16505'
   url: https://arxiv.org/abs/2406.16505
   code: https://github.com/x35f/alpha2
-  code_note: https://github.com/x35f/alpha2（仓库说明为伪代码和算法结构，不是完整可运行复现）
+  code_note: 仓库说明为伪代码和算法结构，不是完整可运行复现
   affiliation: 南京大学新型软件技术全国重点实验室、南京大学人工智能学院、香港大学
   problems:
   - search-space
@@ -157,11 +196,14 @@ papers:
   card: notes/cards/2024_Alpha2.md
   deep: null
   added: '2026-11-03'
+  checked: '2026-11-03'
 - id: qfr-2024
   short: QFR
   title: 'QuantFactor REINFORCE: Mining Steady Formulaic Alpha Factors with Variance-bounded REINFORCE'
+  summary: 用带贪婪基线、无价值网络的 REINFORCE 替代 PPO，并以信息比率提升稳定性。
   first_public: 2024-09
-  published: 2024.09（arXiv v1；v3 为 2025.06）
+  versions: arXiv v1 2024-09；v3 2025-06
+  venue: IEEE Transactions on Signal Processing 2025
   arxiv: '2409.05144'
   url: https://arxiv.org/abs/2409.05144
   code: null
@@ -179,11 +221,14 @@ papers:
   card: notes/cards/2024_QFR.md
   deep: null
   added: '2026-11-03'
+  checked: '2026-11-03'
 - id: alphaqcm-2025
   short: AlphaQCM
   title: 'AlphaQCM: Alpha Discovery with Distributional Reinforcement Learning'
+  summary: 分布式强化学习估计奖励方差（QCM），作为非平稳稀疏奖励下的探索奖励。
   first_public: 2025-05
-  published: 2025.05（ICML 2025 poster）
+  versions: OpenReview 论文页
+  venue: ICML 2025（Poster）
   arxiv: null
   url: https://openreview.net/forum?id=3sXMHlhBSs
   code: null
@@ -200,11 +245,14 @@ papers:
   card: notes/cards/2025_AlphaQCM.md
   deep: null
   added: '2026-11-03'
+  checked: '2026-07-11'
 - id: tlrs-2025
   short: TLRS
   title: 'Learning from Expert Factors: Trajectory-level Reward Shaping for Formulaic Alpha Mining'
+  summary: 以专家因子子序列匹配做轨迹级奖励塑形，并用奖励中心化稳定训练。
   first_public: 2025-07
-  published: 2025.07（arXiv v1）
+  versions: arXiv v1 2025-07
+  venue: null
   arxiv: '2507.20263'
   url: https://arxiv.org/abs/2507.20263
   code: null
@@ -221,15 +269,18 @@ papers:
   card: notes/cards/2025_TLRS.md
   deep: null
   added: '2026-11-03'
+  checked: '2026-11-03'
 - id: alphasage-2025
   short: AlphaSAGE
   title: 'AlphaSAGE: Structure-Aware Alpha Mining via GFlowNets for Robust Exploration'
+  summary: AST + RGCN 编码公式结构，GFlowNet 按多信号奖励成比例采样多样因子。
   first_public: 2025-09
-  published: 2025.09（arXiv v1；v3 为 2026.05）
+  versions: arXiv v1 2025-09；v3 2026-05
+  venue: ICLR 2026（Poster）
   arxiv: '2509.25055'
   url: https://arxiv.org/abs/2509.25055
   code: https://github.com/BerkinChen/AlphaSAGE
-  code_note: 官方仓库：https://github.com/BerkinChen/AlphaSAGE
+  code_note: null
   affiliation: 官方摘要页未展示单位信息；作者为 Binqi Chen、Hongjun Ding、Ning Shen、Jinsheng Huang、Taian Guo、Luchen Liu、Ming Zhang
   problems:
   - learning-signal
@@ -243,15 +294,18 @@ papers:
   card: notes/cards/2025_AlphaSAGE.md
   deep: notes/deep/2025_AlphaSAGE.md
   added: '2026-11-03'
+  checked: '2026-11-03'
 - id: alphacfg-2026
   short: AlphaCFG
   title: Alpha Discovery via Grammar-Guided Learning and Search
+  summary: 用面向 alpha 的上下文无关文法约束语法、语义与长度，在其上做 RL 与 MCTS 搜索。
   first_public: 2026-01
-  published: 2026.01（arXiv v1）
+  versions: arXiv v1 2026-01
+  venue: null
   arxiv: '2601.22119'
   url: https://arxiv.org/abs/2601.22119
   code: https://github.com/HanYang544/AlphaCFG
-  code_note: 官方仓库：https://github.com/HanYang544/AlphaCFG
+  code_note: null
   affiliation: 电子科技大学、King's College London、University of Southampton
   problems:
   - search-space
@@ -265,15 +319,18 @@ papers:
   card: notes/cards/2026_AlphaCFG.md
   deep: null
   added: '2026-11-03'
+  checked: '2026-11-03'
 - id: alphaforge-2024
   short: AlphaForge
   title: 'AlphaForge: A Framework to Mine and Dynamically Combine Formulaic Alpha Factors'
+  summary: 生成器-预测器挖掘因子，使用阶段按近期表现动态筛选并加权组合。
   first_public: 2024-06
-  published: 2024.06（arXiv v1；AAAI 2025）
+  versions: arXiv v1 2024-06；v5 2024-12
+  venue: AAAI 2025
   arxiv: '2406.18394'
   url: https://arxiv.org/abs/2406.18394
   code: https://github.com/dulyhao/alphaforge
-  code_note: https://github.com/dulyhao/alphaforge
+  code_note: null
   affiliation: 中国科学院大学、时代复兴投资管理有限公司、商丘师范学院、中国科学院计算技术研究所、York University、University of Toronto
   problems:
   - eval-cost
@@ -291,11 +348,14 @@ papers:
   card: notes/cards/2024_AlphaForge.md
   deep: notes/deep/2024_AlphaForge.md
   added: '2026-11-03'
+  checked: '2026-11-03'
 - id: alphagat-2025
   short: AlphaGAT
   title: 'AlphaGAT: A Two-Stage Learning Approach for Adaptive Portfolio Selection'
+  summary: CATimeMixer 生成神经 Alpha，再用 GAT + PPO 动态学习因子权重做组合选择。
   first_public: '2025'
-  published: 2025（IJCAI 2025，Proceedings pages 7500-7508）
+  versions: IJCAI 2025 论文集 pp. 7500-7508
+  venue: IJCAI 2025
   arxiv: null
   url: https://www.ijcai.org/proceedings/2025/834
   code: null
@@ -318,11 +378,14 @@ papers:
   card: notes/cards/2025_AlphaGAT.md
   deep: notes/deep/2025_AlphaGAT.md
   added: '2026-11-03'
+  checked: '2026-07-11'
 - id: efs-2025
   short: EFS
   title: 'EFS: Evolutionary Factor Searching for Sparse Portfolio Optimization Using Large Language Models'
+  summary: LLM 演化可执行的资产打分因子，用于只选 Top-m 资产的稀疏组合。
   first_public: 2025-07
-  published: 2025.07（arXiv v1）
+  versions: arXiv v1 2025-07；v2 2026-08
+  venue: null
   arxiv: '2507.17211'
   url: https://arxiv.org/abs/2507.17211
   code: null
@@ -341,15 +404,18 @@ papers:
   card: notes/cards/2025_EFS.md
   deep: null
   added: '2026-11-03'
+  checked: '2026-11-03'
 - id: alpha-r1-2025
   short: Alpha-R1
   title: 'Alpha-R1: Alpha Screening with LLM Reasoning via Reinforcement Learning'
+  summary: 用 SFT + GRPO 训练 LLM 按市场状态推理因子启停，做因子筛选。
   first_public: 2025-12
-  published: 2025.12（arXiv v1）
+  versions: arXiv v1 2025-12；v2 2026-09
+  venue: null
   arxiv: '2512.23515'
   url: https://arxiv.org/abs/2512.23515
   code: https://github.com/FinStep-AI/Alpha-R1
-  code_note: 官方仓库：https://github.com/FinStep-AI/Alpha-R1
+  code_note: null
   affiliation: 官方摘要页未展示单位信息；作者包含 Zuoyou Jiang、Li Zhao、Rui Sun、Ruohan Sun、Zhongjian Li、Jing Li、Daxin Jiang、Zuo Bai、Cheng Hua
   problems:
   - objective-gap
@@ -365,15 +431,18 @@ papers:
   card: notes/cards/2025_Alpha-R1.md
   deep: null
   added: '2026-11-03'
+  checked: '2026-11-03'
 - id: alphaprobe-2026
   short: AlphaPROBE
   title: 'AlphaPROBE: Alpha Mining via Principled Retrieval and On-graph biased evolution'
+  summary: 在因子谱系有向无环图上检索父节点，沿演化路径有偏地生成新因子。
   first_public: 2026-02
-  published: 2026.02（arXiv v1）
+  versions: arXiv v1 2026-02
+  venue: null
   arxiv: '2602.11917'
   url: https://arxiv.org/abs/2602.11917
   code: https://github.com/gta0804/AlphaPROBE
-  code_note: 官方仓库：https://github.com/gta0804/AlphaPROBE
+  code_note: null
   affiliation: 官方摘要页未展示单位信息；作者包含 Taian Guo、Haiyang Shen、Junyu Luo、Binqi Chen、Hongjun Ding、Jinsheng Huang、Luchen Liu、Yun Ma、Ming Zhang
   problems:
   - search-space
@@ -388,11 +457,14 @@ papers:
   card: notes/cards/2026_AlphaPROBE.md
   deep: null
   added: '2026-11-03'
+  checked: '2026-11-03'
 - id: alpha-gpt-2023
   short: Alpha-GPT
   title: 'Alpha-GPT: Human-AI Interactive Alpha Mining for Quantitative Investment'
+  summary: 人机交互的 LLM 因子挖掘：想法生成、公式实现与结果复盘，配合遗传规划搜索。
   first_public: 2023-07
-  published: 2023.07（arXiv）
+  versions: arXiv v1 2023-07；v2 2025-09
+  venue: EMNLP 2025（System Demonstrations）
   arxiv: '2308.00016'
   url: https://arxiv.org/abs/2308.00016
   code: null
@@ -409,11 +481,14 @@ papers:
   card: notes/cards/2023_Alpha-GPT.md
   deep: null
   added: '2026-11-03'
+  checked: '2026-11-03'
 - id: quantagent-2024
   short: QuantAgent
   title: 'QuantAgent: Seeking Holy Grail in Trading by Self-Improving Large Language Model'
+  summary: 内外双循环的自改进 LLM 智能体，持续积累交易信号知识库。
   first_public: 2024-02
-  published: '2024.02'
+  versions: arXiv v1 2024-02
+  venue: null
   arxiv: '2402.03755'
   url: https://arxiv.org/abs/2402.03755
   code: null
@@ -430,11 +505,14 @@ papers:
   card: notes/cards/2024_QuantAgent.md
   deep: null
   added: '2026-11-03'
+  checked: '2026-11-03'
 - id: alpha-gpt2-2024
   short: Alpha-GPT 2.0
   title: 'Alpha-GPT 2.0: Human-in-the-Loop AI for Quantitative Investment'
+  summary: 把人在回路的 LLM 交互扩展到研究、建模、分析的完整量化研究流程。
   first_public: 2024-02
-  published: '2024.02'
+  versions: arXiv v1 2024-02
+  venue: null
   arxiv: '2402.09746'
   url: https://arxiv.org/abs/2402.09746
   code: null
@@ -451,11 +529,14 @@ papers:
   card: notes/cards/2024_Alpha-GPT2.md
   deep: null
   added: '2026-11-03'
+  checked: '2026-11-03'
 - id: llmstrategyfinding-2024
   short: LLM Strategy Finding
   title: Automate Strategy Finding with LLM in Quant Investment
+  summary: 从多模态财经材料抽取策略要素形成种子 Alpha，经多智能体评估后动态加权。
   first_public: 2024-09
-  published: '2024.09'
+  versions: arXiv v1 2024-09；v4 2025-11
+  venue: null
   arxiv: '2409.06289'
   url: https://arxiv.org/abs/2409.06289
   code: null
@@ -473,15 +554,18 @@ papers:
   card: notes/cards/2024_LLMStrategyFinding.md
   deep: null
   added: '2026-11-03'
+  checked: '2026-11-03'
 - id: alphaagent-2025
   short: AlphaAgent
   title: 'AlphaAgent: LLM-Driven Alpha Mining with Regularized Exploration to Counteract Alpha Decay'
+  summary: 多智能体闭环，以 AST 原创性、假设一致性与复杂度正则对抗因子衰减。
   first_public: 2025-02
-  published: 2025.02（arXiv v1；KDD 2025）
+  versions: arXiv v1 2025-02；v2 2025-06
+  venue: KDD 2025
   arxiv: '2502.16789'
   url: https://arxiv.org/abs/2502.16789
   code: https://github.com/RndmVariableQ/AlphaAgent
-  code_note: 官方仓库：https://github.com/RndmVariableQ/AlphaAgent
+  code_note: null
   affiliation: 中山大学、新南威尔士大学、南洋理工大学、鹏城实验室、香港中文大学（深圳）
   problems:
   - expressiveness
@@ -497,11 +581,14 @@ papers:
   card: notes/cards/2025_AlphaAgent.md
   deep: null
   added: '2026-11-03'
+  checked: '2026-11-03'
 - id: alpha-jungle-2025
   short: Alpha-Jungle
   title: 'Navigating the Alpha Jungle: An LLM-Powered MCTS Framework for Formulaic Factor Mining'
+  summary: LLM 驱动的 MCTS 逐步精炼公式，多维评价并规避高频子树。
   first_public: 2025-05
-  published: 2025.05（arXiv v1；v3 为 2025.11；AAAI 2026）
+  versions: arXiv v1 2025-05；v3 2025-11
+  venue: AAAI 2026
   arxiv: '2505.11122'
   url: https://arxiv.org/abs/2505.11122
   code: null
@@ -521,15 +608,18 @@ papers:
   card: notes/cards/2025_Alpha-Jungle.md
   deep: null
   added: '2026-11-03'
+  checked: '2026-11-03'
 - id: rd-agent-quant-2025
   short: RD-Agent(Q)
   title: 'R&D-Agent-Quant: A Multi-Agent Framework for Data-Centric Factors and Model Joint Optimization'
+  summary: 多智能体分别迭代因子与模型，用 Thompson 采样调度二者的联合优化。
   first_public: 2025-05
-  published: 2025.05（arXiv v1；NeurIPS 2025）
+  versions: arXiv v1 2025-05；v2 2025-09
+  venue: NeurIPS 2025
   arxiv: '2505.15155'
   url: https://arxiv.org/abs/2505.15155
   code: https://github.com/microsoft/RD-Agent
-  code_note: 官方仓库：https://github.com/microsoft/RD-Agent
+  code_note: null
   affiliation: Microsoft Research / Microsoft 相关团队（论文作者包含 Yuante Li、Xu Yang、Xiao Yang、Minrui Xu、Xisen Wang、Weiqing Liu、Jiang Bian）
   problems:
   - redundancy
@@ -544,15 +634,18 @@ papers:
   card: notes/cards/2025_RD-Agent-Quant.md
   deep: null
   added: '2026-11-03'
+  checked: '2026-11-03'
 - id: cogalpha-2025
   short: CogAlpha
   title: Cognitive Alpha Mining via LLM-Driven Code-Based Evolution
+  summary: 七层 LLM 代理生成代码级 Alpha，经质量检查后做思考演化。
   first_public: 2025-11
-  published: 2025.11（arXiv v1；v3 为 2026.04）
+  versions: arXiv v1 2025-11；v4 2026-07
+  venue: null
   arxiv: '2511.18850'
   url: https://arxiv.org/abs/2511.18850
   code: null
-  code_note: 论文称代码将发布；截至本次检索未见官方仓库
+  code_note: 论文称代码将发布；截至 2026-07-11 检索未见官方仓库
   affiliation: 中国移动九天研究院、香港大学计算与数据科学学院、Grace Investment Machine
   problems:
   - expressiveness
@@ -566,15 +659,18 @@ papers:
   card: notes/cards/2025_CogAlpha.md
   deep: null
   added: '2026-11-03'
+  checked: '2026-11-03'
 - id: quantaalpha-2026
   short: QuantaAlpha
   title: 'QuantaAlpha: An Evolutionary Framework for LLM-Driven Alpha Mining'
+  summary: 把 LLM 挖掘过程视为可演化轨迹，对高质量轨迹做局部变异与交叉。
   first_public: 2026-02
-  published: 2026.02（arXiv v1；v3 为 2026.05）
+  versions: arXiv v1 2026-02；v3 2026-05
+  venue: null
   arxiv: '2602.07085'
   url: https://arxiv.org/abs/2602.07085
   code: https://github.com/QuantaAlpha/QuantaAlpha
-  code_note: 官方仓库：https://github.com/QuantaAlpha/QuantaAlpha
+  code_note: null
   affiliation: 官方摘要页未展示单位信息；作者包含 Jun Han、Shuo Zhang、Wei Li、Yifan Dong、Tu Hu、Yumo Zhu、Xiaomin Yu、Xin Guo、Zhaowei Liu、Kunyi Wang、Jingping Liu、Tianyi Jiang、Ruichuan An、Sen Hu、Zhi Yang、Ronghao Che、Huacan Wang
   problems:
   - expressiveness
@@ -588,11 +684,14 @@ papers:
   card: notes/cards/2026_QuantaAlpha.md
   deep: null
   added: '2026-11-03'
+  checked: '2026-11-03'
 - id: factorminer-2026
   short: FactorMiner
   title: 'FactorMiner: A Self-Evolving Agent with Skills and Experience Memory for Financial Alpha Discovery'
+  summary: 技能模块封装算子与评估协议，经验记忆记录应避开的高相关区域。
   first_public: 2026-02
-  published: 2026.02（arXiv v1）
+  versions: arXiv v1 2026-02；v2 2026-08
+  venue: null
   arxiv: '2602.14670'
   url: https://arxiv.org/abs/2602.14670
   code: null
@@ -611,11 +710,14 @@ papers:
   card: notes/cards/2026_FactorMiner.md
   deep: null
   added: '2026-11-03'
+  checked: '2026-11-03'
 - id: factorengine-2026
   short: FactorEngine
   title: 'FactorEngine: A Program-level Knowledge-Infused Factor Mining Framework for Quantitative Investment'
+  summary: 图灵完备程序因子：LLM 演化宏观逻辑，贝叶斯优化微观参数，研报知识启动。
   first_public: 2026-03
-  published: 2026.03（arXiv v1；v2 为 2026.04）
+  versions: arXiv v1 2026-03；v3 2026-09
+  venue: ICDM 2026
   arxiv: '2603.16365'
   url: https://arxiv.org/abs/2603.16365
   code: null
@@ -633,11 +735,14 @@ papers:
   card: notes/cards/2026_FactorEngine.md
   deep: null
   added: '2026-11-03'
+  checked: '2026-11-03'
 - id: hubble-2026
   short: Hubble
   title: 'Hubble: An LLM-Driven Agentic Framework for Safe, Diverse, and Reproducible Alpha Factor Discovery'
+  summary: DSL / AST 安全沙箱加正负双通道 RAG 与因子家族感知评分，持久化全部诊断。
   first_public: 2026-03
-  published: 2026.03（arXiv v1；v2 为 2026.04）
+  versions: arXiv v1 2026-03；v2 2026-04
+  venue: null
   arxiv: '2604.09601'
   url: https://arxiv.org/abs/2604.09601
   code: null
@@ -659,15 +764,18 @@ papers:
   card: notes/cards/2026_Hubble.md
   deep: null
   added: '2026-11-03'
+  checked: '2026-11-03'
 - id: quantevolver-2026
   short: QuantEvolver
   title: 'From Feedback Loops to Policy Updates: Reinforcement Fine-Tuning for LLM-Based Alpha Factor Discovery'
+  summary: 用 RFT（GRPO + DiCo 奖励）把评价反馈写进轻量 LLM 参数，代替提示词循环。
   first_public: 2026-05
-  published: 2026.05（arXiv v1）
+  versions: arXiv v1 2026-05
+  venue: null
   arxiv: '2605.15412'
   url: https://arxiv.org/abs/2605.15412
   code: https://github.com/QuantLLM/QuantEvolver
-  code_note: 官方仓库：https://github.com/QuantLLM/QuantEvolver（仓库说明仅包含可复用框架代码，不含私有市场数据、训练 checkpoint、实验日志或论文专用复现实验脚本）
+  code_note: 仓库说明仅包含可复用框架代码，不含私有市场数据、训练 checkpoint、实验日志或论文专用复现实验脚本
   affiliation: 官方摘要页未展示单位信息；作者包含 Lingzhe Zhang、Tong Jia、Yunpeng Zhai、Zixuan Xie、Chiming Duan、Minghua He、Philip S. Yu、Ying Li
   problems:
   - eval-cost
@@ -683,11 +791,14 @@ papers:
   card: notes/cards/2026_QuantEvolver.md
   deep: null
   added: '2026-11-03'
+  checked: '2026-11-03'
 - id: agora-sjs-2026
   short: Agora/SJS
   title: 'AI Trading''s Alpha Singularity: Emergent Market Reasoning through Agent-to-Agent Self-Evolution'
+  summary: 多智能体在密封评估下联合搜索交易信号与评价协议的自演化研究环境。
   first_public: 2026-06
-  published: 2026.06（arXiv v1）
+  versions: arXiv v1 2026-06
+  venue: null
   arxiv: '2606.29194'
   url: https://arxiv.org/abs/2606.29194
   code: null
@@ -706,15 +817,18 @@ papers:
   card: notes/cards/2026_Agora-SJS.md
   deep: null
   added: '2026-11-03'
+  checked: '2026-11-03'
 - id: hrft-2024
   short: HRFT/IRFT
   title: 'HRFT: Mining High-Frequency Risk Factor Collections End-to-End via Transformer'
+  summary: Transformer 以符号-数值混合词表端到端生成含常数的高频风险因子公式。
   first_public: 2024-08
-  published: 2024.08（arXiv v1；WWW Companion 2025）
+  versions: arXiv v1 2024-08；v5 2025-09
+  venue: WWW 2025（Industry Track）
   arxiv: '2408.01271'
   url: https://arxiv.org/abs/2408.01271
   code: https://github.com/wencyxu/IRF-LLM-accepted-at-WWW25-
-  code_note: 官方仓库：https://github.com/wencyxu/IRF-LLM-accepted-at-WWW25-
+  code_note: null
   affiliation: 中央财经大学统计与数学学院、腾讯 TiMi Studio、中国科学院计算机网络信息中心
   problems:
   - expressiveness
@@ -728,3 +842,4 @@ papers:
   card: notes/cards/2024_HRFT.md
   deep: null
   added: '2026-11-03'
+  checked: '2026-11-03'
