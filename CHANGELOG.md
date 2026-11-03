@@ -2,6 +2,20 @@
 
 记录仓库结构、收录口径、模板和分类体系的变化。最新记录在前。
 
+## 2026-11-03 内容补写、候选登记与第一期简报
+
+- 速读卡：除 AlphaQCM（OpenReview 返回 403，需换来源）外，31 张卡的“证据”与“局限”按论文原文补写，每句注明章节或表格来源；无依据处写明“据实验设置”或“推断”。三篇有精读的卡片据本仓库精读补写。
+- 问题标注修正（读原文核对后发现）：
+  - QFR：P5 改为 P9。信息比率针对的是因子随时间是否稳定，原文没有讨论搜索规模带来的选择偏差。
+  - Synergistic RL：P2 改为 P7。扩展算子与窗口是为了扩大搜索空间和因子多样性，原文未讨论可解释性代价。
+  - LLM Strategy Finding：P2 改为 P1。论文抽取的是显式公式因子，没有在表达能力与可解释性之间取舍；同时补上官方仓库 kouzhizhuo/Automate-Strategy-Finding-with-LLM-in-Quant-investment（v4 原文给出）。
+  - 补标：AlphaGen、Alpha2 加 P3；RiskMiner 加 P8；AlphaCFG、EFS 加 P7；AlphaPROBE 加 P8；Alpha-GPT 加 P2；QuantAgent 加 P4；Alpha-GPT 2.0 加 P8。
+  - 相应修改 `papers.yaml`、速读卡和 `topics/problems.md`，脚本核对通过。
+- 文字修正：Alpha101 的“101 个真实交易中使用过的 Alpha”按原文改为“生产中使用、写作时其中 80 个处于生产状态”；AlphaEvolve 的冗余剪枝与集合级相关性阈值剔除分开表述；AlphaGen 的因子池淘汰规则改为按权重绝对值最小。
+- 新增候选 11 篇：`evaluation` 路线 5 篇（AlphaEval、FactorBench、Auditing LLM Alpha-Factor Mining、QBX、Look-Ahead-Bench，状态 `triaged`），新方法 6 篇（AlphaPareto、AlphaPADI、AlphaPilot、AlphaSchema、MAPLE、AlphaDiverse，状态 `inbox`）。新增标签 `benchmark`、`auditing`、`dsl`、`diffusion`。
+- 第一期跟踪简报 `digests/2026-11.md`：统计区间 2026-07-11 至 2026-11-03，记录检索口径、新增收录、问题视角、状态变化、建议精读和未收录候选。
+- 脚本：收录概况增加“待处理”一行；问题编号识别限定为一到两位数字，避免把“2022-2024”这类年份误判为 P2024。
+
 ## 2026-11-03 结构优化与首次状态核查
 
 - 原则：只有 `papers.yaml`、`taxonomy.yaml` 和手写分析是事实源；清单、计数和卡片元数据由脚本生成，手写分析中能核对的引用由脚本校验。

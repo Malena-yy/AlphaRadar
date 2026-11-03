@@ -100,6 +100,8 @@ tags:
   - quality-diversity
   - automl
   - grammar
+  - dsl
+  - diffusion
   - program-search
   - code-evolution
   - generator-predictor
@@ -127,5 +129,7 @@ tags:
   - safety
   # 数据与因子类型
   - formula-library
+  - benchmark
+  - auditing
   - high-frequency
   - risk-factor

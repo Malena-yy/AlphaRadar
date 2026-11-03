@@ -172,7 +172,7 @@ def check_card(p, text, taxonomy):
         debt["局限"] += 1
     ev = values["针对问题与证据"]
     if ev is not None:
-        found = {f"P{n}" for n in re.findall(r"(?<![A-Za-z0-9])P(\d+)(?!\d)", ev)}
+        found = {f"P{n}" for n in re.findall(r"(?<![A-Za-z])P(\d{1,2})(?!\d)", ev)}
         want = {pcode(taxonomy, k) for k in p["problems"]}
         if found != want:
             errors.append(f"{rel}: 针对问题与证据 mentions {sorted(found) or 'none'}, papers.yaml labels {sorted(want) or 'none'}")
@@ -302,6 +302,10 @@ def render_status(papers, taxonomy, debt):
         gaps.append(f"- 速读卡待补：局限 {debt['局限']} 篇，证据 {debt['证据']} 篇。")
     if gaps:
         lines += ["", "覆盖缺口：", ""] + gaps
+    pending = Counter(p["status"] for p in papers if not has_note(p))
+    if pending:
+        what = "，".join(f"{STATUS_LABEL[s]} {pending[s]}" for s in ("triaged", "inbox") if pending[s])
+        lines += ["", f"待处理：{what} 篇尚未写卡，见[论文索引](INDEX.md)。"]
     recent = sorted(papers, key=lambda p: (str(p["added"]), str(p["first_public"])), reverse=True)[:RECENT]
     lines += ["", "最近收录：", ""]
     for p in recent:

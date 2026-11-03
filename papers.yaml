@@ -107,6 +107,7 @@ papers:
   affiliation: 中国科学院计算技术研究所、中国科学院大学、华为 EI Innovation Lab
   problems:
   - search-space
+  - eval-cost
   - redundancy
   - objective-gap
   routes:
@@ -135,7 +136,7 @@ papers:
   affiliation: 韩国光云大学机器人学部
   problems:
   - search-space
-  - expressiveness
+  - redundancy
   routes:
   - formulaic
   tags:
@@ -162,6 +163,7 @@ papers:
   - search-space
   - learning-signal
   - redundancy
+  - objective-gap
   routes:
   - formulaic
   tags:
@@ -186,6 +188,7 @@ papers:
   affiliation: 南京大学新型软件技术全国重点实验室、南京大学人工智能学院、香港大学
   problems:
   - search-space
+  - eval-cost
   routes:
   - formulaic
   tags:
@@ -211,7 +214,7 @@ papers:
   affiliation: 南方科技大学、深圳裕锦私募证券基金管理有限公司、中国科学技术大学
   problems:
   - learning-signal
-  - overfitting
+  - decay
   routes:
   - formulaic
   tags:
@@ -227,12 +230,12 @@ papers:
   title: 'AlphaQCM: Alpha Discovery with Distributional Reinforcement Learning'
   summary: 分布式强化学习估计奖励方差（QCM），作为非平稳稀疏奖励下的探索奖励。
   first_public: 2025-05
-  versions: OpenReview 论文页
-  venue: ICML 2025（Poster）
+  versions: ICML 2025（PMLR 267:80463-80479）
+  venue: ICML 2025
   arxiv: null
   url: https://openreview.net/forum?id=3sXMHlhBSs
-  code: null
-  code_note: 未见官方开源
+  code: https://github.com/ZhuZhouFan/AlphaQCM
+  code_note: null
   affiliation: 厦门大学、香港大学
   problems:
   - learning-signal
@@ -309,6 +312,7 @@ papers:
   affiliation: 电子科技大学、King's College London、University of Southampton
   problems:
   - search-space
+  - redundancy
   routes:
   - formulaic
   tags:
@@ -392,6 +396,7 @@ papers:
   code_note: 未见官方开源
   affiliation: 官方摘要页未展示单位信息；作者为 Haochen Luo、Yuan Zhang、Chen Liu
   problems:
+  - redundancy
   - objective-gap
   routes:
   - llm-agent
@@ -418,6 +423,8 @@ papers:
   code_note: null
   affiliation: 官方摘要页未展示单位信息；作者包含 Zuoyou Jiang、Li Zhao、Rui Sun、Ruohan Sun、Zhongjian Li、Jing Li、Daxin Jiang、Zuo Bai、Cheng Hua
   problems:
+  - overfitting
+  - leakage
   - objective-gap
   - decay
   routes:
@@ -447,6 +454,7 @@ papers:
   problems:
   - search-space
   - redundancy
+  - objective-gap
   routes:
   - formulaic
   - pool-combination
@@ -472,6 +480,7 @@ papers:
   affiliation: 香港科技大学、IDEA Research、Columbia University、香港科技大学（广州）
   problems:
   - search-space
+  - expressiveness
   routes:
   - llm-agent
   tags:
@@ -496,6 +505,7 @@ papers:
   affiliation: 香港科技大学、IDEA Research、香港科技大学（广州）
   problems:
   - search-space
+  - learning-signal
   routes:
   - llm-agent
   tags:
@@ -520,6 +530,7 @@ papers:
   affiliation: 官方摘要页未展示单位信息；作者为 Hang Yuan、Saizhuo Wang、Jian Guo
   problems:
   - search-space
+  - objective-gap
   routes:
   - llm-agent
   tags:
@@ -539,11 +550,11 @@ papers:
   venue: null
   arxiv: '2409.06289'
   url: https://arxiv.org/abs/2409.06289
-  code: null
-  code_note: 未见官方开源
+  code: https://github.com/kouzhizhuo/Automate-Strategy-Finding-with-LLM-in-Quant-investment
+  code_note: null
   affiliation: 官方摘要页未展示单位信息；作者为 Zhizhuo Kou、Holam Yu、Jingshu Peng、Lei Chen
   problems:
-  - expressiveness
+  - search-space
   - objective-gap
   routes:
   - llm-agent
@@ -648,6 +659,7 @@ papers:
   code_note: 论文称代码将发布；截至 2026-07-11 检索未见官方仓库
   affiliation: 中国移动九天研究院、香港大学计算与数据科学学院、Grace Investment Machine
   problems:
+  - search-space
   - expressiveness
   - leakage
   routes:
@@ -698,6 +710,7 @@ papers:
   code_note: 未见官方开源
   affiliation: 官方摘要页未展示单位信息；作者为 Yanlong Wang、Jian Xu、Hongkang Zhang、Shao-Lun Huang、Danny Dongning Sun、Xiao-Ping Zhang
   problems:
+  - eval-cost
   - redundancy
   - reproducibility
   routes:
@@ -726,6 +739,8 @@ papers:
   problems:
   - search-space
   - expressiveness
+  - eval-cost
+  - leakage
   routes:
   - llm-agent
   tags:
@@ -778,6 +793,7 @@ papers:
   code_note: 仓库说明仅包含可复用框架代码，不含私有市场数据、训练 checkpoint、实验日志或论文专用复现实验脚本
   affiliation: 官方摘要页未展示单位信息；作者包含 Lingzhe Zhang、Tong Jia、Yunpeng Zhai、Zixuan Xie、Chiming Duan、Minghua He、Philip S. Yu、Ying Li
   problems:
+  - search-space
   - eval-cost
   - learning-signal
   - redundancy
@@ -840,6 +856,264 @@ papers:
   - transformer
   status: card
   card: notes/cards/2024_HRFT.md
+  deep: null
+  added: '2026-11-03'
+  checked: '2026-11-03'
+- id: alphaeval-2025
+  short: AlphaEval
+  title: 'AlphaEval: A Comprehensive and Efficient Evaluation Framework for Formula Alpha Mining'
+  summary: 面向公式 Alpha 挖掘的统一评估框架：以高效代理指标与回测相互对照，覆盖预测力、稳定性与稳健性。
+  first_public: 2025-08
+  versions: arXiv v1 2025-08；v2 2026-06
+  venue: KDD 2026
+  arxiv: '2508.13174'
+  url: https://arxiv.org/abs/2508.13174
+  code: null
+  code_note: null
+  affiliation: 待查
+  problems:
+  - reproducibility
+  routes:
+  - evaluation
+  tags:
+  - benchmark
+  status: triaged
+  card: null
+  deep: null
+  added: '2026-11-03'
+  checked: '2026-11-03'
+- id: factorb-bench-2026
+  short: FactorBench
+  title: 'FactorBench: A Portfolio-Aware Benchmark for Automated Factor Mining'
+  summary: 组合视角的挖掘基准：在共享数据与评估契约下，横向比较九种自动挖掘方法产出的约五千个因子。
+  first_public: 2026-10
+  versions: arXiv v1 2026-10
+  venue: null
+  arxiv: '2610.06947'
+  url: https://arxiv.org/abs/2610.06947
+  code: null
+  code_note: null
+  affiliation: 待查
+  problems:
+  - objective-gap
+  - reproducibility
+  routes:
+  - evaluation
+  tags:
+  - benchmark
+  status: triaged
+  card: null
+  deep: null
+  added: '2026-11-03'
+  checked: '2026-11-03'
+- id: auditing-llm-alpha-2026
+  short: Auditing LLM Alpha-Factor Mining
+  title: 'Auditing LLM Alpha-Factor Mining: Metric Provenance and Full-Cohort Reanalysis'
+  summary: 审计已留存项目的运行计数与结果保留方式，指出指标来源混用会让架构比较失效，并公开做全量再分析。
+  first_public: 2026-10
+  versions: arXiv v1 2026-10；AI4F Workshop @ ICAIF 2026（非归档）
+  venue: ICAIF 2026 AI4F Workshop（非归档）
+  arxiv: '2610.29500'
+  url: https://arxiv.org/abs/2610.29500
+  code: null
+  code_note: null
+  affiliation: 待查
+  problems:
+  - reproducibility
+  routes:
+  - evaluation
+  tags:
+  - auditing
+  - llm
+  status: triaged
+  card: null
+  deep: null
+  added: '2026-11-03'
+  checked: '2026-11-03'
+- id: qbx-2026
+  short: QBX
+  title: 'QBX: A Compiler for Well-Formed, Auditable Alpha Programs'
+  summary: 面向 alpha 程序的编译器：以版本化算子注册表和带类型、时间可用性的 IR 定义可审计的候选空间。
+  first_public: 2026-10
+  versions: arXiv v1 2026-10
+  venue: ICAIF 2026
+  arxiv: '2610.41689'
+  url: https://arxiv.org/abs/2610.41689
+  code: null
+  code_note: null
+  affiliation: 待查
+  problems:
+  - search-space
+  - leakage
+  - reproducibility
+  routes:
+  - evaluation
+  - formulaic
+  tags:
+  - dsl
+  - auditing
+  status: triaged
+  card: null
+  deep: null
+  added: '2026-11-03'
+  checked: '2026-11-03'
+- id: look-ahead-bench-2026
+  short: Look-Ahead-Bench
+  title: 'Look-Ahead-Bench: a Standardized Benchmark of Look-ahead Bias in Point-in-Time LLMs for Finance'
+  summary: 衡量时点化 LLM 前视偏差的标准化基准，用跨市场状态的表现衰减区分真实预测与记忆。
+  first_public: 2026-01
+  versions: arXiv v1 2026-01
+  venue: null
+  arxiv: '2601.13770'
+  url: https://arxiv.org/abs/2601.13770
+  code: null
+  code_note: null
+  affiliation: 待查
+  problems:
+  - leakage
+  routes:
+  - evaluation
+  tags:
+  - benchmark
+  - llm
+  status: triaged
+  card: null
+  deep: null
+  added: '2026-11-03'
+  checked: '2026-11-03'
+- id: alphapareto-2026
+  short: AlphaPareto
+  title: 'AlphaPareto: Formulaic Alpha Discovery with LLM-Guided Multi-Objective Reinforcement Learning'
+  summary: LLM 引导的多目标强化学习挖掘公式 Alpha，同时优化预测力与演变因子池的其它性质。
+  first_public: 2026-09
+  versions: arXiv v1 2026-09
+  venue: NeurIPS 2026
+  arxiv: '2609.34188'
+  url: https://arxiv.org/abs/2609.34188
+  code: null
+  code_note: null
+  affiliation: 待查
+  problems: []
+  routes:
+  - formulaic
+  tags:
+  - rl
+  - llm
+  status: inbox
+  card: null
+  deep: null
+  added: '2026-11-03'
+  checked: '2026-11-03'
+- id: alphapadi-2026
+  short: AlphaPADI
+  title: 'AlphaPADI: Formulaic Alpha Discovery via Pool-Aware Hierarchical Discrete Diffusion'
+  summary: 以因子池为条件的层次化离散扩散模型生成公式，把互补性纳入生成状态并支持多层结构改写。
+  first_public: 2026-10
+  versions: arXiv v1 2026-10；v2 2026-10
+  venue: null
+  arxiv: '2610.04959'
+  url: https://arxiv.org/abs/2610.04959
+  code: null
+  code_note: null
+  affiliation: 待查
+  problems: []
+  routes:
+  - formulaic
+  tags:
+  - diffusion
+  status: inbox
+  card: null
+  deep: null
+  added: '2026-11-03'
+  checked: '2026-11-03'
+- id: alphapilot-2026
+  short: AlphaPilot
+  title: 'AlphaPilot: Multi-Turn Tool-Using LLM Agents for Adaptive Alpha Mining with Reinforcement Learning'
+  summary: 用强化学习训练多轮调用工具的 LLM 智能体：按市场描述提出公式、查询真实评价并维护因子池。
+  first_public: 2026-10
+  versions: arXiv v1 2026-10
+  venue: null
+  arxiv: '2610.15488'
+  url: https://arxiv.org/abs/2610.15488
+  code: null
+  code_note: null
+  affiliation: 待查
+  problems: []
+  routes:
+  - llm-agent
+  tags:
+  - rl
+  - multi-agent
+  status: inbox
+  card: null
+  deep: null
+  added: '2026-11-03'
+  checked: '2026-11-03'
+- id: alphaschema-2026
+  short: AlphaSchema
+  title: 'AlphaSchema: Exploring the Space of Trading Semantics for LLM-Based Alpha Mining'
+  summary: 把交易语义组织成结构化 schema 空间，让 LLM 在显式的探索空间中挖掘 Alpha。
+  first_public: 2026-07
+  versions: arXiv v1 2026-07
+  venue: null
+  arxiv: '2607.26642'
+  url: https://arxiv.org/abs/2607.26642
+  code: null
+  code_note: null
+  affiliation: 待查
+  problems: []
+  routes:
+  - llm-agent
+  tags:
+  - llm
+  status: inbox
+  card: null
+  deep: null
+  added: '2026-11-03'
+  checked: '2026-11-03'
+- id: maple-2026
+  short: MAPLE
+  title: 'MAPLE: Efficient and Diverse Multi-Alpha Generation for Portfolio Construction'
+  summary: 单次训练内生成多个低相关 Alpha：共享预测头、极端秩加权列表损失与显式相关性正则。
+  first_public: 2026-07
+  versions: arXiv v1 2026-07
+  venue: null
+  arxiv: '2607.24131'
+  url: https://arxiv.org/abs/2607.24131
+  code: null
+  code_note: null
+  affiliation: 待查
+  problems: []
+  routes:
+  - neural
+  - pool-combination
+  tags:
+  - neural-alpha
+  status: inbox
+  card: null
+  deep: null
+  added: '2026-11-03'
+  checked: '2026-11-03'
+- id: alphadiverse-2026
+  short: AlphaDiverse
+  title: 'AlphaDiverse: Post-Training Local Quantitative Research Agents for Diverse Exploration in Alpha Factor Mining'
+  summary: 用多样化研究路径收集与后训练，把多智能体 Alpha 挖掘迁移到本地模型，缓解研究路径坍缩。
+  first_public: 2026-09
+  versions: arXiv v1 2026-09
+  venue: null
+  arxiv: '2609.29014'
+  url: https://arxiv.org/abs/2609.29014
+  code: null
+  code_note: null
+  affiliation: 待查
+  problems: []
+  routes:
+  - llm-agent
+  tags:
+  - multi-agent
+  - rft
+  status: inbox
+  card: null
   deep: null
   added: '2026-11-03'
   checked: '2026-11-03'

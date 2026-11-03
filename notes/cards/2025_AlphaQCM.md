@@ -6,10 +6,10 @@
 | --- | --- |
 | 一句话 | 分布式强化学习估计奖励方差（QCM），作为非平稳稀疏奖励下的探索奖励。 |
 | 首次公开 | 2025-05 |
-| 版本 | OpenReview 论文页 |
-| 会议 / 期刊 | ICML 2025（Poster） |
+| 版本 | ICML 2025（PMLR 267:80463-80479） |
+| 会议 / 期刊 | ICML 2025 |
 | 论文 | [论文页](https://openreview.net/forum?id=3sXMHlhBSs) |
-| 代码 | 未见官方开源 |
+| 代码 | [ZhuZhouFan/AlphaQCM](https://github.com/ZhuZhouFan/AlphaQCM) |
 | 作者单位 | 厦门大学、香港大学 |
 | 路线 | `formulaic` |
 | 标签 | `rl` `distributional-rl` |
