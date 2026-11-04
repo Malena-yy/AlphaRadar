@@ -2286,3 +2286,111 @@ papers:
   deep: null
   added: '2026-11-03'
   checked: '2026-11-03'
+- id: cosmosalpha-2026
+  short: CosmosAlpha
+  title: 'CosmosAlpha: Multi-Relational Graph Search with Pareto-Guided Exploration for LLM-Driven Alpha Mining'
+  summary: 把已评价因子组织成生成、结构、相关三类边的图，按 Pareto 前沿选父并引导 LLM 改写公式。
+  first_public: 2026-11
+  versions: arXiv v1 2026-11
+  venue: null
+  arxiv: '2611.04555'
+  url: https://arxiv.org/abs/2611.04555
+  code: https://github.com/wzhmtldswz/CosmosAlpha
+  code_note: 论文声明将发布带代码版本、提示词与运行配置的产物，PDF 未说明是否已就绪
+  affiliation: 中国科学院大学人工智能与量化金融实验室、上海交通大学物理与天文学院、国科大杭州高等研究院
+  problems:
+  - search-space
+  - redundancy
+  also:
+  - eval-cost
+  - objective-gap
+  setup:
+    markets: CSI300、CSI500（时点成分）
+    freq: 日频
+    test: 2021-01-01 至 2025-12-31
+    label: 次一交易日收盘对收盘收益
+    cost: null
+  routes:
+  - formulaic
+  - llm-agent
+  tags:
+  - llm
+  - factor-lineage
+  - multi-objective
+  - quality-diversity
+  status: card
+  card: notes/cards/2026_CosmosAlpha.md
+  deep: null
+  added: '2026-11-03'
+  checked: '2026-11-03'
+- id: prism-vq-2026
+  short: PRISM-VQ
+  title: 'Vector-Quantized Discrete Latent Factors Meet Financial Priors: Dynamic Cross-Sectional Stock Ranking Prediction for Portfolio Construction'
+  summary: 用向量量化码本学离散隐因子、以码字路由生成动态载荷，并把先验因子直接纳入因子定价方程的选股模型。
+  first_public: 2026-05
+  versions: arXiv v1 2026-05
+  venue: IJCAI 2026
+  arxiv: '2605.13407'
+  url: https://arxiv.org/abs/2605.13407
+  code: https://github.com/finxlab/PRISM-VQ
+  code_note: null
+  affiliation: RiskX、汉阳大学
+  problems:
+  - expressiveness
+  - decay
+  also:
+  - overfitting
+  - leakage
+  - objective-gap
+  setup:
+    markets: CSI300、S&P500（当期成分）
+    freq: 日频
+    test: 2022 至 2024（训练 2009–2019，验证 2020–2021）
+    label: 5 日远期收益（t+1 开盘至 t+5 收盘）
+    cost: 买入 5 bp、卖出 15 bp（附录另扫六档）
+  routes:
+  - neural
+  tags:
+  - neural-alpha
+  - transformer
+  status: card
+  card: notes/cards/2026_PRISM-VQ.md
+  deep: null
+  added: '2026-11-03'
+  checked: '2026-11-03'
+- id: marketsenseai-2026
+  short: MarketSenseAI
+  title: Signal or Noise in Multi-Agent LLM-based Stock Recommendations?
+  summary: 对一个已部署的多智能体 LLM 选股系统做组合层验证：实时生成信号规避前视，用随机零分布检验组合是否胜过运气。
+  first_public: 2026-04
+  versions: arXiv v1 2026-04
+  venue: null
+  arxiv: '2604.17327'
+  url: https://arxiv.org/abs/2604.17327
+  code: null
+  code_note: 论文未给出代码；被评系统为商业闭源平台，未提供提示词、信号面板或数据快照
+  affiliation: Alpha Tensor Technologies
+  problems:
+  - leakage
+  - overfitting
+  also:
+  - objective-gap
+  setup:
+    markets: S&P500（467 只固定队列）、S&P100（94 只固定队列）
+    freq: 日频数据、月度观察与调仓
+    test: S&P500：2024-09 至 2026-03；S&P100：2023-05 至 2026-03
+    label: 一个月买入持有收益
+    cost: null
+  routes:
+  - adjacent
+  - evaluation
+  tags:
+  - llm
+  - multi-agent
+  - benchmark
+  - portfolio
+  status: card
+  card: notes/cards/2026_MarketSenseAI.md
+  deep: null
+  added: '2026-11-03'
+  checked: '2026-11-03'

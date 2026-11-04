@@ -80,7 +80,7 @@ RL 公式因子挖掘路线的核心问题不是“能否生成一个高 IC 公�
 
 代表工作：[AlphaGen](../notes/cards/2023_AlphaGen.md)、[Synergistic RL](../notes/cards/2024_SynergisticRL.md)、[RiskMiner](../notes/cards/2024_RiskMiner.md)、[Alpha2](../notes/cards/2024_Alpha2.md)、[QFR](../notes/cards/2024_QFR.md)、[AlphaQCM](../notes/cards/2025_AlphaQCM.md)、[TLRS](../notes/cards/2025_TLRS.md)、[AlphaSAGE](../notes/cards/2025_AlphaSAGE.md)、[AlphaCFG](../notes/cards/2026_AlphaCFG.md)。
 
-近期把“因子池视角”前移到生成端的做法：以整个池为生成单元并用扩散模型生成（[AlphaPADI](../notes/cards/2026_AlphaPADI.md)）、把池编码进策略状态（[AlphaPareto](../notes/cards/2026_AlphaPareto.md)）、把池级奖励转成池对偏好（[AlphaPADI](../notes/cards/2026_AlphaPADI.md)）。在训练信号层面，还有同前缀兄弟动作的局部蒸馏（[AlphaG-OPD](../notes/cards/2026_AlphaG-OPD.md)）与跨回合记忆加 SDE 回报评论家（[AlphaRJM](../notes/cards/2026_AlphaRJM.md)）。
+把搜索历史显式持久化的另一支：多关系图（生成、结构、相关三类边）加 Pareto 选父（[CosmosAlpha](../notes/cards/2026_CosmosAlpha.md)）。近期把“因子池视角”前移到生成端的做法：以整个池为生成单元并用扩散模型生成（[AlphaPADI](../notes/cards/2026_AlphaPADI.md)）、把池编码进策略状态（[AlphaPareto](../notes/cards/2026_AlphaPareto.md)）、把池级奖励转成池对偏好（[AlphaPADI](../notes/cards/2026_AlphaPADI.md)）。在训练信号层面，还有同前缀兄弟动作的局部蒸馏（[AlphaG-OPD](../notes/cards/2026_AlphaG-OPD.md)）与跨回合记忆加 SDE 回报评论家（[AlphaRJM](../notes/cards/2026_AlphaRJM.md)）。
 
 ### 2.3 因子池、动态组合与筛选
 
@@ -98,13 +98,13 @@ RL 公式因子挖掘路线的核心问题不是“能否生成一个高 IC 公�
 
 这一组与传统日频 Alpha 公式挖掘不完全同构，但对连续参数、符号-数值混合生成、高频风险因子和更宽表达空间有参考价值。
 
-代表工作：[HRFT/IRFT](../notes/cards/2024_HRFT.md)、[MAPLE](../notes/cards/2026_MAPLE.md)（单模型多输出的神经 Alpha）、[Det-MASO](../notes/cards/2026_Det-MASO.md)（多智能体神经因子，智能体间相关矩阵惩罚）、[GoAnt](../notes/cards/2026_GoAnt.md)（订单簿数据）。
+代表工作：[HRFT/IRFT](../notes/cards/2024_HRFT.md)、[MAPLE](../notes/cards/2026_MAPLE.md)（单模型多输出的神经 Alpha）、[Det-MASO](../notes/cards/2026_Det-MASO.md)（多智能体神经因子，智能体间相关矩阵惩罚）、[PRISM-VQ](../notes/cards/2026_PRISM-VQ.md)（离散隐因子，保留“载荷 × 因子”结构）、[GoAnt](../notes/cards/2026_GoAnt.md)（订单簿数据）。
 
 ### 2.6 评估、基准与可复现性
 
 这一组不挖因子，而是定义“怎么评价挖出来的因子”：统一指标、跨方法基准、泄漏检查与证据审计。本仓库此前没有这一组，2026-11 第一期检索后补齐。
 
-代表工作：[AlphaEval](../notes/cards/2025_AlphaEval.md)、[FactorBench](../notes/cards/2026_FactorBench.md)、[QBX](../notes/cards/2026_QBX.md)、[Auditing LLM Alpha-Factor Mining](../notes/cards/2026_AuditingLLMAlpha.md)。口径差异与已知会误导比较的情形见[评估口径对照](evaluation_protocol.md)。专门的泄漏检查另见 [Look-Ahead-Bench](../notes/cards/2026_Look-Ahead-Bench.md)（已归入 `adjacent` 路线，因为评估对象是交易智能体）。
+代表工作：[AlphaEval](../notes/cards/2025_AlphaEval.md)、[FactorBench](../notes/cards/2026_FactorBench.md)、[QBX](../notes/cards/2026_QBX.md)、[Auditing LLM Alpha-Factor Mining](../notes/cards/2026_AuditingLLMAlpha.md)。口径差异与已知会误导比较的情形见[评估口径对照](evaluation_protocol.md)。专门的泄漏检查另见 [Look-Ahead-Bench](../notes/cards/2026_Look-Ahead-Bench.md)（已归入 `adjacent` 路线，因为评估对象是交易智能体）；采用“实时生成 + 截止后评估”规避前视的单系统验证见 [MarketSenseAI](../notes/cards/2026_MarketSenseAI.md)。
 
 ### 2.7 LLM 挖掘的训练化与语义空间
 
