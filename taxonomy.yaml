@@ -93,6 +93,8 @@ tags:
   - rft
   - distributional-rl
   - reward-shaping
+  - multi-objective
+  - preference-optimization
   - mcts
   - gflownet
   - genetic-programming
@@ -104,7 +106,10 @@ tags:
   - diffusion
   - program-search
   - code-evolution
+  - symbolic-regression
+  - distillation
   - generator-predictor
+  - surrogate-model
   - self-play
   # 表示与模型
   - rpn
@@ -132,4 +137,5 @@ tags:
   - benchmark
   - auditing
   - high-frequency
+  - alternative-data
   - risk-factor

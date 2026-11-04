@@ -862,89 +862,102 @@ papers:
 - id: alphaeval-2025
   short: AlphaEval
   title: 'AlphaEval: A Comprehensive and Efficient Evaluation Framework for Formula Alpha Mining'
-  summary: 面向公式 Alpha 挖掘的统一评估框架：以高效代理指标与回测相互对照，覆盖预测力、稳定性与稳健性。
+  summary: 免回测、可并行的公式 Alpha 评估框架：从预测力、时间稳定性、扰动稳健性、金融逻辑与多样性五个维度评价挖掘出的因子集。
   first_public: 2025-08
   versions: arXiv v1 2025-08；v2 2026-06
   venue: KDD 2026
   arxiv: '2508.13174'
   url: https://arxiv.org/abs/2508.13174
-  code: null
+  code: https://github.com/LeoDingggg/AlphaEval
   code_note: null
-  affiliation: 待查
+  affiliation: 纽约市立大学巴鲁克学院、北京大学、哈佛大学、Zhengren Research
   problems:
-  - reproducibility
-  routes:
-  - evaluation
-  tags:
-  - benchmark
-  status: triaged
-  card: null
-  deep: null
-  added: '2026-11-03'
-  checked: '2026-11-03'
-- id: factorb-bench-2026
-  short: FactorBench
-  title: 'FactorBench: A Portfolio-Aware Benchmark for Automated Factor Mining'
-  summary: 组合视角的挖掘基准：在共享数据与评估契约下，横向比较九种自动挖掘方法产出的约五千个因子。
-  first_public: 2026-10
-  versions: arXiv v1 2026-10
-  venue: null
-  arxiv: '2610.06947'
-  url: https://arxiv.org/abs/2610.06947
-  code: null
-  code_note: null
-  affiliation: 待查
-  problems:
+  - expressiveness
+  - eval-cost
+  - redundancy
   - objective-gap
   - reproducibility
   routes:
   - evaluation
   tags:
   - benchmark
-  status: triaged
-  card: null
+  - factor-screening
+  status: card
+  card: notes/cards/2025_AlphaEval.md
+  deep: null
+  added: '2026-11-03'
+  checked: '2026-11-03'
+- id: factorbench-2026
+  short: FactorBench
+  title: 'FactorBench: A Portfolio-Aware Benchmark for Automated Factor Mining'
+  summary: 组合视角的挖掘基准：在共享数据与评估契约下，从因子、因子池到扣费组合三层，横向比较九种方法在五个股票市场产出的约五千个因子。
+  first_public: 2026-10
+  versions: arXiv v1 2026-10
+  venue: null
+  arxiv: '2610.06947'
+  url: https://arxiv.org/abs/2610.06947
+  code: https://github.com/ZhuoHan1998/FactorBench-Release
+  code_note: null
+  affiliation: 伦敦国王学院信息学系
+  problems:
+  - overfitting
+  - redundancy
+  - objective-gap
+  - reproducibility
+  routes:
+  - evaluation
+  tags:
+  - benchmark
+  - portfolio
+  status: card
+  card: notes/cards/2026_FactorBench.md
   deep: null
   added: '2026-11-03'
   checked: '2026-11-03'
 - id: auditing-llm-alpha-2026
   short: Auditing LLM Alpha-Factor Mining
   title: 'Auditing LLM Alpha-Factor Mining: Metric Provenance and Full-Cohort Reanalysis'
-  summary: 审计已留存项目的运行计数与结果保留方式，指出指标来源混用会让架构比较失效，并公开做全量再分析。
+  summary: 对一个已留存的 LLM 因子挖掘项目做三层审计：指标统计总体混用、按样本外结果筛选造成的留存偏差，以及对冻结表达式的全量再分析。
   first_public: 2026-10
   versions: arXiv v1 2026-10；AI4F Workshop @ ICAIF 2026（非归档）
   venue: ICAIF 2026 AI4F Workshop（非归档）
   arxiv: '2610.29500'
   url: https://arxiv.org/abs/2610.29500
   code: null
-  code_note: null
-  affiliation: 待查
+  code_note: 论文未给出代码；会议信息据 arXiv comment，PDF 未写明
+  affiliation: 香港大学
   problems:
+  - leakage
   - reproducibility
   routes:
   - evaluation
   tags:
   - auditing
   - llm
-  status: triaged
-  card: null
+  status: card
+  card: notes/cards/2026_AuditingLLMAlpha.md
   deep: null
   added: '2026-11-03'
   checked: '2026-11-03'
 - id: qbx-2026
   short: QBX
   title: 'QBX: A Compiler for Well-Formed, Auditable Alpha Programs'
-  summary: 面向 alpha 程序的编译器：以版本化算子注册表和带类型、时间可用性的 IR 定义可审计的候选空间。
+  summary: 面向 alpha 程序的编译器：以版本化模块注册表和整策略端口 DAG 定义可审计的候选空间，编译期检查类型与时间可用性，并以内容寻址支持增量求值、去重与试验计数。
   first_public: 2026-10
   versions: arXiv v1 2026-10
   venue: ICAIF 2026
   arxiv: '2610.41689'
   url: https://arxiv.org/abs/2610.41689
   code: null
-  code_note: null
-  affiliation: 待查
+  code_note: 论文未给出代码
+  affiliation: 香港理工大学、北京大学
   problems:
   - search-space
+  - expressiveness
+  - eval-cost
+  - overfitting
   - leakage
+  - redundancy
   - reproducibility
   routes:
   - evaluation
@@ -952,112 +965,223 @@ papers:
   tags:
   - dsl
   - auditing
-  status: triaged
-  card: null
+  - program-search
+  status: card
+  card: notes/cards/2026_QBX.md
   deep: null
   added: '2026-11-03'
   checked: '2026-11-03'
 - id: look-ahead-bench-2026
   short: Look-Ahead-Bench
   title: 'Look-Ahead-Bench: a Standardized Benchmark of Look-ahead Bias in Point-in-Time LLMs for Finance'
-  summary: 衡量时点化 LLM 前视偏差的标准化基准，用跨市场状态的表现衰减区分真实预测与记忆。
+  summary: 在 LLM 交易智能体工作流中，用知识截止前后两个时期的超额收益落差衡量前视偏差，对比标准开源 LLM 与时点化模型。
   first_public: 2026-01
   versions: arXiv v1 2026-01
   venue: null
   arxiv: '2601.13770'
   url: https://arxiv.org/abs/2601.13770
-  code: null
+  code: https://github.com/benstaf/lookaheadbench
   code_note: null
-  affiliation: 待查
+  affiliation: 论文首页未列单位（作者 Mostapha Benhenda）
   problems:
   - leakage
   routes:
   - evaluation
+  - adjacent
   tags:
   - benchmark
   - llm
-  status: triaged
-  card: null
+  status: card
+  card: notes/cards/2026_Look-Ahead-Bench.md
   deep: null
   added: '2026-11-03'
   checked: '2026-11-03'
 - id: alphapareto-2026
   short: AlphaPareto
   title: 'AlphaPareto: Formulaic Alpha Discovery with LLM-Guided Multi-Objective Reinforcement Learning'
-  summary: LLM 引导的多目标强化学习挖掘公式 Alpha，同时优化预测力与演变因子池的其它性质。
+  summary: 冻结 LLM 把当前因子池编码进 PPO 状态以缓解池依赖奖励的非平稳，并把 IC、稳定性、稳健性与多样性四维奖励标量化。
   first_public: 2026-09
   versions: arXiv v1 2026-09
   venue: NeurIPS 2026
   arxiv: '2609.34188'
   url: https://arxiv.org/abs/2609.34188
-  code: null
+  code: https://github.com/BiQiBaoWinner/AlphaPareto
   code_note: null
-  affiliation: 待查
-  problems: []
+  affiliation: 厦门大学
+  problems:
+  - learning-signal
+  - overfitting
+  - redundancy
   routes:
   - formulaic
   tags:
   - rl
+  - ppo
+  - rpn
   - llm
-  status: inbox
-  card: null
+  - pool-reward
+  - multi-objective
+  status: card
+  card: notes/cards/2026_AlphaPareto.md
   deep: null
   added: '2026-11-03'
   checked: '2026-11-03'
 - id: alphapadi-2026
   short: AlphaPADI
   title: 'AlphaPADI: Formulaic Alpha Discovery via Pool-Aware Hierarchical Discrete Diffusion'
-  summary: 以因子池为条件的层次化离散扩散模型生成公式，把互补性纳入生成状态并支持多层结构改写。
+  summary: 以整个因子池为生成单元的层次化离散扩散：在池上下文中按叶、子树、整式三级改写公式，并用池级奖励的偏好学习训练生成器。
   first_public: 2026-10
   versions: arXiv v1 2026-10；v2 2026-10
   venue: null
   arxiv: '2610.04959'
   url: https://arxiv.org/abs/2610.04959
   code: null
-  code_note: null
-  affiliation: 待查
-  problems: []
+  code_note: 论文复现声明称附有匿名代码，但 v2 正文未给出链接
+  affiliation: 新加坡国立大学、新加坡管理大学、中国科学技术大学、清华大学
+  problems:
+  - eval-cost
+  - learning-signal
+  - redundancy
+  - objective-gap
   routes:
   - formulaic
   tags:
   - diffusion
-  status: inbox
-  card: null
+  - rpn
+  - pool-reward
+  - preference-optimization
+  status: card
+  card: notes/cards/2026_AlphaPADI.md
   deep: null
   added: '2026-11-03'
   checked: '2026-11-03'
 - id: alphapilot-2026
   short: AlphaPilot
   title: 'AlphaPilot: Multi-Turn Tool-Using LLM Agents for Adaptive Alpha Mining with Reinforcement Learning'
-  summary: 用强化学习训练多轮调用工具的 LLM 智能体：按市场描述提出公式、查询真实评价并维护因子池。
+  summary: 用 GRPO 训练多轮调用评价工具的小型 LLM：按逐日市场描述提出 DSL 公式，依据真实评价与边际池贡献维护因子池。
   first_public: 2026-10
   versions: arXiv v1 2026-10
   venue: null
   arxiv: '2610.15488'
   url: https://arxiv.org/abs/2610.15488
   code: null
-  code_note: null
-  affiliation: 待查
-  problems: []
+  code_note: 论文未给出代码
+  affiliation: 香港科技大学数学系
+  problems:
+  - search-space
+  - eval-cost
+  - learning-signal
+  - redundancy
+  - objective-gap
+  - decay
   routes:
   - llm-agent
+  - pool-combination
   tags:
-  - rl
-  - multi-agent
-  status: inbox
-  card: null
+  - llm
+  - rft
+  - grpo
+  - pool-reward
+  - memory
+  status: card
+  card: notes/cards/2026_AlphaPilot.md
   deep: null
   added: '2026-11-03'
   checked: '2026-11-03'
 - id: alphaschema-2026
   short: AlphaSchema
   title: 'AlphaSchema: Exploring the Space of Trading Semantics for LLM-Based Alpha Mining'
-  summary: 把交易语义组织成结构化 schema 空间，让 LLM 在显式的探索空间中挖掘 Alpha。
+  summary: 以五元交易语义计划为搜索对象，代理奖励模型与配额选择器在 LLM 之外分配评价预算，LLM 只把选中的计划实现为因子代码。
   first_public: 2026-07
   versions: arXiv v1 2026-07
   venue: null
   arxiv: '2607.26642'
   url: https://arxiv.org/abs/2607.26642
+  code: https://github.com/JingyangYi/AlphaSchema
+  code_note: 仓库完整性未核查
+  affiliation: X-Tech、Xtech-PandaAI-Waton 联合实验室、莫纳什大学、PandaAI、清华大学交叉信息研究院
+  problems:
+  - search-space
+  - expressiveness
+  - eval-cost
+  - leakage
+  - redundancy
+  routes:
+  - llm-agent
+  tags:
+  - llm
+  - surrogate-model
+  status: card
+  card: notes/cards/2026_AlphaSchema.md
+  deep: null
+  added: '2026-11-03'
+  checked: '2026-11-03'
+- id: maple-2026
+  short: MAPLE
+  title: 'MAPLE: Efficient and Diverse Multi-Alpha Generation for Portfolio Construction'
+  summary: 单个神经模型一次训练输出多个低相关 Alpha：统一预测头、极端秩加权列表损失与成对相关正则，各 Alpha 子组合等权聚合。
+  first_public: 2026-07
+  versions: arXiv v1 2026-07
+  venue: null
+  arxiv: '2607.24131'
+  url: https://arxiv.org/abs/2607.24131
+  code: null
+  code_note: 论文未给出代码
+  affiliation: 永丰金控（SinoPac Holdings）、国立政治大学
+  problems:
+  - redundancy
+  - objective-gap
+  routes:
+  - neural
+  tags:
+  - neural-alpha
+  - portfolio
+  status: card
+  card: notes/cards/2026_MAPLE.md
+  deep: null
+  added: '2026-11-03'
+  checked: '2026-11-03'
+- id: alphadiverse-2026
+  short: AlphaDiverse
+  title: 'AlphaDiverse: Post-Training Local Quantitative Research Agents for Diverse Exploration in Alpha Factor Mining'
+  summary: 从多样化的 API 研究轨迹构造 SFT 数据，再用兼顾预测增益与多样性的联合 GRPO 训练本地 Planner / Realizer，缓解研究路径坍缩。
+  first_public: 2026-09
+  versions: arXiv v1 2026-09
+  venue: null
+  arxiv: '2609.29014'
+  url: https://arxiv.org/abs/2609.29014
+  code: null
+  code_note: 论文未给出代码
+  affiliation: 同济大学、Shanghai Non-convex Intelligent Technology
+  problems:
+  - search-space
+  - learning-signal
+  - overfitting
+  - leakage
+  - redundancy
+  - objective-gap
+  routes:
+  - llm-agent
+  tags:
+  - llm
+  - multi-agent
+  - rft
+  - grpo
+  - memory
+  status: card
+  card: notes/cards/2026_AlphaDiverse.md
+  deep: null
+  added: '2026-11-03'
+  checked: '2026-11-03'
+- id: alphaledger-2026
+  short: AlphaLedger
+  title: 'AlphaLedger: Portfolio-Grounded On-Policy Distillation for Regime-Aware Alpha Mining'
+  summary: 用扣除冗余与成本后的组合边际贡献条件化教师，做在线策略蒸馏训练本地因子生成器，并按市场状态调整。
+  first_public: 2026-10
+  versions: arXiv v1 2026-10
+  venue: null
+  arxiv: '2610.23744'
+  url: https://arxiv.org/abs/2610.23744
   code: null
   code_note: null
   affiliation: 待查
@@ -1066,43 +1190,21 @@ papers:
   - llm-agent
   tags:
   - llm
+  - distillation
   status: inbox
   card: null
   deep: null
   added: '2026-11-03'
   checked: '2026-11-03'
-- id: maple-2026
-  short: MAPLE
-  title: 'MAPLE: Efficient and Diverse Multi-Alpha Generation for Portfolio Construction'
-  summary: 单次训练内生成多个低相关 Alpha：共享预测头、极端秩加权列表损失与显式相关性正则。
-  first_public: 2026-07
-  versions: arXiv v1 2026-07
+- id: evoquantlab-2026
+  short: EvoQuantLab
+  title: 'EvoQuantLab: Training-Free Dual-Loop Evolution for Auditable Quantitative Research'
+  summary: 免训练双循环：内层遗传规划在结构与多样性约束下演化类型化表达式，外层诊断循环审计证据以抑制回测过拟合。
+  first_public: 2026-10
+  versions: arXiv v1 2026-10；v2 2026-10
   venue: null
-  arxiv: '2607.24131'
-  url: https://arxiv.org/abs/2607.24131
-  code: null
-  code_note: null
-  affiliation: 待查
-  problems: []
-  routes:
-  - neural
-  - pool-combination
-  tags:
-  - neural-alpha
-  status: inbox
-  card: null
-  deep: null
-  added: '2026-11-03'
-  checked: '2026-11-03'
-- id: alphadiverse-2026
-  short: AlphaDiverse
-  title: 'AlphaDiverse: Post-Training Local Quantitative Research Agents for Diverse Exploration in Alpha Factor Mining'
-  summary: 用多样化研究路径收集与后训练，把多智能体 Alpha 挖掘迁移到本地模型，缓解研究路径坍缩。
-  first_public: 2026-09
-  versions: arXiv v1 2026-09
-  venue: null
-  arxiv: '2609.29014'
-  url: https://arxiv.org/abs/2609.29014
+  arxiv: '2610.17130'
+  url: https://arxiv.org/abs/2610.17130
   code: null
   code_note: null
   affiliation: 待查
@@ -1110,10 +1212,466 @@ papers:
   routes:
   - llm-agent
   tags:
-  - multi-agent
-  - rft
+  - llm
+  - genetic-programming
   status: inbox
   card: null
+  deep: null
+  added: '2026-11-03'
+  checked: '2026-11-03'
+- id: lineageevo-2026
+  short: LineageEvo
+  title: Lineage-Aware Search Control for LLM-Based Evolutionary Factor Mining
+  summary: 在 LLM 演化因子挖掘中引入谱系级搜索控制，用谱系经验条件化变异算子，避免搜索集中于结构相似的因子。
+  first_public: 2026-10
+  versions: arXiv v1 2026-10
+  venue: null
+  arxiv: '2610.29663'
+  url: https://arxiv.org/abs/2610.29663
+  code: null
+  code_note: null
+  affiliation: 待查
+  problems: []
+  routes:
+  - llm-agent
+  tags:
+  - llm
+  - evolutionary
+  - factor-lineage
+  status: inbox
+  card: null
+  deep: null
+  added: '2026-11-03'
+  checked: '2026-11-03'
+- id: warmstartgp-2024
+  short: Warm Start GP
+  title: Alpha Mining and Enhancing via Warm Start Genetic Programming for Quantitative Investment
+  summary: 以精心选择的初始化和结构约束让遗传规划聚焦有希望的区域，提高搜索效率与因子可解释性。
+  first_public: 2024-12
+  versions: arXiv v1 2024-12
+  venue: null
+  arxiv: '2412.00896'
+  url: https://arxiv.org/abs/2412.00896
+  code: null
+  code_note: null
+  affiliation: 待查
+  problems: []
+  routes:
+  - formulaic
+  tags:
+  - genetic-programming
+  status: inbox
+  card: null
+  deep: null
+  added: '2026-11-03'
+  checked: '2026-11-03'
+- id: autoscientist-quant-2026
+  short: AutoScientist-Quant
+  title: 'AutoScientist-Quant: Self-Evolving Coding Agents for Automatic Research in Quantitative Investment'
+  summary: 把量化研究视为受预算约束的搜索，由单一控制器决定改进、组合、转向或停止，并修正沿用评估流程中的前视漏洞。
+  first_public: 2026-08
+  versions: arXiv v1 2026-08；v2 2026-09
+  venue: null
+  arxiv: '2608.28632'
+  url: https://arxiv.org/abs/2608.28632
+  code: null
+  code_note: null
+  affiliation: 待查
+  problems: []
+  routes:
+  - llm-agent
+  tags:
+  - llm
+  - code-evolution
+  - memory
+  status: inbox
+  card: null
+  deep: null
+  added: '2026-11-03'
+  checked: '2026-11-03'
+- id: x-alpha-2026
+  short: X-Alpha
+  title: 'X-Alpha: An AI Quant Researcher with Memory-Driven Self-Evolution'
+  summary: 把研报抽象为可执行研究路径存入持久研究记忆，用记忆路由引导持续的假设到代码的因子发现。
+  first_public: 2026-07
+  versions: arXiv v1 2026-07；v3 2026-10
+  venue: null
+  arxiv: '2607.08332'
+  url: https://arxiv.org/abs/2607.08332
+  code: null
+  code_note: null
+  affiliation: 待查
+  problems: []
+  routes:
+  - llm-agent
+  tags:
+  - llm
+  - memory
+  status: inbox
+  card: null
+  deep: null
+  added: '2026-11-03'
+  checked: '2026-11-03'
+- id: alpharlm-2026
+  short: AlphaRLM
+  title: 'AlphaRLM: Aligning Language Models for Literature-Grounded Symbolic Factor Discovery'
+  summary: 用强化学习训练 LLM 从文献思路和可执行算子直接构造符号因子，奖励包括可执行性与分组收益区分度。
+  first_public: 2026-10
+  versions: arXiv v1 2026-10；v3 2026-10
+  venue: null
+  arxiv: '2610.14959'
+  url: https://arxiv.org/abs/2610.14959
+  code: null
+  code_note: null
+  affiliation: 待查
+  problems: []
+  routes:
+  - llm-agent
+  tags:
+  - llm
+  - rl
+  status: inbox
+  card: null
+  deep: null
+  added: '2026-11-03'
+  checked: '2026-11-03'
+- id: agonalpha-2026
+  short: AgonAlpha
+  title: 'AgonAlpha: Autonomous Alpha Discovery via Prompt Economy and Scalable Agentic Search'
+  summary: 在冻结的研究工件上搜索，由独立上下文的对抗审稿人复核与否决，配合并行预算分配并保留完整证据链。
+  first_public: 2026-08
+  versions: arXiv v1 2026-08
+  venue: null
+  arxiv: '2608.11250'
+  url: https://arxiv.org/abs/2608.11250
+  code: null
+  code_note: null
+  affiliation: 待查
+  problems: []
+  routes:
+  - llm-agent
+  tags:
+  - llm
+  - multi-agent
+  status: inbox
+  card: null
+  deep: null
+  added: '2026-11-03'
+  checked: '2026-11-03'
+- id: treevo-2025
+  short: TreEvo
+  title: 'From Flat to Hierarchical: Evolving Tree-structured Thoughts for Fine-grained Alpha Mining'
+  summary: 把 LLM 的扁平思路改为层次化的树状思路并演化，扩大有效搜索空间、缓解位置偏差。
+  first_public: 2025-08
+  versions: arXiv v1 2025-08；v2 2026-05
+  venue: null
+  arxiv: '2508.16334'
+  url: https://arxiv.org/abs/2508.16334
+  code: null
+  code_note: null
+  affiliation: 待查
+  problems: []
+  routes:
+  - llm-agent
+  tags:
+  - llm
+  - evolutionary
+  status: inbox
+  card: null
+  deep: null
+  added: '2026-11-03'
+  checked: '2026-11-03'
+- id: goant-2026
+  short: GoAnt
+  title: 'GoAnt: Quality-Diversity Multi-Agent Search for Alpha Factor Discovery in Market Microstructure Data'
+  summary: 质量-多样性多智能体搜索：在量价与订单簿数据上按无泄漏的执行画像组织因子小生境，并动态分配评估预算。
+  first_public: 2026-09
+  versions: arXiv v1 2026-09；v2 2026-09
+  venue: null
+  arxiv: '2609.08719'
+  url: https://arxiv.org/abs/2609.08719
+  code: null
+  code_note: null
+  affiliation: 待查
+  problems: []
+  routes:
+  - llm-agent
+  - data-space
+  tags:
+  - multi-agent
+  - quality-diversity
+  - high-frequency
+  status: inbox
+  card: null
+  deep: null
+  added: '2026-11-03'
+  checked: '2026-11-03'
+- id: det-maso-2026
+  short: Det-MASO
+  title: 'Det-MASO: Diversity-Regularized Multi-Agent Sequential Optimization for Factor Generation'
+  summary: 多智能体序列优化生成神经因子，在联合目标中加入智能体间相关矩阵的可微对数行列式惩罚以保持多样性。
+  first_public: 2026-10
+  versions: arXiv v1 2026-10
+  venue: null
+  arxiv: '2610.34936'
+  url: https://arxiv.org/abs/2610.34936
+  code: null
+  code_note: null
+  affiliation: 待查
+  problems: []
+  routes:
+  - neural
+  tags:
+  - neural-alpha
+  - multi-agent
+  status: inbox
+  card: null
+  deep: null
+  added: '2026-11-03'
+  checked: '2026-11-03'
+- id: alphag-opd-2026
+  short: AlphaG-OPD
+  title: 'AlphaG-OPD: Reliability-Gated Sibling Counterfactuals for On-Policy Distillation in Symbolic Alpha Factor Discovery'
+  summary: 在 GFlowNet 公式生成中对中间 AST 状态的兄弟动作做可靠性门控的反事实比较，把终端评价蒸馏为局部动作指导。
+  first_public: 2026-08
+  versions: arXiv v1 2026-08
+  venue: null
+  arxiv: '2608.01303'
+  url: https://arxiv.org/abs/2608.01303
+  code: null
+  code_note: null
+  affiliation: 待查
+  problems: []
+  routes:
+  - formulaic
+  tags:
+  - gflownet
+  - distillation
+  status: inbox
+  card: null
+  deep: null
+  added: '2026-11-03'
+  checked: '2026-11-03'
+- id: alpharjm-2026
+  short: AlphaRJM
+  title: 'AlphaRJM: Reward-Jump Memory for Stochastic Return-Guided Alpha Discovery'
+  summary: 用只在终端评价时更新的奖励跳跃记忆和动作条件的 SDE 回报评论家，处理池依赖的延迟反馈。
+  first_public: 2026-09
+  versions: arXiv v1 2026-09
+  venue: null
+  arxiv: '2609.08581'
+  url: https://arxiv.org/abs/2609.08581
+  code: null
+  code_note: null
+  affiliation: 待查
+  problems: []
+  routes:
+  - formulaic
+  tags:
+  - rl
+  status: inbox
+  card: null
+  deep: null
+  added: '2026-11-03'
+  checked: '2026-11-03'
+- id: sentiment-llm-alpha-2025
+  short: Sentiment-Aware LLM Alpha
+  title: Sentiment-Aware Stock Price Prediction with Transformer and LLM-Generated Formulaic Alpha
+  summary: LLM 依据量价、技术指标和关联公司情绪分数生成公式 Alpha，作为 Transformer 股价预测的高层特征。
+  first_public: 2025-08
+  versions: arXiv v1 2025-08；v2 2026-03
+  venue: Digital Finance
+  arxiv: '2508.04975'
+  url: https://arxiv.org/abs/2508.04975
+  code: null
+  code_note: null
+  affiliation: 待查
+  problems: []
+  routes:
+  - llm-agent
+  - data-space
+  tags:
+  - llm
+  - transformer
+  - alternative-data
+  status: inbox
+  card: null
+  deep: null
+  added: '2026-11-03'
+  checked: '2026-11-03'
+- id: factor-newsflow-2025
+  short: Factor-Newsflow Fusion
+  title: Exploring the Synergy of Quantitative Factors and Newsflow Representations from Large Language Models for Stock Return Prediction
+  summary: 比较量化因子与 LLM 新闻表示的多种融合方式，用于收益预测与选股。
+  first_public: 2025-10
+  versions: arXiv v1 2025-10；v3 2025-11
+  venue: null
+  arxiv: '2510.15691'
+  url: https://arxiv.org/abs/2510.15691
+  code: null
+  code_note: null
+  affiliation: 待查
+  problems: []
+  routes:
+  - data-space
+  tags:
+  - llm
+  - alternative-data
+  status: inbox
+  card: null
+  deep: null
+  added: '2026-11-03'
+  checked: '2026-11-03'
+- id: dsr-2019
+  short: DSR
+  title: 'Deep symbolic regression: Recovering mathematical expressions from data via risk-seeking policy gradients'
+  summary: 用 RNN 自回归生成表达式，以风险寻求策略梯度只按高分位样本更新，用于符号回归。
+  first_public: 2019-12
+  versions: arXiv v1 2019-12；v4 2021-04
+  venue: ICLR 2021
+  arxiv: '1912.04871'
+  url: https://arxiv.org/abs/1912.04871
+  code: https://github.com/brendenpetersen/deep-symbolic-regression
+  code_note: null
+  affiliation: Lawrence Livermore National Laboratory
+  problems:
+  - search-space
+  - learning-signal
+  routes:
+  - adjacent
+  tags:
+  - rl
+  - reinforce
+  - symbolic-regression
+  status: card
+  card: notes/cards/2019_DSR.md
+  deep: null
+  added: '2026-11-03'
+  checked: '2026-11-03'
+- id: gflownet-2021
+  short: GFlowNet
+  title: Flow Network based Generative Models for Non-Iterative Diverse Candidate Generation
+  summary: 学习按奖励成比例采样离散对象的生成策略，用于生成多样的高奖励候选。
+  first_public: 2021-06
+  versions: arXiv v1 2021-06；v2 2021-11
+  venue: NeurIPS 2021
+  arxiv: '2106.04399'
+  url: https://arxiv.org/abs/2106.04399
+  code: https://github.com/bengioe/gflownet
+  code_note: null
+  affiliation: Mila、McGill University、Université de Montréal、DeepMind、Microsoft
+  problems:
+  - eval-cost
+  - learning-signal
+  - redundancy
+  routes:
+  - adjacent
+  tags:
+  - gflownet
+  status: card
+  card: notes/cards/2021_GFlowNet.md
+  deep: null
+  added: '2026-11-03'
+  checked: '2026-11-03'
+- id: trajectory-balance-2022
+  short: Trajectory Balance
+  title: 'Trajectory balance: Improved credit assignment in GFlowNets'
+  summary: 提出轨迹平衡目标，在完整轨迹上约束 GFlowNet 流量一致，改进长序列的信用分配。
+  first_public: 2022-01
+  versions: arXiv v1 2022-01；v4 2026-08
+  venue: NeurIPS 2022
+  arxiv: '2201.13259'
+  url: https://arxiv.org/abs/2201.13259
+  code: https://github.com/GFNOrg/gflownet/tree/trajectory_balance
+  code_note: 超网格实验另见论文给出的 gist
+  affiliation: Mila、Université de Montréal、McGill University、Recursion
+  problems:
+  - learning-signal
+  - redundancy
+  routes:
+  - adjacent
+  tags:
+  - gflownet
+  status: card
+  card: notes/cards/2022_TrajectoryBalance.md
+  deep: null
+  added: '2026-11-03'
+  checked: '2026-11-03'
+- id: deepmind-alphaevolve-2025
+  short: DeepMind AlphaEvolve
+  title: 'AlphaEvolve: A coding agent for scientific and algorithmic discovery'
+  summary: 由 LLM 集成改写代码、自动评价器打分、程序库驱动演化的代码优化智能体；与 2021 年的因子挖掘论文 AlphaEvolve 无关。
+  first_public: 2025-06
+  versions: arXiv v1 2025-06
+  venue: null
+  arxiv: '2506.13131'
+  url: https://arxiv.org/abs/2506.13131
+  code: null
+  code_note: 论文未给出系统代码，仅给出数学结果的 Colab
+  affiliation: Google DeepMind
+  problems:
+  - search-space
+  - expressiveness
+  - eval-cost
+  - redundancy
+  routes:
+  - adjacent
+  tags:
+  - llm
+  - code-evolution
+  - evolutionary
+  - quality-diversity
+  status: card
+  card: notes/cards/2025_DeepMind-AlphaEvolve.md
+  deep: null
+  added: '2026-11-03'
+  checked: '2026-11-03'
+- id: gigpo-2025
+  short: GiGPO
+  title: Group-in-Group Policy Optimization for LLM Agent Training
+  summary: 多轮 LLM 智能体强化学习中，按回合与锚点状态两级分组估计相对优势，无需 critic 与额外 rollout。
+  first_public: 2025-05
+  versions: arXiv v1 2025-05；v3 2025-10
+  venue: NeurIPS 2025
+  arxiv: '2505.10978'
+  url: https://arxiv.org/abs/2505.10978
+  code: https://github.com/langfengQ/verl-agent
+  code_note: null
+  affiliation: Nanyang Technological University、Skywork AI
+  problems:
+  - learning-signal
+  routes:
+  - adjacent
+  tags:
+  - llm
+  - grpo
+  status: card
+  card: notes/cards/2025_GiGPO.md
+  deep: null
+  added: '2026-11-03'
+  checked: '2026-11-03'
+- id: tree-grpo-2025
+  short: Tree-GRPO
+  title: Tree Search for LLM Agent Reinforcement Learning
+  summary: 以智能体步骤为节点做树搜索采样，用树内与树间的组相对优势从结果奖励构造过程信号。
+  first_public: 2025-09
+  versions: arXiv v1 2025-09；v3 2026-03
+  venue: ICLR 2026
+  arxiv: '2509.21240'
+  url: https://arxiv.org/abs/2509.21240
+  code: https://github.com/AMAP-ML/Tree-GRPO
+  code_note: null
+  affiliation: 厦门大学、阿里巴巴高德（AMAP）、南方科技大学
+  problems:
+  - eval-cost
+  - learning-signal
+  routes:
+  - adjacent
+  tags:
+  - llm
+  - grpo
+  status: card
+  card: notes/cards/2025_Tree-GRPO.md
   deep: null
   added: '2026-11-03'
   checked: '2026-11-03'

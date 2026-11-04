@@ -2,6 +2,20 @@
 
 记录仓库结构、收录口径、模板和分类体系的变化。最新记录在前。
 
+## 2026-11-03 新增速读卡与相邻方法专题
+
+- 新写 17 张速读卡，均据原文撰写：
+  - 评估与泄漏 5 篇：AlphaEval、FactorBench、Auditing LLM Alpha-Factor Mining、QBX、Look-Ahead-Bench。
+  - 新方法 6 篇：AlphaPareto、AlphaPADI、MAPLE、AlphaPilot、AlphaSchema、AlphaDiverse。
+  - 相邻方法 6 篇：DSR、GFlowNet、Trajectory Balance、DeepMind AlphaEvolve、GiGPO、Tree-GRPO。
+  - 登记时按摘要初判的问题，读原文后多有增补，以原文机制为准。
+- 新增专题 `topics/adjacent/transferable_methods.md`：相邻方法向因子挖掘的迁移点与迁移时要注意的差异。AGENTS.md 写明相邻方法的标注口径：标注其机制可迁移去应对的问题。
+- 新增 15 篇待筛候选，包括 `data-space` 方向的 GoAnt 和两篇新闻、情绪类工作；其中 4 篇早于首轮检索截止日（2026-07-11），属首轮漏检。
+- 不收录：Chain-of-Alpha（arXiv 两个版本均被移除，无原文）、GPU 常数优化（读原文后判断迁移关系太弱）；已从登记表移除，理由记入简报。
+- 标签新增 `symbolic-regression`、`distillation`、`alternative-data`、`multi-objective`、`preference-optimization`、`surrogate-model`。
+- README 中 P5、P6、P10 的“跟踪关注点”按当前收录改写；第一期简报按本轮结果更新。
+- 修正：FactorBench 的 id 由 `factorb-bench-2026` 改为 `factorbench-2026`；AlphaQCM 据 PMLR 论文集补充页码与官方仓库。
+
 ## 2026-11-03 内容补写、候选登记与第一期简报
 
 - 速读卡：除 AlphaQCM（OpenReview 返回 403，需换来源）外，31 张卡的“证据”与“局限”按论文原文补写，每句注明章节或表格来源；无依据处写明“据实验设置”或“推断”。三篇有精读的卡片据本仓库精读补写。
