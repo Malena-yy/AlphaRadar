@@ -100,37 +100,49 @@ RL 公式因子挖掘路线的核心问题不是“能否生成一个高 IC 公�
 
 代表工作：[AlphaForge](../notes/cards/2024_AlphaForge.md)、[AlphaGAT](../notes/cards/2025_AlphaGAT.md)、[EFS](../notes/cards/2025_EFS.md)、[Alpha-R1](../notes/cards/2025_Alpha-R1.md)、[AlphaPROBE](../notes/cards/2026_AlphaPROBE.md)、[AlphaLedger](../notes/cards/2026_AlphaLedger.md)、[GoAnt](../notes/cards/2026_GoAnt.md)。
 
-### 2.4 LLM、Agent 与 RFT 因子挖掘
+### 2.4 LLM 驱动的因子生成
 
-这一组工作把 LLM 用作想法生成器、公式实现器、代码代理、评价总结器、经验记忆或可微调策略。它们与 2.2 的 RL 主线并不是替代关系，更适合为公式搜索提供上游假设、结构变异、反馈压缩和长期经验沉淀。
+这一组把 LLM 当作想法生成器、公式实现器或结构变异算子：LLM 负责提出与改写表达式，搜索与评价往往仍由传统搜索器或回测循环完成。它们与 2.2 的 RL 主线不是替代关系，而是换了“谁提候选”这一步。
 
-代表工作：[Alpha-GPT](../notes/cards/2023_Alpha-GPT.md)、[QuantAgent](../notes/cards/2024_QuantAgent.md)、[Alpha-GPT 2.0](../notes/cards/2024_Alpha-GPT2.md)、[LLM Strategy Finding](../notes/cards/2024_LLMStrategyFinding.md)、[AlphaAgent](../notes/cards/2025_AlphaAgent.md)、[Alpha-Jungle](../notes/cards/2025_Alpha-Jungle.md)、[RD-Agent(Q)](../notes/cards/2025_RD-Agent-Quant.md)、[CogAlpha](../notes/cards/2025_CogAlpha.md)、[QuantaAlpha](../notes/cards/2026_QuantaAlpha.md)、[FactorMiner](../notes/cards/2026_FactorMiner.md)、[FactorEngine](../notes/cards/2026_FactorEngine.md)、[Hubble](../notes/cards/2026_Hubble.md)、[QuantEvolver](../notes/cards/2026_QuantEvolver.md)、[Agora/SJS](../notes/cards/2026_Agora-SJS.md)。
+代表工作：[Alpha-GPT](../notes/cards/2023_Alpha-GPT.md)、[QuantAgent](../notes/cards/2024_QuantAgent.md)、[Alpha-GPT 2.0](../notes/cards/2024_Alpha-GPT2.md)、[LLM Strategy Finding](../notes/cards/2024_LLMStrategyFinding.md)、[AlphaAgent](../notes/cards/2025_AlphaAgent.md)、[Alpha-Jungle](../notes/cards/2025_Alpha-Jungle.md)、[CogAlpha](../notes/cards/2025_CogAlpha.md)、[QuantaAlpha](../notes/cards/2026_QuantaAlpha.md)、[FactorMiner](../notes/cards/2026_FactorMiner.md)、[Hubble](../notes/cards/2026_Hubble.md)、[LineageEvo](../notes/cards/2026_LineageEvo.md)、[TreEvo](../notes/cards/2025_TreEvo.md)、[AlphaMemo](../notes/cards/2026_AlphaMemo.md)、[AlphaLogics](../notes/cards/2026_AlphaLogics.md)、[AlphaSeek](../notes/cards/2026_AlphaSeek.md)、[CosmosAlpha](../notes/cards/2026_CosmosAlpha.md)、[EvoQuantLab](../notes/cards/2026_EvoQuantLab.md)、[AlphaRLM](../notes/cards/2026_AlphaRLM.md)、[AlphaSchema](../notes/cards/2026_AlphaSchema.md)、[AlphaDiverse](../notes/cards/2026_AlphaDiverse.md)。
 
-### 2.5 表达空间扩展与风险因子生成
+### 2.5 LLM / Agent 的研究流程
+
+这一组关注的是流程本身，而不是某种表达式表示：研究轨迹怎么组织、经验记忆存什么、评价预算怎么分配、多个智能体怎么分工。同一篇工作通常还会落在 2.4 或 2.2 的某条表示路线上。
+
+代表工作：[RD-Agent(Q)](../notes/cards/2025_RD-Agent-Quant.md)（因子与模型双闭环）、[FactorEngine](../notes/cards/2026_FactorEngine.md)（程序池演化）、[QuantEvolver](../notes/cards/2026_QuantEvolver.md)（强化微调）、[AlphaPilot](../notes/cards/2026_AlphaPilot.md)、[AlphaLedger](../notes/cards/2026_AlphaLedger.md)、[AutoScientist-Quant](../notes/cards/2026_AutoScientist-Quant.md)、[X-Alpha](../notes/cards/2026_X-Alpha.md)、[AgonAlpha](../notes/cards/2026_AgonAlpha.md)、[Agora/SJS](../notes/cards/2026_Agora-SJS.md)、[EFS](../notes/cards/2025_EFS.md)、[Alpha-R1](../notes/cards/2025_Alpha-R1.md)、[AgenticFactorInvesting](../notes/cards/2026_AgenticFactorInvesting.md)。
+
+### 2.6 表达空间扩展与风险因子生成
 
 这一组与传统日频 Alpha 公式挖掘不完全同构，但对连续参数、符号-数值混合生成、高频风险因子和更宽表达空间有参考价值。
 
 代表工作：[HRFT/IRFT](../notes/cards/2024_HRFT.md)（分钟高频风险因子）、[TextToAlpha](../notes/cards/2025_TextToAlpha.md)（季度披露文本，给出完整的文本到打分链路）、[MAPLE](../notes/cards/2026_MAPLE.md)（单模型多输出的神经 Alpha）、[Det-MASO](../notes/cards/2026_Det-MASO.md)（多智能体神经因子，智能体间相关矩阵惩罚）、[PRISM-VQ](../notes/cards/2026_PRISM-VQ.md)（离散隐因子，保留“载荷 × 因子”结构）、[GoAnt](../notes/cards/2026_GoAnt.md)（订单簿数据）。
 
-### 2.6 评估、基准与可复现性
+### 2.7 基准与统一评测
 
-这一组不挖因子，而是定义“怎么评价挖出来的因子”：统一指标、跨方法基准、泄漏检查与证据审计。本仓库此前没有这一组，2026-11 第一期检索后补齐。
+这一组给出统一的数据、切分、指标或执行契约，用来横向比较多个挖掘方法。读者关心的是“怎么比”。
 
-代表工作：[AlphaEval](../notes/cards/2025_AlphaEval.md)、[FactorBench](../notes/cards/2026_FactorBench.md)、[QBX](../notes/cards/2026_QBX.md)、[Auditing LLM Alpha-Factor Mining](../notes/cards/2026_AuditingLLMAlpha.md)。口径差异与已知会误导比较的情形见[评估口径对照](evaluation_protocol.md)。专门的泄漏检查另见 [Look-Ahead-Bench](../notes/cards/2026_Look-Ahead-Bench.md)（已归入 `adjacent` 路线，因为评估对象是交易智能体）；采用“实时生成 + 截止后评估”规避前视的单系统验证见 [MarketSenseAI](../notes/cards/2026_MarketSenseAI.md)。
+代表工作：[AlphaEval](../notes/cards/2025_AlphaEval.md)（免回测的代理指标）、[FactorBench](../notes/cards/2026_FactorBench.md)（因子 → 池 → 扣费组合三层）、[Look-Ahead-Bench](../notes/cards/2026_Look-Ahead-Bench.md)（LLM 前视偏差）、[MarketSenseAI](../notes/cards/2026_MarketSenseAI.md)（实时生成信号 + 零分布检验）。口径差异与已知会误导比较的情形见[评估口径对照](evaluation_protocol.md)。
 
-### 2.7 LLM 挖掘的训练化与语义空间
+### 2.8 审计、复现与泄漏检查
+
+这一组审视证据链本身：结果怎么留存、指标口径是否一致、有没有做前视检查、试验次数记不记。读者关心的是“怎么证明”。它与 2.10 的显著性检验相邻。
+
+代表工作：[Auditing LLM Alpha-Factor Mining](../notes/cards/2026_AuditingLLMAlpha.md)（留存偏差与指标来源）、[QBX](../notes/cards/2026_QBX.md)（编译期时间可用性、内容身份与试验账本）、[AgonAlpha](../notes/cards/2026_AgonAlpha.md)（独立上下文审稿与重跑否决）、[EvoQuantLab](../notes/cards/2026_EvoQuantLab.md)（冻结协议与等预算置换）。
+
+### 2.9 LLM 挖掘的训练化与语义空间
 
 这一组是 2.4 的最新变化：不再靠提示词循环反复试错，而是把经验写进模型参数、在显式的语义或机制空间里搜索，或对研究轨迹做后训练。
 
 代表工作：[AlphaPilot](../notes/cards/2026_AlphaPilot.md)、[AlphaDiverse](../notes/cards/2026_AlphaDiverse.md)、[AlphaSchema](../notes/cards/2026_AlphaSchema.md)、[QuantEvolver](../notes/cards/2026_QuantEvolver.md)、[AlphaRLM](../notes/cards/2026_AlphaRLM.md)、[TreEvo](../notes/cards/2025_TreEvo.md)、[LineageEvo](../notes/cards/2026_LineageEvo.md)、[EvoQuantLab](../notes/cards/2026_EvoQuantLab.md)、[AutoScientist-Quant](../notes/cards/2026_AutoScientist-Quant.md)、[X-Alpha](../notes/cards/2026_X-Alpha.md)、[AgonAlpha](../notes/cards/2026_AgonAlpha.md)。
 
-### 2.8 相邻方法
+### 2.10 相邻方法
 
 不是因子挖掘本身，但机制被已收录工作直接借用或可借用，例如 GFlowNet 的按奖励成比例采样、DSR 的风险寻求目标和多轮智能体的步骤级信用分配。逐篇见[可迁移的相邻方法](adjacent/transferable_methods.md)。
 
 代表工作：[GFlowNet](../notes/cards/2021_GFlowNet.md)、[Trajectory Balance](../notes/cards/2022_TrajectoryBalance.md)、[DSR](../notes/cards/2019_DSR.md)、[GiGPO](../notes/cards/2025_GiGPO.md)、[Tree-GRPO](../notes/cards/2025_Tree-GRPO.md)、[DeepMind AlphaEvolve](../notes/cards/2025_DeepMind-AlphaEvolve.md)、[Publication Bias](../notes/cards/2022_PublicationBias.md)、[Sequential Cauchy](../notes/cards/2023_SequentialCauchy.md)。
 
-### 2.9 过拟合控制与显著性检验
+### 2.11 过拟合控制与显著性检验
 
 这一组与 2.6 相邻，但关注的是“挖出来的因子有多少是真的”：在搜索规模未知的情况下如何校正选择偏差、如何把搜索多重性计入显著性。它同时包含挖掘系统与可迁移的检验方法。
 

@@ -11,7 +11,7 @@
 | 论文 | [arXiv:2609.29014](https://arxiv.org/abs/2609.29014) |
 | 代码 | 论文未给出代码 |
 | 作者单位 | 同济大学、Shanghai Non-convex Intelligent Technology |
-| 路线 | `llm-agent` |
+| 路线 | `llm-formula` |
 | 标签 | `llm` `multi-agent` `rft` `grpo` `memory` |
 | 主要针对 | P4 学习信号稀疏、延迟且不可微；P7 因子同质化与冗余 |
 | 顺带涉及 | P1 表达空间巨大，有效因子稀少；P5 低信噪比下的过拟合；P6 前视偏差与信息泄漏；P8 挖掘目标与实际使用脱节 |

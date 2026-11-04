@@ -11,7 +11,7 @@
 | 论文 | [arXiv:2608.13913](https://arxiv.org/abs/2608.13913) |
 | 代码 | 论文未给出代码 |
 | 作者单位 | 中南财经政法大学、清华大学、澳门大学 |
-| 路线 | `llm-agent` `formulaic` |
+| 路线 | `formulaic` `llm-formula` |
 | 标签 | `llm` `multi-agent` `evolutionary` `factor-lineage` `portfolio` |
 | 主要针对 | P1 表达空间巨大，有效因子稀少；P7 因子同质化与冗余；P8 挖掘目标与实际使用脱节 |
 | 顺带涉及 | P2 表达能力与可解释性的权衡；P5 低信噪比下的过拟合；P9 非平稳与因子衰减 |

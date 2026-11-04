@@ -11,7 +11,7 @@
 | 论文 | [arXiv:2402.09746](https://arxiv.org/abs/2402.09746) |
 | 代码 | 未见官方开源 |
 | 作者单位 | 官方摘要页未展示单位信息；作者为 Hang Yuan、Saizhuo Wang、Jian Guo |
-| 路线 | `llm-agent` |
+| 路线 | `llm-formula` |
 | 标签 | `llm` `human-in-the-loop` |
 | 主要针对 | P1 表达空间巨大，有效因子稀少 |
 | 顺带涉及 | P8 挖掘目标与实际使用脱节 |

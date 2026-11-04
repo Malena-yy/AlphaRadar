@@ -11,7 +11,7 @@
 | 论文 | [arXiv:2602.07085](https://arxiv.org/abs/2602.07085) |
 | 代码 | [QuantaAlpha/QuantaAlpha](https://github.com/QuantaAlpha/QuantaAlpha) |
 | 作者单位 | 官方摘要页未展示单位信息；作者包含 Jun Han、Shuo Zhang、Wei Li、Yifan Dong、Tu Hu、Yumo Zhu、Xiaomin Yu、Xin Guo、Zhaowei Liu、Kunyi Wang、Jingping Liu、Tianyi Jiang、Ruichuan An、Sen Hu、Zhi Yang、Ronghao Che、Huacan Wang |
-| 路线 | `llm-agent` |
+| 路线 | `llm-formula` |
 | 标签 | `llm` `evolutionary` |
 | 主要针对 | P2 表达能力与可解释性的权衡；P7 因子同质化与冗余 |
 | 顺带涉及 | — |

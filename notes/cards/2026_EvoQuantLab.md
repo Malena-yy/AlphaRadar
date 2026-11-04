@@ -11,7 +11,7 @@
 | 论文 | [arXiv:2610.17130](https://arxiv.org/abs/2610.17130) |
 | 代码 | 论文承诺发布源码与配置，但未给出链接 |
 | 作者单位 | 香港科技大学、微软、清华大学、澳门大学 |
-| 路线 | `formulaic` `llm-agent` |
+| 路线 | `formulaic` `llm-formula` |
 | 标签 | `llm` `genetic-programming` `evolutionary` `quality-diversity` `auditing` |
 | 主要针对 | P3 评价成本高；P5 低信噪比下的过拟合；P6 前视偏差与信息泄漏 |
 | 顺带涉及 | P1 表达空间巨大，有效因子稀少；P2 表达能力与可解释性的权衡；P7 因子同质化与冗余；P10 评估口径不统一、难以复现 |

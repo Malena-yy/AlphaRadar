@@ -11,7 +11,7 @@
 | 论文 | [arXiv:2409.06289](https://arxiv.org/abs/2409.06289) |
 | 代码 | [kouzhizhuo/Automate-Strategy-Finding-with-LLM-in-Quant-investment](https://github.com/kouzhizhuo/Automate-Strategy-Finding-with-LLM-in-Quant-investment) |
 | 作者单位 | 官方摘要页未展示单位信息；作者为 Zhizhuo Kou、Holam Yu、Jingshu Peng、Lei Chen |
-| 路线 | `llm-agent` |
+| 路线 | `llm-formula` |
 | 标签 | `llm` `multimodal` |
 | 主要针对 | P1 表达空间巨大，有效因子稀少；P8 挖掘目标与实际使用脱节 |
 | 顺带涉及 | — |

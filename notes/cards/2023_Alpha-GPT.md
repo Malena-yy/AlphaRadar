@@ -11,7 +11,7 @@
 | 论文 | [arXiv:2308.00016](https://arxiv.org/abs/2308.00016) |
 | 代码 | 未见官方开源 |
 | 作者单位 | 香港科技大学、IDEA Research、Columbia University、香港科技大学（广州） |
-| 路线 | `llm-agent` |
+| 路线 | `llm-formula` |
 | 标签 | `llm` `human-in-the-loop` |
 | 主要针对 | P1 表达空间巨大，有效因子稀少 |
 | 顺带涉及 | P2 表达能力与可解释性的权衡 |

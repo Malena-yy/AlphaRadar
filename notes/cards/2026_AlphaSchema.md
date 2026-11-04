@@ -11,7 +11,7 @@
 | 论文 | [arXiv:2607.26642](https://arxiv.org/abs/2607.26642) |
 | 代码 | [JingyangYi/AlphaSchema](https://github.com/JingyangYi/AlphaSchema)；仓库完整性未核查 |
 | 作者单位 | X-Tech、Xtech-PandaAI-Waton 联合实验室、莫纳什大学、PandaAI、清华大学交叉信息研究院 |
-| 路线 | `llm-agent` |
+| 路线 | `llm-formula` |
 | 标签 | `llm` `surrogate-model` |
 | 主要针对 | P1 表达空间巨大，有效因子稀少；P3 评价成本高 |
 | 顺带涉及 | P2 表达能力与可解释性的权衡；P6 前视偏差与信息泄漏；P7 因子同质化与冗余 |

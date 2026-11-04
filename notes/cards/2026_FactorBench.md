@@ -11,7 +11,7 @@
 | 论文 | [arXiv:2610.06947](https://arxiv.org/abs/2610.06947) |
 | 代码 | [ZhuoHan1998/FactorBench-Release](https://github.com/ZhuoHan1998/FactorBench-Release) |
 | 作者单位 | 伦敦国王学院信息学系 |
-| 路线 | `evaluation` |
+| 路线 | `pool-combination` `benchmark` |
 | 标签 | `benchmark` `portfolio` |
 | 主要针对 | P8 挖掘目标与实际使用脱节；P10 评估口径不统一、难以复现 |
 | 顺带涉及 | P5 低信噪比下的过拟合；P7 因子同质化与冗余 |

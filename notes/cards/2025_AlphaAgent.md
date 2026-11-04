@@ -11,7 +11,7 @@
 | 论文 | [arXiv:2502.16789](https://arxiv.org/abs/2502.16789) |
 | 代码 | [RndmVariableQ/AlphaAgent](https://github.com/RndmVariableQ/AlphaAgent) |
 | 作者单位 | 中山大学、新南威尔士大学、南洋理工大学、鹏城实验室、香港中文大学（深圳） |
-| 路线 | `llm-agent` |
+| 路线 | `llm-formula` |
 | 标签 | `llm` `alpha-decay` |
 | 主要针对 | P7 因子同质化与冗余；P9 非平稳与因子衰减 |
 | 顺带涉及 | P2 表达能力与可解释性的权衡；P5 低信噪比下的过拟合 |

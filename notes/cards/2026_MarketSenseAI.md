@@ -11,7 +11,7 @@
 | 论文 | [arXiv:2604.17327](https://arxiv.org/abs/2604.17327) |
 | 代码 | 论文未给出代码；被评系统为商业闭源平台，未提供提示词、信号面板或数据快照 |
 | 作者单位 | Alpha Tensor Technologies |
-| 路线 | `adjacent` `evaluation` |
+| 路线 | `benchmark` `adjacent` |
 | 标签 | `llm` `multi-agent` `benchmark` `portfolio` |
 | 主要针对 | P5 低信噪比下的过拟合；P6 前视偏差与信息泄漏 |
 | 顺带涉及 | P8 挖掘目标与实际使用脱节 |

@@ -11,7 +11,7 @@
 | 论文 | [arXiv:2610.29500](https://arxiv.org/abs/2610.29500) |
 | 代码 | 论文未给出代码；会议信息据 arXiv comment，PDF 未写明 |
 | 作者单位 | 香港大学 |
-| 路线 | `evaluation` |
+| 路线 | `auditing` |
 | 标签 | `auditing` `llm` |
 | 主要针对 | P10 评估口径不统一、难以复现 |
 | 顺带涉及 | P6 前视偏差与信息泄漏 |

@@ -2,6 +2,16 @@
 
 记录仓库结构、收录口径、模板和分类体系的变化。最新记录在前。
 
+## 2026-11-03 方向分类调整：拆分 LLM 与评估路线
+
+- 问题：72 篇读完后，`llm-agent` 混了三类东西（公式输出、代码输出、流程编排）；`evaluation` 混了两类（给方法排名 vs 审视证据链）；`pool-combination` 没有一篇单独成篇，实为下游模块。问题见本地工作日志。
+- 路线由 7 条改为 9 条：
+  - `llm-agent` 拆为 `llm-formula`（LLM 提出或改写表达式，20 篇）与 `llm-agent`（以流程编排为主要贡献，12 篇）。
+  - `evaluation` 拆为 `benchmark`（统一数据与执行契约，给方法排名，4 篇）与 `auditing`（留存方式、口径、前视检查与试验计数，3 篇）。
+  - `formulaic` 定义扩展为公式 / 符号 / 代码；`pool-combination` 名称与说明改为“下游模块”，并把 AlphaEval、FactorBench 这类以池为评价单位的基准纳入（13 篇）。
+- 判定规则写进 AGENTS.md：看“谁提候选”区分 `formulaic` 与 `llm-formula`；`llm-agent` 只收以流程编排为主要贡献的工作。
+- `topics/landscape.md` 分组导读按新路线重组，由 9 组变为 11 组；README 简介与收录概况同步更新。
+
 ## 2026-11-03 CogAlpha 会议信息补登
 
 - 外部文章（公众号「随机森林之外」）提到 CogAlpha 为 ACL 2026 论文，登记表原为 `venue: null`。核查：arXiv comment 与 PDF 首页均未标会议；ACL Anthology 站内搜索依赖 Google、无法直接检索；DBLP 与 Semantic Scholar 分别返回反爬与限流；最终在 Crossref 查到记录，会议为 Proceedings of the 64th Annual Meeting of the ACL（Volume 1: Long Papers），2026。已补登 `venue` 并更新 `checked`，速读卡注明出处。

@@ -11,7 +11,7 @@
 | 论文 | [arXiv:2604.09601](https://arxiv.org/abs/2604.09601) |
 | 代码 | 未见官方开源 |
 | 作者单位 | 官方摘要页未展示单位信息；作者为 Runze Shi、Shengyu Yan、Yuecheng Cai、Chengxi Lv |
-| 路线 | `llm-agent` |
+| 路线 | `llm-formula` |
 | 标签 | `llm` `rag` `safety` |
 | 主要针对 | P1 表达空间巨大，有效因子稀少；P7 因子同质化与冗余；P10 评估口径不统一、难以复现 |
 | 顺带涉及 | P8 挖掘目标与实际使用脱节；P9 非平稳与因子衰减 |

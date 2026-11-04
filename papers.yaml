@@ -614,7 +614,7 @@ papers:
     label: 未来收益（论文未说明持有期）
     cost: null
   routes:
-  - llm-agent
+  - llm-formula
   tags:
   - llm
   - human-in-the-loop
@@ -646,7 +646,7 @@ papers:
     label: 未来收益（论文未说明持有期）
     cost: null
   routes:
-  - llm-agent
+  - llm-formula
   tags:
   - llm
   - memory
@@ -678,7 +678,7 @@ papers:
     label: null
     cost: null
   routes:
-  - llm-agent
+  - llm-formula
   tags:
   - llm
   - human-in-the-loop
@@ -710,7 +710,7 @@ papers:
     label: 未来收益（IC 为 alpha 值与未来收益的相关；论文未说明持有期）
     cost: 未给费率；以每日最多换 5 只、日换手上限约 38% 控制成本
   routes:
-  - llm-agent
+  - llm-formula
   tags:
   - llm
   - multimodal
@@ -744,7 +744,7 @@ papers:
     label: 次日收益
     cost: CSI500 买入万 5、卖出万 15；S&P 500 仅卖出万 5
   routes:
-  - llm-agent
+  - llm-formula
   tags:
   - llm
   - alpha-decay
@@ -778,7 +778,7 @@ papers:
     label: 10 日与 30 日收益
     cost: 每笔 0.15%
   routes:
-  - llm-agent
+  - llm-formula
   tags:
   - llm
   - mcts
@@ -844,7 +844,7 @@ papers:
     label: 10 日收益（另用 30 日收益）
     cost: 开仓 0.05%、平仓 0.15%，最低 5 元
   routes:
-  - llm-agent
+  - llm-formula
   tags:
   - llm
   - code-evolution
@@ -876,7 +876,7 @@ papers:
     label: 次日收益 y_t = P_{t+2}/P_{t+1} - 1
     cost: 买入 0.05%、卖出 0.15%
   routes:
-  - llm-agent
+  - llm-formula
   tags:
   - llm
   - evolutionary
@@ -909,7 +909,7 @@ papers:
     label: 同频非重叠的下一步收益比（10 分钟）
     cost: null
   routes:
-  - llm-agent
+  - llm-formula
   tags:
   - llm
   - memory
@@ -978,7 +978,7 @@ papers:
     label: 前向 h 期收益（论文未给出 h 的具体取值）
     cost: null
   routes:
-  - llm-agent
+  - llm-formula
   tags:
   - llm
   - rag
@@ -1113,7 +1113,8 @@ papers:
     label: ΔT 日远期收益（未指定时 ΔT=1，即次日收益）
     cost: null
   routes:
-  - evaluation
+  - pool-combination
+  - benchmark
   tags:
   - benchmark
   - factor-screening
@@ -1147,7 +1148,8 @@ papers:
     label: 20 日收益
     cost: 每交易 1 美元 10 个基点
   routes:
-  - evaluation
+  - pool-combination
+  - benchmark
   tags:
   - benchmark
   - portfolio
@@ -1179,7 +1181,7 @@ papers:
     label: 5 日收益（复权收盘价 5 日变化）
     cost: null
   routes:
-  - evaluation
+  - auditing
   tags:
   - auditing
   - llm
@@ -1216,8 +1218,8 @@ papers:
     label: 20 日远期收益
     cost: null
   routes:
-  - evaluation
   - formulaic
+  - auditing
   tags:
   - dsl
   - auditing
@@ -1249,7 +1251,7 @@ papers:
     label: 五只股票的目标权重（组合收益），持有 1 个月
     cost: null
   routes:
-  - evaluation
+  - benchmark
   - adjacent
   tags:
   - benchmark
@@ -1398,7 +1400,7 @@ papers:
     label: 5 日前向 close-to-close 收益
     cost: 买入 0.05%、卖出 0.15%，单笔最低 5，次日开盘成交，开启涨跌停过滤
   routes:
-  - llm-agent
+  - llm-formula
   tags:
   - llm
   - surrogate-model
@@ -1466,7 +1468,7 @@ papers:
     label: t+1 开盘至 t+2 开盘的超额收益
     cost: 回测收益不扣交易成本（毛收益）
   routes:
-  - llm-agent
+  - llm-formula
   tags:
   - llm
   - multi-agent
@@ -1545,7 +1547,7 @@ papers:
     cost: 权益回测为扣费前毛收益；Crypto 单边 5 bps
   routes:
   - formulaic
-  - llm-agent
+  - llm-formula
   tags:
   - llm
   - genetic-programming
@@ -1581,7 +1583,7 @@ papers:
     label: Ref($close,-2)/Ref($close,-1)-1（次一交易日收益）
     cost: 买入 0.15%、卖出 0.25%，单笔最低 5（Qlib 默认）
   routes:
-  - llm-agent
+  - llm-formula
   tags:
   - llm
   - evolutionary
@@ -1733,8 +1735,8 @@ papers:
     label: 次日收益
     cost: 开仓 0.05%、平仓 0.15%，最低 5 元
   routes:
-  - llm-agent
   - formulaic
+  - llm-formula
   tags:
   - llm
   - rl
@@ -1773,7 +1775,7 @@ papers:
     cost: null
   routes:
   - llm-agent
-  - evaluation
+  - auditing
   tags:
   - llm
   - multi-agent
@@ -1809,7 +1811,7 @@ papers:
     label: 5 日收益
     cost: null
   routes:
-  - llm-agent
+  - llm-formula
   tags:
   - llm
   - evolutionary
@@ -1846,8 +1848,8 @@ papers:
     label: 未来收益作为 RankIC 的标签（收益期限未披露）；另有执行感知净收益
     cost: 有分类别的成本模型但未披露费率公式，仅给准入门限平均有效价差 ≤25 bps
   routes:
-  - data-space
   - pool-combination
+  - data-space
   tags:
   - quality-diversity
   - high-frequency
@@ -2177,7 +2179,7 @@ papers:
     label: 20 日远期收益
     cost: null
   routes:
-  - llm-agent
+  - llm-formula
   tags:
   - llm
   - memory
@@ -2312,7 +2314,7 @@ papers:
     cost: null
   routes:
   - formulaic
-  - llm-agent
+  - llm-formula
   tags:
   - llm
   - factor-lineage
@@ -2382,8 +2384,8 @@ papers:
     label: 一个月买入持有收益
     cost: null
   routes:
+  - benchmark
   - adjacent
-  - evaluation
   tags:
   - llm
   - multi-agent
@@ -2421,8 +2423,8 @@ papers:
     label: 次一交易日收益
     cost: null
   routes:
-  - llm-agent
   - formulaic
+  - llm-formula
   tags:
   - llm
   - multi-agent
@@ -2461,7 +2463,7 @@ papers:
     label: 次一交易日收益
     cost: CSI500 买 0.0005、卖 0.0015；S&P500 仅卖 0.0005
   routes:
-  - llm-agent
+  - llm-formula
   tags:
   - llm
   - multi-agent

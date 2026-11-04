@@ -11,7 +11,7 @@
 | 论文 | [arXiv:2606.20625](https://arxiv.org/abs/2606.20625) |
 | 代码 | [jarrettyu/sspm](https://github.com/jarrettyu/sspm)；论文正文给出仓库链接，未核对完整性 |
 | 作者单位 | 悉尼大学、京东、爱丁堡大学 |
-| 路线 | `llm-agent` |
+| 路线 | `llm-formula` |
 | 标签 | `llm` `memory` |
 | 主要针对 | P4 学习信号稀疏、延迟且不可微；P5 低信噪比下的过拟合 |
 | 顺带涉及 | P1 表达空间巨大，有效因子稀少；P7 因子同质化与冗余 |

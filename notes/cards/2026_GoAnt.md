@@ -11,7 +11,7 @@
 | 论文 | [arXiv:2609.08719](https://arxiv.org/abs/2609.08719) |
 | 代码 | 论文未给出代码；录用状态未写明 |
 | 作者单位 | 明尼苏达大学、石溪大学 |
-| 路线 | `data-space` `pool-combination` |
+| 路线 | `pool-combination` `data-space` |
 | 标签 | `quality-diversity` `high-frequency` `factor-screening` |
 | 主要针对 | P3 评价成本高；P7 因子同质化与冗余；P8 挖掘目标与实际使用脱节 |
 | 顺带涉及 | P5 低信噪比下的过拟合；P6 前视偏差与信息泄漏；P10 评估口径不统一、难以复现 |

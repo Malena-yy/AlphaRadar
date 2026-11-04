@@ -11,7 +11,7 @@
 | 论文 | [arXiv:2508.13174](https://arxiv.org/abs/2508.13174) |
 | 代码 | [LeoDingggg/AlphaEval](https://github.com/LeoDingggg/AlphaEval) |
 | 作者单位 | 纽约市立大学巴鲁克学院、北京大学、哈佛大学、Zhengren Research |
-| 路线 | `evaluation` |
+| 路线 | `pool-combination` `benchmark` |
 | 标签 | `benchmark` `factor-screening` |
 | 主要针对 | P3 评价成本高；P10 评估口径不统一、难以复现 |
 | 顺带涉及 | P2 表达能力与可解释性的权衡；P7 因子同质化与冗余；P8 挖掘目标与实际使用脱节 |

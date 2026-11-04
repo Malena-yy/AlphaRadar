@@ -11,7 +11,7 @@
 | 论文 | [arXiv:2610.29663](https://arxiv.org/abs/2610.29663) |
 | 代码 | 论文未给出代码 |
 | 作者单位 | 南方科技大学 |
-| 路线 | `llm-agent` |
+| 路线 | `llm-formula` |
 | 标签 | `llm` `evolutionary` `factor-lineage` `memory` |
 | 主要针对 | P1 表达空间巨大，有效因子稀少；P7 因子同质化与冗余 |
 | 顺带涉及 | P3 评价成本高 |

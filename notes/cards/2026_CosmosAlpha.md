@@ -11,7 +11,7 @@
 | 论文 | [arXiv:2611.04555](https://arxiv.org/abs/2611.04555) |
 | 代码 | [wzhmtldswz/CosmosAlpha](https://github.com/wzhmtldswz/CosmosAlpha)；论文声明将发布带代码版本、提示词与运行配置的产物，PDF 未说明是否已就绪 |
 | 作者单位 | 中国科学院大学人工智能与量化金融实验室、上海交通大学物理与天文学院、国科大杭州高等研究院 |
-| 路线 | `formulaic` `llm-agent` |
+| 路线 | `formulaic` `llm-formula` |
 | 标签 | `llm` `factor-lineage` `multi-objective` `quality-diversity` |
 | 主要针对 | P1 表达空间巨大，有效因子稀少；P7 因子同质化与冗余 |
 | 顺带涉及 | P3 评价成本高；P8 挖掘目标与实际使用脱节 |

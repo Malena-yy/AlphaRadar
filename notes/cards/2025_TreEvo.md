@@ -11,7 +11,7 @@
 | 论文 | [arXiv:2508.16334](https://arxiv.org/abs/2508.16334) |
 | 代码 | 论文未给出代码 |
 | 作者单位 | 论文未标注单位 |
-| 路线 | `llm-agent` |
+| 路线 | `llm-formula` |
 | 标签 | `llm` `evolutionary` `code-evolution` |
 | 主要针对 | P1 表达空间巨大，有效因子稀少；P3 评价成本高 |
 | 顺带涉及 | P2 表达能力与可解释性的权衡；P7 因子同质化与冗余 |

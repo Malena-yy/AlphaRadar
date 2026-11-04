@@ -11,7 +11,7 @@
 | 论文 | [arXiv:2601.13770](https://arxiv.org/abs/2601.13770) |
 | 代码 | [benstaf/lookaheadbench](https://github.com/benstaf/lookaheadbench) |
 | 作者单位 | 论文首页未列单位（作者 Mostapha Benhenda） |
-| 路线 | `evaluation` `adjacent` |
+| 路线 | `benchmark` `adjacent` |
 | 标签 | `benchmark` `llm` |
 | 主要针对 | P6 前视偏差与信息泄漏 |
 | 顺带涉及 | — |
