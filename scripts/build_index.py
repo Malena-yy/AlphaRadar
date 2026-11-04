@@ -277,7 +277,7 @@ def render_index(papers, taxonomy, mechs):
     lines = [
         "# 论文索引",
         "",
-        "> 本文件由 `scripts/build_index.py` 根据 `papers.yaml` 和速读卡生成，请勿手改。问题编号的含义见 README“出发点：因子挖掘面临的问题”，路线定义见 `taxonomy.yaml`。",
+        "> 本文件由 `scripts/build_index.py` 根据 `papers.yaml` 和速读卡生成，请勿手改。问题编号的含义见 README“因子挖掘面临的问题”，路线定义见 `taxonomy.yaml`。",
         ">",
         "> 问题分两级：“主要针对”是论文动机所在、主要贡献针对的问题（至多 3 个）；“顺带涉及”是论文中有对应机制、但不是主要贡献的问题。",
         "",
