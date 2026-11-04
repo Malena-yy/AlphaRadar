@@ -19,6 +19,7 @@ AlphaRadar 是围绕“因子挖掘专题”的研究跟踪仓库：持续收录
 | `topics/adjacent/` | 不属于因子挖掘、但机制可迁移的相邻方法分析 |
 | `digests/` | 定期跟踪简报 |
 | `scripts/` | 生成与校验脚本 |
+| `WORKLOG.md` | 本地工作日志，不入库；过程记录见该文件，仓库级变化写 `CHANGELOG.md` |
 
 ## 收录口径
 
