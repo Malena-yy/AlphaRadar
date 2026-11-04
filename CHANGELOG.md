@@ -15,6 +15,7 @@
 - 标签新增 `symbolic-regression`、`distillation`、`alternative-data`、`multi-objective`、`preference-optimization`、`surrogate-model`。
 - README 中 P5、P6、P10 的“跟踪关注点”按当前收录改写；第一期简报按本轮结果更新。
 - 修正：FactorBench 的 id 由 `factorb-bench-2026` 改为 `factorbench-2026`；AlphaQCM 据 PMLR 论文集补充页码与官方仓库。
+- AlphaQCM：据 ICML 2025 论文集版原文补写证据与局限，改正标题（补上 “in Finance”）并补作者单位；至此全部速读卡已无待补项。
 
 ## 2026-11-03 内容补写、候选登记与第一期简报
 

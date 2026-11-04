@@ -227,7 +227,7 @@ papers:
   checked: '2026-11-03'
 - id: alphaqcm-2025
   short: AlphaQCM
-  title: 'AlphaQCM: Alpha Discovery with Distributional Reinforcement Learning'
+  title: 'AlphaQCM: Alpha Discovery in Finance with Distributional Reinforcement Learning'
   summary: 分布式强化学习估计奖励方差（QCM），作为非平稳稀疏奖励下的探索奖励。
   first_public: 2025-05
   versions: ICML 2025（PMLR 267:80463-80479）
@@ -236,7 +236,7 @@ papers:
   url: https://openreview.net/forum?id=3sXMHlhBSs
   code: https://github.com/ZhuZhouFan/AlphaQCM
   code_note: null
-  affiliation: 厦门大学、香港大学
+  affiliation: 厦门大学王亚南经济研究院、厦门大学金融系、香港大学统计与精算学系
   problems:
   - learning-signal
   routes:
@@ -248,7 +248,7 @@ papers:
   card: notes/cards/2025_AlphaQCM.md
   deep: null
   added: '2026-11-03'
-  checked: '2026-07-11'
+  checked: '2026-11-03'
 - id: tlrs-2025
   short: TLRS
   title: 'Learning from Expert Factors: Trajectory-level Reward Shaping for Formulaic Alpha Mining'
