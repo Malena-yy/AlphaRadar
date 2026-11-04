@@ -14,6 +14,12 @@
 #   affiliation   作者单位
 #   problems      主要针对的问题：论文动机所在、主要贡献针对的，取 taxonomy.yaml 中 problems 的键，至多 3 个
 #   also          顺带涉及的问题：有对应机制但不是主要贡献的，取值同上；基线或背景工作两者都写 []
+#   setup         实验口径，没有对应信息的字段写 null：
+#                   markets    市场与股票池，例如 "CSI300、CSI500"、"S&P500"、"多市场"
+#                   freq       数据频率，例如 "日频"、"分钟频"、"10 分钟"
+#                   test       样本外区间，例如 "2020-01 至 2021-12"
+#                   label      预测标签与持有期，例如 "20 日收益"
+#                   cost       交易成本假设，例如 "买入万 5、卖出万 15"；未说明写 null
 #   routes, tags  路线与标签，多选，取值见 taxonomy.yaml
 #   status        inbox / triaged / card / deep-read
 #   card, deep    速读卡与精读路径
@@ -34,6 +40,12 @@ papers:
   affiliation: Quantigic Solutions LLC
   problems: []
   also: []
+  setup:
+    markets: WorldQuant 自有数据，股票池未公开（论文未披露具体市场与股票范围）
+    freq: 日频
+    test: 无样本外切分；统计区间 2010-01-04 至 2013-12-31，1006 个交易日
+    label: 无显式预测标签；alpha 直接给出内部持仓，按日频 P&L 统计，平均持有期 0.6–6.4 日
+    cost: 不计交易成本与价格冲击（表 1 注明）
   routes:
   - formulaic
   tags:
@@ -60,6 +72,12 @@ papers:
   - redundancy
   also:
   - eval-cost
+  setup:
+    markets: CSI300（挖掘）、CSI800（回测）
+    freq: 日频
+    test: 2017-09-01 至 2019-07-31
+    label: 1 日与 5 日收益
+    cost: 0.3%（未区分买卖）
   routes:
   - formulaic
   tags:
@@ -87,6 +105,12 @@ papers:
   - redundancy
   also:
   - eval-cost
+  setup:
+    markets: NASDAQ（筛选后 1026 只）
+    freq: 日频
+    test: 2013 至 2017 年按 988/116/116 天切分，测试为最后 116 个交易日（未给具体日期）
+    label: 次日收益（(今日收盘价−昨日收盘价)/昨日收盘价）
+    cost: null
   routes:
   - formulaic
   tags:
@@ -115,6 +139,12 @@ papers:
   also:
   - search-space
   - eval-cost
+  setup:
+    markets: CSI300、CSI500
+    freq: 日频
+    test: 2020-01-01 至 2021-12-31
+    label: 20 日收益（Ref(close,-20)/close-1，按收盘价买卖）
+    cost: null
   routes:
   - formulaic
   tags:
@@ -143,6 +173,12 @@ papers:
   - search-space
   also:
   - redundancy
+  setup:
+    markets: CSI300
+    freq: 日频
+    test: 2020-01-01 至 2021-12-31
+    label: 20 日收益
+    cost: null
   routes:
   - formulaic
   tags:
@@ -171,6 +207,12 @@ papers:
   also:
   - redundancy
   - objective-gap
+  setup:
+    markets: CSI300、CSI500
+    freq: 日频
+    test: 2021-01-01 至 2022-12-31
+    label: 5 日与 10 日收益
+    cost: null
   routes:
   - formulaic
   tags:
@@ -197,6 +239,12 @@ papers:
   - search-space
   also:
   - eval-cost
+  setup:
+    markets: CSI300、CSI500
+    freq: 日频
+    test: 2021-01-01 至 2023-12-31
+    label: 20 日收益
+    cost: null
   routes:
   - formulaic
   tags:
@@ -224,6 +272,12 @@ papers:
   - learning-signal
   - decay
   also: []
+  setup:
+    markets: CSI300、CSI500、CSI1000、SPX、DJI、NDX
+    freq: 日频
+    test: 2021-01-01 至 2024-01-01
+    label: 5 日收益
+    cost: null
   routes:
   - formulaic
   tags:
@@ -249,6 +303,12 @@ papers:
   problems:
   - learning-signal
   also: []
+  setup:
+    markets: CSI300、CSI500、沪深全市场（Market）；附录另测 S&P 500
+    freq: null
+    test: 2021-01-01 至 2022-12-31
+    label: 20 日未来收益
+    cost: null
   routes:
   - formulaic
   tags:
@@ -274,6 +334,12 @@ papers:
   problems:
   - learning-signal
   also: []
+  setup:
+    markets: CSI300、CSI500、CSI1000、SPX、DJI、NDX
+    freq: 日频
+    test: 2021-01-01 至 2024-01-01
+    label: 未来 5 日收益
+    cost: null
   routes:
   - formulaic
   tags:
@@ -300,6 +366,12 @@ papers:
   - learning-signal
   - redundancy
   also: []
+  setup:
+    markets: CSI300、CSI500、CSI1000、S&P500
+    freq: 日频
+    test: 中国市场 2022-01-01 至 2024-12-31；美国市场 2018-01-01 至 2020-12-31
+    label: null
+    cost: null
   routes:
   - formulaic
   tags:
@@ -326,6 +398,12 @@ papers:
   - search-space
   also:
   - redundancy
+  setup:
+    markets: CSI300、S&P500
+    freq: 日频
+    test: 2021-01-01 至 2024-12-31（2020 年数据按设计剔除）
+    label: 20 日远期收益（Ref(close,-20)/close-1）
+    cost: null
   routes:
   - formulaic
   tags:
@@ -356,6 +434,12 @@ papers:
   also:
   - eval-cost
   - redundancy
+  setup:
+    markets: CSI300、CSI500
+    freq: 日频
+    test: 2018 至 2022，逐年测试并年度重训
+    label: Ref(VWAP,-21)/Ref(VWAP,-1)-1（约 20 日 VWAP 收益）
+    cost: 每日最多换 5 只（论文未给费率）
   routes:
   - formulaic
   - pool-combination
@@ -384,6 +468,12 @@ papers:
   - objective-gap
   also:
   - redundancy
+  setup:
+    markets: DJIA、HSI、CSI100、CRYPTO
+    freq: null
+    test: 股票市场 2022-01 至 2023-06；CRYPTO 2023-09 至 2024-04
+    label: 资产价格变动真值 y_t（论文未给收益公式与预测期限）
+    cost: 交易费率 0.25%
   routes:
   - neural
   - pool-combination
@@ -414,6 +504,12 @@ papers:
   - objective-gap
   also:
   - redundancy
+  setup:
+    markets: FF25、FF32、FF49、FF100（Fama-French 组合）；US50、HSI45、CSI300
+    freq: 月度（FF）；日频（US50、HSI45、CSI300）
+    test: FF 1971-07 至 2023-05；US50 2019-01 至 2025-12；HSI45 2022-01 至 2025-03；CSI300 2022-01 至 2025-05
+    label: 下一期收益（FF 为下月、日频市场池为次日），按 RankIC 评价
+    cost: 10 bp 单次交易（附录另做 0/5/10/20 bp 敏感性）
   routes:
   - llm-agent
   - pool-combination
@@ -444,6 +540,12 @@ papers:
   also:
   - overfitting
   - leakage
+  setup:
+    markets: S&P500、CSI300（另有 Russell2000、CSI1000 泛化检验）
+    freq: 日频
+    test: 2025-01-01 至 2025-12-31
+    label: 5 日持有期收益
+    cost: 双边 10 bps
   routes:
   - llm-agent
   - pool-combination
@@ -473,6 +575,12 @@ papers:
   - redundancy
   also:
   - objective-gap
+  setup:
+    markets: CSI300、CSI500、CSI1000
+    freq: 日频
+    test: 2022-07-01 至 2025-06-30
+    label: 20 日远期收益
+    cost: 往返 0.1%
   routes:
   - formulaic
   - pool-combination
@@ -500,6 +608,12 @@ papers:
   - search-space
   also:
   - expressiveness
+  setup:
+    markets: 中国与美国股票的日内量价数据（未给出具体股票池）
+    freq: 日内
+    test: null
+    label: 未来收益（论文未说明持有期）
+    cost: null
   routes:
   - llm-agent
   tags:
@@ -526,6 +640,12 @@ papers:
   - search-space
   also:
   - learning-signal
+  setup:
+    markets: 中国 A 股 500 只股票
+    freq: 日频
+    test: null
+    label: 未来收益（论文未说明持有期）
+    cost: null
   routes:
   - llm-agent
   tags:
@@ -552,6 +672,12 @@ papers:
   - search-space
   also:
   - objective-gap
+  setup:
+    markets: null
+    freq: null
+    test: null
+    label: null
+    cost: null
   routes:
   - llm-agent
   tags:
@@ -578,6 +704,12 @@ papers:
   - search-space
   - objective-gap
   also: []
+  setup:
+    markets: SSE50、CSI300、S&P500
+    freq: 日频
+    test: SSE50 2023-01 至 2024-01；CSI300、S&P500 为 2021-01 至 2023-06 的三段滚动测试（2021H1、2022H1、2023H1）
+    label: 未来收益（IC 为 alpha 值与未来收益的相关；论文未说明持有期）
+    cost: 未给费率；以每日最多换 5 只、日换手上限约 38% 控制成本
   routes:
   - llm-agent
   tags:
@@ -606,6 +738,12 @@ papers:
   also:
   - expressiveness
   - overfitting
+  setup:
+    markets: CSI500、S&P 500
+    freq: 日频
+    test: 2021-01 至 2024-12
+    label: 次日收益
+    cost: CSI500 买入万 5、卖出万 15；S&P 500 仅卖出万 5
   routes:
   - llm-agent
   tags:
@@ -634,6 +772,12 @@ papers:
   also:
   - overfitting
   - objective-gap
+  setup:
+    markets: CSI300、CSI1000
+    freq: 日频
+    test: 2021-01-01 至 2024-11-30
+    label: 10 日与 30 日收益
+    cost: 每笔 0.15%
   routes:
   - llm-agent
   tags:
@@ -660,6 +804,12 @@ papers:
   - objective-gap
   also:
   - redundancy
+  setup:
+    markets: CSI300、CSI500、NASDAQ100
+    freq: 日频
+    test: CSI300 2017-01-01 至 2020-08-01；CSI500 与 NASDAQ100 2024-01-01 至 2025-06-30
+    label: 次日收益
+    cost: 买入 0.05%、卖出 0.15%、每笔最低 5 元
   routes:
   - llm-agent
   tags:
@@ -688,6 +838,12 @@ papers:
   - expressiveness
   also:
   - leakage
+  setup:
+    markets: CSI300（主）、CSI500、S&P500、HSI、HSCI
+    freq: 日频
+    test: CSI300、CSI500 2021-01-01 至 2024-12-01；S&P500 2016-01-01 至 2020-12-01；HSI、HSCI 2021-01-01 至 2025-12-01
+    label: 10 日收益（另用 30 日收益）
+    cost: 开仓 0.05%、平仓 0.15%，最低 5 元
   routes:
   - llm-agent
   tags:
@@ -714,6 +870,12 @@ papers:
   - expressiveness
   - redundancy
   also: []
+  setup:
+    markets: CSI300（另在 CSI500、S&P 500 做零样本迁移）
+    freq: 日频
+    test: 2022-01-01 至 2025-12-26
+    label: 次日收益 y_t = P_{t+2}/P_{t+1} - 1
+    cost: 买入 0.05%、卖出 0.15%
   routes:
   - llm-agent
   tags:
@@ -741,6 +903,12 @@ papers:
   also:
   - eval-cost
   - reproducibility
+  setup:
+    markets: CSI500、CSI1000、CSI300、Binance 64 个加密资产
+    freq: 10 分钟
+    test: 2025 年（训练 2024-Q1 至 2024-Q4）
+    label: 同频非重叠的下一步收益比（10 分钟）
+    cost: null
   routes:
   - llm-agent
   tags:
@@ -770,6 +938,12 @@ papers:
   also:
   - eval-cost
   - leakage
+  setup:
+    markets: CSI300、CSI500
+    freq: 日频
+    test: 2017-01-01 至 2024-12-31
+    label: 1、3、5、10 日远期收益（多滞后评价）
+    cost: 佣金双边 1.5×10⁻⁴、卖出印花税 5×10⁻⁴、滑点 8×10⁻⁴
   routes:
   - llm-agent
   tags:
@@ -799,6 +973,12 @@ papers:
   also:
   - objective-gap
   - decay
+  setup:
+    markets: S&P 500（501 只）
+    freq: 日频
+    test: 2025-06-01 至 2026-03-13（发现期 2022-01-01 至 2025-05-31）
+    label: 前向 h 期收益（论文未给出 h 的具体取值）
+    cost: null
   routes:
   - llm-agent
   tags:
@@ -828,6 +1008,12 @@ papers:
   - redundancy
   also:
   - search-space
+  setup:
+    markets: 单资产 5 分钟方向预测（Benchmark A）、数字资产小时频截面（Benchmark B）、CSI300 ETF 成分股（Benchmark Γ）
+    freq: 5 分钟、小时频、日频
+    test: null
+    label: 未来 5 分钟涨跌方向（A）；未来一小时的截面收益排名（B）；未来收益（Γ）
+    cost: null
   routes:
   - llm-agent
   tags:
@@ -855,6 +1041,12 @@ papers:
   - overfitting
   - leakage
   also: []
+  setup:
+    markets: CSI1000
+    freq: 日频
+    test: 2020-01 至 2025-12（测试段）；2026-01 至 2026-05（密封 holdout）
+    label: 5 日开盘到开盘收益
+    cost: 单边 9 bps（双边 0.04% 佣金 + 0.05% 印花税）
   routes:
   - llm-agent
   tags:
@@ -881,6 +1073,12 @@ papers:
   problems:
   - expressiveness
   also: []
+  setup:
+    markets: HS300、S&P500
+    freq: 1 分钟
+    test: S&P500 2023-10-31 至 2023-12-29；HS300 2023-08-31 至 2023-10-31
+    label: 一日远期已实现波动率 RV
+    cost: null
   routes:
   - data-space
   tags:
@@ -911,6 +1109,12 @@ papers:
   - expressiveness
   - redundancy
   - objective-gap
+  setup:
+    markets: A 股（Qlib）、S&P 500
+    freq: 日频
+    test: A 股 2021-01-01 至 2024-12-31；S&P 500 2017-01-01 至 2020-12-31
+    label: ΔT 日远期收益（未指定时 ΔT=1，即次日收益）
+    cost: null
   routes:
   - evaluation
   tags:
@@ -939,6 +1143,12 @@ papers:
   also:
   - overfitting
   - redundancy
+  setup:
+    markets: S&P100、恒生指数、CSI300、FTSE100、Nikkei225
+    freq: 日频
+    test: 2024-01 至 2025-10
+    label: 20 日收益
+    cost: 每交易 1 美元 10 个基点
   routes:
   - evaluation
   tags:
@@ -965,6 +1175,12 @@ papers:
   - reproducibility
   also:
   - leakage
+  setup:
+    markets: A 股 40 只股票（BaoStock 便利样本）
+    freq: 日频
+    test: 2024 至 2025
+    label: 5 日收益（复权收盘价 5 日变化）
+    cost: null
   routes:
   - evaluation
   tags:
@@ -996,6 +1212,12 @@ papers:
   - eval-cost
   - overfitting
   - redundancy
+  setup:
+    markets: CSI500（主）、CSI300；机制实验用 AAPL
+    freq: 日频（面板）；1 小时（AAPL 机制实验）
+    test: 2022-07 起（扩展数据至 2026-05）
+    label: 20 日远期收益
+    cost: null
   routes:
   - evaluation
   - formulaic
@@ -1023,6 +1245,12 @@ papers:
   problems:
   - leakage
   also: []
+  setup:
+    markets: AAPL、MSFT、GOOGL、NVDA、TSLA（五只美股大盘科技股）
+    freq: 日频（月度调仓）
+    test: 第一期 2021-04-01 至 2021-09-30；第二期 2024-07-01 至 2024-12-31
+    label: 五只股票的目标权重（组合收益），持有 1 个月
+    cost: null
   routes:
   - evaluation
   - adjacent
@@ -1051,6 +1279,12 @@ papers:
   - overfitting
   - redundancy
   also: []
+  setup:
+    markets: CSI300、CSI800、全市场（附录另测 S&P 500）
+    freq: 日频
+    test: 2024-07-01 至 2025-06-30
+    label: 20 日收益
+    cost: 单边 15 bp、最低 5 元（全市场月度调仓回测）
   routes:
   - formulaic
   tags:
@@ -1083,6 +1317,12 @@ papers:
   - objective-gap
   also:
   - eval-cost
+  setup:
+    markets: CSI300、CSI500、S&P500
+    freq: 日频
+    test: 2023-01-01 至 2025-12-31
+    label: 20 日收益
+    cost: 买入 0.05%（c_buy=0.0005）、卖出 0.15%（c_sell=0.0015）
   routes:
   - formulaic
   tags:
@@ -1115,6 +1355,12 @@ papers:
   - search-space
   - eval-cost
   - redundancy
+  setup:
+    markets: CSI300、CSI500
+    freq: 日频
+    test: 2025-07-11 至 2026-03-02（逐日推理）
+    label: 次日收益（IC/RankIC 用次日收益；训练奖励用 21 日与 63 日未来窗口）
+    cost: 10 bps
   routes:
   - llm-agent
   - pool-combination
@@ -1148,6 +1394,12 @@ papers:
   - expressiveness
   - leakage
   - redundancy
+  setup:
+    markets: CSI300（主）、CSI500（附录）
+    freq: 日频
+    test: 2023-01-01 至 2025-12-31
+    label: 5 日前向 close-to-close 收益
+    cost: 买入 0.05%、卖出 0.15%，单笔最低 5，次日开盘成交，开启涨跌停过滤
   routes:
   - llm-agent
   tags:
@@ -1174,6 +1426,12 @@ papers:
   - redundancy
   also:
   - objective-gap
+  setup:
+    markets: CSI300、CSI500、NI225、SP500
+    freq: 日频
+    test: 2021 至 2024
+    label: 5 日收益
+    cost: CSI300、CSI500 买入约 0.006%、卖出约 0.056%；NI225 双边 0.002%；SP500 约 0（附录 C.1 情景）
   routes:
   - neural
   tags:
@@ -1204,6 +1462,12 @@ papers:
   - overfitting
   - leakage
   - objective-gap
+  setup:
+    markets: CSI300、CSI500、CSI1000、沪深 A 股全市场
+    freq: 日频、分钟级
+    test: 2026-01 至 2026-08（外层，只评估一次；内层 2022-05 至 2025-12）
+    label: t+1 开盘至 t+2 开盘的超额收益
+    cost: 回测收益不扣交易成本（毛收益）
   routes:
   - llm-agent
   tags:
@@ -1236,6 +1500,12 @@ papers:
   also:
   - search-space
   - leakage
+  setup:
+    markets: CSI500（统一账户比较）；EviPool 动态池（A 股全市场）；另列 CSI300、CSI1000 指数池
+    freq: 日频
+    test: 2025-01-02 至 2026-07-31
+    label: 20 日远期收益
+    cost: 买入 5 bps、卖出 15 bps
   routes:
   - llm-agent
   - pool-combination
@@ -1270,6 +1540,12 @@ papers:
   - search-space
   - expressiveness
   - reproducibility
+  setup:
+    markets: CSI500、S&P 500、Crypto（数字资产）
+    freq: 日频（权益）；小时频（Crypto）
+    test: CSI500 2026-05-06 至 2026-08-17；S&P500 2026-05-01 至 2026-08-14；Crypto 2026-04-01 至 2026-06-09
+    label: 次日截面收益（Crypto 为下一小时截面收益）
+    cost: 权益回测为扣费前毛收益；Crypto 单边 5 bps
   routes:
   - formulaic
   - llm-agent
@@ -1301,6 +1577,12 @@ papers:
   - search-space
   also:
   - eval-cost
+  setup:
+    markets: CSI500、S&P500
+    freq: 日频
+    test: 2022-05-01 至 2026-04-30
+    label: Ref($close,-2)/Ref($close,-1)-1（次一交易日收益）
+    cost: 买入 0.15%、卖出 0.25%，单笔最低 5（Qlib 默认）
   routes:
   - llm-agent
   tags:
@@ -1332,6 +1614,12 @@ papers:
   - expressiveness
   - eval-cost
   - overfitting
+  setup:
+    markets: 中国 A 股全市场
+    freq: 日频
+    test: 2022-01 至 2024-10（因子层）；组合层 2023-01 至 2024-10
+    label: 5 日 VWAP 累计收益
+    cost: 0.6‰
   routes:
   - formulaic
   tags:
@@ -1362,6 +1650,12 @@ papers:
   - redundancy
   - overfitting
   - reproducibility
+  setup:
+    markets: CSI300、CSI500、CSI800、CSI1000、S&P500、NASDAQ100
+    freq: 日频
+    test: 2023-06 至 2026-05
+    label: null
+    cost: null
   routes:
   - llm-agent
   - pool-combination
@@ -1396,6 +1690,12 @@ papers:
   - expressiveness
   - overfitting
   - leakage
+  setup:
+    markets: CSI300、CSI500、CSI1000、S&P500、HSI90
+    freq: 日频
+    test: 2022-01-01 至 2025-12-31
+    label: 10 日与 30 日开盘到开盘收益
+    cost: 买入 0.026%、卖出 0.076%（含 0.05% 印花税）、每单最低 5 元
   routes:
   - llm-agent
   - pool-combination
@@ -1429,6 +1729,12 @@ papers:
   - eval-cost
   - leakage
   - objective-gap
+  setup:
+    markets: CSI300、CSI1000、S&P 500
+    freq: 日频
+    test: 2021-01-01 至 2024-12-30
+    label: 次日收益
+    cost: 开仓 0.05%、平仓 0.15%，最低 5 元
   routes:
   - llm-agent
   - formulaic
@@ -1462,6 +1768,12 @@ papers:
   - expressiveness
   - overfitting
   - redundancy
+  setup:
+    markets: U.S. TOP3000（WorldQuant BRAIN，delay one）
+    freq: 日频
+    test: 2019-01-01 至 2023-12-31（平台评测窗口，全部提交进入样本外跟踪）
+    label: 平台综合评价分对应的截面 alpha 收益（论文未给收益公式与持有期）
+    cost: null
   routes:
   - llm-agent
   - evaluation
@@ -1493,6 +1805,12 @@ papers:
   also:
   - redundancy
   - expressiveness
+  setup:
+    markets: CSI300、CSI500、SPX、NDX
+    freq: 日频
+    test: 2021-01-01 至 2024-01-01
+    label: 5 日收益
+    cost: null
   routes:
   - llm-agent
   tags:
@@ -1524,6 +1842,12 @@ papers:
   - overfitting
   - leakage
   - reproducibility
+  setup:
+    markets: A 股（价格—成交量面板与订单簿 L2 快照，标的数与股票池未披露）
+    freq: 日频（PV）与订单簿 L2 快照（快照频率未披露）
+    test: 开发窗口与更晚的锁定窗口，仅给数据区间 2023 至 2026，起止日期未披露
+    label: 未来收益作为 RankIC 的标签（收益期限未披露）；另有执行感知净收益
+    cost: 有分类别的成本模型但未披露费率公式，仅给准入门限平均有效价差 ≤25 bps
   routes:
   - data-space
   - pool-combination
@@ -1554,6 +1878,12 @@ papers:
   also:
   - expressiveness
   - objective-gap
+  setup:
+    markets: CSI300、S&P500
+    freq: 日频
+    test: 2024-03-01 至 2026-03-01
+    label: 20 个交易日远期收益
+    cost: null
   routes:
   - neural
   tags:
@@ -1581,6 +1911,12 @@ papers:
   - eval-cost
   also:
   - redundancy
+  setup:
+    markets: CSI300、CSI500、CSI1000、S&P 500
+    freq: 日频
+    test: 中国 2022 至 2024；S&P 500 2018 至 2020
+    label: 20 个交易日远期收益 Ref(close,-20)/close-1
+    cost: null
   routes:
   - formulaic
   tags:
@@ -1607,6 +1943,12 @@ papers:
   - learning-signal
   also:
   - overfitting
+  setup:
+    markets: CSI300、CSI500、CSI800（CSI1000 为附录补充）
+    freq: 日频
+    test: 2022-01-01 至 2024-12-31
+    label: 20 日收益（h=20；另有 h=42 长周期）
+    cost: null
   routes:
   - formulaic
   tags:
@@ -1634,6 +1976,12 @@ papers:
   - learning-signal
   also:
   - search-space
+  setup:
+    markets: 非金融：Nguyen 符号回归基准（12 个表达式）
+    freq: null
+    test: null
+    label: 拟合输入 X 到标量 y 的映射（符号回归，无金融标签）
+    cost: null
   routes:
   - adjacent
   tags:
@@ -1662,6 +2010,12 @@ papers:
   also:
   - eval-cost
   - learning-signal
+  setup:
+    markets: 非金融：超网格合成任务、分子生成
+    freq: null
+    test: null
+    label: 超网格任务为给定奖励函数的成比例采样；分子任务为预训练代理模型预测的结合能
+    cost: null
   routes:
   - adjacent
   tags:
@@ -1687,6 +2041,12 @@ papers:
   - learning-signal
   also:
   - redundancy
+  setup:
+    markets: null
+    freq: null
+    test: null
+    label: null
+    cost: null
   routes:
   - adjacent
   tags:
@@ -1714,6 +2074,12 @@ papers:
   - expressiveness
   - eval-cost
   - redundancy
+  setup:
+    markets: 不适用（数学构造问题、矩阵乘法算法、Google 计算栈工程任务）
+    freq: 不适用
+    test: 不适用
+    label: 不适用（目标为算法正确性与指标改进，如矩阵乘法的秩、内核加速比）
+    cost: null
   routes:
   - adjacent
   tags:
@@ -1741,6 +2107,12 @@ papers:
   problems:
   - learning-signal
   also: []
+  setup:
+    markets: 非金融：ALFWorld、WebShop、搜索增强问答（NQ、TriviaQA、PopQA、HotpotQA 等）
+    freq: null
+    test: null
+    label: 任务完成与否（ALFWorld、WebShop 成功率）与问答正确率
+    cost: null
   routes:
   - adjacent
   tags:
@@ -1767,6 +2139,12 @@ papers:
   - eval-cost
   - learning-signal
   also: []
+  setup:
+    markets: 不适用（11 个单跳/多跳问答与网页智能体数据集）
+    freq: 不适用
+    test: 不适用
+    label: 不适用（答案精确匹配 EM；网页智能体用 F1）
+    cost: null
   routes:
   - adjacent
   tags:

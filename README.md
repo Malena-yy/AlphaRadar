@@ -133,6 +133,7 @@ AlphaRadar 是一个围绕 **因子挖掘专题** 的研究跟踪仓库：持续
 | [研究全景](topics/landscape.md) | 技术路线对比、RL 与 LLM/Agent 闭环、路线演进和分组导读 |
 | [生成器如何使用真实 IC](topics/generator_training_with_ic.md) | 强化学习、AlphaForge、AlphaSAGE 三类生成器训练机制对照 |
 | [算子空间对照](topics/operator_space.md) | 各工作公开的公式算子空间、证据等级与同名异义 |
+| [评估口径对照](topics/evaluation_protocol.md) | 各工作的股票池、频率、标签、切分与成本口径差异，以及会误导比较的情形 |
 | [可迁移的相邻方法](topics/adjacent/transferable_methods.md) | DSR、GFlowNet、LLM 代码演化与智能体信用分配等方法向因子挖掘的迁移点 |
 | [速读卡](notes/cards/) / [精读](notes/deep/) | 单篇论文笔记 |
 | [跟踪简报](digests/) | 定期新增工作与状态变化 |

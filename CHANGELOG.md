@@ -2,6 +2,16 @@
 
 记录仓库结构、收录口径、模板和分类体系的变化。最新记录在前。
 
+## 2026-11-03 实验口径结构化与对照专题
+
+- `papers.yaml` 每条记录新增 `setup` 字段：`markets`、`freq`、`test`、`label`、`cost`，62 篇全部按原文填写，原文没有的字段留空，不推断。字段定义见文件开头注释。
+- `INDEX.md` 新增第 4 节“实验口径”，分两张表列出市场与频率、样本外区间与标签与成本；按路线分组顺延为第 5 节。
+- 新增专题 `topics/evaluation_protocol.md`：按股票池、频率与标签、切分、成本四项比较口径差异，并列出 6 类已知会误导比较的情形（基线复现口径不同、基线只用部分模块、组合池与基线不同、论文内部多套口径、依赖外部平台评测、论文内部数字不一致）。
+- 读原文核对时修正的卡片错误：
+  - QFR：卡片原写“回测假设 TWAP/VWAP 执行、报告换手与最大回撤”，原文第 V-E 节只有累计收益曲线，表 V 只是 IC/RankIC，相关表述已删除；阅读版本由 v3 改为 v2。
+  - AlphaSAGE：本地 PDF 曾为 v2（只含 CSI300、CSI500、S&P500），已换成 v3（28 页，含 CSI1000），并在卡片注明版本；本地 Alpha-Jungle PDF 同步换成 v3。
+- 待核查：Alpha-Jungle 的复现审计记录提到 v3 含 S&P500 实验，本次 v3 全文检索只命中 4 处 S&P，未确认是否有 S&P500 实验，暂不写入兜底结论。
+
 ## 2026-11-03 待筛工作逐篇判断
 
 - 15 篇待筛全部读了原文：13 篇收录并写速读卡（AlphaLedger、EvoQuantLab、LineageEvo、AutoScientist-Quant、Warm Start GP、X-Alpha、AlphaRLM、AgonAlpha、TreEvo、GoAnt、Det-MASO、AlphaG-OPD、AlphaRJM），2 篇按收录口径第 2 条不收录并从登记表移除（Sentiment-Aware LLM Alpha、Factor-Newsflow Fusion，理由记入简报）。

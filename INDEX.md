@@ -437,7 +437,147 @@
 - [GoAnt](notes/cards/2026_GoAnt.md)：定义了一个与地图无关的 effective-yield 协议——所有臂只从各自的评价记录中读取结果，候选须越过同一个预注册下限 q*=随机基因组合分布的 95 分位（在任何臂运行前校准并冻结），多样性固定在一个方法无关的四因子家族 × 五换手分箱网格上统计（ρ=0.7，附录另给 0.3/0.5/0.9 全扫），使有存档与无存档的系统用同一把尺子；静态对照用“运行结束时的不变量断言”定义（中心、细胞数、边界、合并/分裂/重拟合、缩放器重估全部为 0，违反即中止），并公开断言表；批注也承认自己一度把“关闭重绘 tick”误当成让地图更静态，结果那个臂看起来最好，这一自我报告增强了协议的可信度（附录 A、B、表 S1）。
 - [EvoQuantLab](notes/cards/2026_EvoQuantLab.md)：冻结证据管线与内容哈希固定准入结果，附录给出协议补丁的准入标准，使同一研究可在相同证据上重跑与复核。
 
-## 4. 按路线
+## 4. 实验口径
+
+各篇速读卡“证据”一节的摘要，逐项核对自论文原文；口径差异的比较见[评估口径](topics/evaluation_protocol.md)。
+
+“未说明”表示论文没有给出该项。`markets` 为“不适用”的是方法类论文，实验对象不是股票因子挖掘。
+
+### 4.1 市场、股票池与频率
+
+| 工作 | 市场 / 股票池 | 频率 |
+| --- | --- | --- |
+| [Auditing LLM Alpha-Factor Mining](notes/cards/2026_AuditingLLMAlpha.md) | A 股 40 只股票（BaoStock 便利样本） | 日频 |
+| [AlphaEval](notes/cards/2025_AlphaEval.md) | A 股（Qlib）、S&P 500 | 日频 |
+| [GoAnt](notes/cards/2026_GoAnt.md) | A 股（价格—成交量面板与订单簿 L2 快照，标的数与股票池未披露） | 日频（PV）与订单簿 L2 快照（快照频率未披露） |
+| [Look-Ahead-Bench](notes/cards/2026_Look-Ahead-Bench.md) | AAPL、MSFT、GOOGL、NVDA、TSLA（五只美股大盘科技股） | 日频（月度调仓） |
+| [Agora/SJS](notes/cards/2026_Agora-SJS.md) | CSI1000 | 日频 |
+| [Synergistic RL](notes/cards/2024_SynergisticRL.md) | CSI300 | 日频 |
+| [Alpha-Jungle](notes/cards/2025_Alpha-Jungle.md) | CSI300、CSI1000 | 日频 |
+| [AlphaRLM](notes/cards/2026_AlphaRLM.md) | CSI300、CSI1000、S&P 500 | 日频 |
+| [AlphaGen](notes/cards/2023_AlphaGen.md) | CSI300、CSI500 | 日频 |
+| [RiskMiner](notes/cards/2024_RiskMiner.md) | CSI300、CSI500 | 日频 |
+| [Alpha2](notes/cards/2024_Alpha2.md) | CSI300、CSI500 | 日频 |
+| [AlphaForge](notes/cards/2024_AlphaForge.md) | CSI300、CSI500 | 日频 |
+| [FactorEngine](notes/cards/2026_FactorEngine.md) | CSI300、CSI500 | 日频 |
+| [AlphaPilot](notes/cards/2026_AlphaPilot.md) | CSI300、CSI500 | 日频 |
+| [AlphaPROBE](notes/cards/2026_AlphaPROBE.md) | CSI300、CSI500、CSI1000 | 日频 |
+| [AlphaG-OPD](notes/cards/2026_AlphaG-OPD.md) | CSI300、CSI500、CSI1000、S&P 500 | 日频 |
+| [AlphaSAGE](notes/cards/2025_AlphaSAGE.md) | CSI300、CSI500、CSI1000、S&P500 | 日频 |
+| [X-Alpha](notes/cards/2026_X-Alpha.md) | CSI300、CSI500、CSI1000、S&P500、HSI90 | 日频 |
+| [QFR](notes/cards/2024_QFR.md) | CSI300、CSI500、CSI1000、SPX、DJI、NDX | 日频 |
+| [TLRS](notes/cards/2025_TLRS.md) | CSI300、CSI500、CSI1000、SPX、DJI、NDX | 日频 |
+| [AlphaDiverse](notes/cards/2026_AlphaDiverse.md) | CSI300、CSI500、CSI1000、沪深 A 股全市场 | 日频、分钟级 |
+| [AutoScientist-Quant](notes/cards/2026_AutoScientist-Quant.md) | CSI300、CSI500、CSI800、CSI1000、S&P500、NASDAQ100 | 日频 |
+| [AlphaRJM](notes/cards/2026_AlphaRJM.md) | CSI300、CSI500、CSI800（CSI1000 为附录补充） | 日频 |
+| [RD-Agent(Q)](notes/cards/2025_RD-Agent-Quant.md) | CSI300、CSI500、NASDAQ100 | 日频 |
+| [MAPLE](notes/cards/2026_MAPLE.md) | CSI300、CSI500、NI225、SP500 | 日频 |
+| [AlphaPADI](notes/cards/2026_AlphaPADI.md) | CSI300、CSI500、S&P500 | 日频 |
+| [TreEvo](notes/cards/2025_TreEvo.md) | CSI300、CSI500、SPX、NDX | 日频 |
+| [AlphaQCM](notes/cards/2025_AlphaQCM.md) | CSI300、CSI500、沪深全市场（Market）；附录另测 S&P 500 | 未说明 |
+| [AlphaPareto](notes/cards/2026_AlphaPareto.md) | CSI300、CSI800、全市场（附录另测 S&P 500） | 日频 |
+| [AlphaCFG](notes/cards/2026_AlphaCFG.md) | CSI300、S&P500 | 日频 |
+| [Det-MASO](notes/cards/2026_Det-MASO.md) | CSI300、S&P500 | 日频 |
+| [CogAlpha](notes/cards/2025_CogAlpha.md) | CSI300（主）、CSI500、S&P500、HSI、HSCI | 日频 |
+| [AlphaSchema](notes/cards/2026_AlphaSchema.md) | CSI300（主）、CSI500（附录） | 日频 |
+| [QuantaAlpha](notes/cards/2026_QuantaAlpha.md) | CSI300（另在 CSI500、S&P 500 做零样本迁移） | 日频 |
+| [AutoAlpha](notes/cards/2020_AutoAlpha.md) | CSI300（挖掘）、CSI800（回测） | 日频 |
+| [FactorMiner](notes/cards/2026_FactorMiner.md) | CSI500、CSI1000、CSI300、Binance 64 个加密资产 | 10 分钟 |
+| [AlphaAgent](notes/cards/2025_AlphaAgent.md) | CSI500、S&P 500 | 日频 |
+| [EvoQuantLab](notes/cards/2026_EvoQuantLab.md) | CSI500、S&P 500、Crypto（数字资产） | 日频（权益）；小时频（Crypto） |
+| [LineageEvo](notes/cards/2026_LineageEvo.md) | CSI500、S&P500 | 日频 |
+| [QBX](notes/cards/2026_QBX.md) | CSI500（主）、CSI300；机制实验用 AAPL | 日频（面板）；1 小时（AAPL 机制实验） |
+| [AlphaLedger](notes/cards/2026_AlphaLedger.md) | CSI500（统一账户比较）；EviPool 动态池（A 股全市场）；另列 CSI300、CSI1000 指数池 | 日频 |
+| [AlphaGAT](notes/cards/2025_AlphaGAT.md) | DJIA、HSI、CSI100、CRYPTO | 未说明 |
+| [EFS](notes/cards/2025_EFS.md) | FF25、FF32、FF49、FF100（Fama-French 组合）；US50、HSI45、CSI300 | 月度（FF）；日频（US50、HSI45、CSI300） |
+| [HRFT/IRFT](notes/cards/2024_HRFT.md) | HS300、S&P500 | 1 分钟 |
+| [AlphaEvolve](notes/cards/2021_AlphaEvolve.md) | NASDAQ（筛选后 1026 只） | 日频 |
+| [Hubble](notes/cards/2026_Hubble.md) | S&P 500（501 只） | 日频 |
+| [FactorBench](notes/cards/2026_FactorBench.md) | S&P100、恒生指数、CSI300、FTSE100、Nikkei225 | 日频 |
+| [Alpha-R1](notes/cards/2025_Alpha-R1.md) | S&P500、CSI300（另有 Russell2000、CSI1000 泛化检验） | 日频 |
+| [LLM Strategy Finding](notes/cards/2024_LLMStrategyFinding.md) | SSE50、CSI300、S&P500 | 日频 |
+| [AgonAlpha](notes/cards/2026_AgonAlpha.md) | U.S. TOP3000（WorldQuant BRAIN，delay one） | 日频 |
+| [Alpha101](notes/cards/2016_Alpha101.md) | WorldQuant 自有数据，股票池未公开（论文未披露具体市场与股票范围） | 日频 |
+| [Trajectory Balance](notes/cards/2022_TrajectoryBalance.md) | 未说明 | 未说明 |
+| [Alpha-GPT 2.0](notes/cards/2024_Alpha-GPT2.md) | 未说明 | 未说明 |
+| [Tree-GRPO](notes/cards/2025_Tree-GRPO.md) | 不适用（11 个单跳/多跳问答与网页智能体数据集） | 不适用 |
+| [DeepMind AlphaEvolve](notes/cards/2025_DeepMind-AlphaEvolve.md) | 不适用（数学构造问题、矩阵乘法算法、Google 计算栈工程任务） | 不适用 |
+| [QuantAgent](notes/cards/2024_QuantAgent.md) | 中国 A 股 500 只股票 | 日频 |
+| [Warm Start GP](notes/cards/2024_WarmStartGP.md) | 中国 A 股全市场 | 日频 |
+| [Alpha-GPT](notes/cards/2023_Alpha-GPT.md) | 中国与美国股票的日内量价数据（未给出具体股票池） | 日内 |
+| [QuantEvolver](notes/cards/2026_QuantEvolver.md) | 单资产 5 分钟方向预测（Benchmark A）、数字资产小时频截面（Benchmark B）、CSI300 ETF 成分股（Benchmark Γ） | 5 分钟、小时频、日频 |
+| [GiGPO](notes/cards/2025_GiGPO.md) | 非金融：ALFWorld、WebShop、搜索增强问答（NQ、TriviaQA、PopQA、HotpotQA 等） | 未说明 |
+| [DSR](notes/cards/2019_DSR.md) | 非金融：Nguyen 符号回归基准（12 个表达式） | 未说明 |
+| [GFlowNet](notes/cards/2021_GFlowNet.md) | 非金融：超网格合成任务、分子生成 | 未说明 |
+
+### 4.2 样本外区间、标签与交易成本
+
+| 工作 | 样本外区间 | 标签与持有期 | 交易成本 |
+| --- | --- | --- | --- |
+| [Auditing LLM Alpha-Factor Mining](notes/cards/2026_AuditingLLMAlpha.md) | 2024 至 2025 | 5 日收益（复权收盘价 5 日变化） | 未说明 |
+| [AlphaEval](notes/cards/2025_AlphaEval.md) | A 股 2021-01-01 至 2024-12-31；S&P 500 2017-01-01 至 2020-12-31 | ΔT 日远期收益（未指定时 ΔT=1，即次日收益） | 未说明 |
+| [GoAnt](notes/cards/2026_GoAnt.md) | 开发窗口与更晚的锁定窗口，仅给数据区间 2023 至 2026，起止日期未披露 | 未来收益作为 RankIC 的标签（收益期限未披露）；另有执行感知净收益 | 有分类别的成本模型但未披露费率公式，仅给准入门限平均有效价差 ≤25 bps |
+| [Look-Ahead-Bench](notes/cards/2026_Look-Ahead-Bench.md) | 第一期 2021-04-01 至 2021-09-30；第二期 2024-07-01 至 2024-12-31 | 五只股票的目标权重（组合收益），持有 1 个月 | 未说明 |
+| [Agora/SJS](notes/cards/2026_Agora-SJS.md) | 2020-01 至 2025-12（测试段）；2026-01 至 2026-05（密封 holdout） | 5 日开盘到开盘收益 | 单边 9 bps（双边 0.04% 佣金 + 0.05% 印花税） |
+| [Synergistic RL](notes/cards/2024_SynergisticRL.md) | 2020-01-01 至 2021-12-31 | 20 日收益 | 未说明 |
+| [Alpha-Jungle](notes/cards/2025_Alpha-Jungle.md) | 2021-01-01 至 2024-11-30 | 10 日与 30 日收益 | 每笔 0.15% |
+| [AlphaRLM](notes/cards/2026_AlphaRLM.md) | 2021-01-01 至 2024-12-30 | 次日收益 | 开仓 0.05%、平仓 0.15%，最低 5 元 |
+| [AlphaGen](notes/cards/2023_AlphaGen.md) | 2020-01-01 至 2021-12-31 | 20 日收益（Ref(close,-20)/close-1，按收盘价买卖） | 未说明 |
+| [RiskMiner](notes/cards/2024_RiskMiner.md) | 2021-01-01 至 2022-12-31 | 5 日与 10 日收益 | 未说明 |
+| [Alpha2](notes/cards/2024_Alpha2.md) | 2021-01-01 至 2023-12-31 | 20 日收益 | 未说明 |
+| [AlphaForge](notes/cards/2024_AlphaForge.md) | 2018 至 2022，逐年测试并年度重训 | Ref(VWAP,-21)/Ref(VWAP,-1)-1（约 20 日 VWAP 收益） | 每日最多换 5 只（论文未给费率） |
+| [FactorEngine](notes/cards/2026_FactorEngine.md) | 2017-01-01 至 2024-12-31 | 1、3、5、10 日远期收益（多滞后评价） | 佣金双边 1.5×10⁻⁴、卖出印花税 5×10⁻⁴、滑点 8×10⁻⁴ |
+| [AlphaPilot](notes/cards/2026_AlphaPilot.md) | 2025-07-11 至 2026-03-02（逐日推理） | 次日收益（IC/RankIC 用次日收益；训练奖励用 21 日与 63 日未来窗口） | 10 bps |
+| [AlphaPROBE](notes/cards/2026_AlphaPROBE.md) | 2022-07-01 至 2025-06-30 | 20 日远期收益 | 往返 0.1% |
+| [AlphaG-OPD](notes/cards/2026_AlphaG-OPD.md) | 中国 2022 至 2024；S&P 500 2018 至 2020 | 20 个交易日远期收益 Ref(close,-20)/close-1 | 未说明 |
+| [AlphaSAGE](notes/cards/2025_AlphaSAGE.md) | 中国市场 2022-01-01 至 2024-12-31；美国市场 2018-01-01 至 2020-12-31 | 未说明 | 未说明 |
+| [X-Alpha](notes/cards/2026_X-Alpha.md) | 2022-01-01 至 2025-12-31 | 10 日与 30 日开盘到开盘收益 | 买入 0.026%、卖出 0.076%（含 0.05% 印花税）、每单最低 5 元 |
+| [QFR](notes/cards/2024_QFR.md) | 2021-01-01 至 2024-01-01 | 5 日收益 | 未说明 |
+| [TLRS](notes/cards/2025_TLRS.md) | 2021-01-01 至 2024-01-01 | 未来 5 日收益 | 未说明 |
+| [AlphaDiverse](notes/cards/2026_AlphaDiverse.md) | 2026-01 至 2026-08（外层，只评估一次；内层 2022-05 至 2025-12） | t+1 开盘至 t+2 开盘的超额收益 | 回测收益不扣交易成本（毛收益） |
+| [AutoScientist-Quant](notes/cards/2026_AutoScientist-Quant.md) | 2023-06 至 2026-05 | 未说明 | 未说明 |
+| [AlphaRJM](notes/cards/2026_AlphaRJM.md) | 2022-01-01 至 2024-12-31 | 20 日收益（h=20；另有 h=42 长周期） | 未说明 |
+| [RD-Agent(Q)](notes/cards/2025_RD-Agent-Quant.md) | CSI300 2017-01-01 至 2020-08-01；CSI500 与 NASDAQ100 2024-01-01 至 2025-06-30 | 次日收益 | 买入 0.05%、卖出 0.15%、每笔最低 5 元 |
+| [MAPLE](notes/cards/2026_MAPLE.md) | 2021 至 2024 | 5 日收益 | CSI300、CSI500 买入约 0.006%、卖出约 0.056%；NI225 双边 0.002%；SP500 约 0（附录 C.1 情景） |
+| [AlphaPADI](notes/cards/2026_AlphaPADI.md) | 2023-01-01 至 2025-12-31 | 20 日收益 | 买入 0.05%（c_buy=0.0005）、卖出 0.15%（c_sell=0.0015） |
+| [TreEvo](notes/cards/2025_TreEvo.md) | 2021-01-01 至 2024-01-01 | 5 日收益 | 未说明 |
+| [AlphaQCM](notes/cards/2025_AlphaQCM.md) | 2021-01-01 至 2022-12-31 | 20 日未来收益 | 未说明 |
+| [AlphaPareto](notes/cards/2026_AlphaPareto.md) | 2024-07-01 至 2025-06-30 | 20 日收益 | 单边 15 bp、最低 5 元（全市场月度调仓回测） |
+| [AlphaCFG](notes/cards/2026_AlphaCFG.md) | 2021-01-01 至 2024-12-31（2020 年数据按设计剔除） | 20 日远期收益（Ref(close,-20)/close-1） | 未说明 |
+| [Det-MASO](notes/cards/2026_Det-MASO.md) | 2024-03-01 至 2026-03-01 | 20 个交易日远期收益 | 未说明 |
+| [CogAlpha](notes/cards/2025_CogAlpha.md) | CSI300、CSI500 2021-01-01 至 2024-12-01；S&P500 2016-01-01 至 2020-12-01；HSI、HSCI 2021-01-01 至 2025-12-01 | 10 日收益（另用 30 日收益） | 开仓 0.05%、平仓 0.15%，最低 5 元 |
+| [AlphaSchema](notes/cards/2026_AlphaSchema.md) | 2023-01-01 至 2025-12-31 | 5 日前向 close-to-close 收益 | 买入 0.05%、卖出 0.15%，单笔最低 5，次日开盘成交，开启涨跌停过滤 |
+| [QuantaAlpha](notes/cards/2026_QuantaAlpha.md) | 2022-01-01 至 2025-12-26 | 次日收益 y_t = P_{t+2}/P_{t+1} - 1 | 买入 0.05%、卖出 0.15% |
+| [AutoAlpha](notes/cards/2020_AutoAlpha.md) | 2017-09-01 至 2019-07-31 | 1 日与 5 日收益 | 0.3%（未区分买卖） |
+| [FactorMiner](notes/cards/2026_FactorMiner.md) | 2025 年（训练 2024-Q1 至 2024-Q4） | 同频非重叠的下一步收益比（10 分钟） | 未说明 |
+| [AlphaAgent](notes/cards/2025_AlphaAgent.md) | 2021-01 至 2024-12 | 次日收益 | CSI500 买入万 5、卖出万 15；S&P 500 仅卖出万 5 |
+| [EvoQuantLab](notes/cards/2026_EvoQuantLab.md) | CSI500 2026-05-06 至 2026-08-17；S&P500 2026-05-01 至 2026-08-14；Crypto 2026-04-01 至 2026-06-09 | 次日截面收益（Crypto 为下一小时截面收益） | 权益回测为扣费前毛收益；Crypto 单边 5 bps |
+| [LineageEvo](notes/cards/2026_LineageEvo.md) | 2022-05-01 至 2026-04-30 | Ref($close,-2)/Ref($close,-1)-1（次一交易日收益） | 买入 0.15%、卖出 0.25%，单笔最低 5（Qlib 默认） |
+| [QBX](notes/cards/2026_QBX.md) | 2022-07 起（扩展数据至 2026-05） | 20 日远期收益 | 未说明 |
+| [AlphaLedger](notes/cards/2026_AlphaLedger.md) | 2025-01-02 至 2026-07-31 | 20 日远期收益 | 买入 5 bps、卖出 15 bps |
+| [AlphaGAT](notes/cards/2025_AlphaGAT.md) | 股票市场 2022-01 至 2023-06；CRYPTO 2023-09 至 2024-04 | 资产价格变动真值 y_t（论文未给收益公式与预测期限） | 交易费率 0.25% |
+| [EFS](notes/cards/2025_EFS.md) | FF 1971-07 至 2023-05；US50 2019-01 至 2025-12；HSI45 2022-01 至 2025-03；CSI300 2022-01 至 2025-05 | 下一期收益（FF 为下月、日频市场池为次日），按 RankIC 评价 | 10 bp 单次交易（附录另做 0/5/10/20 bp 敏感性） |
+| [HRFT/IRFT](notes/cards/2024_HRFT.md) | S&P500 2023-10-31 至 2023-12-29；HS300 2023-08-31 至 2023-10-31 | 一日远期已实现波动率 RV | 未说明 |
+| [AlphaEvolve](notes/cards/2021_AlphaEvolve.md) | 2013 至 2017 年按 988/116/116 天切分，测试为最后 116 个交易日（未给具体日期） | 次日收益（(今日收盘价−昨日收盘价)/昨日收盘价） | 未说明 |
+| [Hubble](notes/cards/2026_Hubble.md) | 2025-06-01 至 2026-03-13（发现期 2022-01-01 至 2025-05-31） | 前向 h 期收益（论文未给出 h 的具体取值） | 未说明 |
+| [FactorBench](notes/cards/2026_FactorBench.md) | 2024-01 至 2025-10 | 20 日收益 | 每交易 1 美元 10 个基点 |
+| [Alpha-R1](notes/cards/2025_Alpha-R1.md) | 2025-01-01 至 2025-12-31 | 5 日持有期收益 | 双边 10 bps |
+| [LLM Strategy Finding](notes/cards/2024_LLMStrategyFinding.md) | SSE50 2023-01 至 2024-01；CSI300、S&P500 为 2021-01 至 2023-06 的三段滚动测试（2021H1、2022H1、2023H1） | 未来收益（IC 为 alpha 值与未来收益的相关；论文未说明持有期） | 未给费率；以每日最多换 5 只、日换手上限约 38% 控制成本 |
+| [AgonAlpha](notes/cards/2026_AgonAlpha.md) | 2019-01-01 至 2023-12-31（平台评测窗口，全部提交进入样本外跟踪） | 平台综合评价分对应的截面 alpha 收益（论文未给收益公式与持有期） | 未说明 |
+| [Alpha101](notes/cards/2016_Alpha101.md) | 无样本外切分；统计区间 2010-01-04 至 2013-12-31，1006 个交易日 | 无显式预测标签；alpha 直接给出内部持仓，按日频 P&L 统计，平均持有期 0.6–6.4 日 | 不计交易成本与价格冲击（表 1 注明） |
+| [Trajectory Balance](notes/cards/2022_TrajectoryBalance.md) | 未说明 | 未说明 | 未说明 |
+| [Alpha-GPT 2.0](notes/cards/2024_Alpha-GPT2.md) | 未说明 | 未说明 | 未说明 |
+| [Tree-GRPO](notes/cards/2025_Tree-GRPO.md) | 不适用 | 不适用（答案精确匹配 EM；网页智能体用 F1） | 未说明 |
+| [DeepMind AlphaEvolve](notes/cards/2025_DeepMind-AlphaEvolve.md) | 不适用 | 不适用（目标为算法正确性与指标改进，如矩阵乘法的秩、内核加速比） | 未说明 |
+| [QuantAgent](notes/cards/2024_QuantAgent.md) | 未说明 | 未来收益（论文未说明持有期） | 未说明 |
+| [Warm Start GP](notes/cards/2024_WarmStartGP.md) | 2022-01 至 2024-10（因子层）；组合层 2023-01 至 2024-10 | 5 日 VWAP 累计收益 | 0.6‰ |
+| [Alpha-GPT](notes/cards/2023_Alpha-GPT.md) | 未说明 | 未来收益（论文未说明持有期） | 未说明 |
+| [QuantEvolver](notes/cards/2026_QuantEvolver.md) | 未说明 | 未来 5 分钟涨跌方向（A）；未来一小时的截面收益排名（B）；未来收益（Γ） | 未说明 |
+| [GiGPO](notes/cards/2025_GiGPO.md) | 未说明 | 任务完成与否（ALFWorld、WebShop 成功率）与问答正确率 | 未说明 |
+| [DSR](notes/cards/2019_DSR.md) | 未说明 | 拟合输入 X 到标量 y 的映射（符号回归，无金融标签） | 未说明 |
+| [GFlowNet](notes/cards/2021_GFlowNet.md) | 未说明 | 超网格任务为给定奖励函数的成比例采样；分子任务为预训练代理模型预测的结合能 | 未说明 |
+
+## 5. 按路线
 
 同一篇工作可以属于多条路线。
 

@@ -323,7 +323,8 @@ def render_index(papers, taxonomy, mechs):
                 mech = mechs.get(p["id"], {}).get(v["code"], (None, ""))[1]
                 lines.append(f"- {name}" + (f"：{mech}" if mech else ""))
             lines.append("")
-    lines += ["## 4. 按路线", "", "同一篇工作可以属于多条路线。", ""]
+    lines += ["## 4. 实验口径", "", "各篇速读卡“证据”一节的摘要，逐项核对自论文原文；口径差异的比较见[评估口径](topics/evaluation_protocol.md)。", "", render_setup(papers, taxonomy), ""]
+    lines += ["## 5. 按路线", "", "同一篇工作可以属于多条路线。", ""]
     for key, route in taxonomy["routes"].items():
         members = sorted((p for p in papers if key in p["routes"]), key=lambda p: (str(p["first_public"]), p["short"]))
         lines += [f"### {route['name']}（`{key}`，{len(members)} 篇）", "", route["scope"], ""]
@@ -336,6 +337,29 @@ def render_index(papers, taxonomy, mechs):
         else:
             lines += ["_暂无收录，待补检。_", ""]
     return "\n".join(lines).rstrip() + "\n"
+
+
+def render_setup(papers, taxonomy):
+    """Experiment setups as a table; works without a setup block are listed half-way."""
+    rows = sorted(
+        (p for p in papers if p.get("card")),
+        key=lambda p: (str(p.get("setup", {}).get("markets") or "~"), str(p["first_public"]), p["short"]),
+    )
+    cell_ = lambda p, k: cell((p.get("setup") or {}).get(k) or "未说明")
+    lines = [
+        "“未说明”表示论文没有给出该项。`markets` 为“不适用”的是方法类论文，实验对象不是股票因子挖掘。",
+        "",
+        "### 4.1 市场、股票池与频率",
+        "",
+        "| 工作 | 市场 / 股票池 | 频率 |",
+        "| --- | --- | --- |",
+    ]
+    lines += [f"| [{p['short']}]({p['card']}) | {cell_(p, 'markets')} | {cell_(p, 'freq')} |" for p in rows]
+    lines += ["", "### 4.2 样本外区间、标签与交易成本", "",
+              "| 工作 | 样本外区间 | 标签与持有期 | 交易成本 |",
+              "| --- | --- | --- | --- |"]
+    lines += [f"| [{p['short']}]({p['card']}) | {cell_(p, 'test')} | {cell_(p, 'label')} | {cell_(p, 'cost')} |" for p in rows]
+    return "\n".join(lines)
 
 
 def render_problem_table(papers, taxonomy):
