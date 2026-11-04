@@ -2,6 +2,15 @@
 
 记录仓库结构、收录口径、模板和分类体系的变化。最新记录在前。
 
+## 2026-11-03 精读、标签定义与覆盖补检
+
+- 新增 3 篇精读：FactorBench（组合视角基准的评估契约）、AlphaPADI（池级扩散生成）、QBX（编译期准入、身份去重与试验账本）。精读均把“论文明确 / 公式推出 / 未披露”分开记录；QBX 与 AlphaPADI 不公开代码或注册表，相关结论标注为无法外部复核。
+- 读原文后修正速读卡：
+  - AlphaPADI：`R_inner` 惩罚的是最坏邻居的平方 hinge，不是平均邻居相关；共享评价预算只约束六个非 LLM 方法，AlphaAgent 未作说明；所有基线都用同一静态组合器评价，表 1 数字不能与各基线原文表格直接比较。
+  - QBX：补注其未公开代码与注册表、却把可复现性列为主要针对问题之一的自我指涉风险。
+- 标签治理：50 个标签全部补一行定义；合并 4 个重叠标签（`generator-predictor` → `surrogate-model`、`automl` → `evolutionary`、`self-play` → `multi-agent`、`skills` → `memory`），现为 47 个，仅 `alternative-data` 暂无使用。
+- 覆盖补检：为 `neural`、`data-space` 两条较薄路线与 P5 补检候选，已登记 AlphaMemo、AgenticFactorInvesting、Publication Bias、Sequential Cauchy（上一轮）；CosmosAlpha、PRISM-VQ、MarketSenseAI 已下载待判断。
+
 ## 2026-11-03 研究全景补全
 
 - `topics/landscape.md` 的分组导读补齐本轮新增的全部工作：2.1 加 Warm Start GP，2.2 加池级生成与训练信号的近期做法，2.3 加 AlphaLedger、GoAnt，2.5 加 Det-MASO、GoAnt，2.6 链接评估口径专题，2.7 加本轮收录的 LLM 训练化与语义空间工作，2.8 加两篇多重检验相邻方法。
