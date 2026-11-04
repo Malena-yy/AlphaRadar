@@ -2394,3 +2394,112 @@ papers:
   deep: null
   added: '2026-11-03'
   checked: '2026-11-03'
+- id: alphaseek-2026
+  short: AlphaSeek
+  title: 'AlphaSeek: Trajectory-Level Self-Iterative Factor Mining Framework for Multi-Source Financial Data'
+  summary: LLM 以研究轨迹为单位演化公式因子：方向自动生成、AST 去冗余，并在组合层自迭代。
+  first_public: 2026-08
+  versions: arXiv v1 2026-08
+  venue: null
+  arxiv: '2608.13913'
+  url: https://arxiv.org/abs/2608.13913
+  code: null
+  code_note: 论文未给出代码
+  affiliation: 中南财经政法大学、清华大学、澳门大学
+  problems:
+  - search-space
+  - redundancy
+  - objective-gap
+  also:
+  - expressiveness
+  - overfitting
+  - decay
+  setup:
+    markets: CSI300（零样本迁移 CSI500）
+    freq: 日频
+    test: 2022-01-01 至 2025-12-26
+    label: 次一交易日收益
+    cost: null
+  routes:
+  - llm-agent
+  - formulaic
+  tags:
+  - llm
+  - multi-agent
+  - evolutionary
+  - factor-lineage
+  - portfolio
+  status: card
+  card: notes/cards/2026_AlphaSeek.md
+  deep: null
+  added: '2026-11-03'
+  checked: '2026-11-03'
+- id: alphalogics-2026
+  short: AlphaLogics
+  title: 'AlphaLogics: A Market Logic-Driven Multi-Agent System for Scalable and Interpretable Alpha Factor Generation'
+  summary: 多智能体把市场逻辑做成可编译的先验，内外双循环交替优化逻辑与 DSL 因子。
+  first_public: 2026-03
+  versions: arXiv v1 2026-03
+  venue: null
+  arxiv: '2603.20247'
+  url: https://arxiv.org/abs/2603.20247
+  code: null
+  code_note: 论文未给出代码
+  affiliation: 深圳大学电子与信息工程学院
+  problems:
+  - search-space
+  - expressiveness
+  also:
+  - eval-cost
+  - leakage
+  - decay
+  - reproducibility
+  setup:
+    markets: CSI500、S&P500
+    freq: 日频
+    test: 2021-01 至 2024-12
+    label: 次一交易日收益
+    cost: CSI500 买 0.0005、卖 0.0015；S&P500 仅卖 0.0005
+  routes:
+  - llm-agent
+  tags:
+  - llm
+  - multi-agent
+  - dsl
+  - formula-library
+  status: card
+  card: notes/cards/2026_AlphaLogics.md
+  deep: null
+  added: '2026-11-03'
+  checked: '2026-11-03'
+- id: text-to-alpha-2025
+  short: TextToAlpha
+  title: 'From Text to Alpha: Can LLMs Track Evolving Signals in Corporate Disclosures?'
+  summary: LLM 抽取电话会指标、嵌入比对跨期变化，构成可解释的文本因子打分函数。
+  first_public: 2025-10
+  versions: arXiv v1 2025-10；v5 2026-03
+  venue: null
+  arxiv: '2510.03195'
+  url: https://arxiv.org/abs/2510.03195
+  code: null
+  code_note: 正文称代码见 GitHub，超链接实际指向匿名仓库，匿名期后可能失效
+  affiliation: LinqAlpha、MIT、得克萨斯大学奥斯汀分校、佛罗里达大学等
+  problems:
+  - expressiveness
+  also: []
+  setup:
+    markets: S&P100
+    freq: 季度披露 × 月度收益
+    test: 2010-01 至 2024-12（全样本，无样本外切分）
+    label: 次月股票收益
+    cost: null
+  routes:
+  - data-space
+  tags:
+  - alternative-data
+  - llm
+  status: card
+  card: notes/cards/2025_TextToAlpha.md
+  deep: null
+  added: '2026-11-03'
+  checked: '2026-11-03'

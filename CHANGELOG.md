@@ -2,6 +2,13 @@
 
 记录仓库结构、收录口径、模板和分类体系的变化。最新记录在前。
 
+## 2026-11-03 `data-space` 补检
+
+- 新增 3 篇：AlphaSeek（轨迹级自迭代，`llm-agent` `formulaic`）、AlphaLogics（逻辑编译器 + 双循环，`llm-agent`）、TextToAlpha（季度披露文本因子，`data-space`）。
+- 路线判断：AlphaSeek 与 AlphaLogics 的“多源”只出现在选题与先验层，因子输入仍为量价字段，未归入 `data-space`；只有 TextToAlpha 扩展了因子输入的数据类型。这条判据已写进简报，避免以后按“摘要里的数据多样性”误归类。
+- TextToAlpha 属边界收录：机制成立（给出可复用的文本打分函数），但论文称的 Fama-MacBeth 显著性与其表 4 的 t 值不符，且全样本既用于估计又用于评价；按“看机制不看证据强度”的口径收录，证据缺口写在卡片局限。
+- 现状：72 篇（速读 66、精读 6）；`data-space` 3 篇。
+
 ## 2026-11-03 精读完成与路线补检
 
 - 3 篇精读完成并接入：FactorBench、AlphaPADI、QBX；读原文后修正了 AlphaPADI 速读卡的两处机制描述与 QBX 的自我指涉说明。
