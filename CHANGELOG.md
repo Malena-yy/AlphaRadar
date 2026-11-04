@@ -2,6 +2,14 @@
 
 记录仓库结构、收录口径、模板和分类体系的变化。最新记录在前。
 
+## 2026-11-03 待筛工作逐篇判断
+
+- 15 篇待筛全部读了原文：13 篇收录并写速读卡（AlphaLedger、EvoQuantLab、LineageEvo、AutoScientist-Quant、Warm Start GP、X-Alpha、AlphaRLM、AgonAlpha、TreEvo、GoAnt、Det-MASO、AlphaG-OPD、AlphaRJM），2 篇按收录口径第 2 条不收录并从登记表移除（Sentiment-Aware LLM Alpha、Factor-Newsflow Fusion，理由记入简报）。
+- 路线修正：GoAnt 的候选由共享符号算子文法生成、LLM 只做预算调度，路线由 `llm-agent` `data-space` 改为 `data-space` `pool-combination`，去掉 `multi-agent` 标签。
+- AgonAlpha 收录，但性能结论基于商业平台私有评测、无法独立复核，已写入 `code_note` 与卡片局限。
+- 登记表现在 62 篇，全部有速读卡或精读，待筛清零；`evaluation` 路线增至 7 篇。
+- 构建脚本：收录概况新增“未进入研究全景”提示，列出未被 `topics/landscape.md` 提及的卡片；据此补充了评估与基准、LLM 训练化与语义空间、相邻方法三组导读。
+
 ## 2026-11-03 问题标注分为“主要针对”和“顺带涉及”
 
 - 背景：49 张卡里有 17 篇标了 4 个以上问题，P7 覆盖 30/64 篇，矩阵越来越分不出重点工作。此前每条机制在卡片和 `topics/problems.md` 各写一遍，维护量随论文数线性增长。
