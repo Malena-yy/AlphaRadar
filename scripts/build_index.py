@@ -362,6 +362,12 @@ def render_status(papers, taxonomy, debt):
         gaps.append(f"- 速读卡待补：局限 {debt['局限']} 篇，证据 {debt['证据']} 篇。")
     if gaps:
         lines += ["", "覆盖缺口：", ""] + gaps
+    landscape = (ROOT / "topics" / "landscape.md").read_text()
+    uncovered = [p["short"] for p in papers if has_note(p) and p["short"] not in landscape]
+    if uncovered:
+        rel = uncovered if len(uncovered) <= 12 else uncovered[:12]
+        more = f" 等 {len(uncovered)} 篇" if len(uncovered) > 12 else ""
+        lines += ["", f"未进入研究全景：{'、'.join(rel)}{more}，可考虑补入 `topics/landscape.md` 的分组导读。"]
     pending = Counter(p["status"] for p in papers if not has_note(p))
     if pending:
         what = "，".join(f"{STATUS_LABEL[s]} {pending[s]}" for s in ("triaged", "inbox") if pending[s])

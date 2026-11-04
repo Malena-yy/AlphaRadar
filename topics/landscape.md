@@ -80,6 +80,8 @@ RL 公式因子挖掘路线的核心问题不是“能否生成一个高 IC 公�
 
 代表工作：[AlphaGen](../notes/cards/2023_AlphaGen.md)、[Synergistic RL](../notes/cards/2024_SynergisticRL.md)、[RiskMiner](../notes/cards/2024_RiskMiner.md)、[Alpha2](../notes/cards/2024_Alpha2.md)、[QFR](../notes/cards/2024_QFR.md)、[AlphaQCM](../notes/cards/2025_AlphaQCM.md)、[TLRS](../notes/cards/2025_TLRS.md)、[AlphaSAGE](../notes/cards/2025_AlphaSAGE.md)、[AlphaCFG](../notes/cards/2026_AlphaCFG.md)。
 
+近期把“因子池视角”前移到生成端的做法：以整个池为生成单元（[AlphaPADI](../notes/cards/2026_AlphaPADI.md)）、把池编码进策略状态（[AlphaPareto](../notes/cards/2026_AlphaPareto.md)）、用扩散模型替代逐 token 生成（[AlphaPADI](../notes/cards/2026_AlphaPADI.md)）。
+
 ### 2.3 因子池、动态组合与筛选
 
 这一组不一定只关注“生成公式”本身，而是解决候选因子如何去重、动态加权、按市场状态启停，以及如何把因子挖掘结果接入下游投资目标。
@@ -96,4 +98,22 @@ RL 公式因子挖掘路线的核心问题不是“能否生成一个高 IC 公�
 
 这一组与传统日频 Alpha 公式挖掘不完全同构，但对连续参数、符号-数值混合生成、高频风险因子和更宽表达空间有参考价值。
 
-代表工作：[HRFT/IRFT](../notes/cards/2024_HRFT.md)。
+代表工作：[HRFT/IRFT](../notes/cards/2024_HRFT.md)、[MAPLE](../notes/cards/2026_MAPLE.md)（单模型多输出的神经 Alpha）。
+
+### 2.6 评估、基准与可复现性
+
+这一组不挖因子，而是定义“怎么评价挖出来的因子”：统一指标、跨方法基准、泄漏检查与证据审计。本仓库此前没有这一组，2026-11 第一期检索后补齐。
+
+代表工作：[AlphaEval](../notes/cards/2025_AlphaEval.md)、[FactorBench](../notes/cards/2026_FactorBench.md)、[QBX](../notes/cards/2026_QBX.md)、[Auditing LLM Alpha-Factor Mining](../notes/cards/2026_AuditingLLMAlpha.md)。专门的泄漏检查另见 [Look-Ahead-Bench](../notes/cards/2026_Look-Ahead-Bench.md)（已归入 `adjacent` 路线，因为评估对象是交易智能体）。
+
+### 2.7 LLM 挖掘的训练化与语义空间
+
+这一组是 2.4 的最新变化：不再靠提示词循环反复试错，而是把经验写进模型参数、在显式的语义或机制空间里搜索，或对研究轨迹做后训练。
+
+代表工作：[AlphaPilot](../notes/cards/2026_AlphaPilot.md)、[AlphaDiverse](../notes/cards/2026_AlphaDiverse.md)、[AlphaSchema](../notes/cards/2026_AlphaSchema.md)、[QuantEvolver](../notes/cards/2026_QuantEvolver.md)。
+
+### 2.8 相邻方法
+
+不是因子挖掘本身，但机制被已收录工作直接借用或可借用，例如 GFlowNet 的按奖励成比例采样、DSR 的风险寻求目标和多轮智能体的步骤级信用分配。逐篇见[可迁移的相邻方法](adjacent/transferable_methods.md)。
+
+代表工作：[GFlowNet](../notes/cards/2021_GFlowNet.md)、[Trajectory Balance](../notes/cards/2022_TrajectoryBalance.md)、[DSR](../notes/cards/2019_DSR.md)、[GiGPO](../notes/cards/2025_GiGPO.md)、[Tree-GRPO](../notes/cards/2025_Tree-GRPO.md)、[DeepMind AlphaEvolve](../notes/cards/2025_DeepMind-AlphaEvolve.md)。
