@@ -112,8 +112,6 @@ AlphaRadar 是一个围绕 **因子挖掘专题** 的研究跟踪仓库：持续
 | 数据与表达空间（`data-space`） | 2 |
 | 可借鉴的相邻方法（`adjacent`） | 9 |
 
-未进入研究全景：AlphaLedger、EvoQuantLab、LineageEvo、Warm Start GP、AutoScientist-Quant、X-Alpha、AlphaRLM、AgonAlpha、TreEvo、GoAnt、Det-MASO、AlphaG-OPD 等 17 篇，可考虑补入 `topics/landscape.md` 的分组导读。
-
 最近收录：
 
 - 2026-11-03 [FactorBench](notes/cards/2026_FactorBench.md)：组合视角的挖掘基准：在共享数据与评估契约下，从因子、因子池到扣费组合三层，横向比较九种方法在五个股票市场产出的约五千个因子。
