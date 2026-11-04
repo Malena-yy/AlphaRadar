@@ -12,6 +12,8 @@
 | [DeepMind AlphaEvolve](../../notes/cards/2025_DeepMind-AlphaEvolve.md) | 科学与算法发现中的代码演化 | P1 LLM 变异，P2 可读程序作为解，P3 评价级联，P7 质量-多样性程序库 | FactorEngine、CogAlpha 属同类 LLM 代码演化 |
 | [GiGPO](../../notes/cards/2025_GiGPO.md) | 多轮 LLM 智能体强化学习 | P4 步骤级相对优势 | 未见借用；QuantEvolver、Alpha-R1 只用回合级 GRPO |
 | [Tree-GRPO](../../notes/cards/2025_Tree-GRPO.md) | 多轮 LLM 智能体强化学习 | P3 共享前缀省预算，P4 由结果奖励构造过程信号 | 未见借用 |
+| [Publication Bias](../../notes/cards/2022_PublicationBias.md) | 资产定价的发表偏差与多重检验 | P5 从一组候选 t 值估出收缩幅度与 FDR | 未见借用；与 QBX 的试验计数互补 |
+| [Sequential Cauchy](../../notes/cards/2023_SequentialCauchy.md) | 多重检验 | P5 强 FWER 控制并指认个体显著项 | 未见借用；与 EvoQuantLab 的置换 p 值互补 |
 
 ## 2. 迁移点
 
@@ -50,3 +52,13 @@ GFlowNet 学习按奖励成比例采样，多样性来自训练目标本身，�
 ## 3. 未收录
 
 - `Efficient Constant Optimization for Symbolic Regression with GPU-Accelerated Tree-Based Genetic Programming`（arXiv 2609.03352）：最小二乘残差目标、数据行独立的评价内核都与截面 IC 和时序、截面算子不匹配；“结构搜索与常数拟合分层”的思路已由 DSR 和 FactorEngine 覆盖。
+
+### 2.5 把搜索规模纳入显著性：Publication Bias 与 Sequential Cauchy
+
+这两篇不是因子挖掘方法，但直接回答“一批挖出来的因子有多少是真的”。Publication Bias 从一组候选的 t 值估出经验贝叶斯收缩幅度与预期错误发现比例，并给出“短窗口衰减是选择偏差的上界、长窗口衰减才是期望收益变化”的归因规则；Sequential Cauchy 只看 p 值、对相关结构不作参数假设，能强控制族错误率并指认具体哪个因子显著。
+
+迁移时要注意：
+
+- 两者都需要知道检验族有多大。挖掘流程中候选总数往往没有记录，这正是 QBX 试验计数要补的前提。
+- 与 EvoQuantLab 的等预算区块置换相比，一个是解析估计、一个是重采样；后者不依赖对零假设的解析形式，但计算量更大。
+- “提高因子入选门槛”不等于做了多重检验校正，“去掉流动性等风格暴露”也不等于消掉了数据窥探——Publication Bias 原文专门澄清了这两点。

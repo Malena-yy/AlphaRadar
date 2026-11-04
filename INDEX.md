@@ -4,7 +4,7 @@
 >
 > 问题分两级：“主要针对”是论文动机所在、主要贡献针对的问题（至多 3 个）；“顺带涉及”是论文中有对应机制、但不是主要贡献的问题。
 
-共收录 62 篇（速读 59，精读 3）。
+共收录 66 篇（速读 63，精读 3）。
 
 ## 1. 总表
 
@@ -34,10 +34,12 @@
 | 2026-07 | **X-Alpha** | 把研报抽象为可执行研究路径存入持久研究记忆，以跨周期记忆路由改写探索方向与搜索空间。 | P1 P7 P9（P2 P5 P6） | `llm-agent` `pool-combination` | [arXiv](https://arxiv.org/abs/2607.08332) · [速读](notes/cards/2026_X-Alpha.md) |
 | 2026-07 | **MAPLE** | 单个神经模型一次训练输出多个低相关 Alpha：统一预测头、极端秩加权列表损失与成对相关正则，各 Alpha 子组合等权聚合。 | P7（P8） | `neural` | [arXiv](https://arxiv.org/abs/2607.24131) · [速读](notes/cards/2026_MAPLE.md) |
 | 2026-07 | **AlphaSchema** | 以五元交易语义计划为搜索对象，代理奖励模型与配额选择器在 LLM 之外分配评价预算，LLM 只把选中的计划实现为因子代码。 | P1 P3（P2 P6 P7） | `llm-agent` | [arXiv](https://arxiv.org/abs/2607.26642) · [代码](https://github.com/JingyangYi/AlphaSchema) · [速读](notes/cards/2026_AlphaSchema.md) |
+| 2026-06 | **AlphaMemo** | 以父子 AST 差异为编辑单元、按父因子质量分桶校正残差信用，并加置信门与否决记忆的 LLM 因子挖掘智能体。 | P4 P5（P1 P7） | `llm-agent` | [arXiv](https://arxiv.org/abs/2606.20625) · [代码](https://github.com/jarrettyu/sspm) · [速读](notes/cards/2026_AlphaMemo.md) |
 | 2026-06 | **Agora/SJS** | 多智能体在密封评估下联合搜索交易信号与评价协议的自演化研究环境。 | P5 P6 | `llm-agent` | [arXiv](https://arxiv.org/abs/2606.29194) · [速读](notes/cards/2026_Agora-SJS.md) |
 | 2026-05 | **QuantEvolver** | 用 RFT（GRPO + DiCo 奖励）把评价反馈写进轻量 LLM 参数，代替提示词循环。 | P3 P4 P7（P1） | `llm-agent` | [arXiv](https://arxiv.org/abs/2605.15412) · [代码](https://github.com/QuantLLM/QuantEvolver) · [速读](notes/cards/2026_QuantEvolver.md) |
 | 2026-03 | **Hubble** | DSL / AST 安全沙箱加正负双通道 RAG 与因子家族感知评分，持久化全部诊断。 | P1 P7 P10（P8 P9） | `llm-agent` | [arXiv](https://arxiv.org/abs/2604.09601) · [速读](notes/cards/2026_Hubble.md) |
 | 2026-03 | **FactorEngine**（ICDM 2026） | 图灵完备程序因子：LLM 演化宏观逻辑，贝叶斯优化微观参数，研报知识启动。 | P1 P2（P3 P6） | `llm-agent` | [arXiv](https://arxiv.org/abs/2603.16365) · [速读](notes/cards/2026_FactorEngine.md) |
+| 2026-03 | **AgenticFactorInvesting** | 智能体闭环提出经济假设、生成公式并按固定闸门准入，再以线性与 LightGBM 聚合构建多空组合。 | P5 P8（P2 P6） | `llm-agent` `pool-combination` | [arXiv](https://arxiv.org/abs/2603.14288) · [速读](notes/cards/2026_AgenticFactorInvesting.md) |
 | 2026-02 | **QuantaAlpha** | 把 LLM 挖掘过程视为可演化轨迹，对高质量轨迹做局部变异与交叉。 | P2 P7 | `llm-agent` | [arXiv](https://arxiv.org/abs/2602.07085) · [代码](https://github.com/QuantaAlpha/QuantaAlpha) · [速读](notes/cards/2026_QuantaAlpha.md) |
 | 2026-02 | **FactorMiner** | 技能模块封装算子与评估协议，经验记忆记录应避开的高相关区域。 | P7（P3 P10） | `llm-agent` | [arXiv](https://arxiv.org/abs/2602.14670) · [速读](notes/cards/2026_FactorMiner.md) |
 | 2026-02 | **AlphaPROBE** | 在因子谱系有向无环图上检索父节点，沿演化路径有偏地生成新因子。 | P1 P7（P8） | `formulaic` `pool-combination` | [arXiv](https://arxiv.org/abs/2602.11917) · [代码](https://github.com/gta0804/AlphaPROBE) · [速读](notes/cards/2026_AlphaPROBE.md) |
@@ -70,6 +72,8 @@
 | 2024-01 | **Synergistic RL**（ICOIN 2024） | 在 AlphaGen 上扩展算子与长窗口，并用优质种子公式引导探索。 | P1（P7） | `formulaic` | [arXiv](https://arxiv.org/abs/2401.02710) · [速读](notes/cards/2024_SynergisticRL.md) |
 | 2023-07 | **Alpha-GPT**（EMNLP 2025（System Demonstrations）） | 人机交互的 LLM 因子挖掘：想法生成、公式实现与结果复盘，配合遗传规划搜索。 | P1（P2） | `llm-agent` | [arXiv](https://arxiv.org/abs/2308.00016) · [速读](notes/cards/2023_Alpha-GPT.md) |
 | 2023-05 | **AlphaGen**（KDD 2023（ADS Track）） | 把 RPN 公式生成建模为 MDP，用因子池组合 IC 的边际贡献作为 PPO 奖励。 | P7 P8（P1 P3） | `formulaic` | [arXiv](https://arxiv.org/abs/2306.12964) · [代码](https://github.com/ICT-FinD-Lab/alphagen) · [速读](notes/cards/2023_AlphaGen.md) |
+| 2023-03 | **Sequential Cauchy** | 把全局 Cauchy 组合检验递归施于升序 p 值的后缀，实现强 FWER 控制并能指认个体显著项的多重检验程序。 | P5（P7 P10） | `adjacent` | [arXiv](https://arxiv.org/abs/2303.13406) · [速读](notes/cards/2023_SequentialCauchy.md) |
+| 2022-09 | **Publication Bias** | 综述资产定价研究的发表偏差：四条元研究事实、经验贝叶斯收缩与 FDR 校正，并澄清样本外衰减等常见误读。 | P5（P9 P10） | `adjacent` | [arXiv](https://arxiv.org/abs/2209.13623) · [代码](https://github.com/chenandrewy/PBR) · [速读](notes/cards/2022_PublicationBias.md) |
 | 2022-01 | **Trajectory Balance**（NeurIPS 2022） | 提出轨迹平衡目标，在完整轨迹上约束 GFlowNet 流量一致，改进长序列的信用分配。 | P4（P7） | `adjacent` | [arXiv](https://arxiv.org/abs/2201.13259) · [代码](https://github.com/GFNOrg/gflownet/tree/trajectory_balance) · [速读](notes/cards/2022_TrajectoryBalance.md) |
 | 2021-06 | **GFlowNet**（NeurIPS 2021） | 学习按奖励成比例采样离散对象的生成策略，用于生成多样的高奖励候选。 | P7（P3 P4） | `adjacent` | [arXiv](https://arxiv.org/abs/2106.04399) · [代码](https://github.com/bengioe/gflownet) · [速读](notes/cards/2021_GFlowNet.md) |
 | 2021-03 | **AlphaEvolve**（SIGMOD 2021（Data Science and Engineering Track）） | AutoML 进化搜索，引入矩阵 / 向量算子与行业关系，并剪枝冗余表达式。 | P2 P7（P3） | `formulaic` | [arXiv](https://arxiv.org/abs/2103.16196) · [速读](notes/cards/2021_AlphaEvolve.md) |
@@ -103,10 +107,12 @@
 | X-Alpha | ● | ○ |   |   | ○ | ○ | ● |   | ● |   |
 | MAPLE |   |   |   |   |   |   | ● | ○ |   |   |
 | AlphaSchema | ● | ○ | ● |   |   | ○ | ○ |   |   |   |
+| AlphaMemo | ○ |   |   | ● | ● |   | ○ |   |   |   |
 | Agora/SJS |   |   |   |   | ● | ● |   |   |   |   |
 | QuantEvolver | ○ |   | ● | ● |   |   | ● |   |   |   |
 | Hubble | ● |   |   |   |   |   | ● | ○ | ○ | ● |
 | FactorEngine | ● | ● | ○ |   |   | ○ |   |   |   |   |
+| AgenticFactorInvesting |   | ○ |   |   | ● | ○ |   | ● |   |   |
 | QuantaAlpha |   | ● |   |   |   |   | ● |   |   |   |
 | FactorMiner |   |   | ○ |   |   |   | ● |   |   | ○ |
 | AlphaPROBE | ● |   |   |   |   |   | ● | ○ |   |   |
@@ -139,20 +145,22 @@
 | Synergistic RL | ● |   |   |   |   |   | ○ |   |   |   |
 | Alpha-GPT | ● | ○ |   |   |   |   |   |   |   |   |
 | AlphaGen | ○ |   | ○ |   |   |   | ● | ● |   |   |
+| Sequential Cauchy |   |   |   |   | ● |   | ○ |   |   | ○ |
+| Publication Bias |   |   |   |   | ● |   |   |   | ○ | ○ |
 | Trajectory Balance |   |   |   | ● |   |   | ○ |   |   |   |
 | GFlowNet |   |   | ○ | ○ |   |   | ● |   |   |   |
 | AlphaEvolve |   | ● | ○ |   |   |   | ● |   |   |   |
 | AutoAlpha | ● |   | ○ |   |   |   | ● |   |   |   |
 | DSR | ○ |   |   | ● |   |   |   |   |   |   |
 | Alpha101 |   |   |   |   |   |   |   |   |   |   |
-| **主要** | 22 | 6 | 10 | 19 | 3 | 5 | 21 | 13 | 8 | 6 |
-| **涉及** | 7 | 12 | 15 | 2 | 12 | 10 | 19 | 10 | 1 | 4 |
+| **主要** | 22 | 6 | 10 | 20 | 7 | 5 | 21 | 14 | 8 | 6 |
+| **涉及** | 8 | 13 | 15 | 2 | 12 | 11 | 21 | 10 | 2 | 6 |
 
 ## 3. 按问题
 
 每个问题下列出标注它的工作及速读卡中写明的对应机制，按首次公开时间排序。机制的归纳与比较见[各问题的应对机制](topics/problems.md)。
 
-### P1 表达空间巨大，有效因子稀少（主要 22，涉及 7）
+### P1 表达空间巨大，有效因子稀少（主要 22，涉及 8）
 
 主要针对：
 
@@ -184,12 +192,13 @@
 - [DSR](notes/cards/2019_DSR.md)：符号回归中把先验约束放在自回归采样时执行，直接屏蔽违规 token，样本无需事后拒绝即全部合法；论文还报告 GP 加入事后约束反而降低表现（第 3.1、4 节，附录 F）→ 对应公式因子生成中的语法、类型与无意义组合约束，以 mask 前置可把评价预算集中在合法表达式上；已收录的 AlphaSAGE 在语法合法动作中逐步采样，属同类做法（见 AlphaSAGE 速读卡）。
 - [AlphaGen](notes/cards/2023_AlphaGen.md)：动作掩码与栈规则。
 - [QuantEvolver](notes/cards/2026_QuantEvolver.md)：用因子 DSL 约束可生成的表达式，消融中去掉 DSL 后表现大幅下降。
+- [AlphaMemo](notes/cards/2026_AlphaMemo.md)：生成被限制在十类 motif 与提示中的可用算子内，无效或语法重复的子表达式不进入记忆统计、也不计为失败（第 4.1、4.5 节）；motif 由实际 AST 差异而非请求的编辑标签决定，使同一编辑行为在不同表面写法间共享信用（第 4.3 节）。
 - [AlphaDiverse](notes/cards/2026_AlphaDiverse.md)：用经济机制目录约束研究方向；为每个计划只检索少量相关特征与算子，减少实现歧义；Realizer 的生成受 JSON 文法约束，无效规格带着校验反馈修复（第 2.1 节、附录 B.2）。
 - [AlphaLedger](notes/cards/2026_AlphaLedger.md)：因子是类型化文法程序，教师与学生的分布都被限制在当前前缀的合法动作集 A(s_j) 上；生成时按意图规定必须使用的数据族与允许的持有期，减少无意义组合（第 3.1、3.3 节、附录 D）。
 - [AlphaPilot](notes/cards/2026_AlphaPilot.md)：评价工具强制固定 DSL 文法，返回非法表达式与执行错误；搜索以 20 条种子因子库和 regime 描述为起点，近期已试因子记忆用于避免重复失败（第 4.1–4.3 节、附录 A.4、表 14）。
 - [EvoQuantLab](notes/cards/2026_EvoQuantLab.md)：候选被限制在终端集与算子集诱导的合法类型化表达式空间内，语法与语义无效、重复的表达式不进入 DAG 也不消耗有效评价预算（第 3.1、3.3 节）。
 
-### P2 表达能力与可解释性的权衡（主要 6，涉及 12）
+### P2 表达能力与可解释性的权衡（主要 6，涉及 13）
 
 主要针对：
 
@@ -208,6 +217,7 @@
 - [DeepMind AlphaEvolve](notes/cards/2025_DeepMind-AlphaEvolve.md)：演化对象从单个函数扩展到整个代码文件与多个组件，并可选择演化解本身、构造函数或定制搜索算法等不同抽象层次（第 2.1 节）；数据中心调度任务选用其代码解而非深度强化学习，理由是可解释、可调试、可预测且易部署（第 3.3.1 节）→ 对应以程序而非受限 DSL 表示因子，在扩大表达能力的同时保留可读、可审计的代码形式；已收录的 FactorEngine 与 CogAlpha 都把因子表示扩展为可执行代码（见两者速读卡）。
 - [AlphaEval](notes/cards/2025_AlphaEval.md)：用 LLM 评分的 Logic Score 度量表达式的金融逻辑与可解释性，并以人工专家排序检验其一致性，使不同范式在可解释性上可比。
 - [TreEvo](notes/cards/2025_TreEvo.md)：因子同时以“可读的思路树”和“可执行代码”两种形式存在，树结构本身限制节点类型与层次语义（金融语义节点—统计算子节点—数据叶节点），使每个因子可自上而下审计；论文把可解释性作为选择符号范式而非神经网络范式的主要理由（第 1 节、第 3.2 节、附录 G.2）。
+- [AgenticFactorInvesting](notes/cards/2026_AgenticFactorInvesting.md)：论文把“黑箱机器学习”列为要解决的两个问题之一，主张以透明符号公式替代神经因子，并给出每条因子的经济含义清单（第 2.2 节、第 6.5.2 节、Exhibit 15）。
 - [AlphaSchema](notes/cards/2026_AlphaSchema.md)：因子以任意 pandas 代码实现，但实现前先用五元语义计划声明交易逻辑，提示词还要求代码开头的注释逐项对应 Event、Context、Quality、Direction、Output（第 2 节、附录 D）。
 - [X-Alpha](notes/cards/2026_X-Alpha.md)：三对齐显式检查“假设—解释—可执行代码”三者一致，并对不一致做定点修复；167 条因子记录的成对人工复核中，同时通过解释—代码一致、代码金融合理、解释金融合理三项的比例由修复前 12.57% 升至 89.82%（第 4.5 节、附录 L）。
 - [AgonAlpha](notes/cards/2026_AgonAlpha.md)：审稿者按五个维度审计冻结报告，其中“符号逻辑”要求表达式每一项的方向与所述市场机制一致（不一致即记符号警告），“常数依据”要求每个不寻常的系数或窗口都有经济、日历或搜索风险上的解释；第 5.3 节记录一次因“声称机制与所执行算子语义不符”而触发置零的干预。
@@ -248,7 +258,7 @@
 - [LineageEvo](notes/cards/2026_LineageEvo.md)：全部方法共用 B=200 个有效评价预算，无效、重复与执行失败的候选不计入预算；论文以“前 5 个绝对验证 IC 的均值随有效评价数的变化”比较搜索效率，而不是只看终点分数（附录 D、第 5.3 节、图 3）。
 - [QBX](notes/cards/2026_QBX.md)：节点级内容地址只重算编辑影响的依赖锥；准入与去重是微秒级 CPU 开销，每次 LLM 调用可以扩展为大量合法候选。
 
-### P4 学习信号稀疏、延迟且不可微（主要 19，涉及 2）
+### P4 学习信号稀疏、延迟且不可微（主要 20，涉及 2）
 
 主要针对：
 
@@ -263,6 +273,7 @@
 - [AlphaSAGE](notes/cards/2025_AlphaSAGE.md)：预测性能、结构对齐与新颖性的多信号奖励加轨迹平衡。
 - [Tree-GRPO](notes/cards/2025_Tree-GRPO.md)：只用结果奖励，在每个分叉点比较兄弟子树回传的奖励，把轨迹级信号转成粒度随子树深度变化的过程信号；树内优势提供隐式步骤级偏好，树间优势提供更稳定的基线（第 3.2–3.3 节、表 4）→ 对应公式生成或多轮因子智能体只有终端 IC 的情形：在共享前缀处分叉，比较不同后续的 IC，得到前缀层面的相对信用；已收录的 QuantEvolver 与 Alpha-R1 只用回合级 GRPO 优势（见两者速读卡），未见借用树结构优势。
 - [QuantEvolver](notes/cards/2026_QuantEvolver.md)：组内相对优势更新。
+- [AlphaMemo](notes/cards/2026_AlphaMemo.md)：论文把问题定义为 search-level credit assignment——子因子的分数包含父因子继承的信号，直接把它当成“这次编辑的奖励”会强化只是保住了好起点的改动（第 1 节）。AlphaMemo 因此不训练策略、不算梯度，而是对每次“可执行父—子转移”记录实际发生的结构编辑与其相对信用，在线累积到 (g,m) 单元，并在下一轮用于 motif 选择（第 4.2、4.5 节、Algorithm 1）；记忆只用搜索期反馈更新，样本外不参与（第 6.1 节）。论文把这一步与 policy fine-tuning、RL、全轨迹回放区分开，理由是不需要另起训练循环、记忆表可读可改（第 5.4 节、附录 E 的 Q6）。
 - [AlphaG-OPD](notes/cards/2026_AlphaG-OPD.md)：用同前缀下多个兄弟动作的配对终端评分构造局部教师，替代只有轨迹级标量的 TB 信用分配；可靠性门控与梯度配比控制辅助信号的强度与寿命（第 3 节、组件 I–III）。
 - [AlphaDiverse](notes/cards/2026_AlphaDiverse.md)：联合 GRPO 按角色分配信用，Planner 在计划组合之间比较，Realizer 在同一计划的不同实现之间比较；奖励尺度和最低增益阈值用历史候选与高斯噪声因子组合的得分增益分位数校准（第 2.3 节、附录 B.2）。
 - [AlphaPareto](notes/cards/2026_AlphaPareto.md)：把冻结 LLM 编码的当前因子池嵌入并入策略状态，让策略能感知池的组成；论文称这样把依赖因子池的非平稳 MDP 改写为增广状态下的平稳 MDP（第 3、4.1 节）。
@@ -277,11 +288,15 @@
 - [GFlowNet](notes/cards/2021_GFlowNet.md)：奖励只在终止状态给出，论文把终端奖励作为流网络的边界条件，用流守恒损失为每个中间状态提供训练目标，奖励本身无需可微，且训练可离策略、离线进行（第 2.2 节、命题 3）→ 对应公式只有完整生成后才有 IC、IC 对 token 不可微，已评价过的历史公式也可作为离策略训练轨迹复用；已收录的 AlphaSAGE 采用 GFlowNet 框架，但训练目标用的是后续的 Trajectory Balance（见 AlphaSAGE 速读卡与精读第 6 节）。
 - [QuantAgent](notes/cards/2024_QuantAgent.md)：外层循环以真实回测反馈驱动知识库更新，用于下一轮生成。
 
-### P5 低信噪比下的过拟合（主要 3，涉及 12）
+### P5 低信噪比下的过拟合（主要 7，涉及 12）
 
 主要针对：
 
+- [Publication Bias](notes/cards/2022_PublicationBias.md)：原领域解决的是“一群已发表的显著结果里，有多少是选择偏差造成的、平均被高估多少”。给出的是两件可直接落到因子挖掘结果上的量：对一组候选因子的 t 统计量，用经验贝叶斯把 t 收缩为校正后的 θ（式 14），得到“平均有多少幅度是运气”；用 FDR=Pr(θ≤0|发现) 给出“这批因子里预期有多大比例其实没有正期望收益”（式 10）。迁移到因子挖掘对应的是：把挖掘流程产出的 N 个因子（含被淘汰的）的统计量当作检验族，估计 σ_θ 后报告收缩后的 IC/t 与 FDR，而不是只报最好因子的原始 t 值；四条风格化事实同时给出了“什么时候可以说挖掘找到了真实结构”的判据清单——可复现、样本外持续、t 值远超门槛、彼此弱相关。论文还提示了最容易被误用的方向：样本外衰减不能直接当作选择偏差的证据，必须先把偏差与期望收益变化分开（第 4.2 节）。
+- [Sequential Cauchy](notes/cards/2023_SequentialCauchy.md)：原领域解决的是“大量相关检验下，显著性检验本身会因重复尝试而膨胀”。方法给出的是检验侧的控制工具：给定一族候选因子的 p 值（每个因子对“真实 IC 或 alpha 为零”的单检验），SCC 给出在 α 水平上强控制 FWER 的拒绝集 R，且不要求因子彼此独立——这一点对因子挖掘直接相关，因为同一算子空间生成的因子必然高度相关，Bonferroni/Holm/BH 在强相关下会过度保守、把真因子也一并丢掉。模拟中这一点被量化：相关矩阵指数衰减 θ=0.95 时 Bonferroni/Holm 的实测 FWER 只有 1.76%，而 SCC 为 5.38%，接近名义 5%；对应地全局功效 SCC 高出约 10 个百分点（表 1、表 2）。迁移到因子挖掘对应的是：把挖掘全过程（含被淘汰与被去重的候选）的统计量收成一个检验族，用 SCC 一次性给出“哪些因子在考虑整个搜索族之后仍然显著”，取代逐个因子看 t 值或对全部候选统一乘 Bonferroni 惩罚。论文的两个应用之一（检验 Fama-French 五因子模型下哪些组合有非零 alpha）与“检验一批候选因子是否真的带来超额收益”在结构上同构。
+- [AgenticFactorInvesting](notes/cards/2026_AgenticFactorInvesting.md)：论文把“大规模搜索即多重检验”作为核心动机，并用三层机制应对——生成阶段的经济理由约束收缩假设空间（作者称其相当于一个降低多重检验负担的贝叶斯先验，第 6.1 节）；显著性门槛由 2.0 提高到 3.0，并引入 Harvey & Liu (2021) 的 Scaled Intercept 式“增量解释力”要求（第 6.2 节）；样本外协议上，所有发现与智能体学习在 2020-12 前冻结，2021–2024 期间因子库与内部状态不再更新，声称是可防止“迭代造成隐式测试集反馈”的盲测（第 3.3 节、第 6.4 节）。第 6.3 节还以 López de Prado 的 False Strategy Theorem 与 Deflated Sharpe Ratio 作为设计依据，但只落实为多目标闸门这一“功能性启发式”，正文未给出 DSR 的计算（据原文脚注 10）。
 - [Agora/SJS](notes/cards/2026_Agora-SJS.md)：最终评估数据对参与搜索的智能体保持密封。
+- [AlphaMemo](notes/cards/2026_AlphaMemo.md)：摘要列出的四项挑战之一即“naively reusing past successes 带来的过拟合风险”。机制上有三层：残差信用把编辑收益相对同质量父因子桶做基准化，避免把父因子的高分重复计功（第 4.2 节、式 6）；置信门按样本数、准入率熵与残差方差折扣稀疏或不稳定的信用，n<2 时直接为 0（式 9）；不对称否决在重复失败后抑制该 (g,m)，正向证据只作软偏好（第 4.4 节、式 11）。消融给出同种子对照：CSI500 上“绝对信用”（直接用子因子 |ICIR| 作信用）的 ICIR 为 0.2468，低于残差信用的 0.2698（表 3）。论文自己限定这类机制是“经验复用的校准控制，不构成过拟合保证”（附录 E 的 Q5）。
 - [AlphaPareto](notes/cards/2026_AlphaPareto.md)：把 RRE（排序的时间稳定性）与 PFS（扰动稳健性）写入奖励，用各目标最低水平约束代替只看样本内 IC，针对“高 IC 但波动大、对扰动脆弱、样本外失效”的因子池（第 3、4.2 节）。
 - [EvoQuantLab](notes/cards/2026_EvoQuantLab.md)：论文的动机即“更强的搜索只会进一步增加有效试验次数”；Gate 1 用与真实搜索等预算的区块置换伪搜索计算 p̂_sel，把搜索规模直接计入显著性判断，并对 train-to-dev 退化、跨折稳定性、标签与指标脆弱性逐项打分（第 1 节、第 3.4 节、Eq. 2、附录 B 表 6）。
 
@@ -300,7 +315,7 @@
 - [FactorBench](notes/cards/2026_FactorBench.md)：用训练期固定因子方向，比较同一批因子在训练、验证、测试期的 IC、RankIC、ICIR，并计算因子内配对的训练–测试退化量，保留样本外符号反转。
 - [QBX](notes/cards/2026_QBX.md)：以根身份去重的试验账本记录实际试验次数，为 deflated Sharpe 等多重检验校正提供分母；统计校正本身留作后续工作。
 
-### P6 前视偏差与信息泄漏（主要 5，涉及 10）
+### P6 前视偏差与信息泄漏（主要 5，涉及 11）
 
 主要针对：
 
@@ -314,6 +329,7 @@
 
 - [CogAlpha](notes/cards/2025_CogAlpha.md)：多智能体质量检查器中包含时间泄漏检查。
 - [Alpha-R1](notes/cards/2025_Alpha-R1.md)：用 point-in-time 成分、各模块数据截止表与前视内容审计控制泄漏。
+- [AgenticFactorInvesting](notes/cards/2026_AgenticFactorInvesting.md)：以 filtration 形式约定 f_{i,t}∈F_t=σ({X_{j,s}}_{j∈N,s≤t})（式 3.4）；截面预处理逐日进行而非用全样本矩，时序算子只用截至该日的历史；晋升阈值只在样本内计算，样本外不参与再排序或策略更新（第 3.3 节）。附录 A.1 用 ReAct 与思维链把“先写理由再写公式”形式化（式 A.1–A.2），并明确其为概念框架而非可估计的计量模型（附录 A.3）。
 - [FactorEngine](notes/cards/2026_FactorEngine.md)：启动资料限定只用测试期之前发布的研报，控制知识泄漏。
 - [AlphaSchema](notes/cards/2026_AlphaSchema.md)：代码实现须通过前视泄漏筛查，提示词规定 t 时刻的信号只能使用 t 及之前的信息；因子筛选、相关性过滤和模型选择只用训练与验证窗口（第 3 节、附录 A、附录 D）。
 - [X-Alpha](notes/cards/2026_X-Alpha.md)：候选执行后筛查未来信息泄漏，可修复的进入修复—复验、持续失败的在实证评价前丢弃（第 3.3 节、图 2 的 Numerical & Leakage Tests）；训练/验证/测试按 2011–2020、2021、2022–2025 划分，测试期只用于报告（第 4.1 节、附录 J）。
@@ -323,7 +339,7 @@
 - [AlphaRLM](notes/cards/2026_AlphaRLM.md)：有效性奖励把计算窗口分别向前延长 1 天、1 周、1 月、1 年后重算因子值，若原窗口的因子值改变即判为使用了未来数据并给 0 分；文献语料限定为 2015–2019 年发表，测试区间在 2019 年文献截止之后（附录 B 的有效性奖励、附录 A 的文献数据）。消融中把金融文献换成同期非金融文献，等于同时去掉这一先验，因此无法分离“语料时点控制”的单独贡献（表 2）。
 - [Auditing LLM Alpha-Factor Mining](notes/cards/2026_AuditingLLMAlpha.md)：核查“OOS 验证集”的生成过程，发现留存目录写出前已按 OOS Sharpe 剔除非正结果，并提出在接触 OOS 之前冻结并哈希候选清单、只用 IS 数据筛选与去重、保留全部 OOS 结果与报错的干净评估协议。
 
-### P7 因子同质化与冗余（主要 21，涉及 19）
+### P7 因子同质化与冗余（主要 21，涉及 21）
 
 主要针对：
 
@@ -352,6 +368,7 @@
 顺带涉及：
 
 - [Trajectory Balance](notes/cards/2022_TrajectoryBalance.md)：在保持按奖励比例采样的同时改进分布拟合与样本多样性，分子任务中 TB 生成的 top-1000 分子相似度始终低于 FM，比特序列任务中发现模式更快（第 5.2、5.3.1 节）→ 对应用多模式采样缓解因子模式坍缩；已收录的 AlphaSAGE 借用 TB 使采样覆盖多个高奖励公式模式（见 AlphaSAGE 速读卡）。
+- [Sequential Cauchy](notes/cards/2023_SequentialCauchy.md)：原领域要处理的是“检验统计量之间相关”造成的控制失效。SCC 的结论是：对依赖结构只要求两两二元正态与相关矩阵特征值有界，极端相关（σ_max 接近 1、块对角等强截面相关）会破坏 Assumption 2.2 的前提，论文将这种情况列为未解决（第 2.3 节脚注 4）。迁移到因子挖掘对应的是：SCC 在中等至强相关下仍然稳健且更省功效，但若候选因子的收益序列几乎是彼此的复制（接近完全相关），SCC 的拒绝集与小样本 Bonferroni 的差距会缩小、功效也会损失；这正好说明去冗余不仅是组合层的需要，也是多重检验校正有效性的前提（推断）。
 - [Synergistic RL](notes/cards/2024_SynergisticRL.md)：扩大算子与窗口后组合中的因子相关性下降。
 - [RiskMiner](notes/cards/2024_RiskMiner.md)：中间奖励中加入与已有因子的 MutIC 重复惩罚。
 - [AlphaForge](notes/cards/2024_AlphaForge.md)：入库同时检查 IC、ICIR 和相关性阈值；生成器损失中的多样性项。
@@ -362,6 +379,7 @@
 - [AlphaEval](notes/cards/2025_AlphaEval.md)：以协方差特征值熵 DE 度量因子集的多样性，信号越共线熵越低。
 - [TreEvo](notes/cards/2025_TreEvo.md)：剪枝算子显式删除结构冗余或语义中性的子树；论文用五个独立运行所发现最优因子之间的 IC 相关性热图做对照，指出 ReEvo 存在显著冗余（一致的高正相关）、EoH 出现两个方向上的极端绝对相关，而 TreEvo 的非对角系数明显更低、更稀疏，说明其探索了更广的功能空间（第 4.2.3 节、图 8）。
 - [AlphaCFG](notes/cards/2026_AlphaCFG.md)：价值目标中加入与因子池的结构相似度惩罚，并处理同构表达式。
+- [AlphaMemo](notes/cards/2026_AlphaMemo.md)：准入失败记忆专门惩罚“反复因质量或相关性被拒”的 (g,m)，与 |ρ|≤0.70 的准入规则配合（式 3、第 4.4 节）；去掉失败惩罚后 CSI500 的 ICIR 由 0.2698 降到 0.2047、Sharpe 由 0.3994 降到 0.2429（表 3）。
 - [AlphaSchema](notes/cards/2026_AlphaSchema.md)：探索名额按 Event-Context 覆盖度的新颖性得分分配，优先选少见组合；导出因子池按 |corr|<0.7 贪心去冗余（附录 A）。
 - [AgonAlpha](notes/cards/2026_AgonAlpha.md)：自相关阈值 0.85 从审稿警告升级为提议者侧的硬性排序前闸门，近重复在排名之前被删除；与已提交祖先的冗余作为建议性记录；五个代表 alpha 的自相关分别为 0.1827、0.4498、0.4173、0.4968、0.6321，均低于 0.70 的上限（表 2、表 3、第 5.2 节）。
 - [AlphaG-OPD](notes/cards/2026_AlphaG-OPD.md)：沿用 AlphaSAGE 的 GFlowNet 奖励成比例分布与多模态采样，OPD 只在已访问状态的合法兄弟集合内重分配概率，不改变全局奖励比例（第 3 节）。
@@ -371,7 +389,7 @@
 - [FactorBench](notes/cards/2026_FactorBench.md)：以截面 Spearman 相关度量方法内冗余、方法间收敛和对 Alpha101 的重复，并用 Pearson 相关做稳健性检验。
 - [QBX](notes/cards/2026_QBX.md)：精确字符串、结构/规范化、审计重写饱和、面板外延等价四级身份阶梯识别别名与重复，并以行为生态位占用惩罚降低入选因子间的相关性。
 
-### P8 挖掘目标与实际使用脱节（主要 13，涉及 10）
+### P8 挖掘目标与实际使用脱节（主要 14，涉及 10）
 
 主要针对：
 
@@ -382,6 +400,7 @@
 - [RD-Agent(Q)](notes/cards/2025_RD-Agent-Quant.md)：因子与模型联合优化。
 - [EFS](notes/cards/2025_EFS.md)：稀疏组合选股。
 - [Alpha-R1](notes/cards/2025_Alpha-R1.md)：用 LLM 推理决定因子启停。
+- [AgenticFactorInvesting](notes/cards/2026_AgenticFactorInvesting.md)：选股目标是“在严格控制换手与交易成本下最大化风险调整收益”（第 1 节）；闸门与记忆对高换手、快速衰减的候选施加惩罚（第 6.3 节），因子库最终以线性和 LightGBM 两种方式聚合为可交易组合，并在 3 bps 单边成本下报告净表现（第 5.2、7.2–7.3 节）。
 - [AutoScientist-Quant](notes/cards/2026_AutoScientist-Quant.md)：论文指出自动化通常止于因子生成，因子库被直接交给一个固定预测器、没有组合层面的选择与模型搜索；本文用同一控制器依次做 alpha 筛选与模型搜索，目标函数是带成本的组合指标而非 IC；主表中所有 agentic 基线 IC 在 0.023–0.034 但扣费超额收益多为负，本文是唯一在四种 alpha 设置下均为正的方法（第 1.2 节、第 2.3–2.4 节、表 1）。
 - [GoAnt](notes/cards/2026_GoAnt.md)：论文把 Execution Trap 作为首要诊断：在保守的全价差成本墙下，RankIC 强的因子净收益为负，而只按预测代理选择的系统在搜索期间从不会撞上这堵墙。对应机制是三层分离——搜索适应度只含 deflated 信号质量，换手进入描述子轴，净收益只做事后验证与样本外闸门，外加一组冻结的准入闸门（|RankIC|≥0.01、|t_dsr|≥2.0、正 IC 期占比≥0.52、正日 IC 占比≥0.60、样本内与后段 IC 差≤0.02、平均有效价差≤25 bps、净累计收益>0、毛净保留率>0、净收益最大回撤>−0.50）。arm 7 把入档适应度换成原始净收益后，质量加权产出从 41.8/47.6 跌到 9.9/6.8，distinct 降到 11/8，是全部消融中最差的一档（表 1）。论文同时指出这一分歧在日频量价面板上只是二阶修正、在订单簿数据上才占主导，因此两类数据都跑（第 3 节的 Execution Trap 与 Formulation）。
 - [AlphaLedger](notes/cards/2026_AlphaLedger.md)：信用函数直接度量“换入后 Top-K 组合收益的变化再扣替代成本”，库筛选也用这一组合口径而非 IC 峰值；消融中把 EC-OPD 换成 SFT/OPD/PPO/GRPO 后，IC 类指标未必同步下降但 ARR 与 Sharpe 明显更低（Eq. 4、第 3.4 节、Table 4）。
@@ -402,7 +421,7 @@
 - [AlphaRLM](notes/cards/2026_AlphaRLM.md)：TMB 不比较 IC，而比较池化后的分组收益跨组极差，以容纳非单调的因子—收益关系；论文据此说明 S&P 500 上 AR 为正而 IC、RankIC 接近零的现象——边际预测相关不能完全解释组合表现（第 1 节、第 4.2 节）。线性端点价差（只比第 1 与第 K 组）的对照在 CSI300 上 IC 更高（0.031 对 0.026）但 MDD 明显更大（−15.60% 对 −6.15%）、S&P 500 AR 更低（0.77% 对 6.94%）（表 2、第 4.3 节）。
 - [Det-MASO](notes/cards/2026_Det-MASO.md)：目标函数含滚动窗口组合 Sharpe 项，把组合层目标纳入训练（式 12）；评估也用 top-decile 多头组合的 AR/SR/MDD。
 
-### P9 非平稳与因子衰减（主要 8，涉及 1）
+### P9 非平稳与因子衰减（主要 8，涉及 2）
 
 主要针对：
 
@@ -417,9 +436,10 @@
 
 顺带涉及：
 
+- [Publication Bias](notes/cards/2022_PublicationBias.md)：原领域要回答“样本外变弱是发表偏差还是市场变了”。论文用收益自相关的时限作识别：由于月度因子收益 3 个月后自相关归零，发表偏差应在样本结束后的数月内显现，因此 3 年处的 25% 衰减是偏差的上界（Fact #2），而 10 年处的 50% 衰减中只有约 12 个百分点可由偏差解释，剩下约 38 个百分点是期望收益的真实变化，且与原文多以“错误定价”解释其发现相一致（第 4.2 节、图 9）。迁移到因子挖掘对应的是：给“因子上线后衰减”做归因时，用短窗口（与标签期同量级）衡量选择偏差、用长窗口衡量拥挤与定价修正，而不是把全部衰减都记在过拟合账上，也不是反过来把拥挤当成挖掘失败。
 - [Hubble](notes/cards/2026_Hubble.md)：负向检索提示应避开的拥挤模板。
 
-### P10 评估口径不统一、难以复现（主要 6，涉及 4）
+### P10 评估口径不统一、难以复现（主要 6，涉及 6）
 
 主要针对：
 
@@ -432,6 +452,8 @@
 
 顺带涉及：
 
+- [Publication Bias](notes/cards/2022_PublicationBias.md)：原领域用统一的复现语料把“原文报告值”与“独立复现值”对齐（207 个因子来自 140 篇论文，手抄原始 t 值与复现 t 值逐点比较，数据与代码公开并在每年更新时修错），并把“复现失败”严格定义为可复现的实现下不显著，从而把口径差异从结论差异里剥离出来（第 2.1 节、第 4.4.2 节）。迁移到因子挖掘对应的是：同一方法在不同论文中作为基线出现时，需要先固定标签、切分、股票池与组合构造，再比较 IC 或收益，否则“复现不出来”很可能只是口径不同；本仓库《评估口径对照》专题处理的正是这件事。
+- [Sequential Cauchy](notes/cards/2023_SequentialCauchy.md)：方法只需要原始 p 值、不需要重采样与参数假设，实现只有排序、tan 变换、后缀累加三步，且不随样本变化重估阈值；论文把这条性质作为相对重采样方案（Christensen et al. 2022 的 AR(1) 模拟临界值）的实际优势提出——后者要为每条序列单独生成临界值、计算量大、且依赖可能被设定错误的依赖结构（第 4.1 节）。迁移到因子挖掘对应的是：多重检验校正若要成为论文的固定披露项，需要一个几乎零成本、不引入额外建模假设的算法，SCC 满足这一条。
 - [FactorMiner](notes/cards/2026_FactorMiner.md)：技能模块中封装标准化评估协议。
 - [AutoScientist-Quant](notes/cards/2026_AutoScientist-Quant.md)：指出前作评估代码的两处前视缺陷并给出修正，使所有方法在同一修正管线、同一切分、同一成本假设下重跑；并明确排除 R&D-Agent-Quant 作为基线，理由是它的循环在它所报告的那一段上选因子（第 1.2–1.3 节、第 3.3 节）。
 - [GoAnt](notes/cards/2026_GoAnt.md)：定义了一个与地图无关的 effective-yield 协议——所有臂只从各自的评价记录中读取结果，候选须越过同一个预注册下限 q*=随机基因组合分布的 95 分位（在任何臂运行前校准并冻结），多样性固定在一个方法无关的四因子家族 × 五换手分箱网格上统计（ρ=0.7，附录另给 0.3/0.5/0.9 全扫），使有存档与无存档的系统用同一把尺子；静态对照用“运行结束时的不变量断言”定义（中心、细胞数、边界、合并/分裂/重拟合、缩放器重估全部为 0，违反即中止），并公开断言表；批注也承认自己一度把“关闭重绘 tick”误当成让地图更静态，结果那个臂看起来最好，这一自我报告增强了协议的可信度（附录 A、B、表 S1）。
@@ -486,6 +508,7 @@
 | [AlphaAgent](notes/cards/2025_AlphaAgent.md) | CSI500、S&P 500 | 日频 |
 | [EvoQuantLab](notes/cards/2026_EvoQuantLab.md) | CSI500、S&P 500、Crypto（数字资产） | 日频（权益）；小时频（Crypto） |
 | [LineageEvo](notes/cards/2026_LineageEvo.md) | CSI500、S&P500 | 日频 |
+| [AlphaMemo](notes/cards/2026_AlphaMemo.md) | CSI500、S&P500（Qlib） | 日频 |
 | [QBX](notes/cards/2026_QBX.md) | CSI500（主）、CSI300；机制实验用 AAPL | 日频（面板）；1 小时（AAPL 机制实验） |
 | [AlphaLedger](notes/cards/2026_AlphaLedger.md) | CSI500（统一账户比较）；EviPool 动态池（A 股全市场）；另列 CSI300、CSI1000 指数池 | 日频 |
 | [AlphaGAT](notes/cards/2025_AlphaGAT.md) | DJIA、HSI、CSI100、CRYPTO | 未说明 |
@@ -506,6 +529,9 @@
 | [Warm Start GP](notes/cards/2024_WarmStartGP.md) | 中国 A 股全市场 | 日频 |
 | [Alpha-GPT](notes/cards/2023_Alpha-GPT.md) | 中国与美国股票的日内量价数据（未给出具体股票池） | 日内 |
 | [QuantEvolver](notes/cards/2026_QuantEvolver.md) | 单资产 5 分钟方向预测（Benchmark A）、数字资产小时频截面（Benchmark B）、CSI300 ETF 成分股（Benchmark Γ） | 5 分钟、小时频、日频 |
+| [AgenticFactorInvesting](notes/cards/2026_AgenticFactorInvesting.md) | 美股 CRSP（NYSE/AMEX/NASDAQ 普通股） | 日频 |
+| [Publication Bias](notes/cards/2022_PublicationBias.md) | 美股（207 个截面预测因子） | 月频 |
+| [Sequential Cauchy](notes/cards/2023_SequentialCauchy.md) | 美股（Kenneth French 100 个组合）；另 Nasdaq 与 S&P500 ETF 高频 | 月频；另 1 分钟 |
 | [GiGPO](notes/cards/2025_GiGPO.md) | 非金融：ALFWorld、WebShop、搜索增强问答（NQ、TriviaQA、PopQA、HotpotQA 等） | 未说明 |
 | [DSR](notes/cards/2019_DSR.md) | 非金融：Nguyen 符号回归基准（12 个表达式） | 未说明 |
 | [GFlowNet](notes/cards/2021_GFlowNet.md) | 非金融：超网格合成任务、分子生成 | 未说明 |
@@ -553,6 +579,7 @@
 | [AlphaAgent](notes/cards/2025_AlphaAgent.md) | 2021-01 至 2024-12 | 次日收益 | CSI500 买入万 5、卖出万 15；S&P 500 仅卖出万 5 |
 | [EvoQuantLab](notes/cards/2026_EvoQuantLab.md) | CSI500 2026-05-06 至 2026-08-17；S&P500 2026-05-01 至 2026-08-14；Crypto 2026-04-01 至 2026-06-09 | 次日截面收益（Crypto 为下一小时截面收益） | 权益回测为扣费前毛收益；Crypto 单边 5 bps |
 | [LineageEvo](notes/cards/2026_LineageEvo.md) | 2022-05-01 至 2026-04-30 | Ref($close,-2)/Ref($close,-1)-1（次一交易日收益） | 买入 0.15%、卖出 0.25%，单笔最低 5（Qlib 默认） |
+| [AlphaMemo](notes/cards/2026_AlphaMemo.md) | 2022-01 至 2025-12-26（验证 2021） | 20 日远期收益 | 未说明 |
 | [QBX](notes/cards/2026_QBX.md) | 2022-07 起（扩展数据至 2026-05） | 20 日远期收益 | 未说明 |
 | [AlphaLedger](notes/cards/2026_AlphaLedger.md) | 2025-01-02 至 2026-07-31 | 20 日远期收益 | 买入 5 bps、卖出 15 bps |
 | [AlphaGAT](notes/cards/2025_AlphaGAT.md) | 股票市场 2022-01 至 2023-06；CRYPTO 2023-09 至 2024-04 | 资产价格变动真值 y_t（论文未给收益公式与预测期限） | 交易费率 0.25% |
@@ -573,6 +600,9 @@
 | [Warm Start GP](notes/cards/2024_WarmStartGP.md) | 2022-01 至 2024-10（因子层）；组合层 2023-01 至 2024-10 | 5 日 VWAP 累计收益 | 0.6‰ |
 | [Alpha-GPT](notes/cards/2023_Alpha-GPT.md) | 未说明 | 未来收益（论文未说明持有期） | 未说明 |
 | [QuantEvolver](notes/cards/2026_QuantEvolver.md) | 未说明 | 未来 5 分钟涨跌方向（A）；未来一小时的截面收益排名（B）；未来收益（Γ） | 未说明 |
+| [AgenticFactorInvesting](notes/cards/2026_AgenticFactorInvesting.md) | 2021-01 至 2024-12（晋升仅用 2020-12 前） | 次日收益 | 单边 3 bps |
+| [Publication Bias](notes/cards/2022_PublicationBias.md) | 无统一样本外；另报告样本结束后 1–3 年与 10 年 | 未说明 | 未说明 |
+| [Sequential Cauchy](notes/cards/2023_SequentialCauchy.md) | 1963-07 至 2022-11 滚动窗口 | 未说明 | 未说明 |
 | [GiGPO](notes/cards/2025_GiGPO.md) | 未说明 | 任务完成与否（ALFWorld、WebShop 成功率）与问答正确率 | 未说明 |
 | [DSR](notes/cards/2019_DSR.md) | 未说明 | 拟合输入 X 到标量 y 的映射（符号回归，无金融标签） | 未说明 |
 | [GFlowNet](notes/cards/2021_GFlowNet.md) | 未说明 | 超网格任务为给定奖励函数的成比例采样；分子任务为预训练代理模型预测的结合能 | 未说明 |
@@ -587,11 +617,11 @@
 
 [Alpha101](notes/cards/2016_Alpha101.md)（2016-01） · [AutoAlpha](notes/cards/2020_AutoAlpha.md)（2020-02） · [AlphaEvolve](notes/cards/2021_AlphaEvolve.md)（2021-03） · [AlphaGen](notes/cards/2023_AlphaGen.md)（2023-05） · [Synergistic RL](notes/cards/2024_SynergisticRL.md)（2024-01） · [RiskMiner](notes/cards/2024_RiskMiner.md)（2024-02） · [Alpha2](notes/cards/2024_Alpha2.md)（2024-06） · [AlphaForge](notes/cards/2024_AlphaForge.md)（2024-06） · [QFR](notes/cards/2024_QFR.md)（2024-09） · [Warm Start GP](notes/cards/2024_WarmStartGP.md)（2024-12） · [AlphaQCM](notes/cards/2025_AlphaQCM.md)（2025-05） · [TLRS](notes/cards/2025_TLRS.md)（2025-07） · [AlphaSAGE](notes/cards/2025_AlphaSAGE.md)（2025-09） · [AlphaCFG](notes/cards/2026_AlphaCFG.md)（2026-01） · [AlphaPROBE](notes/cards/2026_AlphaPROBE.md)（2026-02） · [AlphaG-OPD](notes/cards/2026_AlphaG-OPD.md)（2026-08） · [AlphaPareto](notes/cards/2026_AlphaPareto.md)（2026-09） · [AlphaRJM](notes/cards/2026_AlphaRJM.md)（2026-09） · [AlphaPADI](notes/cards/2026_AlphaPADI.md)（2026-10） · [AlphaRLM](notes/cards/2026_AlphaRLM.md)（2026-10） · [EvoQuantLab](notes/cards/2026_EvoQuantLab.md)（2026-10） · [QBX](notes/cards/2026_QBX.md)（2026-10）
 
-### LLM / Agent 因子挖掘（`llm-agent`，27 篇）
+### LLM / Agent 因子挖掘（`llm-agent`，29 篇）
 
 以大语言模型或智能体完成假设生成、公式或代码实现、经验记忆、评价反馈和 RFT 的因子挖掘。
 
-[Alpha-GPT](notes/cards/2023_Alpha-GPT.md)（2023-07） · [Alpha-GPT 2.0](notes/cards/2024_Alpha-GPT2.md)（2024-02） · [QuantAgent](notes/cards/2024_QuantAgent.md)（2024-02） · [LLM Strategy Finding](notes/cards/2024_LLMStrategyFinding.md)（2024-09） · [AlphaAgent](notes/cards/2025_AlphaAgent.md)（2025-02） · [Alpha-Jungle](notes/cards/2025_Alpha-Jungle.md)（2025-05） · [RD-Agent(Q)](notes/cards/2025_RD-Agent-Quant.md)（2025-05） · [EFS](notes/cards/2025_EFS.md)（2025-07） · [TreEvo](notes/cards/2025_TreEvo.md)（2025-08） · [CogAlpha](notes/cards/2025_CogAlpha.md)（2025-11） · [Alpha-R1](notes/cards/2025_Alpha-R1.md)（2025-12） · [FactorMiner](notes/cards/2026_FactorMiner.md)（2026-02） · [QuantaAlpha](notes/cards/2026_QuantaAlpha.md)（2026-02） · [FactorEngine](notes/cards/2026_FactorEngine.md)（2026-03） · [Hubble](notes/cards/2026_Hubble.md)（2026-03） · [QuantEvolver](notes/cards/2026_QuantEvolver.md)（2026-05） · [Agora/SJS](notes/cards/2026_Agora-SJS.md)（2026-06） · [AlphaSchema](notes/cards/2026_AlphaSchema.md)（2026-07） · [X-Alpha](notes/cards/2026_X-Alpha.md)（2026-07） · [AgonAlpha](notes/cards/2026_AgonAlpha.md)（2026-08） · [AutoScientist-Quant](notes/cards/2026_AutoScientist-Quant.md)（2026-08） · [AlphaDiverse](notes/cards/2026_AlphaDiverse.md)（2026-09） · [AlphaLedger](notes/cards/2026_AlphaLedger.md)（2026-10） · [AlphaPilot](notes/cards/2026_AlphaPilot.md)（2026-10） · [AlphaRLM](notes/cards/2026_AlphaRLM.md)（2026-10） · [EvoQuantLab](notes/cards/2026_EvoQuantLab.md)（2026-10） · [LineageEvo](notes/cards/2026_LineageEvo.md)（2026-10）
+[Alpha-GPT](notes/cards/2023_Alpha-GPT.md)（2023-07） · [Alpha-GPT 2.0](notes/cards/2024_Alpha-GPT2.md)（2024-02） · [QuantAgent](notes/cards/2024_QuantAgent.md)（2024-02） · [LLM Strategy Finding](notes/cards/2024_LLMStrategyFinding.md)（2024-09） · [AlphaAgent](notes/cards/2025_AlphaAgent.md)（2025-02） · [Alpha-Jungle](notes/cards/2025_Alpha-Jungle.md)（2025-05） · [RD-Agent(Q)](notes/cards/2025_RD-Agent-Quant.md)（2025-05） · [EFS](notes/cards/2025_EFS.md)（2025-07） · [TreEvo](notes/cards/2025_TreEvo.md)（2025-08） · [CogAlpha](notes/cards/2025_CogAlpha.md)（2025-11） · [Alpha-R1](notes/cards/2025_Alpha-R1.md)（2025-12） · [FactorMiner](notes/cards/2026_FactorMiner.md)（2026-02） · [QuantaAlpha](notes/cards/2026_QuantaAlpha.md)（2026-02） · [AgenticFactorInvesting](notes/cards/2026_AgenticFactorInvesting.md)（2026-03） · [FactorEngine](notes/cards/2026_FactorEngine.md)（2026-03） · [Hubble](notes/cards/2026_Hubble.md)（2026-03） · [QuantEvolver](notes/cards/2026_QuantEvolver.md)（2026-05） · [Agora/SJS](notes/cards/2026_Agora-SJS.md)（2026-06） · [AlphaMemo](notes/cards/2026_AlphaMemo.md)（2026-06） · [AlphaSchema](notes/cards/2026_AlphaSchema.md)（2026-07） · [X-Alpha](notes/cards/2026_X-Alpha.md)（2026-07） · [AgonAlpha](notes/cards/2026_AgonAlpha.md)（2026-08） · [AutoScientist-Quant](notes/cards/2026_AutoScientist-Quant.md)（2026-08） · [AlphaDiverse](notes/cards/2026_AlphaDiverse.md)（2026-09） · [AlphaLedger](notes/cards/2026_AlphaLedger.md)（2026-10） · [AlphaPilot](notes/cards/2026_AlphaPilot.md)（2026-10） · [AlphaRLM](notes/cards/2026_AlphaRLM.md)（2026-10） · [EvoQuantLab](notes/cards/2026_EvoQuantLab.md)（2026-10） · [LineageEvo](notes/cards/2026_LineageEvo.md)（2026-10）
 
 ### 神经 / 隐式因子（`neural`，3 篇）
 
@@ -599,11 +629,11 @@
 
 [AlphaGAT](notes/cards/2025_AlphaGAT.md)（2025） · [MAPLE](notes/cards/2026_MAPLE.md)（2026-07） · [Det-MASO](notes/cards/2026_Det-MASO.md)（2026-10）
 
-### 因子池与组合（`pool-combination`，10 篇）
+### 因子池与组合（`pool-combination`，11 篇）
 
 候选因子准入、去冗余、筛选启停、动态加权和面向下游投资目标的组合。
 
-[AlphaForge](notes/cards/2024_AlphaForge.md)（2024-06） · [AlphaGAT](notes/cards/2025_AlphaGAT.md)（2025） · [EFS](notes/cards/2025_EFS.md)（2025-07） · [Alpha-R1](notes/cards/2025_Alpha-R1.md)（2025-12） · [AlphaPROBE](notes/cards/2026_AlphaPROBE.md)（2026-02） · [X-Alpha](notes/cards/2026_X-Alpha.md)（2026-07） · [AutoScientist-Quant](notes/cards/2026_AutoScientist-Quant.md)（2026-08） · [GoAnt](notes/cards/2026_GoAnt.md)（2026-09） · [AlphaLedger](notes/cards/2026_AlphaLedger.md)（2026-10） · [AlphaPilot](notes/cards/2026_AlphaPilot.md)（2026-10）
+[AlphaForge](notes/cards/2024_AlphaForge.md)（2024-06） · [AlphaGAT](notes/cards/2025_AlphaGAT.md)（2025） · [EFS](notes/cards/2025_EFS.md)（2025-07） · [Alpha-R1](notes/cards/2025_Alpha-R1.md)（2025-12） · [AlphaPROBE](notes/cards/2026_AlphaPROBE.md)（2026-02） · [AgenticFactorInvesting](notes/cards/2026_AgenticFactorInvesting.md)（2026-03） · [X-Alpha](notes/cards/2026_X-Alpha.md)（2026-07） · [AutoScientist-Quant](notes/cards/2026_AutoScientist-Quant.md)（2026-08） · [GoAnt](notes/cards/2026_GoAnt.md)（2026-09） · [AlphaLedger](notes/cards/2026_AlphaLedger.md)（2026-10） · [AlphaPilot](notes/cards/2026_AlphaPilot.md)（2026-10）
 
 ### 评估与稳健性（`evaluation`，6 篇）
 
@@ -617,8 +647,8 @@
 
 [HRFT/IRFT](notes/cards/2024_HRFT.md)（2024-08） · [GoAnt](notes/cards/2026_GoAnt.md)（2026-09）
 
-### 可借鉴的相邻方法（`adjacent`，7 篇）
+### 可借鉴的相邻方法（`adjacent`，9 篇）
 
 不是因子挖掘本身，但机制可迁移的方法，例如 Agentic RL 的信用分配与 advantage 设计。
 
-[DSR](notes/cards/2019_DSR.md)（2019-12） · [GFlowNet](notes/cards/2021_GFlowNet.md)（2021-06） · [Trajectory Balance](notes/cards/2022_TrajectoryBalance.md)（2022-01） · [GiGPO](notes/cards/2025_GiGPO.md)（2025-05） · [DeepMind AlphaEvolve](notes/cards/2025_DeepMind-AlphaEvolve.md)（2025-06） · [Tree-GRPO](notes/cards/2025_Tree-GRPO.md)（2025-09） · [Look-Ahead-Bench](notes/cards/2026_Look-Ahead-Bench.md)（2026-01）
+[DSR](notes/cards/2019_DSR.md)（2019-12） · [GFlowNet](notes/cards/2021_GFlowNet.md)（2021-06） · [Trajectory Balance](notes/cards/2022_TrajectoryBalance.md)（2022-01） · [Publication Bias](notes/cards/2022_PublicationBias.md)（2022-09） · [Sequential Cauchy](notes/cards/2023_SequentialCauchy.md)（2023-03） · [GiGPO](notes/cards/2025_GiGPO.md)（2025-05） · [DeepMind AlphaEvolve](notes/cards/2025_DeepMind-AlphaEvolve.md)（2025-06） · [Tree-GRPO](notes/cards/2025_Tree-GRPO.md)（2025-09） · [Look-Ahead-Bench](notes/cards/2026_Look-Ahead-Bench.md)（2026-01）

@@ -2155,3 +2155,137 @@ papers:
   deep: null
   added: '2026-11-03'
   checked: '2026-11-03'
+- id: alphamemo-2026
+  short: AlphaMemo
+  title: 'AlphaMemo: Structured Search-Process Memory for Self-Evolving Alpha Mining Agents'
+  summary: 以父子 AST 差异为编辑单元、按父因子质量分桶校正残差信用，并加置信门与否决记忆的 LLM 因子挖掘智能体。
+  first_public: 2026-06
+  versions: arXiv v1 2026-06；v2 2026-10
+  venue: null
+  arxiv: '2606.20625'
+  url: https://arxiv.org/abs/2606.20625
+  code: https://github.com/jarrettyu/sspm
+  code_note: 论文正文给出仓库链接，未核对完整性
+  affiliation: 悉尼大学、京东、爱丁堡大学
+  problems:
+  - learning-signal
+  - overfitting
+  also:
+  - redundancy
+  - search-space
+  setup:
+    markets: CSI500、S&P500（Qlib）
+    freq: 日频
+    test: 2022-01 至 2025-12-26（验证 2021）
+    label: 20 日远期收益
+    cost: null
+  routes:
+  - llm-agent
+  tags:
+  - llm
+  - memory
+  status: card
+  card: notes/cards/2026_AlphaMemo.md
+  deep: null
+  added: '2026-11-03'
+  checked: '2026-11-03'
+- id: agentic-factor-investing-2026
+  short: AgenticFactorInvesting
+  title: 'Beyond Prompting: Autonomous Factor Investing via Agentic AI'
+  summary: 智能体闭环提出经济假设、生成公式并按固定闸门准入，再以线性与 LightGBM 聚合构建多空组合。
+  first_public: 2026-03
+  versions: arXiv v1 2026-03；v2 2026-04
+  venue: null
+  arxiv: '2603.14288'
+  url: https://arxiv.org/abs/2603.14288
+  code: null
+  code_note: 无公开代码仓库，仅项目主页；数据需向作者索取
+  affiliation: 北京大学光华管理学院、香港科技大学
+  problems:
+  - overfitting
+  - objective-gap
+  also:
+  - leakage
+  - expressiveness
+  setup:
+    markets: 美股 CRSP（NYSE/AMEX/NASDAQ 普通股）
+    freq: 日频
+    test: 2021-01 至 2024-12（晋升仅用 2020-12 前）
+    label: 次日收益
+    cost: 单边 3 bps
+  routes:
+  - llm-agent
+  - pool-combination
+  tags:
+  - llm
+  - portfolio
+  status: card
+  card: notes/cards/2026_AgenticFactorInvesting.md
+  deep: null
+  added: '2026-11-03'
+  checked: '2026-11-03'
+- id: publication-bias-2022
+  short: Publication Bias
+  title: Publication Bias in Asset Pricing Research
+  summary: 综述资产定价研究的发表偏差：四条元研究事实、经验贝叶斯收缩与 FDR 校正，并澄清样本外衰减等常见误读。
+  first_public: 2022-09
+  versions: arXiv v1 2022-09；v3 2023-09
+  venue: null
+  arxiv: '2209.13623'
+  url: https://arxiv.org/abs/2209.13623
+  code: https://github.com/chenandrewy/PBR
+  code_note: 复现本文结果的代码；配套数据见 openassetpricing.com
+  affiliation: 美联储理事会、科隆大学
+  problems:
+  - overfitting
+  also:
+  - decay
+  - reproducibility
+  setup:
+    markets: 美股（207 个截面预测因子）
+    freq: 月频
+    test: 无统一样本外；另报告样本结束后 1–3 年与 10 年
+    label: null
+    cost: null
+  routes:
+  - adjacent
+  tags:
+  - auditing
+  - multiple-testing
+  status: card
+  card: notes/cards/2022_PublicationBias.md
+  deep: null
+  added: '2026-11-03'
+  checked: '2026-11-03'
+- id: sequential-cauchy-2023
+  short: Sequential Cauchy
+  title: Sequential Cauchy Combination Test for Multiple Testing Problems with Financial Applications
+  summary: 把全局 Cauchy 组合检验递归施于升序 p 值的后缀，实现强 FWER 控制并能指认个体显著项的多重检验程序。
+  first_public: 2023-03
+  versions: arXiv v1 2023-03；v2 2023-06
+  venue: null
+  arxiv: '2303.13406'
+  url: https://arxiv.org/abs/2303.13406
+  code: null
+  code_note: 未见官方开源
+  affiliation: 鲁汶大学、艾克斯-马赛大学、麦考瑞大学
+  problems:
+  - overfitting
+  also:
+  - redundancy
+  - reproducibility
+  setup:
+    markets: 美股（Kenneth French 100 个组合）；另 Nasdaq 与 S&P500 ETF 高频
+    freq: 月频；另 1 分钟
+    test: 1963-07 至 2022-11 滚动窗口
+    label: null
+    cost: null
+  routes:
+  - adjacent
+  tags:
+  - multiple-testing
+  status: card
+  card: notes/cards/2023_SequentialCauchy.md
+  deep: null
+  added: '2026-11-03'
+  checked: '2026-11-03'

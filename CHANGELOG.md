@@ -2,6 +2,15 @@
 
 记录仓库结构、收录口径、模板和分类体系的变化。最新记录在前。
 
+## 2026-11-03 补 P5：过拟合与多重检验
+
+- `problems.md` 此前只剩 P5「低信噪比下的过拟合」一个覆盖缺口（主要针对 3 篇）。本轮两轮 arXiv 检索（多重检验、数据窥探、回测过拟合、发表偏差等关键词）选出 4 篇候选，读原文后全部收录：
+  - `llm-agent` 路线 2 篇：AlphaMemo（按父因子质量分桶校正残差信用，控制经验复用带来的选择偏差）、AgenticFactorInvesting（经济理由约束、显著性门槛与样本外冻结三层准入闸门）。
+  - `adjacent` 路线 2 篇：Publication Bias（经验贝叶斯收缩与 FDR，附“短窗口衰减是选择偏差上界”的归因规则）、Sequential Cauchy（强 FWER 控制并能指认个体显著项的多重检验程序）。
+- P5 主要针对由 3 篇增至 5 篇，另有 2 篇相邻方法；`topics/problems.md` 的 P5 归纳与 `topics/adjacent/transferable_methods.md` 同步更新（新增 2.5 节）。
+- taxonomy 标签新增 `multiple-testing`。
+- AgenticFactorInvesting 的显著性门槛只写 `|t|>3.0`，未披露搜索规模，是本仓库 P5 谱系里最弱的一档，已在卡片局限与专题中标注；其第 7.2 节收益数字与 Exhibit 13 口径冲突，卡片保留“需核对”标注。
+
 ## 2026-11-03 实验口径结构化与对照专题
 
 - `papers.yaml` 每条记录新增 `setup` 字段：`markets`、`freq`、`test`、`label`、`cost`，62 篇全部按原文填写，原文没有的字段留空，不推断。字段定义见文件开头注释。
