@@ -2,6 +2,10 @@
 
 记录仓库结构、收录口径、模板和分类体系的变化。最新记录在前。
 
+## 2026-11-03 CogAlpha 会议信息补登
+
+- 外部文章（公众号「随机森林之外」）提到 CogAlpha 为 ACL 2026 论文，登记表原为 `venue: null`。核查：arXiv comment 与 PDF 首页均未标会议；ACL Anthology 站内搜索依赖 Google、无法直接检索；DBLP 与 Semantic Scholar 分别返回反爬与限流；最终在 Crossref 查到记录，会议为 Proceedings of the 64th Annual Meeting of the ACL（Volume 1: Long Papers），2026。已补登 `venue` 并更新 `checked`，速读卡注明出处。
+
 ## 2026-11-03 研究全景的演进叙述与第二期增量
 
 - `topics/landscape.md` 新增「三条演进主线」一节，把现有 9 个分组按时间横切成三条线：优化单位从单条公式变成因子池、学习信号从外部反馈转向模型内部、评价从报一个 IC 变成可审计的证据链；每条线给出现有工作的先后与转折点，并指出三条线交会处的问题（池状态让奖励不平稳、训练化让证据链更难追溯、所有校正都需要搜索规模）。

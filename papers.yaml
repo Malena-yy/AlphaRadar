@@ -826,7 +826,7 @@ papers:
   summary: 七层 LLM 代理生成代码级 Alpha，经质量检查后做思考演化。
   first_public: 2025-11
   versions: arXiv v1 2025-11；v4 2026-07
-  venue: null
+  venue: 'ACL 2026（Volume 1: Long Papers）'
   arxiv: '2511.18850'
   url: https://arxiv.org/abs/2511.18850
   code: null
