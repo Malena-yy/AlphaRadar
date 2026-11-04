@@ -12,7 +12,8 @@
 #   code          官方仓库链接；未见官方开源为 null
 #   code_note     开源补充说明：未开源时写检索结论；有仓库时只写完整性等补充；没有则为 null
 #   affiliation   作者单位
-#   problems      针对的问题，取 taxonomy.yaml 中 problems 的键，多选；基线或背景工作为 []
+#   problems      主要针对的问题：论文动机所在、主要贡献针对的，取 taxonomy.yaml 中 problems 的键，至多 3 个
+#   also          顺带涉及的问题：有对应机制但不是主要贡献的，取值同上；基线或背景工作两者都写 []
 #   routes, tags  路线与标签，多选，取值见 taxonomy.yaml
 #   status        inbox / triaged / card / deep-read
 #   card, deep    速读卡与精读路径
@@ -32,6 +33,7 @@ papers:
   code_note: 未见官方开源；社区有多种 Alpha101/WorldQuant 101 复现，但需要逐一校验算子定义、数据对齐和未来函数处理
   affiliation: Quantigic Solutions LLC
   problems: []
+  also: []
   routes:
   - formulaic
   tags:
@@ -55,8 +57,9 @@ papers:
   affiliation: 清华大学交叉信息研究院
   problems:
   - search-space
-  - eval-cost
   - redundancy
+  also:
+  - eval-cost
   routes:
   - formulaic
   tags:
@@ -81,8 +84,9 @@ papers:
   affiliation: 新加坡国立大学、北京理工大学、浙江大学
   problems:
   - expressiveness
-  - eval-cost
   - redundancy
+  also:
+  - eval-cost
   routes:
   - formulaic
   tags:
@@ -106,10 +110,11 @@ papers:
   code_note: null
   affiliation: 中国科学院计算技术研究所、中国科学院大学、华为 EI Innovation Lab
   problems:
-  - search-space
-  - eval-cost
   - redundancy
   - objective-gap
+  also:
+  - search-space
+  - eval-cost
   routes:
   - formulaic
   tags:
@@ -136,6 +141,7 @@ papers:
   affiliation: 韩国光云大学机器人学部
   problems:
   - search-space
+  also:
   - redundancy
   routes:
   - formulaic
@@ -162,6 +168,7 @@ papers:
   problems:
   - search-space
   - learning-signal
+  also:
   - redundancy
   - objective-gap
   routes:
@@ -188,6 +195,7 @@ papers:
   affiliation: 南京大学新型软件技术全国重点实验室、南京大学人工智能学院、香港大学
   problems:
   - search-space
+  also:
   - eval-cost
   routes:
   - formulaic
@@ -215,6 +223,7 @@ papers:
   problems:
   - learning-signal
   - decay
+  also: []
   routes:
   - formulaic
   tags:
@@ -239,6 +248,7 @@ papers:
   affiliation: 厦门大学王亚南经济研究院、厦门大学金融系、香港大学统计与精算学系
   problems:
   - learning-signal
+  also: []
   routes:
   - formulaic
   tags:
@@ -263,6 +273,7 @@ papers:
   affiliation: 南方科技大学、悉尼大学、哈佛大学
   problems:
   - learning-signal
+  also: []
   routes:
   - formulaic
   tags:
@@ -288,6 +299,7 @@ papers:
   problems:
   - learning-signal
   - redundancy
+  also: []
   routes:
   - formulaic
   tags:
@@ -312,6 +324,7 @@ papers:
   affiliation: 电子科技大学、King's College London、University of Southampton
   problems:
   - search-space
+  also:
   - redundancy
   routes:
   - formulaic
@@ -337,11 +350,12 @@ papers:
   code_note: null
   affiliation: 中国科学院大学、时代复兴投资管理有限公司、商丘师范学院、中国科学院计算技术研究所、York University、University of Toronto
   problems:
-  - eval-cost
   - learning-signal
-  - redundancy
   - objective-gap
   - decay
+  also:
+  - eval-cost
+  - redundancy
   routes:
   - formulaic
   - pool-combination
@@ -367,8 +381,9 @@ papers:
   affiliation: IJCAI 官方页面未展示单位信息；作者为 Shicheng Li、Jinshan Zhang、Feng Wang
   problems:
   - expressiveness
-  - redundancy
   - objective-gap
+  also:
+  - redundancy
   routes:
   - neural
   - pool-combination
@@ -396,8 +411,9 @@ papers:
   code_note: 未见官方开源
   affiliation: 官方摘要页未展示单位信息；作者为 Haochen Luo、Yuan Zhang、Chen Liu
   problems:
-  - redundancy
   - objective-gap
+  also:
+  - redundancy
   routes:
   - llm-agent
   - pool-combination
@@ -423,10 +439,11 @@ papers:
   code_note: null
   affiliation: 官方摘要页未展示单位信息；作者包含 Zuoyou Jiang、Li Zhao、Rui Sun、Ruohan Sun、Zhongjian Li、Jing Li、Daxin Jiang、Zuo Bai、Cheng Hua
   problems:
-  - overfitting
-  - leakage
   - objective-gap
   - decay
+  also:
+  - overfitting
+  - leakage
   routes:
   - llm-agent
   - pool-combination
@@ -454,6 +471,7 @@ papers:
   problems:
   - search-space
   - redundancy
+  also:
   - objective-gap
   routes:
   - formulaic
@@ -480,6 +498,7 @@ papers:
   affiliation: 香港科技大学、IDEA Research、Columbia University、香港科技大学（广州）
   problems:
   - search-space
+  also:
   - expressiveness
   routes:
   - llm-agent
@@ -505,6 +524,7 @@ papers:
   affiliation: 香港科技大学、IDEA Research、香港科技大学（广州）
   problems:
   - search-space
+  also:
   - learning-signal
   routes:
   - llm-agent
@@ -530,6 +550,7 @@ papers:
   affiliation: 官方摘要页未展示单位信息；作者为 Hang Yuan、Saizhuo Wang、Jian Guo
   problems:
   - search-space
+  also:
   - objective-gap
   routes:
   - llm-agent
@@ -556,6 +577,7 @@ papers:
   problems:
   - search-space
   - objective-gap
+  also: []
   routes:
   - llm-agent
   tags:
@@ -579,10 +601,11 @@ papers:
   code_note: null
   affiliation: 中山大学、新南威尔士大学、南洋理工大学、鹏城实验室、香港中文大学（深圳）
   problems:
-  - expressiveness
-  - overfitting
   - redundancy
   - decay
+  also:
+  - expressiveness
+  - overfitting
   routes:
   - llm-agent
   tags:
@@ -607,8 +630,9 @@ papers:
   affiliation: 官方摘要页未展示单位信息；作者为 Yu Shi、Yitong Duan、Jian Li
   problems:
   - search-space
-  - overfitting
   - redundancy
+  also:
+  - overfitting
   - objective-gap
   routes:
   - llm-agent
@@ -633,8 +657,9 @@ papers:
   code_note: null
   affiliation: Microsoft Research / Microsoft 相关团队（论文作者包含 Yuante Li、Xu Yang、Xiao Yang、Minrui Xu、Xisen Wang、Weiqing Liu、Jiang Bian）
   problems:
-  - redundancy
   - objective-gap
+  also:
+  - redundancy
   routes:
   - llm-agent
   tags:
@@ -661,6 +686,7 @@ papers:
   problems:
   - search-space
   - expressiveness
+  also:
   - leakage
   routes:
   - llm-agent
@@ -687,6 +713,7 @@ papers:
   problems:
   - expressiveness
   - redundancy
+  also: []
   routes:
   - llm-agent
   tags:
@@ -710,8 +737,9 @@ papers:
   code_note: 未见官方开源
   affiliation: 官方摘要页未展示单位信息；作者为 Yanlong Wang、Jian Xu、Hongkang Zhang、Shao-Lun Huang、Danny Dongning Sun、Xiao-Ping Zhang
   problems:
-  - eval-cost
   - redundancy
+  also:
+  - eval-cost
   - reproducibility
   routes:
   - llm-agent
@@ -739,6 +767,7 @@ papers:
   problems:
   - search-space
   - expressiveness
+  also:
   - eval-cost
   - leakage
   routes:
@@ -766,9 +795,10 @@ papers:
   problems:
   - search-space
   - redundancy
+  - reproducibility
+  also:
   - objective-gap
   - decay
-  - reproducibility
   routes:
   - llm-agent
   tags:
@@ -793,10 +823,11 @@ papers:
   code_note: 仓库说明仅包含可复用框架代码，不含私有市场数据、训练 checkpoint、实验日志或论文专用复现实验脚本
   affiliation: 官方摘要页未展示单位信息；作者包含 Lingzhe Zhang、Tong Jia、Yunpeng Zhai、Zixuan Xie、Chiming Duan、Minghua He、Philip S. Yu、Ying Li
   problems:
-  - search-space
   - eval-cost
   - learning-signal
   - redundancy
+  also:
+  - search-space
   routes:
   - llm-agent
   tags:
@@ -823,6 +854,7 @@ papers:
   problems:
   - overfitting
   - leakage
+  also: []
   routes:
   - llm-agent
   tags:
@@ -848,6 +880,7 @@ papers:
   affiliation: 中央财经大学统计与数学学院、腾讯 TiMi Studio、中国科学院计算机网络信息中心
   problems:
   - expressiveness
+  also: []
   routes:
   - data-space
   tags:
@@ -872,11 +905,12 @@ papers:
   code_note: null
   affiliation: 纽约市立大学巴鲁克学院、北京大学、哈佛大学、Zhengren Research
   problems:
-  - expressiveness
   - eval-cost
+  - reproducibility
+  also:
+  - expressiveness
   - redundancy
   - objective-gap
-  - reproducibility
   routes:
   - evaluation
   tags:
@@ -900,10 +934,11 @@ papers:
   code_note: null
   affiliation: 伦敦国王学院信息学系
   problems:
-  - overfitting
-  - redundancy
   - objective-gap
   - reproducibility
+  also:
+  - overfitting
+  - redundancy
   routes:
   - evaluation
   tags:
@@ -927,8 +962,9 @@ papers:
   code_note: 论文未给出代码；会议信息据 arXiv comment，PDF 未写明
   affiliation: 香港大学
   problems:
-  - leakage
   - reproducibility
+  also:
+  - leakage
   routes:
   - evaluation
   tags:
@@ -953,12 +989,13 @@ papers:
   affiliation: 香港理工大学、北京大学
   problems:
   - search-space
+  - leakage
+  - reproducibility
+  also:
   - expressiveness
   - eval-cost
   - overfitting
-  - leakage
   - redundancy
-  - reproducibility
   routes:
   - evaluation
   - formulaic
@@ -985,6 +1022,7 @@ papers:
   affiliation: 论文首页未列单位（作者 Mostapha Benhenda）
   problems:
   - leakage
+  also: []
   routes:
   - evaluation
   - adjacent
@@ -1012,6 +1050,7 @@ papers:
   - learning-signal
   - overfitting
   - redundancy
+  also: []
   routes:
   - formulaic
   tags:
@@ -1039,10 +1078,11 @@ papers:
   code_note: 论文复现声明称附有匿名代码，但 v2 正文未给出链接
   affiliation: 新加坡国立大学、新加坡管理大学、中国科学技术大学、清华大学
   problems:
-  - eval-cost
   - learning-signal
   - redundancy
   - objective-gap
+  also:
+  - eval-cost
   routes:
   - formulaic
   tags:
@@ -1068,12 +1108,13 @@ papers:
   code_note: 论文未给出代码
   affiliation: 香港科技大学数学系
   problems:
-  - search-space
-  - eval-cost
   - learning-signal
-  - redundancy
   - objective-gap
   - decay
+  also:
+  - search-space
+  - eval-cost
+  - redundancy
   routes:
   - llm-agent
   - pool-combination
@@ -1102,8 +1143,9 @@ papers:
   affiliation: X-Tech、Xtech-PandaAI-Waton 联合实验室、莫纳什大学、PandaAI、清华大学交叉信息研究院
   problems:
   - search-space
-  - expressiveness
   - eval-cost
+  also:
+  - expressiveness
   - leakage
   - redundancy
   routes:
@@ -1130,6 +1172,7 @@ papers:
   affiliation: 永丰金控（SinoPac Holdings）、国立政治大学
   problems:
   - redundancy
+  also:
   - objective-gap
   routes:
   - neural
@@ -1154,11 +1197,12 @@ papers:
   code_note: 论文未给出代码
   affiliation: 同济大学、Shanghai Non-convex Intelligent Technology
   problems:
-  - search-space
   - learning-signal
+  - redundancy
+  also:
+  - search-space
   - overfitting
   - leakage
-  - redundancy
   - objective-gap
   routes:
   - llm-agent
@@ -1186,6 +1230,7 @@ papers:
   code_note: null
   affiliation: 待查
   problems: []
+  also: []
   routes:
   - llm-agent
   tags:
@@ -1209,6 +1254,7 @@ papers:
   code_note: null
   affiliation: 待查
   problems: []
+  also: []
   routes:
   - llm-agent
   tags:
@@ -1232,6 +1278,7 @@ papers:
   code_note: null
   affiliation: 待查
   problems: []
+  also: []
   routes:
   - llm-agent
   tags:
@@ -1256,6 +1303,7 @@ papers:
   code_note: null
   affiliation: 待查
   problems: []
+  also: []
   routes:
   - formulaic
   tags:
@@ -1278,6 +1326,7 @@ papers:
   code_note: null
   affiliation: 待查
   problems: []
+  also: []
   routes:
   - llm-agent
   tags:
@@ -1302,6 +1351,7 @@ papers:
   code_note: null
   affiliation: 待查
   problems: []
+  also: []
   routes:
   - llm-agent
   tags:
@@ -1325,6 +1375,7 @@ papers:
   code_note: null
   affiliation: 待查
   problems: []
+  also: []
   routes:
   - llm-agent
   tags:
@@ -1348,6 +1399,7 @@ papers:
   code_note: null
   affiliation: 待查
   problems: []
+  also: []
   routes:
   - llm-agent
   tags:
@@ -1371,6 +1423,7 @@ papers:
   code_note: null
   affiliation: 待查
   problems: []
+  also: []
   routes:
   - llm-agent
   tags:
@@ -1394,6 +1447,7 @@ papers:
   code_note: null
   affiliation: 待查
   problems: []
+  also: []
   routes:
   - llm-agent
   - data-space
@@ -1419,6 +1473,7 @@ papers:
   code_note: null
   affiliation: 待查
   problems: []
+  also: []
   routes:
   - neural
   tags:
@@ -1442,6 +1497,7 @@ papers:
   code_note: null
   affiliation: 待查
   problems: []
+  also: []
   routes:
   - formulaic
   tags:
@@ -1465,6 +1521,7 @@ papers:
   code_note: null
   affiliation: 待查
   problems: []
+  also: []
   routes:
   - formulaic
   tags:
@@ -1487,6 +1544,7 @@ papers:
   code_note: null
   affiliation: 待查
   problems: []
+  also: []
   routes:
   - llm-agent
   - data-space
@@ -1512,6 +1570,7 @@ papers:
   code_note: null
   affiliation: 待查
   problems: []
+  also: []
   routes:
   - data-space
   tags:
@@ -1535,8 +1594,9 @@ papers:
   code_note: null
   affiliation: Lawrence Livermore National Laboratory
   problems:
-  - search-space
   - learning-signal
+  also:
+  - search-space
   routes:
   - adjacent
   tags:
@@ -1561,9 +1621,10 @@ papers:
   code_note: null
   affiliation: Mila、McGill University、Université de Montréal、DeepMind、Microsoft
   problems:
+  - redundancy
+  also:
   - eval-cost
   - learning-signal
-  - redundancy
   routes:
   - adjacent
   tags:
@@ -1587,6 +1648,7 @@ papers:
   affiliation: Mila、Université de Montréal、McGill University、Recursion
   problems:
   - learning-signal
+  also:
   - redundancy
   routes:
   - adjacent
@@ -1611,6 +1673,7 @@ papers:
   affiliation: Google DeepMind
   problems:
   - search-space
+  also:
   - expressiveness
   - eval-cost
   - redundancy
@@ -1640,6 +1703,7 @@ papers:
   affiliation: Nanyang Technological University、Skywork AI
   problems:
   - learning-signal
+  also: []
   routes:
   - adjacent
   tags:
@@ -1665,6 +1729,7 @@ papers:
   problems:
   - eval-cost
   - learning-signal
+  also: []
   routes:
   - adjacent
   tags:

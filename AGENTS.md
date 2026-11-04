@@ -8,14 +8,14 @@ AlphaRadar 是围绕“因子挖掘专题”的研究跟踪仓库：持续收录
 
 - 事实源：`papers.yaml`（论文登记，字段含义见文件开头注释）、`taxonomy.yaml`（问题、路线、标签和状态的取值），以及手写的笔记、专题和简报。
 - 生成物：README 中 `PROBLEMS`、`STATUS` 两个标记区块，`INDEX.md`，速读卡从文件开头到 `META:END` 的部分。改了事实源就运行 `python scripts/build_index.py`，不要手改生成内容。
-- 脚本同时校验：登记表取值、日期和路径；README 问题标题与 `taxonomy.yaml` 一致；`topics/problems.md` 每个问题下点名的工作与 `problems` 标注一致；速读卡四个字段齐全，且“针对问题与证据”中的 P 编号与标注一致；精读含必备章节。
+- 脚本同时校验：登记表取值、日期和路径；README 问题标题与 `taxonomy.yaml` 一致；`topics/problems.md` 点名的工作确实标注了对应问题；速读卡四个字段齐全，问题行的“（主要）/（涉及）”与 `problems` / `also` 一致、问题名与 `taxonomy.yaml` 一致；精读含必备章节。
 
 ## 目录
 
 | 路径 | 内容 |
 | --- | --- |
 | `notes/cards/`、`notes/deep/` | 单篇速读卡与精读 |
-| `topics/` | 横向专题；`topics/problems.md` 按问题汇总应对机制 |
+| `topics/` | 横向专题；`topics/problems.md` 归纳各问题的应对思路，全部工作与机制见 `INDEX.md` 第 3 节 |
 | `topics/adjacent/` | 不属于因子挖掘、但机制可迁移的相邻方法分析 |
 | `digests/` | 定期跟踪简报 |
 | `scripts/` | 生成与校验脚本 |
@@ -29,14 +29,14 @@ AlphaRadar 是围绕“因子挖掘专题”的研究跟踪仓库：持续收录
 
 ## 问题标注
 
-1. README“出发点”定义的 P1-P10 是分析主线。只标注论文中有对应机制的问题，不按标题或宣传语标注；作为基线或背景收录的工作写 `[]`。
+1. README“出发点”定义的 P1-P10 是分析主线。`problems` 只放论文动机所在、主要贡献针对的问题，至多 3 个；其余有对应机制的问题放 `also`。只标注论文中有对应机制的问题，不按标题或宣传语标注；作为基线或背景收录的工作两者都写 `[]`。
 2. `adjacent` 路线的工作标注其机制可迁移去应对的问题；速读卡的每条机制要写清“原领域解决什么 → 迁移到因子挖掘对应什么”，并说明已收录工作中谁借用了它。
 3. 新工作引出现有框架覆盖不了的问题时，先在 `taxonomy.yaml`、README 和 `topics/problems.md` 中新增问题并记入 `CHANGELOG.md`，再标注论文；已发布的编号不改。
 
 ## 任务入口
 
-- 新增论文：在 `papers.yaml` 追加记录，`id` 为 `<小写简称>-<首次公开年份>`，状态从 `inbox` 或 `triaged` 开始，填写 `summary` 和 `problems`。
-- 写速读卡：按 `notes/_template_card.md` 新建卡片，在登记表填 `card` 并把状态改为 `card`，运行脚本生成卡片开头；同时在 `topics/problems.md` 对应问题下补上机制。
+- 新增论文：在 `papers.yaml` 追加记录，`id` 为 `<小写简称>-<首次公开年份>`，状态从 `inbox` 或 `triaged` 开始。待筛条目只填 `id`、`short`、`title`、`first_public`、`url`、`routes`、`status`、`added` 和标签；`summary`、`affiliation`、`versions`、`checked` 与问题标注等写卡时再补。
+- 写速读卡：按 `notes/_template_card.md` 新建卡片，在登记表填 `card`、`summary`、`affiliation`、`versions`、问题标注，并把状态改为 `card`，运行脚本生成卡片开头。`topics/problems.md` 只在校对整节时更新归纳和代表工作。
 - 写精读：按 `notes/_template_deep.md` 撰写，填 `deep` 并把状态改为 `deep-read`。
 - 定期跟踪：按 `digests/_template.md` 写简报，沿用上一期的检索口径，口径变化写入本期。
 - 状态核查：核查论文页、会议页或官方仓库，更新 `versions`、`venue`、`code`、`code_note`、`checked`，并把变化记入简报或 `CHANGELOG.md`。
