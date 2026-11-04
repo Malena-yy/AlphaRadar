@@ -4,7 +4,7 @@
 >
 > 问题分两级：“主要针对”是论文动机所在、主要贡献针对的问题（至多 3 个）；“顺带涉及”是论文中有对应机制、但不是主要贡献的问题。
 
-共收录 66 篇（速读 61，精读 5）。
+共收录 66 篇（速读 60，精读 6）。
 
 ## 1. 总表
 
@@ -16,7 +16,7 @@
 | --- | --- | --- | --- | --- | --- |
 | 2026-10 | **QBX**（ICAIF 2026） | 面向 alpha 程序的编译器：以版本化模块注册表和整策略端口 DAG 定义可审计的候选空间，编译期检查类型与时间可用性，并以内容寻址支持增量求值、去重与试验计数。 | P1 P6 P10（P2 P3 P5 P7） | `evaluation` `formulaic` | [arXiv](https://arxiv.org/abs/2610.41689) · [速读](notes/cards/2026_QBX.md) · [精读](notes/deep/2026_QBX.md) |
 | 2026-10 | **LineageEvo** | 以因子谱系为搜索单位：谱系内经验改写 LLM 变异先验，并按质量与稀少度分层分配评价预算。 | P1 P7（P3） | `llm-agent` | [arXiv](https://arxiv.org/abs/2610.29663) · [速读](notes/cards/2026_LineageEvo.md) |
-| 2026-10 | **FactorBench** | 组合视角的挖掘基准：在共享数据与评估契约下，从因子、因子池到扣费组合三层，横向比较九种方法在五个股票市场产出的约五千个因子。 | P8 P10（P5 P7） | `evaluation` | [arXiv](https://arxiv.org/abs/2610.06947) · [代码](https://github.com/ZhuoHan1998/FactorBench-Release) · [速读](notes/cards/2026_FactorBench.md) |
+| 2026-10 | **FactorBench** | 组合视角的挖掘基准：在共享数据与评估契约下，从因子、因子池到扣费组合三层，横向比较九种方法在五个股票市场产出的约五千个因子。 | P8 P10（P5 P7） | `evaluation` | [arXiv](https://arxiv.org/abs/2610.06947) · [代码](https://github.com/ZhuoHan1998/FactorBench-Release) · [速读](notes/cards/2026_FactorBench.md) · [精读](notes/deep/2026_FactorBench.md) |
 | 2026-10 | **EvoQuantLab** | 免训练遗传规划内循环加诊断外循环：以等预算置换检验审计搜索多重性，并在样本外前冻结协议与准入因子。 | P3 P5 P6（P1 P2 P7 P10） | `formulaic` `llm-agent` | [arXiv](https://arxiv.org/abs/2610.17130) · [速读](notes/cards/2026_EvoQuantLab.md) |
 | 2026-10 | **Det-MASO** | 多智能体神经因子生成：对智能体间相关矩阵加可微行列式惩罚抑制同质化，并按市场状态聚类分配专精。 | P7 P9（P2 P8） | `neural` | [arXiv](https://arxiv.org/abs/2610.34936) · [速读](notes/cards/2026_Det-MASO.md) |
 | 2026-10 | **Auditing LLM Alpha-Factor Mining**（ICAIF 2026 AI4F Workshop（非归档）） | 对一个已留存的 LLM 因子挖掘项目做三层审计：指标统计总体混用、按样本外结果筛选造成的留存偏差，以及对冻结表达式的全量再分析。 | P10（P6） | `evaluation` | [arXiv](https://arxiv.org/abs/2610.29500) · [速读](notes/cards/2026_AuditingLLMAlpha.md) |

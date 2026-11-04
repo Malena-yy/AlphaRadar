@@ -1151,9 +1151,9 @@ papers:
   tags:
   - benchmark
   - portfolio
-  status: card
+  status: deep-read
   card: notes/cards/2026_FactorBench.md
-  deep: null
+  deep: notes/deep/2026_FactorBench.md
   added: '2026-11-03'
   checked: '2026-11-03'
 - id: auditing-llm-alpha-2026
