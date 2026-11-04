@@ -1222,9 +1222,9 @@ papers:
   - dsl
   - auditing
   - program-search
-  status: card
+  status: deep-read
   card: notes/cards/2026_QBX.md
-  deep: null
+  deep: notes/deep/2026_QBX.md
   added: '2026-11-03'
   checked: '2026-11-03'
 - id: look-ahead-bench-2026
@@ -1327,9 +1327,9 @@ papers:
   - rpn
   - pool-reward
   - preference-optimization
-  status: card
+  status: deep-read
   card: notes/cards/2026_AlphaPADI.md
-  deep: null
+  deep: notes/deep/2026_AlphaPADI.md
   added: '2026-11-03'
   checked: '2026-11-03'
 - id: alphapilot-2026

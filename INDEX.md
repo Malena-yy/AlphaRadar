@@ -4,7 +4,7 @@
 >
 > 问题分两级：“主要针对”是论文动机所在、主要贡献针对的问题（至多 3 个）；“顺带涉及”是论文中有对应机制、但不是主要贡献的问题。
 
-共收录 66 篇（速读 63，精读 3）。
+共收录 66 篇（速读 61，精读 5）。
 
 ## 1. 总表
 
@@ -14,7 +14,7 @@
 
 | 时间 | 工作 | 一句话 | 问题 | 路线 | 链接 |
 | --- | --- | --- | --- | --- | --- |
-| 2026-10 | **QBX**（ICAIF 2026） | 面向 alpha 程序的编译器：以版本化模块注册表和整策略端口 DAG 定义可审计的候选空间，编译期检查类型与时间可用性，并以内容寻址支持增量求值、去重与试验计数。 | P1 P6 P10（P2 P3 P5 P7） | `evaluation` `formulaic` | [arXiv](https://arxiv.org/abs/2610.41689) · [速读](notes/cards/2026_QBX.md) |
+| 2026-10 | **QBX**（ICAIF 2026） | 面向 alpha 程序的编译器：以版本化模块注册表和整策略端口 DAG 定义可审计的候选空间，编译期检查类型与时间可用性，并以内容寻址支持增量求值、去重与试验计数。 | P1 P6 P10（P2 P3 P5 P7） | `evaluation` `formulaic` | [arXiv](https://arxiv.org/abs/2610.41689) · [速读](notes/cards/2026_QBX.md) · [精读](notes/deep/2026_QBX.md) |
 | 2026-10 | **LineageEvo** | 以因子谱系为搜索单位：谱系内经验改写 LLM 变异先验，并按质量与稀少度分层分配评价预算。 | P1 P7（P3） | `llm-agent` | [arXiv](https://arxiv.org/abs/2610.29663) · [速读](notes/cards/2026_LineageEvo.md) |
 | 2026-10 | **FactorBench** | 组合视角的挖掘基准：在共享数据与评估契约下，从因子、因子池到扣费组合三层，横向比较九种方法在五个股票市场产出的约五千个因子。 | P8 P10（P5 P7） | `evaluation` | [arXiv](https://arxiv.org/abs/2610.06947) · [代码](https://github.com/ZhuoHan1998/FactorBench-Release) · [速读](notes/cards/2026_FactorBench.md) |
 | 2026-10 | **EvoQuantLab** | 免训练遗传规划内循环加诊断外循环：以等预算置换检验审计搜索多重性，并在样本外前冻结协议与准入因子。 | P3 P5 P6（P1 P2 P7 P10） | `formulaic` `llm-agent` | [arXiv](https://arxiv.org/abs/2610.17130) · [速读](notes/cards/2026_EvoQuantLab.md) |
@@ -22,7 +22,7 @@
 | 2026-10 | **Auditing LLM Alpha-Factor Mining**（ICAIF 2026 AI4F Workshop（非归档）） | 对一个已留存的 LLM 因子挖掘项目做三层审计：指标统计总体混用、按样本外结果筛选造成的留存偏差，以及对冻结表达式的全量再分析。 | P10（P6） | `evaluation` | [arXiv](https://arxiv.org/abs/2610.29500) · [速读](notes/cards/2026_AuditingLLMAlpha.md) |
 | 2026-10 | **AlphaRLM** | 用 DAPO 训练 LLM 从文献思路直接构造可执行符号因子，奖励为可执行有效性与池化分组收益极差。 | P1 P4（P3 P6 P8） | `llm-agent` `formulaic` | [arXiv](https://arxiv.org/abs/2610.14959) · [速读](notes/cards/2026_AlphaRLM.md) |
 | 2026-10 | **AlphaPilot** | 用 GRPO 训练多轮调用评价工具的小型 LLM：按逐日市场描述提出 DSL 公式，依据真实评价与边际池贡献维护因子池。 | P4 P8 P9（P1 P3 P7） | `llm-agent` `pool-combination` | [arXiv](https://arxiv.org/abs/2610.15488) · [速读](notes/cards/2026_AlphaPilot.md) |
-| 2026-10 | **AlphaPADI** | 以整个因子池为生成单元的层次化离散扩散：在池上下文中按叶、子树、整式三级改写公式，并用池级奖励的偏好学习训练生成器。 | P4 P7 P8（P3） | `formulaic` | [arXiv](https://arxiv.org/abs/2610.04959) · [速读](notes/cards/2026_AlphaPADI.md) |
+| 2026-10 | **AlphaPADI** | 以整个因子池为生成单元的层次化离散扩散：在池上下文中按叶、子树、整式三级改写公式，并用池级奖励的偏好学习训练生成器。 | P4 P7 P8（P3） | `formulaic` | [arXiv](https://arxiv.org/abs/2610.04959) · [速读](notes/cards/2026_AlphaPADI.md) · [精读](notes/deep/2026_AlphaPADI.md) |
 | 2026-10 | **AlphaLedger** | 以扣费组合边际贡献为教师特权上下文做在线策略蒸馏，训练本地生成器并按市场状态动态定池与配权。 | P4 P8 P9（P1 P6） | `llm-agent` `pool-combination` | [arXiv](https://arxiv.org/abs/2610.23744) · [速读](notes/cards/2026_AlphaLedger.md) |
 | 2026-09 | **GoAnt** | 质量-多样性存档按无泄漏的执行画像组织小生境，在量价与订单簿数据上分配评价预算。 | P3 P7 P8（P5 P6 P10） | `data-space` `pool-combination` | [arXiv](https://arxiv.org/abs/2609.08719) · [速读](notes/cards/2026_GoAnt.md) |
 | 2026-09 | **AlphaRJM** | 把终端评价的奖励与结果写入事件驱动的持久记忆，并用动作条件 SDE 粒子回报评论家引导池依赖的公式搜索。 | P4（P5） | `formulaic` | [arXiv](https://arxiv.org/abs/2609.08581) · [速读](notes/cards/2026_AlphaRJM.md) |
@@ -361,7 +361,7 @@
 - [AlphaDiverse](notes/cards/2026_AlphaDiverse.md)：Planner 每轮须覆盖不同机制与主题，并满足相邻轮的新颖性要求；同一计划的两个实现须计算结构不同；筛选时与已有因子的平均绝对相关不得高于 0.90；GRPO 奖励中的 D 项对与历史档案相似的预测变化给递减奖励（第 2.1–2.3 节、附录 B.1、D.5）。
 - [AlphaPareto](notes/cards/2026_AlphaPareto.md)：以池内因子信号协方差特征值的归一化熵 DH 作为多样性奖励；prompt 也要求 LLM 识别池内表达式同质化和信息盲区（第 4.2.1 节、附录 B）。
 - [GoAnt](notes/cards/2026_GoAnt.md)：论文把“反复探索冗余的因子家族”列为现有系统的两个核心失效之一，用 QD 存档直接对抗模式坍缩：每个小生境只留精英、覆盖只在一个新细胞的精英越过预注册质量下限 q* 后才计入，从而把探索变成需要兑现的赌注而不是白给的补贴；Connector 通过互近邻图（k=4）跨小生境重组。表 1 中 GoAnt 在价格—成交量（PV）与订单簿（L2）两个数据类别上的质量加权有效产出为 41.8 与 47.6，分别比最强基线 AutoAlpha 高 57% 与 97%，同时 distinct 因子数 34/37（AutoAlpha 为 24/22），保留下来的因子两两 |Spearman| 均值 0.31/0.28（AutoAlpha 0.36/0.37）；去掉地图的 No-Map 对照质量加权仅 8.7/7.6、distinct 9/8。角色消融（附录表 S3）显示单个角色都不足以复现完整群体：Exploiter 单独 11.6/10.4、Explorer 单独 24.3/26.1、含 Connector 的两两组合占 116/128 个细胞、缺 Connector 的两两组合只有 92/101，去掉 Connector 的损失（−8.7/−10.9）大于去掉 Exploiter（−6.0/−7.4）。
-- [AlphaPADI](notes/cards/2026_AlphaPADI.md)：池上下文进入反向生成状态，用来决定改写哪些子结构；R_inner 惩罚与池内最近邻相关超过 δ 的成员；规范化后的重复成员替换为随机合法公式（第 4.2–4.3 节）。
+- [AlphaPADI](notes/cards/2026_AlphaPADI.md)：池上下文进入反向生成状态，用来决定改写哪些子结构；R_inner 惩罚各成员与池内相关最高邻居（最坏邻居，不是平均）超过 δ 的部分，形式是平方 hinge；规范化后的重复成员替换为随机合法公式（第 4.2–4.3 节、式 8）。
 - [Det-MASO](notes/cards/2026_Det-MASO.md)：联合目标内加入 agent 间秩相关矩阵的可微 −log det 惩罚，在训练过程中压制同质化而非事后过滤；步成本 O(Nn²+n³)，对资产数 N 线性（式 10 后、表 3）。
 - [LineageEvo](notes/cards/2026_LineageEvo.md)：论文把“随机变异 + 适应度选择”导致的搜索集中、谱系接管作为核心问题；LSPS 在谱系层按质量与稀少度混合分配预算，并限制单谱系在活跃种群中的占比不超过 0.40；消融去掉 LSPS 后，谱系熵从 2.154 降到 0.405、平均成对 AST 距离从 0.747 降到 0.509、有效结构数从 41.90 降到 37.89（第 1 节、第 3 节、表 3）。
 
