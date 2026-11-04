@@ -86,57 +86,53 @@ status:
 
 tags:
   # 搜索与训练方法
-  - rl
-  - ppo
-  - reinforce
-  - grpo
-  - rft
-  - distributional-rl
-  - reward-shaping
-  - multi-objective
-  - preference-optimization
-  - mcts
-  - gflownet
-  - genetic-programming
-  - evolutionary
-  - quality-diversity
-  - automl
-  - grammar
-  - dsl
-  - diffusion
-  - program-search
-  - code-evolution
-  - symbolic-regression
-  - distillation
-  - generator-predictor
-  - surrogate-model
-  - self-play
+  - rl                     # 强化学习优化生成策略
+  - ppo                    # 近端策略优化
+  - reinforce              # REINFORCE 及其基线变体
+  - grpo                   # 组相对策略优化，含 DAPO 等变体
+  - rft                    # 强化微调：把评价反馈写进模型参数
+  - distributional-rl      # 学习回报分布而非期望
+  - reward-shaping         # 中间步骤或轨迹级奖励塑形
+  - multi-objective        # 多目标或 Pareto 式奖励
+  - preference-optimization # 把奖励转成偏好对做训练
+  - mcts                   # 蒙特卡洛树搜索
+  - gflownet               # 生成流网络及其目标
+  - genetic-programming    # 遗传规划
+  - evolutionary           # 进化或演化搜索（非严格遗传规划）
+  - quality-diversity      # 质量-多样性搜索与存档
+  - diffusion              # 离散扩散生成
+  - program-search         # 在程序或指令空间搜索
+  - code-evolution         # 演化可执行代码
+  - dsl                    # 受限领域特定语言表达式
+  - grammar                # 以文法定义合法表达式空间
+  - symbolic-regression    # 符号回归（相邻方法常用）
+  - distillation           # 蒸馏教师信号，含在线策略蒸馏
+  - surrogate-model        # 在真实评价前用学到的模型打分或分配预算
   # 表示与模型
-  - rpn
-  - gnn
-  - transformer
-  - neural-alpha
-  - llm
-  - multi-agent
-  - memory
-  - skills
-  - rag
-  - multimodal
-  - human-in-the-loop
+  - rpn                    # 逆波兰表示
+  - gnn                    # 图神经网络
+  - transformer            # Transformer 主干
+  - neural-alpha           # 神经网络直接输出因子信号
+  - llm                    # 以语言模型生成、实现或评价因子
+  - multi-agent            # 多个智能体分工或对抗
+  - memory                 # 跨轮次记忆
+  - rag                    # 检索增强
+  - human-in-the-loop      # 人类想法或审核进入循环
+  - multimodal             # 从文本、表格、图像等多种材料抽取线索
   # 因子池、组合与评价
-  - pool-reward
-  - dynamic-combination
-  - factor-screening
-  - factor-lineage
-  - factor-model-joint
-  - portfolio
-  - alpha-decay
-  - safety
+  - pool-reward            # 以加入因子池或组合的边际贡献作奖励
+  - dynamic-combination    # 按市场状态动态定池或定权
+  - factor-screening       # 对已有因子筛选启停
+  - factor-lineage         # 以因子谱系或演化图组织搜索
+  - factor-model-joint     # 因子与预测模型联合优化
+  - portfolio              # 直接面向组合构建或组合表现
+  - alpha-decay            # 以对抗因子衰减为生成目标
+  - multiple-testing       # 多重检验与错误发现控制
+  - auditing               # 证据审计与可追溯记录
+  - benchmark              # 基准或统一评测框架
+  - safety                 # 安全沙箱与准入
   # 数据与因子类型
-  - formula-library
-  - benchmark
-  - auditing
-  - multiple-testing
-  - high-frequency
-  - alternative-data
-  - risk-factor
+  - formula-library        # 人工公式因子库
+  - high-frequency         # 高频或订单簿数据
+  - alternative-data       # 文本、新闻、情绪等另类数据
+  - risk-factor            # 风险因子而非 alpha 因子

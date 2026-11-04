@@ -12,7 +12,7 @@
 | 代码 | [dulyhao/alphaforge](https://github.com/dulyhao/alphaforge) |
 | 作者单位 | 中国科学院大学、时代复兴投资管理有限公司、商丘师范学院、中国科学院计算技术研究所、York University、University of Toronto |
 | 路线 | `formulaic` `pool-combination` |
-| 标签 | `generator-predictor` `dynamic-combination` |
+| 标签 | `surrogate-model` `dynamic-combination` |
 | 主要针对 | P4 学习信号稀疏、延迟且不可微；P8 挖掘目标与实际使用脱节；P9 非平稳与因子衰减 |
 | 顺带涉及 | P3 评价成本高；P7 因子同质化与冗余 |
 | 精读 | [AlphaForge 精读](../deep/2024_AlphaForge.md) |

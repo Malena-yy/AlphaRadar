@@ -12,7 +12,7 @@
 | 代码 | 论文称将发布 Agora implementation、七个 baseline 配置和 LLM Wiki schema；论文中未给出明确仓库链接 |
 | 作者单位 | 官方摘要页未展示单位信息；作者为 Yuqi Li、Siyuan Liu、Bingjun Liu |
 | 路线 | `llm-agent` |
-| 标签 | `llm` `multi-agent` `self-play` |
+| 标签 | `llm` `multi-agent` |
 | 主要针对 | P5 低信噪比下的过拟合；P6 前视偏差与信息泄漏 |
 | 顺带涉及 | — |
 | 状态核查 | 2026-11-03 |

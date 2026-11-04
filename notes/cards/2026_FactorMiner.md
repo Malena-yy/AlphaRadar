@@ -12,7 +12,7 @@
 | 代码 | 未见官方开源 |
 | 作者单位 | 官方摘要页未展示单位信息；作者为 Yanlong Wang、Jian Xu、Hongkang Zhang、Shao-Lun Huang、Danny Dongning Sun、Xiao-Ping Zhang |
 | 路线 | `llm-agent` |
-| 标签 | `llm` `memory` `skills` |
+| 标签 | `llm` `memory` |
 | 主要针对 | P7 因子同质化与冗余 |
 | 顺带涉及 | P3 评价成本高；P10 评估口径不统一、难以复现 |
 | 状态核查 | 2026-11-03 |

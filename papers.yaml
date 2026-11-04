@@ -114,7 +114,6 @@ papers:
   routes:
   - formulaic
   tags:
-  - automl
   - evolutionary
   status: card
   card: notes/cards/2021_AlphaEvolve.md
@@ -444,7 +443,7 @@ papers:
   - formulaic
   - pool-combination
   tags:
-  - generator-predictor
+  - surrogate-model
   - dynamic-combination
   status: deep-read
   card: notes/cards/2024_AlphaForge.md
@@ -914,7 +913,6 @@ papers:
   tags:
   - llm
   - memory
-  - skills
   status: card
   card: notes/cards/2026_FactorMiner.md
   deep: null
@@ -1052,7 +1050,6 @@ papers:
   tags:
   - llm
   - multi-agent
-  - self-play
   status: card
   card: notes/cards/2026_Agora-SJS.md
   deep: null
