@@ -110,7 +110,7 @@ def validate(papers, taxonomy):
             if p.get(key) in (None, "", []):
                 errors.append(f"{pid}: missing {key}")
         for field in ("problems", "also"):
-            if not isinstance(p.get(field), list):
+            if (has_note(p) or field in p) and not isinstance(p.get(field), list):
                 errors.append(f"{pid}: {field} must be a list (use [] when empty)")
             errors += [f"{pid}: unknown problem {x} in {field}" for x in p.get(field) or [] if x not in problems]
         prim, also = set(p.get("problems") or []), set(p.get("also") or [])
@@ -303,7 +303,7 @@ def render_index(papers, taxonomy, mechs):
     for p in rows:
         if not (p.get("problems") or p.get("also") or has_note(p)):
             continue
-        marks = " | ".join("●" if k in p["problems"] else "○" if k in (p.get("also") or []) else " " for k, _ in probs)
+        marks = " | ".join("●" if k in (p.get("problems") or []) else "○" if k in (p.get("also") or []) else " " for k, _ in probs)
         lines.append(f"| {cell(p['short'])} | {marks} |")
     for label, field in (("主要", "problems"), ("涉及", "also")):
         totals = " | ".join(str(sum(k in (p.get(field) or []) for p in papers)) for k, _ in probs)
@@ -311,7 +311,7 @@ def render_index(papers, taxonomy, mechs):
     lines += ["", "## 3. 按问题", "", "每个问题下列出标注它的工作及速读卡中写明的对应机制，按首次公开时间排序。机制的归纳与比较见[各问题的应对机制](topics/problems.md)。", ""]
     by_time = sorted(papers, key=lambda p: (str(p["first_public"]), p["short"]))
     for key, v in probs:
-        prim = [p for p in by_time if key in p["problems"]]
+        prim = [p for p in by_time if key in (p.get("problems") or [])]
         also = [p for p in by_time if key in (p.get("also") or [])]
         lines += [f"### {v['code']} {v['name']}（主要 {len(prim)}，涉及 {len(also)}）", ""]
         for label, group in (("主要针对", prim), ("顺带涉及", also)):
@@ -365,7 +365,7 @@ def render_setup(papers, taxonomy):
 def render_problem_table(papers, taxonomy):
     lines = ["| 编号 | 问题 | 核心矛盾 | 所在环节 | 主要针对 | 顺带涉及 |", "| --- | --- | --- | --- | ---: | ---: |"]
     for key, v in taxonomy["problems"].items():
-        n = sum(key in p["problems"] for p in papers)
+        n = sum(key in (p.get("problems") or []) for p in papers)
         m = sum(key in (p.get("also") or []) for p in papers)
         lines.append(f"| {v['code']} | {cell(v['name'])} | {cell(v['tension'])} | {cell(v['stage'])} | {n} | {m} |")
     return "\n".join(lines)
@@ -376,7 +376,7 @@ def render_status(papers, taxonomy, debt):
     for key, route in taxonomy["routes"].items():
         lines.append(f"| {route['name']}（`{key}`） | {sum(key in p['routes'] for p in papers)} |")
     empty_routes = [f"`{k}`" for k in taxonomy["routes"] if not any(k in p["routes"] for p in papers)]
-    thin = [v["code"] for k, v in taxonomy["problems"].items() if sum(k in p["problems"] for p in papers) <= THIN]
+    thin = [v["code"] for k, v in taxonomy["problems"].items() if sum(k in (p.get("problems") or []) for p in papers) <= THIN]
     gaps = []
     if empty_routes:
         gaps.append(f"- 暂无收录的路线：{'、'.join(empty_routes)}。")

@@ -38,7 +38,7 @@
 
 **主线二：学习信号从外部反馈转向模型内部。** 公式挖掘的奖励只在完整公式生成后出现，且对生成的 token 不可微。早期做法是在外部构造更密集或更稳的信号：RiskMiner 给合法中间表达式即时奖励，TLRS 用专家子序列做轨迹级塑形，QFR 用信息比率压低短期波动，AlphaQCM 用回报分布方差做探索奖励。另一条路是让奖励变得可微：AlphaForge 训练预测器替代部分真实评价，同时把它的分数经 Gumbel-Softmax 回传给生成器（见 2.2）。LLM 路线重复了同一段历史，但速度更快：Alpha-GPT（2023）到 QuantaAlpha（2026）主要靠提示词与上下文循环，QuantEvolver（2026）开始用强化微调把评价反馈写进模型参数，AlphaPilot、AlphaDiverse 用 GRPO 训练多轮工具调用与分角色协作，AlphaLedger 用在线策略蒸馏把组合账本变成动作级监督（见 2.4、2.7）。这条主线的代价是把训练成本与模型依赖引入了挖掘流程，也带来了主线三要处理的问题：评价口径和证据链在训练流程里更容易不可追溯。
 
-**主线三：评价从“报一个 IC”变成“可审计的证据链”。** 早期工作的结论主要是一张 IC 或回测表。随着搜索规模变大和 LLM 介入，两类风险被反复提出：一是搜索本身就是大量多重检验，二是泄漏与留存偏差让结果难以复核。应对手段逐步前移：AlphaEval（2025）用免回测的代理指标同时评价预测力、稳定性、逻辑与多样性；FactorBench（2026）把评价分成因子、池、扣费组合三层；QBX（2026）把时间可用性检查放进编译期、用内容身份去重并把试验次数记账（见 2.6）。在 LLM 路线内部，Auditing（2026）审计已留存项目的度量口径与留存偏差，EvoQuantLab（2026）用等预算置换把搜索规模计入显著性，AlphaMemo 与 AgenticFactorInvesting 分别从“经验复用的信用”和“准入闸门”两端控制选择偏差（见 2.9）。相邻方法里的 Publication Bias 与 Sequential Cauchy 提供了从一组候选直接估出收缩幅度与族错误率的工具。这条主线目前最薄的一环是：大多数挖掘工作仍不报告自己搜索了多少候选，而所有校正方法都需要这个前提。
+**主线三：评价从“报一个 IC”变成“可审计的证据链”。** 早期工作的结论主要是一张 IC 或回测表。随着搜索规模变大和 LLM 介入，两类风险被反复提出：一是搜索本身就是大量多重检验，二是泄漏与留存偏差让结果难以复核。应对手段逐步前移：AlphaEval（2025）用免回测的代理指标同时评价预测力、稳定性、逻辑与多样性；FactorBench（2026）把评价分成因子、池、扣费组合三层；QBX（2026）把时间可用性检查放进编译期、用内容身份去重并把试验次数记账（见 2.7、2.8）。在 LLM 路线内部，Auditing（2026）审计已留存项目的度量口径与留存偏差，EvoQuantLab（2026）提出等预算置换的搜索赢家诊断，但尚未公开置换配置和校准产物；AlphaMemo 与 AgenticFactorInvesting 分别从“经验复用的信用”和“准入闸门”两端控制选择偏差（见 2.11）。相邻方法里的 Publication Bias 在发表选择模型下估计收缩与方向错误风险，Sequential Cauchy 在有效 p 值和分布假设下控制族错误率。多数挖掘工作仍不完整披露搜索规模与选择规则；账本、搜索诊断与候选族推断各自需要什么，见[搜索规模与过拟合校正](search_multiplicity.md)。
 
 三条主线交会在同一处：池视角让奖励依赖池状态，训练化让反馈进入模型参数，可审计性让搜索规模与数据边界暴露在评价之下。读一篇新工作时，可以沿这三条线各问一句——它的优化单位是什么、学习信号从哪里来、它的结论能否被独立复核——这比按方法标签归类更容易看出它真正前进了哪一步。
 
@@ -74,7 +74,7 @@ RL 公式因子挖掘路线的核心问题不是“能否生成一个高 IC 公�
 
 本文优先覆盖显式公式、符号表达式、DSL、AST 或代码形式的 Alpha / 风险因子挖掘工作。AlphaGAT、EFS、HRFT/IRFT 等条目与主线存在交集，但它们分别更偏动态组合、稀疏组合优化和高频风险因子生成，阅读时应避免把它们等同于日频公式 Alpha 生成 baseline。
 
-后续维护时建议优先核查三类信息：第一，2025-2026 年新论文的版本、会议接收状态和官方仓库是否变化；第二，论文图是否与当前条目对应，避免使用早期草稿图或非官方复现图；第三，涉及 LLM/Agent 的工作是否提供可执行代码、数据切分和回测协议，否则只能作为方法思路参考，不宜直接作为可复现实验基线。
+后续维护时建议优先核查三类信息：第一，2025-2026 年新论文的版本、会议接收状态和官方仓库是否变化；第二，笔记所依据的论文版本是否与登记一致，避免混用早期草稿与正式版；第三，涉及 LLM/Agent 的工作是否提供可执行代码、数据切分和回测协议，否则只能作为方法思路参考，不宜直接作为可复现实验基线。
 
 ## 2. 分组导读
 
@@ -104,19 +104,19 @@ RL 公式因子挖掘路线的核心问题不是“能否生成一个高 IC 公�
 
 这一组把 LLM 当作想法生成器、公式实现器或结构变异算子：LLM 负责提出与改写表达式，搜索与评价往往仍由传统搜索器或回测循环完成。它们与 2.2 的 RL 主线不是替代关系，而是换了“谁提候选”这一步。
 
-代表工作：[Alpha-GPT](../notes/cards/2023_Alpha-GPT.md)、[QuantAgent](../notes/cards/2024_QuantAgent.md)、[Alpha-GPT 2.0](../notes/cards/2024_Alpha-GPT2.md)、[LLM Strategy Finding](../notes/cards/2024_LLMStrategyFinding.md)、[AlphaAgent](../notes/cards/2025_AlphaAgent.md)、[Alpha-Jungle](../notes/cards/2025_Alpha-Jungle.md)、[CogAlpha](../notes/cards/2025_CogAlpha.md)、[QuantaAlpha](../notes/cards/2026_QuantaAlpha.md)、[FactorMiner](../notes/cards/2026_FactorMiner.md)、[Hubble](../notes/cards/2026_Hubble.md)、[LineageEvo](../notes/cards/2026_LineageEvo.md)、[TreEvo](../notes/cards/2025_TreEvo.md)、[AlphaMemo](../notes/cards/2026_AlphaMemo.md)、[AlphaLogics](../notes/cards/2026_AlphaLogics.md)、[AlphaSeek](../notes/cards/2026_AlphaSeek.md)、[CosmosAlpha](../notes/cards/2026_CosmosAlpha.md)、[EvoQuantLab](../notes/cards/2026_EvoQuantLab.md)、[AlphaRLM](../notes/cards/2026_AlphaRLM.md)、[AlphaSchema](../notes/cards/2026_AlphaSchema.md)、[AlphaDiverse](../notes/cards/2026_AlphaDiverse.md)。
+代表工作：[Alpha-GPT](../notes/cards/2023_Alpha-GPT.md)、[QuantAgent](../notes/cards/2024_QuantAgent.md)、[Alpha-GPT 2.0](../notes/cards/2024_Alpha-GPT2.md)、[LLM Strategy Finding](../notes/cards/2024_LLMStrategyFinding.md)、[AlphaAgent](../notes/cards/2025_AlphaAgent.md)、[Alpha-Jungle](../notes/cards/2025_Alpha-Jungle.md)、[CogAlpha](../notes/cards/2025_CogAlpha.md)、[QuantaAlpha](../notes/cards/2026_QuantaAlpha.md)、[FactorMiner](../notes/cards/2026_FactorMiner.md)、[Hubble](../notes/cards/2026_Hubble.md)、[LineageEvo](../notes/cards/2026_LineageEvo.md)、[TreEvo](../notes/cards/2025_TreEvo.md)、[AlphaMemo](../notes/cards/2026_AlphaMemo.md)、[AlphaLogics](../notes/cards/2026_AlphaLogics.md)、[AlphaSeek](../notes/cards/2026_AlphaSeek.md)、[CosmosAlpha](../notes/cards/2026_CosmosAlpha.md)、[AlphaRLM](../notes/cards/2026_AlphaRLM.md)、[AlphaSchema](../notes/cards/2026_AlphaSchema.md)、[AlphaDiverse](../notes/cards/2026_AlphaDiverse.md)。
 
 ### 2.5 LLM / Agent 的研究流程
 
 这一组关注的是流程本身，而不是某种表达式表示：研究轨迹怎么组织、经验记忆存什么、评价预算怎么分配、多个智能体怎么分工。同一篇工作通常还会落在 2.4 或 2.2 的某条表示路线上。
 
-代表工作：[RD-Agent(Q)](../notes/cards/2025_RD-Agent-Quant.md)（因子与模型双闭环）、[FactorEngine](../notes/cards/2026_FactorEngine.md)（程序池演化）、[QuantEvolver](../notes/cards/2026_QuantEvolver.md)（强化微调）、[AlphaPilot](../notes/cards/2026_AlphaPilot.md)、[AlphaLedger](../notes/cards/2026_AlphaLedger.md)、[AutoScientist-Quant](../notes/cards/2026_AutoScientist-Quant.md)、[X-Alpha](../notes/cards/2026_X-Alpha.md)、[AgonAlpha](../notes/cards/2026_AgonAlpha.md)、[Agora/SJS](../notes/cards/2026_Agora-SJS.md)、[EFS](../notes/cards/2025_EFS.md)、[Alpha-R1](../notes/cards/2025_Alpha-R1.md)、[AgenticFactorInvesting](../notes/cards/2026_AgenticFactorInvesting.md)。
+代表工作：[RD-Agent(Q)](../notes/cards/2025_RD-Agent-Quant.md)（因子与模型双闭环）、[EvoQuantLab](../notes/cards/2026_EvoQuantLab.md)（类型化 GP 快循环与协议诊断慢循环，见[精读](../notes/deep/2026_EvoQuantLab.md)）、[FactorEngine](../notes/cards/2026_FactorEngine.md)（程序池演化）、[QuantEvolver](../notes/cards/2026_QuantEvolver.md)（强化微调）、[AlphaPilot](../notes/cards/2026_AlphaPilot.md)、[AlphaLedger](../notes/cards/2026_AlphaLedger.md)、[AutoScientist-Quant](../notes/cards/2026_AutoScientist-Quant.md)、[X-Alpha](../notes/cards/2026_X-Alpha.md)、[AgonAlpha](../notes/cards/2026_AgonAlpha.md)、[Agora/SJS](../notes/cards/2026_Agora-SJS.md)、[EFS](../notes/cards/2025_EFS.md)、[Alpha-R1](../notes/cards/2025_Alpha-R1.md)、[AgenticFactorInvesting](../notes/cards/2026_AgenticFactorInvesting.md)。
 
 ### 2.6 表达空间扩展与风险因子生成
 
 这一组与传统日频 Alpha 公式挖掘不完全同构，但对连续参数、符号-数值混合生成、高频风险因子和更宽表达空间有参考价值。
 
-代表工作：[HRFT/IRFT](../notes/cards/2024_HRFT.md)（分钟高频风险因子）、[TextToAlpha](../notes/cards/2025_TextToAlpha.md)（季度披露文本，给出完整的文本到打分链路）、[MAPLE](../notes/cards/2026_MAPLE.md)（单模型多输出的神经 Alpha）、[Det-MASO](../notes/cards/2026_Det-MASO.md)（多智能体神经因子，智能体间相关矩阵惩罚）、[PRISM-VQ](../notes/cards/2026_PRISM-VQ.md)（离散隐因子，保留“载荷 × 因子”结构）、[GoAnt](../notes/cards/2026_GoAnt.md)（订单簿数据）。
+代表工作：[HRFT/IRFT](../notes/cards/2024_HRFT.md)（分钟高频风险因子）、[TextToAlpha](../notes/cards/2025_TextToAlpha.md)（季度披露文本，给出完整的文本到打分链路）、[MAPLE](../notes/cards/2026_MAPLE.md)（单模型多输出的神经 Alpha）、[Det-MASO](../notes/cards/2026_Det-MASO.md)（多智能体神经因子，智能体间相关矩阵惩罚）、[PRISM-VQ](../notes/cards/2026_PRISM-VQ.md)（离散隐因子，保留“载荷 × 因子”结构）、[CAVB](../notes/cards/2025_CAVB.md)（对抗变分隐因子与分位条件载荷，区分重构和历史因子均值预测）、[GoAnt](../notes/cards/2026_GoAnt.md)（订单簿数据）。
 
 ### 2.7 基准与统一评测
 
@@ -134,7 +134,7 @@ RL 公式因子挖掘路线的核心问题不是“能否生成一个高 IC 公�
 
 这一组是 2.4 的最新变化：不再靠提示词循环反复试错，而是把经验写进模型参数、在显式的语义或机制空间里搜索，或对研究轨迹做后训练。
 
-代表工作：[AlphaPilot](../notes/cards/2026_AlphaPilot.md)、[AlphaDiverse](../notes/cards/2026_AlphaDiverse.md)、[AlphaSchema](../notes/cards/2026_AlphaSchema.md)、[QuantEvolver](../notes/cards/2026_QuantEvolver.md)、[AlphaRLM](../notes/cards/2026_AlphaRLM.md)、[TreEvo](../notes/cards/2025_TreEvo.md)、[LineageEvo](../notes/cards/2026_LineageEvo.md)、[EvoQuantLab](../notes/cards/2026_EvoQuantLab.md)、[AutoScientist-Quant](../notes/cards/2026_AutoScientist-Quant.md)、[X-Alpha](../notes/cards/2026_X-Alpha.md)、[AgonAlpha](../notes/cards/2026_AgonAlpha.md)。
+代表工作：[AlphaPilot](../notes/cards/2026_AlphaPilot.md)、[AlphaDiverse](../notes/cards/2026_AlphaDiverse.md)、[AlphaSchema](../notes/cards/2026_AlphaSchema.md)、[QuantEvolver](../notes/cards/2026_QuantEvolver.md)、[AlphaRLM](../notes/cards/2026_AlphaRLM.md)、[TreEvo](../notes/cards/2025_TreEvo.md)、[LineageEvo](../notes/cards/2026_LineageEvo.md)、[AutoScientist-Quant](../notes/cards/2026_AutoScientist-Quant.md)、[X-Alpha](../notes/cards/2026_X-Alpha.md)、[AgonAlpha](../notes/cards/2026_AgonAlpha.md)。
 
 ### 2.10 相邻方法
 

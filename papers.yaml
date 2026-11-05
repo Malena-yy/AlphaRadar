@@ -460,8 +460,8 @@ papers:
   arxiv: null
   url: https://www.ijcai.org/proceedings/2025/834
   code: null
-  code_note: 未见官方开源
-  affiliation: IJCAI 官方页面未展示单位信息；作者为 Shicheng Li、Jinshan Zhang、Feng Wang
+  code_note: 2026-11-05 核查 IJCAI 正式论文页、PDF，并按标题与 CATimeMixer 检索，未见官方代码链接
+  affiliation: 武汉大学计算机学院、浙江大学软件学院（据正式 PDF 首页）
   problems:
   - expressiveness
   - objective-gap
@@ -486,7 +486,7 @@ papers:
   card: notes/cards/2025_AlphaGAT.md
   deep: notes/deep/2025_AlphaGAT.md
   added: '2026-11-03'
-  checked: '2026-07-11'
+  checked: '2026-11-05'
 - id: efs-2025
   short: EFS
   title: 'EFS: Evolutionary Factor Searching for Sparse Portfolio Optimization Using Large Language Models'
@@ -1133,7 +1133,7 @@ papers:
   arxiv: '2610.06947'
   url: https://arxiv.org/abs/2610.06947
   code: https://github.com/ZhuoHan1998/FactorBench-Release
-  code_note: null
+  code_note: 2026-11-05 静态核查提交 8dbc5b4 的选池、合成与回测源码；补充口径与评估边界见精读，未运行实验
   affiliation: 伦敦国王学院信息学系
   problems:
   - objective-gap
@@ -1157,7 +1157,7 @@ papers:
   card: notes/cards/2026_FactorBench.md
   deep: notes/deep/2026_FactorBench.md
   added: '2026-11-03'
-  checked: '2026-11-03'
+  checked: '2026-11-05'
 - id: auditing-llm-alpha-2026
   short: Auditing LLM Alpha-Factor Mining
   title: 'Auditing LLM Alpha-Factor Mining: Metric Provenance and Full-Cohort Reanalysis'
@@ -1528,7 +1528,7 @@ papers:
   arxiv: '2610.17130'
   url: https://arxiv.org/abs/2610.17130
   code: null
-  code_note: 论文承诺发布源码与配置，但未给出链接
+  code_note: 2026-11-05 核查 arXiv v2 及标题 / GitHub 检索，未见官方链接；源码、配置、试验账本与 OOS 产物仍为发布承诺
   affiliation: 香港科技大学、微软、清华大学、澳门大学
   problems:
   - overfitting
@@ -1544,21 +1544,21 @@ papers:
     freq: 日频（权益）；小时频（Crypto）
     test: CSI500 2026-05-06 至 2026-08-17；S&P500 2026-05-01 至 2026-08-14；Crypto 2026-04-01 至 2026-06-09
     label: 次日截面收益（Crypto 为下一小时截面收益）
-    cost: 权益回测为扣费前毛收益；Crypto 单边 5 bps
+    cost: 权益回测为扣费前毛收益；Crypto 单边 5 bps，不含永续资金费
   routes:
   - formulaic
-  - llm-formula
+  - llm-agent
   tags:
   - llm
   - genetic-programming
   - evolutionary
   - quality-diversity
   - auditing
-  status: card
+  status: deep-read
   card: notes/cards/2026_EvoQuantLab.md
-  deep: null
+  deep: notes/deep/2026_EvoQuantLab.md
   added: '2026-11-03'
-  checked: '2026-11-03'
+  checked: '2026-11-05'
 - id: lineageevo-2026
   short: LineageEvo
   title: Lineage-Aware Search Control for LLM-Based Evolutionary Factor Mining
@@ -2505,3 +2505,36 @@ papers:
   deep: null
   added: '2026-11-03'
   checked: '2026-11-03'
+- id: cavb-2025
+  short: CAVB
+  title: Asset Pricing with Contrastive Adversarial Variational Bayes
+  summary: 对抗变分贝叶斯学习共同隐因子，对比学习区分分位条件载荷，以历史因子均值预测收益。
+  first_public: '2025'
+  versions: IJCAI 2025 正式论文集 pp. 7572-7579；在线补充材料另见 SSRN 5263270（本次未读到正文）
+  venue: IJCAI 2025（Main Track）
+  arxiv: null
+  url: https://www.ijcai.org/proceedings/2025/842
+  code: null
+  code_note: 2026-11-05 核查正式论文页与 PDF，并按标题及作者检索，未见官方代码链接；SSRN 补充材料访问返回 403
+  affiliation: 伦敦国王学院、香港城市大学、Bayescien Technologies、伦敦政治经济学院
+  problems:
+  - expressiveness
+  also:
+  - redundancy
+  setup:
+    markets: 美股 NYSE、AMEX、NASDAQ；流动性筛选后的逐期股票数未披露
+    freq: 月频
+    test: 2010 至 2022 年（由 1980 年起、20 年训练 + 10 年验证 + 1 年测试、13 次年度滚动推出）
+    label: 次月收益；模型以超额收益定义因子结构，正文未细化无风险收益处理
+    cost: 月度调仓 30 bps；未明确单边 / 双边与换手计费基数
+  routes:
+  - neural
+  tags:
+  - neural-alpha
+  - factor-model-joint
+  - risk-factor
+  status: card
+  card: notes/cards/2025_CAVB.md
+  deep: null
+  added: '2026-11-05'
+  checked: '2026-11-05'
