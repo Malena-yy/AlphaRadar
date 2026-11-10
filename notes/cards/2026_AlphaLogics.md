@@ -19,7 +19,7 @@
 
 <!-- META:END -->
 
-> 阅读口径：2026-11-03 据本地 PDF（arXiv v1 版，2026-03 提交）撰写。
+> 文献依据：arXiv v1。
 
 * **主要工作/创新点：** AlphaLogics 把“市场逻辑”（observed alpha factor 背后的潜在机制，解释因子为何应跨资产与跨状态持续）本身当作显式、可编译、可迭代优化的研究对象，而因子只是逻辑的证据。市场逻辑写成二元组 H = ⟨C, B⟩：C 是由谓词 c_i = (v, op, θ, w) 组成的合取/析取条件，B = (y, d, h) 给出目标、方向与期限（式 1，附录 A.4）。流程分三阶段（第 3 节，图 2）。1）市场逻辑挖掘：从四个公开因子库 Alpha101、Alpha191、Alpha158、Alpha360 出发，用 FormulaStructureAgent（只做公式结构与形式性质拆解）、FinancialSemanticsMappingAgent（把算子映射到金融与行为金融语义）、MarketLogicAbstractionAgent（抽象为自然语言市场逻辑）三段流水线，把“数学公式 → 金融含义 → 市场逻辑”逐层反转，得到初始逻辑库 H_init。2）受逻辑引导的因子生成：LogicToFinanceConstraintAgent 把 H 规范化为 H_struct 并确定性地编译为约束 Γ = COMPILE(H_struct)，限定允许的变量族、算子族、参数范围与符号方向；FactorExpressionGeneratorAgent 在固定 DSL（附录 A.2–A.3 列出截面、时序、平滑、条件、回归、技术指标等算子族）内生成满足 Γ 的表达式，不满足的程序被 DSL 解析器拒绝并要求重生成；BacktestEngine 返回 (R_train, R_val)，FactorPerformanceFeedbackAgent 维护最近 M 个候选的缓冲、跨候选比较后给出结构化反馈（算法 1，内循环）。3）市场逻辑生成与优化：当同一逻辑下的因子改进停滞，MarketLogicRefinementDirectionAgent 汇总该逻辑下所有因子的表现，指出过宽、含糊或与市场结构不符的条件，MarketLogicGeneratorAgent 据此改写或重构逻辑，新逻辑追加进逻辑库并成为后续生成的上下文（算法 2，外循环）。逻辑级评价取该逻辑下因子的最优验证指标 J(R_val)，最终按 J 保留最佳 H*。所有优化信号（早停、因子与逻辑选择、反馈）只用 D_val；D_train 只用于拟合 LightGBM 与计算因子值，最终结果在 D_test 上报告（第 4.1 节）。AlphaLogics 只用 OHLCV 与量价形态，不建模基本面或会计类信号（第 1 节）。
 

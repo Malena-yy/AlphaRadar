@@ -10,7 +10,7 @@
 #   arxiv         arXiv 编号；没有为 null
 #   url           论文主链接
 #   code          官方仓库链接；未见官方开源为 null
-#   code_note     开源补充说明：未开源时写检索结论；有仓库时只写完整性等补充；没有则为 null
+#   code_note     开源补充说明：只写公开状态与代码材料的实质缺口，不写检索步骤或核查过程；无补充则为 null
 #   affiliation   作者单位
 #   problems      主要针对的问题：论文动机所在、主要贡献针对的，取 taxonomy.yaml 中 problems 的键，至多 3 个
 #   also          顺带涉及的问题：有对应机制但不是主要贡献的，取值同上；基线或背景工作两者都写 []
@@ -24,7 +24,7 @@
 #   status        inbox / triaged / card / deep-read
 #   card, deep    速读卡与精读路径
 #   added         收录日期
-#   checked       最近一次核查版本与发表状态的日期；开源情况的检索日期写在 code_note 中
+#   checked       最近一次核查版本与发表状态的日期；各分项的检索步骤与核查时间记入本地 WORKLOG.md
 papers:
 - id: alpha101-2016
   short: Alpha101
@@ -460,7 +460,7 @@ papers:
   arxiv: null
   url: https://www.ijcai.org/proceedings/2025/834
   code: null
-  code_note: 2026-11-05 核查 IJCAI 正式论文页、PDF，并按标题与 CATimeMixer 检索，未见官方代码链接
+  code_note: 论文及正式论文页未给出官方代码链接
   affiliation: 武汉大学计算机学院、浙江大学软件学院（据正式 PDF 首页）
   problems:
   - expressiveness
@@ -830,7 +830,7 @@ papers:
   arxiv: '2511.18850'
   url: https://arxiv.org/abs/2511.18850
   code: null
-  code_note: 论文称代码将发布；截至 2026-07-11 检索未见官方仓库
+  code_note: 论文称代码将发布，未给出官方仓库链接
   affiliation: 中国移动九天研究院、香港大学计算与数据科学学院、Grace Investment Machine
   problems:
   - search-space
@@ -1133,7 +1133,7 @@ papers:
   arxiv: '2610.06947'
   url: https://arxiv.org/abs/2610.06947
   code: https://github.com/ZhuoHan1998/FactorBench-Release
-  code_note: 2026-11-05 静态核查提交 8dbc5b4 的选池、合成与回测源码；补充口径与评估边界见精读，未运行实验
+  code_note: 论文实验对应的代码版本、运行配置与入选清单未明确
   affiliation: 伦敦国王学院信息学系
   problems:
   - objective-gap
@@ -1384,7 +1384,7 @@ papers:
   arxiv: '2607.26642'
   url: https://arxiv.org/abs/2607.26642
   code: https://github.com/JingyangYi/AlphaSchema
-  code_note: 仓库完整性未核查
+  code_note: null
   affiliation: X-Tech、Xtech-PandaAI-Waton 联合实验室、莫纳什大学、PandaAI、清华大学交叉信息研究院
   problems:
   - search-space
@@ -1528,7 +1528,7 @@ papers:
   arxiv: '2610.17130'
   url: https://arxiv.org/abs/2610.17130
   code: null
-  code_note: 2026-11-05 核查 arXiv v2 及标题 / GitHub 检索，未见官方链接；源码、配置、试验账本与 OOS 产物仍为发布承诺
+  code_note: 论文未给出代码链接；源码、配置、试验账本与 OOS 产物为发布承诺
   affiliation: 香港科技大学、微软、清华大学、澳门大学
   problems:
   - overfitting
@@ -2164,7 +2164,7 @@ papers:
   arxiv: '2606.20625'
   url: https://arxiv.org/abs/2606.20625
   code: https://github.com/jarrettyu/sspm
-  code_note: 论文正文给出仓库链接，未核对完整性
+  code_note: null
   affiliation: 悉尼大学、京东、爱丁堡大学
   problems:
   - learning-signal
@@ -2510,12 +2510,12 @@ papers:
   title: Asset Pricing with Contrastive Adversarial Variational Bayes
   summary: 对抗变分贝叶斯学习共同隐因子，对比学习区分分位条件载荷，以历史因子均值预测收益。
   first_public: '2025'
-  versions: IJCAI 2025 正式论文集 pp. 7572-7579；在线补充材料另见 SSRN 5263270（本次未读到正文）
+  versions: IJCAI 2025 正式论文集 pp. 7572-7579；在线补充材料另见 SSRN 5263270
   venue: IJCAI 2025（Main Track）
   arxiv: null
   url: https://www.ijcai.org/proceedings/2025/842
   code: null
-  code_note: 2026-11-05 核查正式论文页与 PDF，并按标题及作者检索，未见官方代码链接；SSRN 补充材料访问返回 403
+  code_note: 正式论文未给出官方代码链接
   affiliation: 伦敦国王学院、香港城市大学、Bayescien Technologies、伦敦政治经济学院
   problems:
   - expressiveness

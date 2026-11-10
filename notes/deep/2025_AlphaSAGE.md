@@ -3,8 +3,8 @@
 > - 速读卡：[AlphaSAGE](../cards/2025_AlphaSAGE.md)。
 > - 论文：AlphaSAGE: Structure-Aware Alpha Mining via GFlowNets for Robust Exploration，ICLR 2026 conference paper。
 > - 原文：[arXiv:2509.25055](https://arxiv.org/abs/2509.25055)
-> - 阅读范围：PDF 全文 28 页，覆盖正文第 1-5 节、Appendix A-F、Algorithm 1、Table 1-13、公式 (1)-(45)。
-> - 官方代码补充范围：官方仓库 `README.md`、`train_gfn.py`、`run_adaptive_combination.py`、`src/alpha_gfn/`、`src/alphagen/data/`、`src/alphagen/models/alpha_pool.py`、`src/alphagen/utils/`、`src/alphagen_qlib/`。
+> - 分析范围：PDF 全文 28 页，覆盖正文第 1-5 节、Appendix A-F、Algorithm 1、Table 1-13、公式 (1)-(45)。
+> - 源码依据：官方仓库 `README.md`、`train_gfn.py`、`run_adaptive_combination.py`、`src/alpha_gfn/`、`src/alphagen/data/`、`src/alphagen/models/alpha_pool.py`、`src/alphagen/utils/`、`src/alphagen_qlib/`。
 > - 文档边界：本文解释论文算法与可直接从公式推出的性质；官方源码口径与论文不一致时单独标注，不改写论文结论。
 
 ## 1. 核心结论

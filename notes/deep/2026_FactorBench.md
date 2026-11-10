@@ -1,9 +1,9 @@
 # FactorBench 精读
 
 > - 速读卡：[FactorBench](../cards/2026_FactorBench.md)（论文元数据见速读卡开头）
-> - 阅读版本：arXiv v1（`arXiv:2610.06947v1 [q-fin.PM] 3 Oct 2026`），PDF 30 页；与速读卡记录一致
-> - 阅读范围：正文第 1–6 节；附录 A（数据与处理协议）、B（方法实现）、C（因子层评估）、D（因子池层评估）、E（组合层评估）；Table 1–8、Figure 1–21；正文公式 (1)（标签）、(2)（相似度），以及附录 C.2 配对退化式、C.3 横截面回归式与调整 R² 式（正文未编号）
-> - 官方代码补充范围：2026-11-05 静态核查官方仓库提交 [`8dbc5b42e005a4038dd52e4790b30b467a5c1575`](https://github.com/ZhuoHan1998/FactorBench-Release/tree/8dbc5b42e005a4038dd52e4790b30b467a5c1575) 的选池、合成、回测、准入与时间切分代码，补充见第 11.6 节；未运行实验，未确认该提交就是论文数字的产出版本
+> - 文献版本：arXiv v1（`arXiv:2610.06947v1 [q-fin.PM] 3 Oct 2026`），PDF 30 页；与速读卡记录一致
+> - 分析范围：正文第 1–6 节；附录 A（数据与处理协议）、B（方法实现）、C（因子层评估）、D（因子池层评估）、E（组合层评估）；Table 1–8、Figure 1–21；正文公式 (1)（标签）、(2)（相似度），以及附录 C.2 配对退化式、C.3 横截面回归式与调整 R² 式（正文未编号）
+> - 源码依据：[官方仓库固定版本](https://github.com/ZhuoHan1998/FactorBench-Release/tree/8dbc5b42e005a4038dd52e4790b30b467a5c1575)的选池、合成、回测、准入与时间切分实现，补充见第 11.6 节；该版本与论文实验版本的对应关系未明确
 > - 文档边界：本文解释基准协议与可直接从公式推出的性质；论文文字、表格与附录之间的不一致单独标注，不改写论文结论；作者未给出的信息写“未披露”，读者自己的判断写“推断”
 
 <!--
@@ -591,11 +591,13 @@ Table 7 把净 Sharpe 按市场拆开，是本文最能说明"跨市场平均掩
 - **种子对非 LLM 方法的实际作用面**：种子 0/1/2 只影响随机初始化与采样，但未说明是否也影响池的准入顺序（相关阈值下先入池的因子会挤掉后来的）。
 - **LLM 方法的调用规模**：只给墙钟时间与轮数，未给每 run 的 token 数、调用次数与成本；附录 B.2 排除 Alpha Jungle / CogAlpha 的理由正是"调用量高出可复现量级"，但没有量化。
 - **Qwen3.8-27B 的预训练截止**：未讨论其语料是否覆盖 2024–2025 测试期（这是 LLM 挖掘的 P6 类风险，本文未处理）。
-- **官方仓库能补多少**：2026-11-05 已静态核对选池、合成与回测等关键文件，见第 11.6 节；各方法 runner、交付产物及论文数字的完整复现仍未核查。
+- **官方源码的证据范围**：选池、合成与回测等实现细节见第 11.6 节；各方法 runner、交付产物与论文实验的对应关系尚不明确。
 
-### 11.6 官方源码核查（2026-11-05）
+<a id="source-protocol"></a>
 
-以下均为**官方源码口径**，固定于上述提交。源码可以补充复现细节，但当前代码可能晚于论文实验；本次没有下载数据、运行回测或验证表格数字。
+### 11.6 官方源码口径
+
+以下均为**官方源码口径**，来自上述固定版本。源码可以补充实现细节，但其与论文实验的版本对应关系未明确，不能据此确认论文表格数字。
 
 | 核查项 | 当前实现 | 与论文阅读的关系及边界 |
 | --- | --- | --- |
@@ -606,8 +608,8 @@ Table 7 把净 Sharpe 按市场拆开，是本文最能说明"跨市场平均掩
 | 组合实验入口 | [`run_backtests.py`](https://github.com/ZhuoHan1998/FactorBench-Release/blob/8dbc5b42e005a4038dd52e4790b30b467a5c1575/factor_bench/portfolio/run_backtests.py)：主调仓间隔 20 日、10 bp，遍历三种合成、全池 / top10、正验证 IC 门槛开 / 关；选池与合成在调仓循环外完成 | 支持静态选池与固定合成权重的实现口径。`CombineConfig` 默认等权、`BacktestConfig` 默认 5 日，不能把类默认值当作论文的岭回归 / 20 日主结果 |
 | 换手与交易费 | [`backtest.py`](https://github.com/ZhuoHan1998/FactorBench-Release/blob/8dbc5b42e005a4038dd52e4790b30b467a5c1575/factor_bench/portfolio/backtest.py)：换手为 `0.5 * sum(abs(target-held))`，交易费为换手 × `cost_bps / 1e4`；各市场走同一配置 | 计费基数是半 L1 换手，不能直接理解成买卖名义额之和各扣 10 bp。调仓前的 `held` 按上一日收益更新后再按绝对权重和归一；这本身不是完整的现金与自融资账户模型 |
 | 融券、持仓与执行时点 | 同上：融券默认年化 50 bp，按空头绝对权重每日除以 252 扣费；前 / 后 20% 的数量向下取整；long–short 为 +0.5 / −0.5；`execution_lag=1` 时 t 日信号对应的目标权重从索引 t+2 开始计收益 | 补齐费率和取整；时点由 `effective=i+execution_lag+1` 与当日收益计算顺序推出。未建模真实借券、税费、冲击和容量 |
-| 可评分性准入 | [`admission.py`](https://github.com/ZhuoHan1998/FactorBench-Release/blob/8dbc5b42e005a4038dd52e4790b30b467a5c1575/factor_bench/eval/admission.py)、[`ic_table.py`](https://github.com/ZhuoHan1998/FactorBench-Release/blob/8dbc5b42e005a4038dd52e4790b30b467a5c1575/factor_bench/eval/ic_table.py)：`admitted` 要求 train / valid / test 三段各至少 100 个可评分日；`selection.py` 在该列存在时默认要求其为真 | 与论文要求跨期共同可评分样本一致，但让组合入选集依赖测试期可评分性。它不读取测试 IC 高低作排序，却不满足严格的“选池不读取任何测试信息”。影响大小未由本次静态核查确定 |
-| 标签与末尾缓冲 | [`target.py`](https://github.com/ZhuoHan1998/FactorBench-Release/blob/8dbc5b42e005a4038dd52e4790b30b467a5c1575/factor_bench/data/target.py)定义 `close[t+20]/close[t]-1`；[`splits.py`](https://github.com/ZhuoHan1998/FactorBench-Release/blob/8dbc5b42e005a4038dd52e4790b30b467a5c1575/factor_bench/data/splits.py)注明数据末尾至 2025-12-30，测试止于 2025-10-31，保留超过 30 个交易日供标签计算 | 补充代码所声明的末尾缓冲；未核对实际数据日历与缓存，不能据此宣称切分边界与全部 runner 已无泄漏 |
+| 可评分性准入 | [`admission.py`](https://github.com/ZhuoHan1998/FactorBench-Release/blob/8dbc5b42e005a4038dd52e4790b30b467a5c1575/factor_bench/eval/admission.py)、[`ic_table.py`](https://github.com/ZhuoHan1998/FactorBench-Release/blob/8dbc5b42e005a4038dd52e4790b30b467a5c1575/factor_bench/eval/ic_table.py)：`admitted` 要求 train / valid / test 三段各至少 100 个可评分日；`selection.py` 在该列存在时默认要求其为真 | 与论文要求跨期共同可评分样本一致，但让组合入选集依赖测试期可评分性。它不读取测试 IC 高低作排序，却不满足严格的“选池不读取任何测试信息”。仅凭源码不能确定其对结果的影响大小 |
+| 标签与末尾缓冲 | [`target.py`](https://github.com/ZhuoHan1998/FactorBench-Release/blob/8dbc5b42e005a4038dd52e4790b30b467a5c1575/factor_bench/data/target.py)定义 `close[t+20]/close[t]-1`；[`splits.py`](https://github.com/ZhuoHan1998/FactorBench-Release/blob/8dbc5b42e005a4038dd52e4790b30b467a5c1575/factor_bench/data/splits.py)注明数据末尾至 2025-12-30，测试止于 2025-10-31，保留超过 30 个交易日供标签计算 | 补充代码所声明的末尾缓冲；实际数据日历、缓存与各 runner 的信息边界仍需运行产物佐证，不能仅凭该声明确认无泄漏 |
 
 剩余缺口：论文实验对应的准确提交、实际运行配置与入选清单、退回等权是否发生、各方法 runner 的完整信息边界、股票池名单时点和数据缓存一致性均未确认。源码已公开不等于论文结果已经复现。
 
@@ -657,7 +659,7 @@ Table 7 把净 Sharpe 按市场拆开，是本文最能说明"跨市场平均掩
 | 因子去重规则（跨 seed、跨市场、同表达式不同语法） | 未披露 | Table 4 |
 | 方法间差异的显著性检验与多重比较校正 | 未披露（全文只报离散度） | Table 5–7、附录 E.1 |
 | 正文承诺的 temporal buffer 在附录 A 的具体设置 | 未披露 / 前后不一致 | 第 3.2 节 vs 附录 A |
-| 当前官方源码补充了选池、排名归一化、岭回归网格、计费、融券与执行时点；选池依赖测试期可评分性 | 官方源码口径；未运行实验 | 固定提交 `8dbc5b4`，第 11.6 节 |
+| 所引官方源码补充了选池、排名归一化、岭回归网格、计费、融券与执行时点；选池依赖测试期可评分性 | 官方源码口径，不构成对论文结果的验证 | 第 11.6 节及固定版本源码链接 |
 
 ## 13. 作为“实验口径对照骨架”使用时的边界
 

@@ -9,7 +9,7 @@
 | 版本 | arXiv v1 2026-07 |
 | 会议 / 期刊 | — |
 | 论文 | [arXiv:2607.26642](https://arxiv.org/abs/2607.26642) |
-| 代码 | [JingyangYi/AlphaSchema](https://github.com/JingyangYi/AlphaSchema)；仓库完整性未核查 |
+| 代码 | [JingyangYi/AlphaSchema](https://github.com/JingyangYi/AlphaSchema) |
 | 作者单位 | X-Tech、Xtech-PandaAI-Waton 联合实验室、莫纳什大学、PandaAI、清华大学交叉信息研究院 |
 | 路线 | `llm-formula` |
 | 标签 | `llm` `surrogate-model` |
@@ -19,7 +19,7 @@
 
 <!-- META:END -->
 
-> 阅读口径：2026-11-03 据 arXiv v1 原文撰写。
+> 文献依据：arXiv v1。
 
 * **主要工作/创新点：** AlphaSchema 认为，现有 LLM 因子挖掘把搜索空间构造、搜索方向选择和代码实现都交给智能体，探索隐含在提示词、记忆和模型行为里，难以度量、控制和复现。它把每个候选因子表示为结构化的交易语义计划 p=(e, c, Q, d, o)，五个维度依次是：Event（市场事件）、Context（解释该事件的条件）、Qualities（0–3 个确认或过滤条件）、Direction（与未来收益的方向关系）、Output（信号的输出形式）。计划只描述交易逻辑，不规定算子、函数或参数，各维度之间也不设人工兼容规则（第 2–3 节）。主实验的价量语义空间含 140 个组件（40 个 Event、40 个 Context、50 个 Qualities、3 个 Direction、7 个 Output），词表来自研报、论文、书籍、从业者材料和以往的挖掘结果（第 4 节、附录 C）。搜索在 LLM 之外进行。每轮从语义空间随机采样 10,000 个计划，用 LightGBM 代理奖励模型打分（该模型每轮在累积奖励缓冲区上重训）。配额选择器再把每轮 16 个实现名额分给三类来源：结构探索（偏向少见的 Event-Context 组合）、代理模型引导的利用、对高奖励计划只改一个组件的局部变异；探索份额随已评价计划数指数衰减（第 3 节、附录 A）。选中的计划由代码智能体（默认 DeepSeek-V4-Flash）按数据契约实现为快、慢两个时间尺度的 pandas 因子函数，须通过契约、数值稳定性和前视泄漏检查。未通过的可修复一次，仍失败则记零奖励并留在缓冲区。奖励为 10·RankIC + 1·RankICIR − 2·Δlag，其中 Δlag 惩罚信号滞后一期后 RankIC 的下降；计划奖励取两个时间尺度中的较大值（Eq. 2、附录 A）。最终因子池按奖励排序，以 |corr|<0.7 贪心去冗余，再交给 LightGBM 组合器（附录 A）。
 

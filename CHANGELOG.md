@@ -2,6 +2,12 @@
 
 记录仓库结构、收录口径、模板和分类体系的变化。最新记录在前。
 
+## 2026-11-10 清理对外文档的维护过程叙述
+
+- 73 张速读卡的开头统一为文献依据，保留论文版本与来源；登记说明、精读、专题、简报和旧维护日志删除阅读、检索操作、访问报错与维护待办等过程叙述。
+- 固定源码版本、公开状态、检索口径与证据范围继续保留；未纳入分析的补充材料不改写为论文未披露。
+- AGENTS.md 强调维护过程只进入本地工作日志，CHANGELOG 只记录仓库实质变化；卡片、精读和简报模板同步调整。
+
 ## 2026-11-10 索引去重与阅读导航
 
 - 删除与总表问题标注、按问题列表重复的问题矩阵，保留总表、按问题、实验口径与按路线四种检索视图。
@@ -20,7 +26,7 @@
 
 ## 2026-11-05 CAVB 写卡与 EvoQuantLab 精读
 
-- CAVB 从待写推进为速读：补齐共同隐因子、分位条件载荷、训练与预测信息边界及月频滚动口径；正文公式歧义和补充材料访问失败分别记录，不按常见实现补全。
+- CAVB 从待写推进为速读：补齐共同隐因子、分位条件载荷、训练与预测信息边界及月频滚动口径；正文公式歧义与分析证据范围分别说明，不按常见实现补全。
 - 新增 EvoQuantLab 精读，核查协议冻结、GP / LLM 分工、等预算置换与外循环选择的边界。全文未披露 B₀、区块配置、实际 p 值和完整重放产物，相关专题不再保留“待精读”的旧任务表述。
 - 修正 EvoQuantLab 旧卡的数字和口径：CSI500 单因子 OOS IR 为 1.041，1.002 属于 RD-Agent；两张原表一致，旧卡为文本抽取误读。Crypto IC 高于 FactorMiner，权益毛收益与 Crypto 扣费且不含资金费的口径分开记录。
 - 按主要贡献与主文分工将 EvoQuantLab 路线改为 `formulaic` + `llm-agent`，研究全景导读同步；附录对候选提议来源的含糊处保留为待核点。
@@ -29,7 +35,7 @@
 ## 2026-11-05 维护基线、源码核查与搜索多重性专题
 
 - 评估口径专题按 72 篇已写卡工作更新，另列新增待写 CAVB；成本字段空值与明确不计成本、非金融方法不适用分别说明，删除已过期的互斥市场计数。
-- 核查 AlphaGAT 正式发表状态与单位，补充检索范围；FactorBench 精读新增固定官方提交的静态源码核查，论文口径与源码口径分开记录，明确测试期可评分性进入选池的边界。两篇登记与速读卡同步更新。
+- AlphaGAT 补充正式发表信息与作者单位；FactorBench 精读增加固定版本的官方源码口径，明确测试期可评分性进入选池的边界，论文与源码结论分别记录。
 - 新增 `topics/search_multiplicity.md`，比较试验计数、等预算伪搜索、发表偏差估计与候选族错误率控制；修正 README 和相关专题对 EvoQuantLab 的遗漏，以及把无需估计相关矩阵误写成无分布假设等表述。
 - 本轮增量与覆盖补检写入 `digests/2026-11-05.md`：arXiv 增量无新增，会议录补录 CAVB 为待写；原简报补充历史口径说明，保留当期路线、计数和状态。
 - 修正校验脚本与待筛最小字段规则的冲突：未写卡条目可以省略 `problems` / `also`；已写卡仍必须显式提供列表，待筛条目若主动填写也继续校验类型与取值。
@@ -41,7 +47,7 @@
 
 ## 2026-11-03 方向分类调整：拆分 LLM 与评估路线
 
-- 问题：72 篇读完后，`llm-agent` 混了三类东西（公式输出、代码输出、流程编排）；`evaluation` 混了两类（给方法排名 vs 审视证据链）；`pool-combination` 没有一篇单独成篇，实为下游模块。问题见本地工作日志。
+- 问题：72 篇读完后，`llm-agent` 混了三类东西（公式输出、代码输出、流程编排）；`evaluation` 混了两类（给方法排名 vs 审视证据链）；`pool-combination` 没有一篇单独成篇，实为下游模块。
 - 路线由 7 条改为 9 条：
   - `llm-agent` 拆为 `llm-formula`（LLM 提出或改写表达式，20 篇）与 `llm-agent`（以流程编排为主要贡献，12 篇）。
   - `evaluation` 拆为 `benchmark`（统一数据与执行契约，给方法排名，4 篇）与 `auditing`（留存方式、口径、前视检查与试验计数，3 篇）。
@@ -51,7 +57,7 @@
 
 ## 2026-11-03 CogAlpha 会议信息补登
 
-- 外部文章（公众号「随机森林之外」）提到 CogAlpha 为 ACL 2026 论文，登记表原为 `venue: null`。核查：arXiv comment 与 PDF 首页均未标会议；ACL Anthology 站内搜索依赖 Google、无法直接检索；DBLP 与 Semantic Scholar 分别返回反爬与限流；最终在 Crossref 查到记录，会议为 Proceedings of the 64th Annual Meeting of the ACL（Volume 1: Long Papers），2026。已补登 `venue` 并更新 `checked`，速读卡注明出处。
+- CogAlpha 补充为 ACL 2026 主会（Proceedings of the 64th Annual Meeting of the ACL，Volume 1: Long Papers），依据为 Crossref 记录。
 
 ## 2026-11-03 研究全景的演进叙述与第二期增量
 
@@ -80,7 +86,6 @@
   - AlphaPADI：`R_inner` 惩罚的是最坏邻居的平方 hinge，不是平均邻居相关；共享评价预算只约束六个非 LLM 方法，AlphaAgent 未作说明；所有基线都用同一静态组合器评价，表 1 数字不能与各基线原文表格直接比较。
   - QBX：补注其未公开代码与注册表、却把可复现性列为主要针对问题之一的自我指涉风险。
 - 标签治理：50 个标签全部补一行定义；合并 4 个重叠标签（`generator-predictor` → `surrogate-model`、`automl` → `evolutionary`、`self-play` → `multi-agent`、`skills` → `memory`），现为 47 个，仅 `alternative-data` 暂无使用。
-- 覆盖补检：为 `neural`、`data-space` 两条较薄路线与 P5 补检候选，已登记 AlphaMemo、AgenticFactorInvesting、Publication Bias、Sequential Cauchy（上一轮）；CosmosAlpha、PRISM-VQ、MarketSenseAI 已下载待判断。
 
 ## 2026-11-03 研究全景补全
 
@@ -90,7 +95,7 @@
 
 ## 2026-11-03 补 P5：过拟合与多重检验
 
-- `problems.md` 此前只剩 P5「低信噪比下的过拟合」一个覆盖缺口（主要针对 3 篇）。本轮两轮 arXiv 检索（多重检验、数据窥探、回测过拟合、发表偏差等关键词）选出 4 篇候选，读原文后全部收录：
+- P5「低信噪比下的过拟合」补充以下 4 篇，覆盖多重检验、发表偏差与经验复用中的选择偏差：
   - `llm-agent` 路线 2 篇：AlphaMemo（按父因子质量分桶校正残差信用，控制经验复用带来的选择偏差）、AgenticFactorInvesting（经济理由约束、显著性门槛与样本外冻结三层准入闸门）。
   - `adjacent` 路线 2 篇：Publication Bias（经验贝叶斯收缩与 FDR，附“短窗口衰减是选择偏差上界”的归因规则）、Sequential Cauchy（强 FWER 控制并能指认个体显著项的多重检验程序）。
 - P5 主要针对由 3 篇增至 5 篇，另有 2 篇相邻方法；`topics/problems.md` 的 P5 归纳与 `topics/adjacent/transferable_methods.md` 同步更新（新增 2.5 节）。
@@ -104,8 +109,7 @@
 - 新增专题 `topics/evaluation_protocol.md`：按股票池、频率与标签、切分、成本四项比较口径差异，并列出 6 类已知会误导比较的情形（基线复现口径不同、基线只用部分模块、组合池与基线不同、论文内部多套口径、依赖外部平台评测、论文内部数字不一致）。
 - 读原文核对时修正的卡片错误：
   - QFR：卡片原写“回测假设 TWAP/VWAP 执行、报告换手与最大回撤”，原文第 V-E 节只有累计收益曲线，表 V 只是 IC/RankIC，相关表述已删除；阅读版本由 v3 改为 v2。
-  - AlphaSAGE：本地 PDF 曾为 v2（只含 CSI300、CSI500、S&P500），已换成 v3（28 页，含 CSI1000），并在卡片注明版本；本地 Alpha-Jungle PDF 同步换成 v3。
-- 待核查：Alpha-Jungle 的复现审计记录提到 v3 含 S&P500 实验，本次 v3 全文检索只命中 4 处 S&P，未确认是否有 S&P500 实验，暂不写入兜底结论。
+  - AlphaSAGE：实验口径以 v3 为准，包含 CSI1000；v2 仅包含 CSI300、CSI500、S&P500。
 
 ## 2026-11-03 待筛工作逐篇判断
 
@@ -142,7 +146,7 @@
 
 ## 2026-11-03 内容补写、候选登记与第一期简报
 
-- 速读卡：除 AlphaQCM（OpenReview 返回 403，需换来源）外，31 张卡的“证据”与“局限”按论文原文补写，每句注明章节或表格来源；无依据处写明“据实验设置”或“推断”。三篇有精读的卡片据本仓库精读补写。
+- 31 张速读卡补充“证据”与“局限”，注明章节或表格来源；推断与论文结论分别标明。AlphaQCM 的证据与局限保留原状态。
 - 问题标注修正（读原文核对后发现）：
   - QFR：P5 改为 P9。信息比率针对的是因子随时间是否稳定，原文没有讨论搜索规模带来的选择偏差。
   - Synergistic RL：P2 改为 P7。扩展算子与窗口是为了扩大搜索空间和因子多样性，原文未讨论可解释性代价。
@@ -169,7 +173,7 @@
   - 修正 `first_public`：AutoAlpha 2020-04 → 2020-02，AlphaEvolve 2021-04 → 2021-03，原值是 v2 日期。
   - 新增或确认发表信息：Alpha101（Wilmott Magazine 2016）、Synergistic RL（ICOIN 2024）、RiskMiner（ICAIF 2024）、QFR（IEEE Transactions on Signal Processing 2025）、Alpha-GPT（EMNLP 2025 System Demonstrations）、AlphaSAGE（ICLR 2026 Poster）、FactorEngine（ICDM 2026）、HRFT/IRFT（WWW 2025 Industry Track）。
   - 首轮检索（2026-07-11）之后出现的新版本：EFS v2、Alpha-R1 v2、FactorMiner v2、FactorEngine v3、CogAlpha v4。
-  - AlphaQCM（OpenReview 需要人机验证）和 AlphaGAT（没有 arXiv）未重新核查，`checked` 保持 2026-07-11；开源情况沿用 2026-07-11 的检索结论。
+  - AlphaQCM 与 AlphaGAT 的外部状态记录保留截至 2026-07-11 的口径。
 
 ## 2026-11-03 以问题为出发点组织仓库
 
@@ -178,7 +182,6 @@
 - 划分依据：评价的算力成本（P3）与学习型生成器的信用分配（P4）应对手段不同，分开列；先验知识是应对 P1 的手段，不单列；过拟合、泄漏、衰减按成因而非“样本外失效”这一共同表现区分；换手、容量、成本并入 P8。
 - `taxonomy.yaml` 新增 `problems`（字段 `code` 为 P 编号）；`papers.yaml` 新增必填列表字段 `problems`，32 篇按速读卡中的机制描述回填，Alpha101 作为基线工作为 `[]`；速读卡元数据新增“针对问题”行；README 索引新增“问题”列。
 - 模板：速读卡新增“针对问题与证据”字段，精读新增“针对的问题”一节，简报新增“问题视角”一节和“针对问题”列。
-- 待办：P6 泄漏和 P10 评估复现的已收录工作很少，列为补检重点。
 
 ## 2026-11-03 初始化
 
@@ -190,7 +193,3 @@
   - 专题：研究全景（`topics/landscape.md`）、算子空间对照（`topics/operator_space.md`，检索日期 2026-08-12，补充检索 2026-08-27）、生成器如何使用真实 IC（`topics/generator_training_with_ic.md`）。
 - 资料规则：论文 PDF 不入库，只登记链接；仓库不保存图片，论文笔记和专题不附图，流程示意用表格、文本或 Mermaid，`check_links.py` 会拒绝图片引用。
 - 许可：文档内容采用 CC BY 4.0（`LICENSE`），代码（`scripts/`、`.github/`）采用 MIT（`LICENSE-MIT`）。
-- 待办：
-  - `neural`、`evaluation`、`adjacent` 路线目前只有少量或没有收录，需要补检代表工作。
-  - 补检 2026-07-11 之后的新工作，形成第一期跟踪简报。
-  - 首批速读卡没有单独的“局限”字段；后续更新时按新模板补齐。

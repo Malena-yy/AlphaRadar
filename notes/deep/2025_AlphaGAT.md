@@ -3,7 +3,7 @@
 > - 速读卡：[AlphaGAT](../cards/2025_AlphaGAT.md)。
 > - 论文：AlphaGAT: A Two-Stage Learning Approach for Adaptive Portfolio Selection，IJCAI 2025。
 > - 原文：[IJCAI 2025 Proceedings 834](https://www.ijcai.org/proceedings/2025/834)
-> - 阅读范围：PDF 全文 9 页，重点对应论文第 3、4、5 节以及公式 (1)–(10)、Algorithm 1、Table 1–4。
+> - 分析范围：PDF 全文 9 页，重点对应论文第 3、4、5 节以及公式 (1)–(10)、Algorithm 1、Table 1–4。
 > - 文档边界：本文解释论文算法；论文未披露的细节单独列出，不作推断。
 
 ## 1. 核心结论

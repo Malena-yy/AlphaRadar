@@ -3,8 +3,8 @@
 > - 速读卡：[AlphaForge](../cards/2024_AlphaForge.md)。
 > - 论文：AlphaForge: A Framework to Mine and Dynamically Combine Formulaic Alpha Factors，AAAI 2025。
 > - 原文：[arXiv:2406.18394](https://arxiv.org/abs/2406.18394)
-> - 阅读范围：PDF 全文 10 页，重点对应正文 Preliminary、Methodology、Experiments、Algorithm 1、Algorithm 2、公式 (1)-(5)、Table 1-3、Figure 1-3。
-> - 官方代码补充范围：官方仓库 `README.md`、`train_AFF.py`、`combine_AFF.py`、`gan/network/`、`gan/dataset/collector.py`、`gan/utils/`、`alphagen/` 与 `alphagen_generic/` 中和 AlphaForge 主流程直接相关的实现。
+> - 分析范围：PDF 全文 10 页，重点对应正文 Preliminary、Methodology、Experiments、Algorithm 1、Algorithm 2、公式 (1)-(5)、Table 1-3、Figure 1-3。
+> - 源码依据：官方仓库 `README.md`、`train_AFF.py`、`combine_AFF.py`、`gan/network/`、`gan/dataset/collector.py`、`gan/utils/`、`alphagen/` 与 `alphagen_generic/` 中和 AlphaForge 主流程直接相关的实现。
 > - 文档边界：本文解释论文算法与可直接从公式推出的性质；官方源码口径与论文不一致时单独标注，不改写论文结论。
 
 ## 1. 核心结论

@@ -11,7 +11,7 @@
 
 目录结构：本文包含总览、路线脉络和分组导读，是对路线的综合分析，不是完整清单；全部收录工作见[论文索引](../INDEX.md)，逐篇内容见 [`notes/cards/`](../notes/cards/) 下的速读卡。
 
-检索口径：优先纳入“显式公式/符号/DSL/代码形式 Alpha 或风险因子挖掘”的论文；对纯黑盒收益预测模型只在与公式挖掘框架强相关时纳入。每个条目保留论文链接，并补充对应 GitHub 开源仓库；若未发现官方仓库，则标注“未见官方开源”。作者单位优先采用论文 PDF、会议页面或官方项目页；若官方摘要页未展示单位，则统一写作“官方摘要页未展示单位信息；作者为/包含……”。本轮补检截至 2026-07-11，重点检索关键词包括 `formulaic alpha reinforcement learning`、`formulaic factor mining MCTS`、`alpha mining GFlowNet`、`alpha factor discovery reinforcement fine-tuning`、`LLM alpha mining evolutionary factor search` 和 `alpha factor screening reinforcement learning`。
+收录边界：本文重点讨论显式公式、符号、DSL 或代码形式的因子挖掘，并纳入因子表示、生成与组合机制相关的神经方法。纯收益预测模型只有在提出这些机制时收录；完整口径见 [AGENTS.md](../AGENTS.md)。
 
 ## 1. 总览与阅读地图
 

@@ -19,7 +19,7 @@
 
 <!-- META:END -->
 
-> 阅读口径：2026-11-03 据本地 PDF（arXiv v1 版）撰写。
+> 文献依据：arXiv v1。
 
 * **主要工作/创新点：** AlphaRJM 沿用 AlphaGen 的池依赖设定：奖励 r_t = Q(P_{t+1}) − Q(P_t) 只在公式完成、评价之后出现，Q 为因子池加权组合的训练集 IC；同一个候选在不同池下价值不同。论文认为现有方法（AlphaGen、AlphaQCM、AlphaSAGE）都只以“当前池”为条件，丢掉了搜索过程中已经观测到的评价历史，于是提出两项机制。1）Reward-Jump Memory：一个事件驱动的持久隐状态 H_t，在两次终端评价之间严格不变，只在 δ_t=1 时按 H_{t+1}=H_t + J_max·g_t⊙tanh(·) 跳一步，跳变量由终端奖励 r_t 与四类结果 o_t∈{accepted, replaced, rejected, invalid} 经事件编码得到；公式结束只终止 Bellman episode，不终止记忆流，因而形成“token 构造快、记忆更新慢”两个时间尺度（式 6–9，命题 F.1 给出变差上界）。2）Action-conditioned SDE return critic：对每个候选动作 a，用 [表达式编码 e_t; 池编码 p_t; H_t; 动作嵌入] 生成均值回复 SDE dZ = κ(μ−Z)dτ + σ dB 的四个标量参数，采样 M 条独立轨道的终值作为粒子，用均值加不确定度 σ 项打分 S_t(a)=Z̄ + c_n·√(V̂+ε)，c_n 随 episode 递减、配合 ϵ_n-greedy。训练目标是分布式 Bellman：以分布的粒子做经验一维能量距离匹配（论文称 CRPS 式目标）加 Huber 均值校准，并在真实评价事件上加跳跃幅度正则（式 20–23）；因为 H_t 使打乱重放会破坏事件序列，训练用连续片段重放并带 burn-in 前缀重建记忆轨迹。表达空间为 62 个可动作 token、最长 20 token 的语法构造，并复刻 AlphaSAGE 的长度相关早停掩码；因子池容量 50，论文未描述准入、淘汰与加权组合的具体规则（第 3 节、附录 B）。
 
