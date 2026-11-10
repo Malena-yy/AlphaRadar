@@ -15,7 +15,7 @@ AlphaRadar 是围绕“因子挖掘专题”的研究跟踪仓库：持续收录
 | 路径 | 内容 |
 | --- | --- |
 | `notes/cards/`、`notes/deep/` | 单篇速读卡与精读 |
-| `topics/` | 横向专题；`topics/problems.md` 归纳各问题的应对思路，全部工作与机制见 `INDEX.md` 第 3 节 |
+| `topics/` | 横向专题；`topics/problems.md` 归纳各问题的应对思路，全部工作与机制见[索引的按问题列表](INDEX.md#by-problem) |
 | `topics/adjacent/` | 不属于因子挖掘、但机制可迁移的相邻方法分析 |
 | `digests/` | 定期跟踪简报 |
 | `scripts/` | 生成与校验脚本 |
@@ -36,6 +36,7 @@ AlphaRadar 是围绕“因子挖掘专题”的研究跟踪仓库：持续收录
 
 ## 任务入口
 
+- 新增工作以单篇为独立维护单元：更新该篇登记与笔记后生成索引，不要求联动改写旧卡或专题；专题归纳作为独立校对任务维护。发现已有内容存在事实错误时仍须修正。
 - 新增论文：在 `papers.yaml` 追加记录，`id` 为 `<小写简称>-<首次公开年份>`，状态从 `inbox` 或 `triaged` 开始。待筛条目只填 `id`、`short`、`title`、`first_public`、`url`、`routes`、`status`、`added` 和标签；`summary`、`affiliation`、`versions`、`checked` 与问题标注等写卡时再补。
 - 写速读卡：按 `notes/_template_card.md` 新建卡片，在登记表填 `card`、`summary`、`affiliation`、`versions`、问题标注，并把状态改为 `card`，运行脚本生成卡片开头。`topics/problems.md` 只在校对整节时更新归纳和代表工作。
 - 写精读：按 `notes/_template_deep.md` 撰写，填 `deep` 并把状态改为 `deep-read`。

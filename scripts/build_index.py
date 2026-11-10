@@ -283,6 +283,12 @@ def render_index(papers, taxonomy, mechs):
         "",
         summary_line(papers, taxonomy) + "。",
         "",
+        "查找论文：[总表](#all-papers) · [按问题](#by-problem) · [实验口径](#setups) · [按路线](#by-route)。",
+        "",
+        "理解方法：[研究全景](topics/landscape.md) · [各问题的应对机制](topics/problems.md) · [评估口径对照](topics/evaluation_protocol.md)；查看新增与状态变化：[跟踪简报](digests/)。",
+        "",
+        '<a id="all-papers"></a>',
+        "",
         "## 1. 总表",
         "",
         "按首次公开时间倒序。",
@@ -297,34 +303,22 @@ def render_index(papers, taxonomy, mechs):
         routes = " ".join(f"`{r}`" for r in p["routes"])
         summ = p.get("summary") or "—"
         lines.append(f"| {p['first_public']} | {cell(work)} | {cell(summ)} | {problem_cell(p, taxonomy)} | {routes} | {links(p)} |")
-    lines += ["", "## 2. 问题 × 工作矩阵", "", "“●”为主要针对，“○”为顺带涉及；末两行是各问题的工作数。尚未判断问题的待筛工作不列入。", ""]
-    lines.append("| 工作 | " + " | ".join(v["code"] for _, v in probs) + " |")
-    lines.append("| --- |" + " :---: |" * len(probs))
-    for p in rows:
-        if not (p.get("problems") or p.get("also") or has_note(p)):
-            continue
-        marks = " | ".join("●" if k in (p.get("problems") or []) else "○" if k in (p.get("also") or []) else " " for k, _ in probs)
-        lines.append(f"| {cell(p['short'])} | {marks} |")
-    for label, field in (("主要", "problems"), ("涉及", "also")):
-        totals = " | ".join(str(sum(k in (p.get(field) or []) for p in papers)) for k, _ in probs)
-        lines.append(f"| **{label}** | {totals} |")
-    lines += ["", "## 3. 按问题", "", "每个问题下列出标注它的工作及速读卡中写明的对应机制，按首次公开时间排序。机制的归纳与比较见[各问题的应对机制](topics/problems.md)。", ""]
-    by_time = sorted(papers, key=lambda p: (str(p["first_public"]), p["short"]))
+    lines += ["", '<a id="by-problem"></a>', "", "## 2. 按问题", "", "每个问题下的相关工作按首次公开时间从新到旧统一排列，逐篇标明时间与“主要针对 / 顺带涉及”，机制取自各自速读卡。机制的归纳与比较见[各问题的应对机制](topics/problems.md)。", ""]
+    lines += [" · ".join(f"[{v['code']} {v['name']}](#{v['code'].lower()})" for _, v in probs), ""]
     for key, v in probs:
-        prim = [p for p in by_time if key in (p.get("problems") or [])]
-        also = [p for p in by_time if key in (p.get("also") or [])]
-        lines += [f"### {v['code']} {v['name']}（主要 {len(prim)}，涉及 {len(also)}）", ""]
-        for label, group in (("主要针对", prim), ("顺带涉及", also)):
-            if not group:
+        prim = [p for p in rows if key in (p.get("problems") or [])]
+        also = [p for p in rows if key in (p.get("also") or [])]
+        lines += [f'<a id="{v["code"].lower()}"></a>', "", f"### {v['code']} {v['name']}（主要 {len(prim)}，涉及 {len(also)}）", ""]
+        for p in rows:
+            if not labelled(p, key):
                 continue
-            lines += [f"{label}：", ""]
-            for p in group:
-                name = f"[{p['short']}]({p['card']})" if has_note(p) else p["short"]
-                mech = mechs.get(p["id"], {}).get(v["code"], (None, ""))[1]
-                lines.append(f"- {name}" + (f"：{mech}" if mech else ""))
-            lines.append("")
-    lines += ["## 4. 实验口径", "", "各篇速读卡“证据”一节的摘要，逐项核对自论文原文；口径差异的比较见[评估口径](topics/evaluation_protocol.md)。", "", render_setup(papers, taxonomy), ""]
-    lines += ["## 5. 按路线", "", "同一篇工作可以属于多条路线。", ""]
+            label = "主要针对" if key in (p.get("problems") or []) else "顺带涉及"
+            name = f"[{p['short']}]({p['card']})" if has_note(p) else p["short"]
+            mech = mechs.get(p["id"], {}).get(v["code"], (None, ""))[1]
+            lines.append(f"- {p['first_public']} {name}（{label}）" + (f"：{mech}" if mech else ""))
+        lines.append("")
+    lines += ['<a id="setups"></a>', "", "## 3. 实验口径", "", "各篇速读卡“证据”一节的摘要，逐项核对自论文原文；口径差异的比较见[评估口径](topics/evaluation_protocol.md)。", "", render_setup(papers, taxonomy), ""]
+    lines += ['<a id="by-route"></a>', "", "## 4. 按路线", "", "同一篇工作可以属于多条路线。", ""]
     for key, route in taxonomy["routes"].items():
         members = sorted((p for p in papers if key in p["routes"]), key=lambda p: (str(p["first_public"]), p["short"]))
         lines += [f"### {route['name']}（`{key}`，{len(members)} 篇）", "", route["scope"], ""]
