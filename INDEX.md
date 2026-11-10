@@ -221,7 +221,7 @@
 - 2025-05 [GiGPO](notes/cards/2025_GiGPO.md)（主要针对）：在不增加 rollout、不训练 critic 的前提下，从已采样轨迹中重复出现的状态回溯构造步骤级组，用同一状态下不同动作之后的折扣回报差异给出逐步信用，并与回合级优势相加（第 4.2–4.3 节）→ 对应公式逐 token 生成或多轮 LLM 因子智能体只在完成后得到 IC 的情形：同一批采样中重复出现的公式前缀或智能体状态可作为锚点，比较其后不同动作的最终奖励，得到比整条轨迹更细的信用；已收录的 QuantEvolver 与 Alpha-R1 使用的是回合级 GRPO 组相对优势（见两者速读卡），未见借用步骤级锚点分组。
 - 2025-05 [AlphaQCM](notes/cards/2025_AlphaQCM.md)（主要针对）：奖励分布方差作为探索奖励。
 - 2024-09 [QFR](notes/cards/2024_QFR.md)（主要针对）：不带价值网络的 REINFORCE 加贪婪基线。
-- 2024-06 [AlphaForge](notes/cards/2024_AlphaForge.md)（主要针对）：可微预测器把 fitness 变成生成器的梯度。
+- 2024-06 [AlphaForge](notes/cards/2024_AlphaForge.md)（主要针对）：以可微预测器近似真实 fitness，通过预测评分为生成器提供梯度信号。
 - 2024-02 [RiskMiner](notes/cards/2024_RiskMiner.md)（主要针对）：合法中间表达式即时奖励。
 - 2024-02 [QuantAgent](notes/cards/2024_QuantAgent.md)（顺带涉及）：外层循环以真实回测反馈驱动知识库更新，用于下一轮生成。
 - 2022-01 [Trajectory Balance](notes/cards/2022_TrajectoryBalance.md)（主要针对）：用整条轨迹上的一个残差同时更新所有步的 log P_F，终端奖励一次分配到每个动作，而不是像 FM / DB 那样逐步回传；比特序列任务中 FM 的拟合随轨迹变短而改善，TB 对轨迹长度与动作空间大小都稳健（第 3、5.3.1 节，图 4）→ 对应公式 token 序列只有终端 IC、序列较长且词表大的情形，可用 TB 把终端奖励直接分到每个 token；已收录的 AlphaSAGE 即用 TB 损失训练公式生成的前向策略（见 AlphaSAGE 速读卡与精读第 6 节）。

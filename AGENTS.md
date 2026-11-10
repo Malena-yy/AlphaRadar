@@ -39,7 +39,7 @@ AlphaRadar 是围绕“因子挖掘专题”的研究跟踪仓库：持续收录
 - 新增工作以单篇为独立维护单元：更新该篇登记与笔记后生成索引，不要求联动改写旧卡或专题；专题归纳作为独立校对任务维护。发现已有内容存在事实错误时仍须修正。
 - 新增论文：在 `papers.yaml` 追加记录，`id` 为 `<小写简称>-<首次公开年份>`，状态从 `inbox` 或 `triaged` 开始。待筛条目只填 `id`、`short`、`title`、`first_public`、`url`、`routes`、`status`、`added` 和标签；`summary`、`affiliation`、`versions`、`checked` 与问题标注等写卡时再补。
 - 写速读卡：按 `notes/_template_card.md` 新建卡片，在登记表填 `card`、`summary`、`affiliation`、`versions`、问题标注，并把状态改为 `card`，运行脚本生成卡片开头。`topics/problems.md` 只在校对整节时更新归纳和代表工作。
-- 写精读：按 `notes/_template_deep.md` 撰写，填 `deep` 并把状态改为 `deep-read`。
+- 写精读：按 `notes/_template_deep.md` 撰写，填 `deep` 并把状态改为 `deep-read`。笔记的论证主线与仅依据论文的范围遵循 [`notes/AGENTS.md`](notes/AGENTS.md)。
 - 定期跟踪：按 `digests/_template.md` 写简报，沿用上一期的检索口径，口径变化写入本期。
 - 状态核查：核查论文页、会议页或官方仓库，更新 `versions`、`venue`、`code`、`code_note`、`checked`，并把变化记入简报或 `CHANGELOG.md`。
 - 路线脉络变化：更新 `topics/landscape.md` 等专题；专题是综合分析，不维护完整清单。

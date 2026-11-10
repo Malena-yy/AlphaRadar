@@ -1,726 +1,213 @@
-# AlphaForge 核心算法解读
+# AlphaForge 论文解读
 
-> - 速读卡：[AlphaForge](../cards/2024_AlphaForge.md)。
-> - 论文：AlphaForge: A Framework to Mine and Dynamically Combine Formulaic Alpha Factors，AAAI 2025。
-> - 原文：[arXiv:2406.18394](https://arxiv.org/abs/2406.18394)
-> - 分析范围：PDF 全文 10 页，重点对应正文 Preliminary、Methodology、Experiments、Algorithm 1、Algorithm 2、公式 (1)-(5)、Table 1-3、Figure 1-3。
-> - 源码依据：官方仓库 `README.md`、`train_AFF.py`、`combine_AFF.py`、`gan/network/`、`gan/dataset/collector.py`、`gan/utils/`、`alphagen/` 与 `alphagen_generic/` 中和 AlphaForge 主流程直接相关的实现。
-> - 文档边界：本文解释论文算法与可直接从公式推出的性质；官方源码口径与论文不一致时单独标注，不改写论文结论。
+> - 速读卡：[AlphaForge](../cards/2024_AlphaForge.md)
+> - 文献版本：[arXiv v5](https://arxiv.org/html/2406.18394v5)，2024-12-12
+> - 文献范围：正文及附录 A 的作者检查表；正文另行提及的补充材料未纳入本文证据。
 
-## 1. 核心结论
+## 核心结论
 
-AlphaForge 是一个两阶段公式 Alpha 框架：
+AlphaForge 将公式因子挖掘与动态组合划分为两个阶段。挖掘阶段采用生成器—预测器模型，生成具有预测能力且相互低相关的公式，形成 Factor Zoo；组合阶段根据因子的近期表现，每日更新因子子集与线性组合权重，构建选股信号 Mega-Alpha。两阶段分别针对稀疏评分下的搜索效率和因子有效性的时变特征。论文在 CSI300、CSI500 上报告了预测指标的改善，动态与静态组合的对照为组合阶段的增量作用提供了实验依据。
 
-1. Stage 1 使用 generator-predictor 结构挖掘公式 Alpha，并把满足预测能力和低相关要求的公式放入 Factor Zoo。
-2. Stage 2 在每个交易日根据 Factor Zoo 中因子的近期表现动态筛选、重新赋权，生成当天的 Mega-Alpha。
+## 1. 研究背景与问题
 
-核心链路为：
+公式因子以历史量价数据为输入，为股票截面输出预测未来收益的评分。本文使用开盘价、最高价、最低价、收盘价、成交量与 VWAP 六个字段及其历史窗口。多个因子经组合形成最终选股信号，论文将其称为 Mega-Alpha（原文 Preliminary）。
 
-```text
-随机公式样本 R
-      │
-      ▼
-真实评价 fitness(x, Z, X, Y)
-      │
-      ▼
-Predictor P 学习公式 one-hot -> fitness
-      │
-      ▼
-冻结 P，训练 Generator G 最大化 P 的预测 fitness
-      │
-      ▼
-Mask + Gumbel-Softmax 生成合法公式 one-hot
-      │
-      ▼
-解析公式、真实评价、低相关筛选
-      │
-      ▼
-Factor Zoo
-      │
-      ▼
-每日用近期 IC / ICIR 等指标重筛 Top-N 因子
-      │
-      ▼
-线性回归动态权重
-      │
-      ▼
-Mega-Alpha 当日预测信号
+论文关注因子挖掘与组合使用中的两类相关问题。
+
+第一，公式表达空间庞大，满足质量与相关性要求的有效候选稀少。候选必须完整生成并在行情数据上求值，才能获得预测能力评价；大量零分候选使直接采样难以获得有效的搜索方向。作者因此引入神经网络学习高分公式的分布，同时保留公式表达的可解释性（原文 Introduction、Factor Mining Model）。
+
+第二，固定因子集合与固定权重难以适应因子有效性的变化。论文讨论的 RL 参照方法联合进行因子挖掘与组合权重学习，最终使用固定组合；市场风格变化则可能导致部分因子失效或预测方向反转。扩大候选集合本身不能解决因子启用时点与组合权重的动态调整问题（原文 Introduction、Alpha Combination）。
+
+由此，论文将研究目标分为有效公式的定向生成，以及基于时变表现的因子筛选与组合。
+
+## 2. 核心思路：代理引导生成与动态组合
+
+两阶段设计分别对应搜索目标稀疏与因子表现非平稳这两类困难。
+
+挖掘阶段采用可微预测器近似真实评分函数。真实评分依赖公式执行、IC 计算及候选与已有因子的相关性。Predictor 以已评价公式为监督样本，学习上述评分关系；Generator 通过预测评分获得梯度信号，无需对真实 IC 计算直接求导。多样性损失进一步约束生成分布，缓解候选集中于少数模式的问题（原文 Factor Mining Model）。
+
+使用阶段从固定候选库中动态筛选因子并估计组合权重。基于因子表现可能具有动量、同时存在失效与反转风险的判断，组合器利用更新后的历史数据重评各因子。Factor Zoo 在使用阶段保持不变，每日参与组合的因子子集与权重则随近期表现调整（原文 Alpha Combination、Overview）。
+
+该设计将候选库构建与日常组合决策解耦：前者负责生成可供选择的公式集合，后者在固定集合内调整使用方式。
+
+## 3. 方法设计
+
+### 3.1 总体框架与迭代关系
+
+框架包含公式样本库、准入因子库与每日使用子集三个对象：
+
+| 对象 | 含义 | 作用 |
+| --- | --- | --- |
+| 样本库 $\mathcal R$ | 用于评价与训练的公式样本 | 为 Predictor 提供公式与真实评分的监督样本 |
+| 因子库 $\mathcal Z$，即 Factor Zoo | 通过质量与相关性准入的公式 | 为组合阶段提供候选 |
+| 每日子集 $\mathcal Z_t^{(N)}$ | 从固定 Zoo 中选出的至多 $N$ 个因子 | 参与当天的 Mega-Alpha |
+
+样本库包含未通过准入的生成公式，用于积累评分信息；Zoo 仅保留合格因子，作为组合阶段的候选集合。两者的更新共同影响后续搜索，具体关系如下（原文 Figure 1、Algorithm 1）：
+
+```mermaid
+flowchart TD
+    A[初始化公式样本库 R 与空 Zoo] --> B[按当前 Zoo 计算样本真实 fitness]
+    B --> C[训练 Predictor 拟合评分]
+    C --> D[固定 Predictor 参数，训练 Generator]
+    D --> E[生成公式，解析并检查真实质量与相关性]
+    E --> F[生成样本加入 R，合格因子加入 Zoo]
+    F -->|未达到目标，下一轮重新评价| B
+    F -->|达到目标，固定 Zoo| G[每日用更新后的历史数据筛选因子并拟合权重]
+    G --> H[输出当天 Mega-Alpha 选股评分]
 ```
 
-论文最重要的思想不是单纯换一个生成器，而是把“挖出一批可解释、低相关的公式因子”和“随市场状态动态使用这些因子”拆成两个阶段。Stage 1 追求可执行的强因子库，Stage 2 处理因子有效性随时间变化的问题。
+图中表示外层迭代关系。每轮内部包含多次噪声采样、Generator 更新与候选评价。生成公式扩充样本库，新增准入因子改变相关性筛选条件，因而下一轮需要依据当前 Zoo 重新评价样本并训练 Predictor。Zoo 达到目标规模后，挖掘阶段结束，其结果作为组合阶段的固定输入（原文 Algorithm 1、Overview）。
 
-### 针对的问题
+### 3.2 适应度定义与因子准入
 
-对应 README 中的 P1-P10，本文涉及的机制如下；实验证据见第 6 节。
-
-- **P3 评价成本高**：Predictor 作为 fitness surrogate 引导生成器（第 4.2 节），减少对真实评价的依赖；新生成的公式仍要经过真实评价和准入。
-- **P4 学习信号稀疏、延迟且不可微**：语法 mask 和 Gumbel-Softmax 让 Predictor 的分数可微地回传到生成器（第 4.3 节）。
-- **P7 因子同质化与冗余**：生成器损失中的 diversity 项（第 4.4 节），以及 Factor Zoo 准入的 IC 与相关性门槛（第 4.5 节）。
-- **P8 挖掘目标与实际使用脱节**：挖掘与使用解耦，每个交易日按近期表现动态筛选因子、重新加权生成 Mega-Alpha（第 5 节）。
-- **P9 非平稳与因子衰减**：Stage 2 只用预测日前的历史重筛和拟合，使用的因子与权重随时间变化（第 5.2 节）。
-
-## 2. 问题定义与数据对象
-
-论文设市场中有 `n` 只股票、`T` 个交易日。每个股票在每个交易日有 `m` 个原始特征，并可访问过去 `tau` 天滚动窗口数据。
-
-单日输入可写为：
+论文用 IC 衡量因子的平均截面预测能力：
 
 $$
-X_t\in\mathbb R^{n\times m\tau}.
-$$
-
-标签为未来收益：
-
-$$
-y_t\in\mathbb R^n.
-$$
-
-一个公式 Alpha 是函数：
-
-$$
-f: X_t \mapsto v_t,\qquad v_t=f(X_t)\in\mathbb R^n.
-$$
-
-其中 `v_t` 是该公式在当天全部股票上的横截面因子值。
-
-论文使用六个原始字段：
-
-```text
-open, high, close, low, volume, vwap
-```
-
-公式由 operands 和 operators 组成：
-
-- operands：基础字段和可选常数；
-- unary operators：例如 `abs`、`log`；
-- binary operators：例如 `+`、`-`、`*`、`/`；
-- time-series operators：例如 `Sum(volume, 5d)`。
-
-论文沿用 AlphaGen 类 RPN 表示。公式树经后序遍历转成 Reverse Polish Notation，再编码成适合神经网络处理的 one-hot 矩阵。
-
-| 符号 | 含义 |
-| --- | --- |
-| `D` | 可用 operator / feature token 的总数，论文没有明确常数 token 是否计入 |
-| `S` | 公式最大长度 |
-| `x in {0,1}^{D x S}` | 一个公式的 one-hot 矩阵 |
-| `R={x_1,...,x_r}` | 已采样并评价过的公式样本库 |
-| `Z={f_1,...,f_k}` | Factor Zoo，已入库的低相关强因子集合 |
-
-## 3. 评价指标
-
-论文正文显式定义 IC：
-
-$$
-IC(f,X,Y)
-=
-E_t[\rho(v_t,y_t)]
-=
-\frac{1}{T}\sum_{t=1}^{T}\rho(v_t,y_t),
+IC(f,X,Y)=\frac{1}{T}\sum_{t=1}^{T}\rho(f(X_t),y_t).
 \tag{1}
 $$
 
-其中 `rho(v_t, y_t)` 是某一横截面上因子值与未来收益的 Pearson correlation。
+其中 $T$ 是评价交易日数，$X_t$ 是时点 $t$ 的历史特征，$f(X_t)$ 是各股票的因子值，$y_t$ 是对应未来收益，$\rho$ 是截面 Pearson 相关。IC 衡量因子值与未来收益的平均截面线性关联，公式表达式与公式在行情上产生的数值应分开理解。
 
-论文同时把 ICIR、RankIC、RankICIR 作为因子评价指标，但当前 PDF 正文只说明 RankIC 用于弥补 Pearson correlation 的不稳定，未给出 ICIR / RankICIR 的完整公式。后续复现时不能只凭正文唯一确定：
-
-- ICIR 的有限日数门槛；
-- Rank 的并列值处理；
-- 横截面零方差和缺失值处理；
-- 日度 IC 聚合时是否使用有效日等权。
-
-## 4. Stage 1：Factor Mining Model
-
-Stage 1 的目标是得到一组“强且相互低相关”的公式因子，称为 Factor Zoo。
-
-### 4.1 Algorithm 1 主循环
-
-Algorithm 1 的输入是行情与标签：
+对编码为 $x$、解析后为 $f$ 的公式，论文的 fitness 为：
 
 $$
-X=\{X_t\},\qquad Y=\{y_t\}.
-$$
-
-输出是 Factor Zoo：
-
-$$
-Z=\{f_1,\ldots,f_k\}.
-$$
-
-算法步骤可以还原为：
-
-1. 初始化 `Z = empty`。
-2. 随机采样一批公式 one-hot 矩阵：
-
-   $$
-   R=\{x_1,\ldots,x_r\}.
-   $$
-
-3. 当 `|Z| < TargetFactorNum` 时重复：
-   - 根据当前 Factor Zoo 计算样本库中每个公式的真实 fitness：
-
-     $$
-     R_{fitness}
-     =
-     \{\pi(x_1,Z,X,Y),\ldots,\pi(x_r,Z,X,Y)\}.
-     $$
-
-   - 训练 Predictor `P` 拟合 `x -> fitness`。
-   - 在多个 generator epoch 中：
-     - 采样两个 latent noise：
-
-       $$
-       z_1,z_2\sim N(0,1)^Q.
-       $$
-
-     - 经 Generator 和可微 mask 得到两个公式 one-hot：
-
-       $$
-       x_1=M(G(z_1)),\qquad x_2=M(G(z_2)).
-       $$
-
-     - 用 generator loss 更新 `G`。
-     - 把 `x_1`、`x_2` 解析成公式。
-     - 若新公式满足质量要求且不在 `Z` 中，则加入 Factor Zoo。
-     - 将 `x_1`、`x_2` 加入样本库 `R`。
-
-4. 当 Factor Zoo 达到目标数量后返回 `Z`。
-
-论文伪代码中有一行 `theta_G <- theta_G || rand(), theta_P <- theta_P || rand()`。从语义看它表示在每轮重新训练前引入随机初始化或随机状态，但 `||` 的确切含义没有解释，不能唯一判断是完整重置、追加随机参数，还是公式排版残留。
-
-### 4.2 Predictor：fitness surrogate
-
-Predictor `P(x)` 输入一个公式 one-hot 矩阵，输出该公式的 fitness 预测值。它先于 Generator 训练，训练数据来自样本库 `R` 中所有已真实评价的公式。
-
-论文给出的 Predictor loss 是 RMSE：
-
-$$
-L_P
-=
-\sqrt{
-\frac{1}{n}
-\sum_{i=1}^{n}
-(P(x_i)-fitness(x_i))^2
-}.
-\tag{2}
-$$
-
-Predictor 的作用是把离散、稀疏、评价昂贵的公式 fitness 转化为可微 surrogate，使 Generator 可以通过梯度朝高分区域移动。
-
-论文没有在 PDF 正文中披露 Predictor 网络结构、层数、hidden size、optimizer、batch size、训练 epoch、early stopping 或输入 padding 规则。
-
-### 4.3 Generator：从 latent noise 到公式
-
-Generator `G(z)` 输入 `Q` 维正态噪声：
-
-$$
-z\in\mathbb R^Q.
-$$
-
-输出是 `D x S` logit 矩阵。该 logit 经过 `M()` 变成公式 one-hot：
-
-$$
-x=M(G(z))\in\{0,1\}^{D\times S}.
-$$
-
-`M()` 同时包含两类机制：
-
-- sequence rule mask：约束 token 序列满足公式语法；
-- Gumbel-Softmax：把离散 token 采样做成可微近似。
-
-论文强调 `M()` 保持 differentiability，因此 Generator 可以接收来自 Predictor 的梯度。
-
-在 Predictor 训练完成后，冻结 `P`，Generator 先最小化：
-
-$$
-L_{Fitness}
-=
--P(M(G(z))).
-\tag{3}
-$$
-
-由于最小化负号，Generator 被训练为生成 Predictor 认为高 fitness 的公式。
-
-### 4.4 Diversity loss
-
-论文认为只最大化 Predictor 分数会导致 Generator 过早收敛到局部模式，因此加入 diversity loss。它用两个 latent noise 生成两组公式，并惩罚二者相似性。
-
-最终 generator loss 写为：
-
-$$
-L_G
-=
-L_{Fitness}
-+
-L_{Diversity}
-$$
-
-$$
-=
--P(x_1)
-+
-\lambda_{onehot}
-\cdot
-Similarity_{onehot}(f(z_1),f(z_2))
-+
-\lambda_{hidden}
-\cdot
-Similarity_{hidden}(f(z_1),f(z_2)).
-\tag{4}
-$$
-
-这里有几个复现必须注意的细节：
-
-- 公式中 `-P(x_1)` 只写了第一个样本，第二个样本主要用于 diversity；论文没有说明是否实际对 `x_1`、`x_2` 做对称平均。
-- `Similarity_onehot` 没有给出具体计算式。
-- `Similarity_hidden` 的 hidden representation 来源没有在 PDF 正文中定义。
-- `lambda_onehot`、`lambda_hidden` 的取值在当前 PDF 中没有给出。
-- Gumbel temperature、hard / soft 采样方式和 mask 逐步更新规则没有披露。
-
-因此，论文能确定“用可微生成 + surrogate fitness + diversity 约束”这个目标结构，但不能唯一确定 Generator 的完整实现。
-
-### 4.5 Fitness 函数与 Factor Zoo 准入
-
-论文用 `pi(x,Z,X,Y)` 表示公式 one-hot `x` 在当前 Factor Zoo `Z` 下的真实 fitness：
-
-$$
-\pi(x,Z,X,Y)
-=
+\pi(x,\mathcal Z,X,Y)=
 \begin{cases}
-|IC(f,X,Y)|,
-&
-f\text{ is valid and }\psi(f,Z,X,Y)<CORR'\\
-0,
-&
-\text{otherwise}
+|IC(f,X,Y)|, & f\text{ 合法且 }\psi(f,\mathcal Z,X,Y)<\mathrm{CORR}',\\
+0, & \text{其他情况}.
 \end{cases}
 \tag{5}
 $$
 
-其中：
+$\psi$ 表示候选与已有 Zoo 中因子的最大绝对相关，$\mathrm{CORR}'$ 是相关性阈值。取绝对 IC 的理由是负向预测信号可以反向使用。原文还说明，因子准入依据 IC、用于稳定性筛选的 ICIR 与收益相关性三类条件；式 (5) 是训练评分的定义，不能单独代替 Algorithm 1 中全部 `qualified` 准入条件。
 
-- `f=parse(x)`，表示从 one-hot 解析出的可执行公式；
-- `Z` 是已有 Factor Zoo；
-- `psi(f,Z,X,Y)` 是新公式与已有 Zoo 中各因子的最大绝对相关；
-- `CORR'` 是人工设定的相关性阈值；
-- 当 `|Z|=0` 时，`pi` 退化为 `|IC(f,X,Y)|`。
+该评分同时约束预测能力与因子冗余。同一公式在 Zoo 为空时可能获得非零评分，在相似因子准入后则可能因相关性条件不满足而得零分。因此，Algorithm 1 在每轮开始依据当前 Zoo 重新评价样本库。此处的目标变化由因子库状态引起，应与组合阶段针对市场变化的动态调整区分。
 
-论文说明取绝对 IC 的原因是：负 IC 因子可以通过反向因子值变成正 IC 因子。
+### 3.3 基于代理模型的可微公式生成
 
-需要特别注意：正文文字说因子入库标准包含三方面：
+论文将表达式树转成逆波兰记法（RPN，即按后序顺序排列操作数与算子），再编码为 one-hot 矩阵 $x\in\{0,1\}^{D\times S}$。$D$ 是可用 token 的维度，$S$ 是最大公式长度。这使公式本身能够成为神经网络的输入或输出（原文 Formulaic Alpha）。
 
-1. IC；
-2. ICIR；
-3. 与已有库中因子的收益相关性。
-
-但公式 (5) 只显式写了 `|IC|` 和 `psi<CORR'`，没有写 ICIR 阈值。Algorithm 1 中的 `qualified` 也没有展开。因此可以确认论文主张使用 IC/ICIR/相关性三类门槛，但当前 PDF 不能唯一还原这些门槛如何合并。
-
-`pi` 会随 `Z` 变化而变化。也就是说，同一个公式在不同 Factor Zoo 状态下可能有不同 fitness，因为它与当前库的相关性不同。这是 AlphaForge 相比固定 objective 公式搜索的重要特征。
-
-## 5. Stage 2：动态组合模型
-
-Stage 2 解决的是 Factor Zoo 的使用问题。论文认为 Alpha 因子的有效性可能周期性失效、永久失效或反转，固定因子集合和固定权重难以及时适应市场变化。
-
-### 5.1 Algorithm 2 主流程
-
-Algorithm 2 输入：
-
-- Factor Zoo：
-
-  $$
-  Z=\{f_1,\ldots,f_k\}
-  $$
-
-- 最大使用因子数 `N`；
-- 数据集 `X`、`Y`。
-
-输出是逐日预测：
+Predictor 以公式编码为输入，估计对应的 fitness。其监督标签来自上一节定义的真实评价过程；该模型拟合公式与评分的映射，不直接预测股票收益。训练目标为：
 
 $$
-\hat Y=\{\hat y_t\}.
+\mathcal L_P=\sqrt{\frac{1}{n}\sum_{i=1}^{n}
+\left(P(x_i)-\mathrm{fitness}(x_i)\right)^2}.
+\tag{2}
 $$
 
-主流程为：
+其中 $n$ 为 Predictor 的训练样本数。上式保留论文的公式形式，训练所得预测器为真实评分函数提供可微近似。
 
-1. 对每个交易日 `t`：
-   - 初始化当日候选集合 `Z_t`。
-   - 对 Zoo 中每个因子 `f` 计算近期表现：
+Generator 以正态噪声 $z$ 为输入，输出各位置的 token logits，经变换 $M$ 得到公式编码。其目标为最大化 Predictor 对生成公式的预测评分：
 
-     $$
-     IC_t^\rho(f),\qquad ICIR_t^{\hat\rho}(f).
-     $$
+$$
+x=M(G(z)),\qquad
+\mathcal L_{\mathrm{Fitness}}=-P(M(G(z))).
+\tag{3}
+$$
 
-   - 若满足：
+$M$ 包含序列规则掩码与 Gumbel-Softmax：前者约束公式语法，后者提供离散选择的可微近似。训练 Generator 时固定 Predictor 的参数，梯度经过 $P$ 和 $M$ 回传到 $G$；真实 IC 计算不在这条梯度路径上（原文 Factor Mining Model）。
 
-     $$
-     IC_t^\rho(f)>IC'
-     \quad\text{and}\quad
-     ICIR_t^{\hat\rho}(f)>ICIR'
-     $$
+代理模型由此将候选评价信息转化为生成器可利用的局部梯度信号。由于代理预测存在误差，生成公式仍须经过解析、真实评价与准入筛选，不能仅凭预测评分进入 Zoo。
 
-     则加入 `Z_t`。
+### 3.4 生成多样性与因子去冗余
 
-   - 按 `IC_t^\rho(f)` 排序。
-   - 选择 Top-N 因子：
+仅优化预测评分可能导致生成分布集中于少数高分模式。论文通过两次噪声采样生成两组候选，并分别对 one-hot 编码与隐藏表示的相似度施加惩罚。式 (4) 的目标结构可概括为：
 
-     $$
-     Z_t^{(N)}=TopN(Z_t).
-     $$
+$$
+\mathcal L_G=-P(x_1)+\mathcal L_{\mathrm{Diversity}},
+\tag{4}
+$$
 
-   - 用这些因子拟合线性回归。
-   - 用回归模型预测当前横截面，得到 `hat y_t`。
+其中多样性项由 one-hot 相似度和隐藏表示相似度加权组成。该约束使生成目标同时考虑预测评分与候选差异，完整相似度记号见原式 (4)。所据正文未展开两个相似度函数的具体计算形式，因而此处仅分析其约束作用。
 
-论文正文说明每个时点使用此前 `n` 天数据重新评估因子近期表现并拟合线性模型。因此复现时应将 Algorithm 2 中的 `LinearRegression(Z_t^{(N)}, y_t)` 理解为用可观测历史样本训练，再预测当前横截面；不能机械理解为使用当日未来标签拟合当日预测。
+生成多样性约束作用于候选分布，准入相关性约束则作用于候选与已有因子的行为冗余。表达结构或表示差异不必然对应行情上的低相关性，因此两类约束具有不同作用，不能相互替代（依据原文机制的分析）。
 
-### 5.2 动态组合的含义
+### 3.5 基于近期表现的动态因子组合
 
-Stage 2 的动态性体现在两层：
+挖掘完成后，Factor Zoo 保持固定。组合器在各预测时点依据此前历史数据重评因子、筛选子集并拟合线性组合（原文 Alpha Combination、Algorithm 2）：
 
-- 因子集合动态：每天从固定 Factor Zoo 中筛选近期仍有效的一部分因子；
-- 因子权重动态：每天用最新历史数据重新拟合线性回归权重。
+1. 计算各因子的近期 IC 与 ICIR，保留满足阈值条件的因子。
+2. 按近期 IC 排序，最多选择 $N$ 个因子。
+3. 用所选因子和历史标签拟合线性回归，再对当前股票截面产生预测。
 
-论文强调组合模型偏向线性结构，原因是金融场景要求可解释，且非线性组合更容易在低信噪比金融数据中过拟合。
+该过程同时更新每日使用的因子子集与组合权重。正文还列举 RankIC 等可选近期指标；上述步骤采用 Algorithm 2 明示的 IC / ICIR 版本。根据正文的历史数据约束，线性回归应仅使用预测时点已可观测的样本，伪代码简写不构成使用待预测收益训练当日模型的依据。
 
-正文还提到可使用 ICIR、IC、RankIC 等近期指标进行重排，但 Algorithm 2 只显式写出 IC 和 ICIR。复现时要明确到底使用哪组指标。
+原文 Tables 2–3 展示了固定 Zoo 下的组合变化：库内包含 100 个因子，每日最多使用 10 个，两个交易日的因子子集仅有 5 个成员重合；因子 3 的权重由 −0.00014 变为 0.00168。该案例体现了因子子集与权重的时变特征，说明动态使用不要求同步改变因子库；其收益贡献仍需系统性对照评价。
 
-### 5.3 组合阶段未披露细节
+## 4. 实验证据
 
-当前 PDF 没有给出以下实现细节：
+### 4.1 实验设置与对照方法
 
-- 近期窗口 `n` 的具体长度；
-- `IC'`、`ICIR'`、`CORR'` 的数值；
-- 线性回归是否包含截距；
-- 因子值是否按日标准化；
-- 目标 `y` 是否保留原值或标准化；
-- 候选不足 `N` 时如何处理；
-- 没有因子通过阈值时是否回退；
-- 因子缺失值处理；
-- 权重是否有约束；
-- 交易成本是否进入组合训练目标。
+原文 Experiments 分别考察完整框架的预测性能、组合因子数量的影响、组件有效性及交易表现。主要设置如下：
 
-这些缺口意味着论文足以还原动态组合主干，但不足以唯一复现实验代码。
-
-## 6. 实验设置
-
-### 6.1 数据与时间划分
-
-论文主要使用 CSI300 和 CSI500 数据，因为两者覆盖中国 A 股市场较大市值范围，并且与被比较的相关工作保持一致。数据通过 Qlib 下载。
-
-论文测试期为 2018-2022 年，并采用年度重训。第一个窗口明确写为：
-
-| Split | 日期 |
+| 项目 | 论文设置 |
 | --- | --- |
-| Train | 2010-01-01 至 2016-12-31 |
-| Validation | 2017-01-01 至 2017-12-31 |
-| Test | 2018-01-01 至 2018-12-31 |
+| 数据 | CSI300、CSI500，六个量价字段，数据来自 Qlib |
+| 标签 | `Ref(VWAP,-21)/Ref(VWAP,-1)-1`，约 20 日 VWAP 收益 |
+| 时间 | 2018–2022 年逐年测试、年度重训，测试年前一年作为验证期 |
+| 首个窗口 | 训练 2010–2016；验证 2017；测试 2018 |
+| 公式方法对照 | GP、DSO、AlphaGen 类 RL |
+| 机器学习对照 | XGBoost、LightGBM、MLP |
+| 重复次数 | 论文说明每个模型运行 5 次 |
 
-后续年份按“测试年前一年作为 validation，并用新数据年度重训”的方式推进。论文没有在正文逐一列出 2019-2022 每个窗口的完整 train 范围。
+主表评价最终预测信号，结果包含挖掘与组合两阶段的共同作用。论文通过 `Static` 与 `Ours` 区分组合方式：前者使用 AlphaForge 挖掘模型与 RL 参照的静态组合方法，后者使用完整动态组合。因此，组件贡献分析需要区分挖掘流程比较与组合方式比较。
 
-### 6.2 标签
+### 4.2 预测性能与组件贡献
 
-论文使用：
-
-```text
-Ref(VWAP, -21) / Ref(VWAP, -1) - 1
-```
-
-作为标签，并说明该标签更贴近真实交易场景。按 AlphaGen / AlphaForge 系列常见偏移记号理解，它表示使用未来第 1 日到未来第 21 日之间的 VWAP 收益，即大致 20 日持有收益。
-
-复现时必须确认 `Ref` 的正负方向和数据可用边界，不能只复制字符串而忽略 future context。
-
-### 6.3 对比方法
-
-论文比较了三类公式方法：
-
-| 方法 | 含义 |
-| --- | --- |
-| GP | 遗传规划，用 IC 作为优化目标 |
-| DSO | Deep Symbolic Optimization，符号回归代表方法 |
-| RL | AlphaGen 类强化学习公式因子集合生成 |
-
-同时比较了三个机器学习模型：
-
-| 方法 | 含义 |
-| --- | --- |
-| XGBoost | 梯度提升树 |
-| LightGBM | 高效梯度提升框架 |
-| MLP | 多层感知机 |
-
-论文称为避免随机种子影响，每个模型重复运行 5 次。表中部分 deterministic baseline 未报告标准差。
-
-### 6.4 主结果
-
-Table 1 报告的核心结果如下，单位为百分比。
+以下选取原文 Table 1 中的公式方法与消融版本，单位均为百分比，括号内沿用原表的波动报告值：
 
 | 方法 | CSI300 IC | CSI300 RankIC | CSI500 IC | CSI500 RankIC |
 | --- | ---: | ---: | ---: | ---: |
-| XGB | 0.41 | 1.63 | 0.33 | 2.87 |
-| MLP | 1.22 (0.16) | 1.75 (0.28) | 1.94 (0.11) | 3.31 (0.23) |
-| LGBM | 0.84 | 1.85 | 1.75 | 3.81 |
 | GP | 1.29 (0.44) | 2.72 (0.58) | 0.37 (0.76) | 2.34 (1.07) |
 | DSO | 2.55 (0.69) | 3.88 (1.12) | 1.38 (0.57) | 4.56 (0.61) |
 | RL | 2.09 (0.26) | 2.72 (0.42) | 1.91 (0.49) | 4.03 (0.62) |
 | Static | 2.43 (0.57) | 3.67 (0.46) | 2.05 (0.29) | 4.48 (0.46) |
-| Ours | 4.40 (0.56) | 5.89 (0.69) | 2.84 (0.58) | 5.57 (0.58) |
+| AlphaForge | 4.40 (0.56) | 5.89 (0.69) | 2.84 (0.58) | 5.57 (0.58) |
 
-`Static` 是消融版本：使用 AlphaForge 的 factor mining model 生成 Alpha，但用类似 RL 的静态 Mega-Alpha 组合方式。`Ours` 是完整动态组合版本。这个对比说明：
+上述结果分别支持以下判断：
 
-- generator-predictor 挖掘模型本身相对 RL baseline 有增益；
-- 动态组合进一步提升表现。
+- **完整框架的预测性能**：AlphaForge 在表 1 的两个股票池、四项 IC / RankIC 上均高于所列参照，也高于原表中的三个机器学习模型，支持该设置下最终信号的预测表现改善。
+- **动态组合的增量作用**：`Ours` 与 `Static` 共享挖掘模型，组合方式是设计上的关键差别；完整版本的四项指标都更高，支持动态组合在所报设置下有增量作用。
+- **挖掘模块的独立贡献**：`Static` 相对 RL 的均值有所改善，但两者比较的是不同挖掘流程。正文未分别设置移除 Predictor 或多样性项的对照，现有结果不足以分离各模块的独立贡献。
 
-### 6.5 Factor pool size
+这些判断限于作者报告的实验设置与对照条件；均值领先不足以支持跨市场、跨预算的普遍优势。
 
-论文将 pool size 设置为：
+### 4.3 组合因子数量的影响
 
-```text
-1, 10, 20, 50, 100
-```
+原文 Figure 2 比较了 CSI300 上不同 pool size（1、10、20、50、100）对应的 IC。结果呈非单调关系，最高值出现在 10。依据该实验的文字说明及库内 100 个因子、每日使用 10 个的案例，此处的数量限制对应每日组合使用上限 $N$。
 
-并在 CSI300 上比较 IC。结果呈非单调关系，最高点出现在 pool size = 10。论文解释为动态组合每个时点只需要大约 10 个最相关的价格信息来源，继续扩大库可能带来边际收益下降。
+该结果表明，增加每日参与组合的因子数量不必然改善预测性能。最优值 10 仅适用于所报设置，且不等同于挖掘阶段的最优因子库规模；较大的 Zoo 仍可为不同时点提供不同的候选子集。
 
-这个结论需要谨慎理解：它支持“组合使用阶段不一定越多因子越好”，但不直接证明挖掘阶段永远只应保留 10 个因子，因为更大 Factor Zoo 仍可能为不同市场状态提供候选。
+### 4.4 模拟交易与实盘结果
 
-## 7. Case Study 与可解释性
+原文 Figure 3 对应两类证据：
 
-论文用一个案例说明动态 factor timing：
+| 证据 | 设置与结果 | 证据范围 |
+| --- | --- | --- |
+| 模拟交易 | CSI300，2018–2022；等权持有 Mega-Alpha 最高的 50 只股票，每天最多更换 5 只；图中 AlphaForge 净值最高 | 所报交易规则下的结果排序，与预测指标形成补充 |
+| 实盘展示 | CSI500，300 万人民币账户，约 9 个月；作者报告相对 CSI500 超额收益 21.68% | 特定账户的表现记录，不能独立识别方法贡献 |
 
-- Generator 产生 100 个 Alpha 的 Factor Zoo；
-- 组合模型每次最多使用 10 个因子；
-- Day 1 和 Day 2 各选出 10 个因子；
-- 两天只有 5 个因子重合；
-- 同一个因子在不同日期的权重可能显著变化甚至变号。
+论文通过每日换股数量限制控制交易成本，但所据正文未列明确费率。实盘展示也未提供足以支持统一比较的交易明细及完整风险、成本口径。现有材料不足以确立可复核的净收益优势。
 
-例如，论文提到第 3 个因子在 Day 1 权重约为负值，而 Day 2 权重变为正值，说明同一公式可能在不同市场状态下承担不同作用。
+## 5. 研究结论
 
-论文还用 `S_log1p(ts_cov(high, volume, 20))` 解释公式可读性：该因子可理解为过去 20 天最高价与成交量趋势是否同步。论文认为，投资经理可以根据公式经济含义、权重方向和风险暴露做进一步判断。
+AlphaForge 通过两阶段框架分别处理公式生成与动态使用问题。代理评分为生成器提供优化信号，生成多样性与准入相关性约束分别作用于候选分布和因子库；动态组合则在固定候选库内更新因子子集与权重。主实验支持完整框架在所报 A 股任务上的预测改善，静态与动态版本的对照进一步支持组合阶段的增量作用。
 
-另一个例子是 `-1 * ts_mean(volume, 20)`。论文指出它与市值风险暴露相关；若权重过大，组合可能偏向小市值股票，投资经理应识别并控制这种暴露。
+两阶段解耦同时保留了目标层面的限制。原文 Related Work 后的 Discussion 指出，尽管 Zoo 增长会改变评分条件，Generator 的训练目标仍为单因子的 IC / fitness；将整批因子的 combined IC 纳入生成目标被列为后续方向。因此，Stage 1 提供低冗余候选集合，但尚未直接优化该集合的完整组合效用。
 
-这些案例的作用是说明公式 Alpha 相比黑盒模型更便于归因、风控和人工干预。
+### 局限与未披露
 
-## 8. 回测与实盘证据
+- **组件归因与效率证据有限**：正文的消融重点是动态组合，没有分别检验 Predictor 与多样性项的独立增益；也没有等真实评价次数或统一计算预算下的效率表。因此，可微代理提供优化方向的机制设计尚不足以确立评价成本方面的普遍优势。
+- **预测表现的适用范围有限**：主实验集中在两个 A 股指数股票池；因子数量实验只给出 CSI300 的结果，动态组合依赖近期表现继续提供有效信息，其跨市场与不同状态下的适用性不能由这些结果保证。
+- **关键协议仍有不确定性**：所据正文没有完整展开近期窗口、准入阈值与标签可用性的对齐规则；交易费率和实盘比较口径也不充分。正文指向另行补充材料，本文未纳入这些材料，因此此处只说明正文证据能够支持的范围。
 
-论文进行了模拟交易和实盘展示。
+### 针对的问题
 
-模拟交易设置：
-
-- 时间：2018-01-01 至 2022-12-31；
-- 股票池：CSI300；
-- 框架：Qlib；
-- 每日持有 Mega-Alpha 分数最高的 50 只股票；
-- 等权持仓；
-- 每日最多换 5 只股票，用于控制过高交易成本。
-
-论文报告 AlphaForge 在五年模拟交易中取得最高净值表现。
-
-实盘展示：
-
-- 账户资金：300 万人民币；
-- 股票池：CSI500；
-- 时长：约 9 个月；
-- 论文声称相对 CSI500 取得 21.68% 超额收益。
-
-实盘结果是论文报告的外部证据，但当前 PDF 没有给出可复验的交易明细、成本模型、持仓约束、风险控制参数或审计口径，因此不能单独作为可复现算法定义。
-
-## 9. 论文讨论中的重要边界
-
-论文 Discussion 中有一个容易被忽略的点：尽管 Factor Zoo 增长会改变 mining objective，因为相关性惩罚依赖当前 `Z`，但 Generator 的训练目标仍主要是单个 Alpha 的 IC / fitness。
-
-论文认为，未来可以探索把整批因子的 combined IC 作为 Generator 目标，以提高挖掘效率。这说明 AlphaForge 当前 Stage 1 并未直接优化完整 batch 的组合 IC，而是先挖单因子强度和低相关性，再交给 Stage 2 组合。
-
-这与 AlphaGen 类方法不同：
-
-- AlphaGen / RL baseline 更直接把组合 IC 边际贡献写入 reward；
-- AlphaForge 用 surrogate model 学当前 Zoo 下的单公式 fitness，再通过 Stage 2 动态组合使用因子。
-
-## 10. 复现时最关键的歧义与缺口：官方源码补全
-
-本节只记录官方源码可确认的实现口径。源码与论文 Algorithm 1、Algorithm 2 或公式 (5) 不一致的点标注为“源码差异”，不等同于论文原文结论。
-
-### 10.1 公式生成、action space 与 mask
-
-官方源码确认公式使用 AlphaGen 类 RPN 栈表示，最大表达式长度为 `20`，实际 action space 大小为 `51`。`Null` token 不作为可采样 action；网络输出 action 再偏移成内部 token。
-
-官方 action space 由以下部分组成：
-
-- operators：`Inv`、`S_log1p`、`Add`、`Sub`、`Mul`、`Div`、`Pow`、`Ref`、`ts_mean`、`ts_sum`、`ts_std`、`ts_var`、`ts_max`、`ts_min`、`ts_med`、`ts_mad`、`ts_div`、`ts_pctchange`、`ts_delta`、`ts_wma`、`ts_ema`、`ts_cov`、`ts_corr`；
-- features：`open`、`close`、`high`、`low`、`volume`、`vwap`；
-- rolling windows / delta times：`1`、`5`、`10`、`20`、`30`、`40`、`50`；
-- constants：`-30`、`-10`、`-5`、`-2`、`-1`、`-0.5`、`-0.01`、`0.01`、`0.5`、`1`、`2`、`5`、`10`、`30`；
-- end token：`SEP`。
-
-源码中也保留了一些未启用或与论文示例不同的 operator 定义，例如 `Abs`、`Sign`、`Log`、`CSRank`、`Greater`、`Less`、`ts_skew`、`ts_kurt`、`ts_rank`、`ts_ir` 等没有进入 AlphaForge 主训练配置。因此复现时应以主训练配置中的 action list 为准，而不是以所有 Python 类定义为准。
-
-`ExpressionBuilder` 的 legality rule 是栈约束：
-
-- terminal 合法条件是栈里只剩一个 featured expression；
-- unary operator 要求栈顶是 featured expression；
-- binary operator 要求至少两个元素，且不能把纯 `DeltaTime` 当作普通操作数；
-- rolling operator 要求栈顶是 `DeltaTime`，其前一项或前两项是 featured expression；
-- `DeltaTime` 只能接在 featured expression 后；
-- `Constant` 可在空栈或 featured expression 后出现；
-- `Feature` 不能紧跟 `DeltaTime`。
-
-`NetM` 的 mask 实现有一个重要源码细节：每个位置先把非法 action 的 logit 设为极小值，再用 masked logit 的 `argmax` 更新 builder 前缀；随后 Generator 训练阶段再对 masked logit 调用 `F.gumbel_softmax(..., hard=True)` 得到硬 one-hot。也就是说，mask 递推使用的是 argmax 前缀，而最终 hard Gumbel 样本可能与该 argmax 前缀不同。这是源码行为，不是论文对 `M()` 的数学定义。
-
-其它实现细节：
-
-- Gumbel-Softmax 没有显式传入 temperature，使用 PyTorch 默认 `tau=1`，并采用 `hard=True`；
-- 若某个样本生成 `SEP`，builder 会把后续 token 填成 `SEP`；
-- duplicate 的主要判定是 token 序列字符串去重；
-- 无效公式在 builder 解析或真实评价阶段被过滤或记为 0 分，不会仅凭 Predictor 分数直接进入 Zoo；
-- `S_log1p` 的实现是 `sign(x) * log1p(abs(x))`；
-- `ts_div` 的源码语义是当前值除以 `d` 日前值，不是除以滚动均值。
-
-### 10.2 网络结构与训练预算
-
-官方主流程使用 `NetP`、`NetG_DCGAN` 和 `NetM`。源码里存在其它 Generator 变体，但 `train_AFF.py` 主训练选择的是 DCGAN 版本。
-
-Predictor `NetP` 的结构为：
-
-```text
-one-hot sequence
-  -> permute to channel-first tensor
-  -> Conv2d(n_actions -> 96, kernel=(1, 3))
-  -> ReLU
-  -> MaxPool2d(kernel=(1, 2))
-  -> Conv2d(96 -> 128, kernel=(1, 4))
-  -> ReLU
-  -> flatten
-  -> Linear(128 * 6 -> 256)
-  -> Dropout(0.2)
-  -> ReLU
-  -> Linear(256 -> 1)
-```
-
-`NetP` 构造参数里有 `hidden`，但主结构实际使用固定 `256` hidden；源码没有把该参数作为通用 hidden size。Predictor 训练使用 weighted MSE，而不是公式 (2) 中写出的 RMSE；训练样本按 `train_test_split(test_size=0.2, random_state=42)` 切分，Adam learning rate 为 `1e-3`，batch size 为 `64`，最多 `100` epoch，early stopping patience 为 `10`。训练标签会按当前样本分数最大值缩放到大致 `0` 到 `100` 的区间；源码固定使用 `min_y=0`，没有按样本最小值平移。
-
-Generator `NetG_DCGAN` 固定要求 `seq_len=20`，输入 latent noise 维度默认为 `100`，主要结构是：
-
-```text
-Normal(0, 1) latent z
-  -> Linear(100 -> 6 * 384)
-  -> reshape
-  -> ConvTranspose / BatchNorm / ReLU blocks
-  -> Conv / BatchNorm / ReLU blocks
-  -> output logits with shape (batch, 20, n_actions)
-```
-
-源码中 `g_hidden=128` 传入构造函数，但 DCGAN 主干通道数固定为 `384/256/192/128/64`，并未按 `g_hidden` 缩放。Generator 训练默认 batch size 为 `256`，最多 `200` epoch，Adam learning rate 为 `1e-3`，early stopping patience 为 `10`，默认按生成候选的最大真实 score 选择 best state。源码在每轮 while 循环开始会重新初始化 `NetP` 和 `NetG` 的权重与 bias；但 BatchNorm running state 不是完整重置项，这属于源码实现细节。
-
-Generator loss 的源码口径为：
-
-- `loss_pred = -pred_1.mean()`，只用第一组 latent 样本的 Predictor 输出，第二组主要服务 diversity；
-- one-hot similarity 先按 token 位置比较两组 hard one-hot，相似度超过阈值 `0.4` 的部分才进入惩罚，默认系数 `10`；
-- hidden similarity 使用 `NetP` 中 `fc1` 后的 latent representation，cosine similarity 超过阈值 `0.4` 的部分才进入惩罚，默认系数 `10`；
-- entropy loss 默认系数为 `0`，主流程不启用；
-- 源码在 epoch 0 会评价候选并记录 best state，但只有 `epoch > 0` 时才执行 `backward()` 和 optimizer step，因此第 0 个 epoch 不更新 Generator。
-
-源码差异：论文说 Predictor 训练后冻结 `P`，源码训练 Generator 时把 `NetP` 置为 `eval()`，optimizer 只更新 `NetG`，但并没有逐参数设置 `requires_grad=False`。这不改变 optimizer 更新对象，但会让 Autograd 仍构建穿过 Predictor 的梯度路径。
-
-### 10.3 Fitness、准入与 Zoo 生命周期
-
-官方源码的训练标签与论文一致，使用：
-
-```text
-Ref(vwap, -21) / Ref(vwap, -1) - 1
-```
-
-训练数据加载时使用 `raw=True`，价格字段会按 Qlib factor 还原，volume 会做缩放。表达式值和 target 在训练评价中按日做横截面标准化；`normalize_by_day` 会按日计算均值和标准差，并把 NaN 填成 0。
-
-`get_metric()` 的源码口径是：
-
-- 主 score 固定为 `abs(mean(IC))`；虽然函数参数保留 `metric_target`，内部又硬编码为 `ic`；
-- ICIR 使用 `abs(mean(IC)) / std(IC)`，作为附加门槛参与入库；
-- `batch_ret` 不是组合回测收益，而是以 `cov(factor, target) / var(factor)` 形式得到的日度 factor-return / slope-like 序列；
-- 与已有 Zoo 的相关性检查使用候选 `batch_ret` 序列和 Zoo 中已保存 `ret_list` 的最大绝对相关；
-- 若首日有限值覆盖不足 `0.8`，或首日唯一值比例不足 `0.01`，score 置 0；
-- 非有限 IC、ICIR、return 类指标会被置 0。
-
-默认 CLI / config 门槛为：
-
-| 项 | 源码默认值 |
-| --- | ---: |
-| `zoo_size` | `100` |
-| `corr_thresh` | `0.7` |
-| `ic_thresh` | `0.03` |
-| `icir_thresh` | `0.1` |
-
-`filter_valid_blds()` 的入库筛选顺序是：先保留 `score > 0`，过滤 invalid，按 token 序列去重，按 score 降序排序；再要求 `score > ic_thresh`、`icir > icir_thresh`，并对本批候选之间的 `ret_list` 绝对相关做贪心去冗余。候选与已有 Zoo 的相关性主要已经体现在 `get_metric()` 得到的 score 中；每隔若干轮源码还会对整个 Zoo 重新执行一次过滤。
-
-Zoo 生命周期的源码口径为：
-
-- 初始随机收集约 `10000` 个候选；
-- 每轮用当前候选和历史备份训练 Predictor，备份样本权重为 `1`，当前样本权重为 `2`；
-- 每轮 Generator 训练后，合并训练中生成的候选和新采样候选，再进行真实评价与入库；
-- 每轮结束还会追加一批随机探索候选，供下一轮使用；
-- while 条件是 `len(zoo) < num_factors`，新增候选后不强制裁剪到刚好等于 `zoo_size`，因此最终 Zoo 数量可能超过目标数量。
-
-源码没有持久保存“负 IC 因子应在后续整体取反”的独立方向字段；主 fitness 用 `abs(IC)`，但组合阶段直接使用表达式值计算近期 RankIC / RankICIR 和线性回归权重。
-
-### 10.4 动态组合官方源码口径
-
-`combine_AFF.py` 是官方 Stage 2 入口。它读取 Stage 1 保存的 final Zoo，按 `abs(score)` 排序，将表达式重新计算为因子张量；因子值默认按日标准化，target 不标准化。组合前会预计算每个因子的日度 IC、RankIC 和 `batch_ret`。
-
-每日组合的核心实现为：
-
-1. 对预测日 `cur`，使用 `shift = 21`，只取 `begin:cur-shift` 的历史区间计算近期表现和拟合线性回归；
-2. 若 `window=inf`，历史起点为全样本起点；若使用有限 window，源码使用 `begin = cur - window - shift`，没有显式 clamp 到 0；
-3. 对每个因子计算历史区间的 IC、ICIR、RankIC、RankICIR、return 和 return IR；
-4. 按 `abs(RankICIR)` 降序排序；
-5. 筛选 `RankIC > 0.02` 且 `RankICIR > 0.2` 的因子；
-6. 若没有因子通过筛选，则回退到排序后的 top-1；
-7. 最多取 `n_factors` 个因子，默认 README 示例为 `10`；
-8. 将历史日期和股票截面展平成二维回归样本，在线性回归中显式加入常数列；
-9. 用 `torch.linalg.lstsq` 求解 OLS，并对当日横截面预测。
-
-源码差异：论文 Algorithm 2 写的是按 IC / ICIR 过滤并按 IC 排序；官方组合代码实际使用 RankIC / RankICIR，按 `abs(RankICIR)` 排序，并加入了空集合 top-1 fallback。源码没有加入权重非负、权重和、交易成本或换手约束；OLS 权重可以为负，是否使用某个因子由当日历史筛选决定。
-
-另一个需要注意的细节是缺失值处理：拟合样本主要按 target 是否 finite 过滤，预测日因子值会用 `nan_to_num` 填 0；代码没有把组合阶段写成严格的投资组合优化器，它更接近每日横截面标签预测器。
-
-### 10.5 数据切分、保存与 baseline 边界
-
-官方 README 示例把 `train_end_year` 作为滚动训练结束年。例如 `train_end_year=2020` 时，训练区间为 2010-01-01 至 2020-12-31，validation 为 2021 年，test 为 2022 年。源码 `get_data_by_year()` 每次只构造一个 validation 年和一个 test 年；论文 2018-2022 的五年结果需要按年度滚动运行组合得到，而不是单次训练覆盖全部测试年。
-
-源码还会为 validation / test 构造向前两年的 head data，用于满足滚动算子和未来标签上下文；全量数据范围则覆盖 train start 到 test end。公共文档中不应写官方代码 checkout 的本地绝对路径，也不应把本地 Qlib 数据目录写成算法定义。
-
-保存口径：
-
-- Stage 1 保存 builder pickle 和 CSV，final Zoo 文件名包含 `z_bld_zoo_final`；
-- Stage 2 保存 validation 和 test 预测张量；
-- 源码没有提供统一的 optimizer / RNG / dataloader checkpoint 复现包。
-
-对比 baseline 方面，PDF 和官方主流程能确认 AlphaForge 自身的两阶段算法与主要实验入口，但不能从当前 PDF 唯一还原 DSO、GP、RL、MLP、XGBoost、LightGBM 的全部输入特征、超参和训练预算。后续复现实验需要单独标注 baseline 的代码依据或复现假设。
-
-## 11. 阅读时最容易混淆的边界
-
-1. Stage 1 的 Factor Zoo 是挖掘结果；Stage 2 的每日 Top-N 是使用阶段的动态子集。
-2. Factor Zoo 可以有很多因子，但 Mega-Alpha 每天不一定使用全部因子。
-3. 公式 (5) 的 fitness 明确写的是绝对 IC 和相关性门槛；正文文字还提到 ICIR，因此不能只按公式或只按文字还原。
-4. `M()` 不是普通 softmax，它还承担公式语法 mask 和 Gumbel-Softmax 可微采样。
-5. Predictor 是 surrogate，不替代真实评价；新生成公式仍需 parse、真实评价和准入。
-6. Generator loss 中 diversity 是避免模式坍缩的关键，不是事后去重的替代品。
-7. Algorithm 2 的线性回归必须按正文理解为使用历史数据预测当前，不能把当前未来收益泄露进当日预测。
-8. `Static` 消融不是传统 RL baseline，而是 AlphaForge 挖掘 + 静态组合。
-9. 论文的实盘展示不能替代可复现实验协议。
-10. 当前 PDF 没有 supplementary hyperparameter 表；缺失实现细节应标注为源码依据或复现假设。
-11. 官方源码补全的是实现事实；当它与论文 Algorithm 1、Algorithm 2 或公式 (5) 冲突时，不能反向改写论文结论。
-
-## 12. 复现要点
-
-从算法定位看，AlphaForge 的价值在于：
-
-- 用可微 surrogate 引导离散公式搜索；
-- 在 sparse fitness space 中通过 Generator 学习高分区域；
-- 在生成目标中加入 diversity，避免公式同质化；
-- 通过当前 Factor Zoo 相关性让 mining objective 随库状态变化；
-- 将 Factor Zoo 挖掘与每日动态组合解耦。
-
-复现时最关键的是保留以下语义：
-
-1. 公式必须经过合法 mask / parse / 真实评价，不应只相信 Predictor。
-2. Factor Zoo 准入必须同时考虑预测能力和与已有库的冗余。
-3. 负 IC 公式的可用方向需要被显式处理，避免测试期按未来收益翻转。
-4. Stage 2 只能使用预测日前可观测历史重筛与拟合。
-5. 动态组合是训练后独立使用阶段，不应反向污染 Stage 1 的 Factor Zoo 定义。
-
-当前 PDF 足以还原 AlphaForge 的两阶段算法主干、关键目标函数、Factor Zoo 语义、动态组合伪代码、实验数据划分、标签和主要证据；但不足以唯一还原官方实现的网络结构、超参、mask、ICIR 阈值、Zoo 更新和组合细节。补全这些内容时，应明确区分论文原文、官方源码依据和复现者自己的实现选择。
+| 仓库问题 | 定位 | 本文中的机制位置 |
+| --- | --- | --- |
+| P4 学习信号稀疏、延迟且不可微 | 主要 | 第 3.3 节：Predictor 将真实评分近似为可微的生成方向 |
+| P8 挖掘目标与实际使用脱节 | 主要 | 第 3.5 节：挖掘与每日组合使用解耦 |
+| P9 非平稳与因子衰减 | 主要 | 第 3.5 节：按近期表现更新所用因子与权重 |
+| P3 评价成本高 | 涉及 | 第 3.3 节：利用预测评分引导生成，仍需真实评价确认 |
+| P7 因子同质化与冗余 | 涉及 | 第 3.4 节：生成多样性与入库去冗余分别处理 |
