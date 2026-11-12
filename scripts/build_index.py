@@ -176,19 +176,17 @@ def check_problem_doc(papers, taxonomy):
 
 
 def check_card(p, text, taxonomy):
-    """Return (errors, debt, mechanisms); mechanisms maps a problem code to (level, text) from the card."""
-    errors, debt, mechs = [], Counter(), {}
+    """Return (errors, mechanisms); mechanisms maps a problem code to (level, text) from the card."""
+    errors, mechs = [], {}
     rel = p["card"]
     if META_END not in text:
-        return [f"{rel}: missing {META_END} marker"], debt, mechs
+        return [f"{rel}: missing {META_END} marker"], mechs
     body = text.split(META_END, 1)[1]
     values = {}
     for name in CARD_FIELDS:
         values[name] = card_field(body, name)
         if values[name] is None:
             errors.append(f"{rel}: missing field * **{name}：**")
-    if values["局限"] is not None and values["局限"].startswith("待补"):
-        debt["局限"] += 1
     ev = values["针对问题与证据"]
     if ev is not None:
         names = {v["code"]: v["name"] for v in taxonomy["problems"].values()}
@@ -205,9 +203,7 @@ def check_card(p, text, taxonomy):
             want = set(codes(p, taxonomy, field))
             if found != want:
                 errors.append(f"{rel}: {level} lines cover {sorted(found) or 'none'}, papers.yaml {field} has {sorted(want) or 'none'}")
-        if mechs and re.search(r"证据：\s*待补", ev):
-            debt["证据"] += 1
-    return errors, debt, mechs
+    return errors, mechs
 
 
 def check_deep(p):
@@ -277,7 +273,7 @@ def render_index(papers, taxonomy, mechs):
     lines = [
         "# 论文索引",
         "",
-        "> 本文件由 `scripts/build_index.py` 根据 `papers.yaml` 和速读卡生成，请勿手改。问题编号的含义见 README“因子挖掘面临的问题”，路线定义见 `taxonomy.yaml`。",
+        "> 问题编号的含义见 [README 的问题说明](README.md#因子挖掘面临的问题)，路线范围见[按路线列表](#by-route)。",
         ">",
         "> 问题分两级：“主要针对”是论文动机所在、主要贡献针对的问题（至多 3 个）；“顺带涉及”是论文中有对应机制、但不是主要贡献的问题。",
         "",
@@ -285,7 +281,7 @@ def render_index(papers, taxonomy, mechs):
         "",
         "查找论文：[总表](#all-papers) · [按问题](#by-problem) · [实验口径](#setups) · [按路线](#by-route)。",
         "",
-        "理解方法：[研究全景](topics/landscape.md) · [各问题的应对机制](topics/problems.md) · [评估口径对照](topics/evaluation_protocol.md)；查看新增与状态变化：[跟踪简报](digests/)。",
+        "理解方法：[研究全景](topics/landscape.md) · [各问题的应对机制](topics/problems.md) · [评估口径对照](topics/evaluation_protocol.md)；查看新工作与状态变化：[跟踪简报](digests/README.md)。",
         "",
         '<a id="all-papers"></a>',
         "",
@@ -317,7 +313,7 @@ def render_index(papers, taxonomy, mechs):
             mech = mechs.get(p["id"], {}).get(v["code"], (None, ""))[1]
             lines.append(f"- {p['first_public']} {name}（{label}）" + (f"：{mech}" if mech else ""))
         lines.append("")
-    lines += ['<a id="setups"></a>', "", "## 3. 实验口径", "", "各篇速读卡“证据”一节的摘要，逐项核对自论文原文；口径差异的比较见[评估口径](topics/evaluation_protocol.md)。", "", render_setup(papers, taxonomy), ""]
+    lines += ['<a id="setups"></a>', "", "## 3. 实验口径", "", "各篇论文实验设置的摘要；口径差异的比较见[评估口径](topics/evaluation_protocol.md)。", "", render_setup(papers, taxonomy), ""]
     lines += ['<a id="by-route"></a>', "", "## 4. 按路线", "", "同一篇工作可以属于多条路线。", ""]
     for key, route in taxonomy["routes"].items():
         members = sorted((p for p in papers if key in p["routes"]), key=lambda p: (str(p["first_public"]), p["short"]))
@@ -329,7 +325,7 @@ def render_index(papers, taxonomy, mechs):
             ]
             lines += [" · ".join(items), ""]
         else:
-            lines += ["_暂无收录，待补检。_", ""]
+            lines += ["_暂无收录。_", ""]
     return "\n".join(lines).rstrip() + "\n"
 
 
@@ -339,18 +335,18 @@ def render_setup(papers, taxonomy):
         (p for p in papers if p.get("card")),
         key=lambda p: (str(p.get("setup", {}).get("markets") or "~"), str(p["first_public"]), p["short"]),
     )
-    cell_ = lambda p, k: cell((p.get("setup") or {}).get(k) or "未说明")
+    cell_ = lambda p, k: cell((p.get("setup") or {}).get(k) or "—")
     lines = [
-        "“未说明”表示论文没有给出该项。`markets` 为“不适用”的是方法类论文，实验对象不是股票因子挖掘。",
+        "“—”表示该项没有可列出的信息，可能未披露或不适用；具体证据范围见速读卡。市场列的“不适用”表示实验对象不是股票因子挖掘。标签期限与实际持有期分别说明，二者不必相同。",
         "",
-        "### 4.1 市场、股票池与频率",
+        "### 3.1 市场、股票池与频率",
         "",
         "| 工作 | 市场 / 股票池 | 频率 |",
         "| --- | --- | --- |",
     ]
     lines += [f"| [{p['short']}]({p['card']}) | {cell_(p, 'markets')} | {cell_(p, 'freq')} |" for p in rows]
-    lines += ["", "### 4.2 样本外区间、标签与交易成本", "",
-              "| 工作 | 样本外区间 | 标签与持有期 | 交易成本 |",
+    lines += ["", "### 3.2 样本外区间、标签与交易成本", "",
+              "| 工作 | 样本外区间 | 收益标签 / 持有期说明 | 交易成本 |",
               "| --- | --- | --- | --- |"]
     lines += [f"| [{p['short']}]({p['card']}) | {cell_(p, 'test')} | {cell_(p, 'label')} | {cell_(p, 'cost')} |" for p in rows]
     return "\n".join(lines)
@@ -365,7 +361,7 @@ def render_problem_table(papers, taxonomy):
     return "\n".join(lines)
 
 
-def render_status(papers, taxonomy, debt):
+def render_status(papers, taxonomy):
     lines = [f"{summary_line(papers, taxonomy)}，完整列表见[论文索引](INDEX.md)。", "", "| 路线 | 篇数 |", "| --- | ---: |"]
     for key, route in taxonomy["routes"].items():
         lines.append(f"| {route['name']}（`{key}`） | {sum(key in p['routes'] for p in papers)} |")
@@ -376,20 +372,8 @@ def render_status(papers, taxonomy, debt):
         gaps.append(f"- 暂无收录的路线：{'、'.join(empty_routes)}。")
     if thin:
         gaps.append(f"- 主要针对的工作不超过 {THIN} 篇的问题：{'、'.join(thin)}。")
-    if debt:
-        gaps.append(f"- 速读卡待补：局限 {debt['局限']} 篇，证据 {debt['证据']} 篇。")
     if gaps:
         lines += ["", "覆盖缺口：", ""] + gaps
-    landscape = (ROOT / "topics" / "landscape.md").read_text()
-    uncovered = [p["short"] for p in papers if has_note(p) and p["short"] not in landscape]
-    if uncovered:
-        rel = uncovered if len(uncovered) <= 12 else uncovered[:12]
-        more = f" 等 {len(uncovered)} 篇" if len(uncovered) > 12 else ""
-        lines += ["", f"未进入研究全景：{'、'.join(rel)}{more}，可考虑补入 `topics/landscape.md` 的分组导读。"]
-    pending = Counter(p["status"] for p in papers if not has_note(p))
-    if pending:
-        what = "，".join(f"{STATUS_LABEL[s]} {pending[s]}" for s in ("triaged", "inbox") if pending[s])
-        lines += ["", f"待处理：{what} 篇尚未写卡，见[论文索引](INDEX.md)。"]
     recent = sorted(papers, key=lambda p: (str(p["added"]), str(p["first_public"])), reverse=True)[:RECENT]
     lines += ["", "最近收录：", ""]
     for p in recent:
@@ -418,20 +402,19 @@ def main():
     readme = readme_path.read_text()
     errors += check_readme_problems(readme, taxonomy)
     errors += check_problem_doc(papers, taxonomy)
-    debt, outputs, mechs = Counter(), {}, {}
+    outputs, mechs = {}, {}
     for p in papers:
         if p.get("card"):
             path = ROOT / p["card"]
             text = path.read_text()
-            e, d, mechs[p["id"]] = check_card(p, text, taxonomy)
+            e, mechs[p["id"]] = check_card(p, text, taxonomy)
             errors += e
-            debt += d
             if META_END in text:
                 outputs[path] = render_card_header(p, taxonomy) + text.split(META_END, 1)[1]
         if p.get("deep"):
             errors += check_deep(p)
     readme = replace_block(readme, "PROBLEMS", render_problem_table(papers, taxonomy), errors)
-    readme = replace_block(readme, "STATUS", render_status(papers, taxonomy, debt), errors)
+    readme = replace_block(readme, "STATUS", render_status(papers, taxonomy), errors)
     outputs[readme_path] = readme
     outputs[ROOT / "INDEX.md"] = render_index(papers, taxonomy, mechs)
     if errors:

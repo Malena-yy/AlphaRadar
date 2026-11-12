@@ -36,7 +36,7 @@ papers:
   arxiv: '1601.00991'
   url: https://arxiv.org/abs/1601.00991
   code: null
-  code_note: 未见官方开源；社区有多种 Alpha101/WorldQuant 101 复现，但需要逐一校验算子定义、数据对齐和未来函数处理
+  code_note: 未见官方开源；社区有多种 Alpha101/WorldQuant 101 复现，其算子定义、数据对齐和时间可用性与原文的一致性未获确认
   affiliation: Quantigic Solutions LLC
   problems: []
   also: []

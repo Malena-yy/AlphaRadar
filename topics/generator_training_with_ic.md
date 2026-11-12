@@ -1,58 +1,52 @@
 # 公式因子挖掘的三类训练方法
 
-> 本文只比较强化学习、AlphaForge 和 AlphaSAGE 如何把真实因子 IC 用于生成器训练。逐篇公式、实验和未披露细节见 `notes/deep/` 下的论文精读。本文不记录实验数字，也不替代相关工作调研。
+> 本文以 AlphaGen 的策略梯度、AlphaForge 的可微代理生成与 AlphaSAGE 的轨迹平衡为例，比较真实因子 IC 如何进入训练。文献版本、实验与披露边界见各篇笔记；不据此概括所有强化学习或生成方法。
 
 ## 1. 共同约束
 
-三条方法都生成离散的公式 token。公式要在行情上求值，再和未来收益标签计算 IC。IC 出现在整条公式确定之后，对 token 编号没有梯度。生成器不能把 IC 当作普通网络损失，直接反传到“下一个 token 应该是什么”。
+三类方法最终都生成离散公式。真实 IC 由公式在行情面板上求值后与未来收益标签计算，无法经离散 token 选择直接反传到生成器参数。合法中间表达式也可能被评价；困难在于信用分配与离散选择，不是所有方法都只能在最终一步得到反馈。
 
-三条方法都仍然使用真实 IC。差别是 IC 进入训练的方式，以及生成器最后学到的是峰值策略、可微代理分数，还是一个与奖励成比例的公式分布。
+真实 IC 分别用于奖励、Predictor 的监督标签和轨迹平衡的终端目标。策略梯度通常提高期望回报，风险寻求方法另强调高分尾部；可微代理优化预测评分，GFlowNet 则以奖励比例分布为目标。
 
-入池时检查绝对 IC 和与已有因子的相关性，是因子库的筛选规则。它和下面三种训练目标不是同一层。三类方法都可以叠加这类门槛；相关性门槛本身不构成 AlphaSAGE 的训练差异。
+训练奖励与准入条件需分别说明。相关性可以用于入库门槛，也可以连续影响奖励；AlphaForge 的 fitness 已包含合法性与相关性条件，AlphaSAGE 的新颖性项也进入终端奖励，不能把所有池规则都视为训练之后的筛选。
 
 ## 2. 对照
 
-| | 强化学习 | AlphaForge | AlphaSAGE |
+| 对照项 | 策略梯度（以 AlphaGen 为例） | AlphaForge | AlphaSAGE |
 | --- | --- | --- | --- |
 | 生成方式 | 从空序列逐步采样 token | 由噪声一次生成整条公式的 token 分布 | 从空序列逐步采样 token |
-| 真实 IC 的角色 | 变成终端奖励，作为常数乘到策略梯度上 | 先评价一批公式，训练 Predictor 去拟合 fitness | 合成终端奖励 \(R\) 后，以 \(\log R\) 常数进入 Trajectory Balance |
-| 梯度路径 | 优势或回报加权各步 \(\log\pi(a_t\mid s_t)\) | Predictor 的分数经 Gumbel-Softmax 回到生成器 | 同一个残差同时更新轨迹上每个已选 token 的 \(\log P(a_t\mid s_t)\) |
-| 生成器学到的对象 | 提高期望奖励，概率向高回报公式集中 | 提高 Predictor 认为的 fitness，并用多样性损失拉开样本 | 以完整公式的采样概率正比于 \(R\) 为目标 |
+| 真实 IC 的角色 | 组合 IC 变化形成奖励，进入回报或优势估计 | 评价公式，监督 Predictor 拟合 fitness | 合成正终端奖励 R，以 log R 作为 Trajectory Balance 的匹配目标 |
+| 梯度路径 | 回报或优势加权的 log pi(a_t given s_t) 梯度；PPO 另有概率比与裁剪 | Predictor 的分数经 Gumbel-Softmax 近似回到 Generator | 轨迹残差对 log P_F、log P_B 与 log Z 的梯度 |
+| 生成器学到的对象 | 提高期望回报；不保证只采样一个最优公式 | 提高 Predictor 认为的 fitness，并用多样性损失拉开样本 | 以完整公式的采样概率正比于 R 为目标，成立依赖奖励与优化条件 |
 
 ## 3. 强化学习
 
-公式生成是一个序列决策过程。状态是已经写出的 token，动作是下一个算子、特征、常数、窗口或结束符。中间步骤没有 IC，奖励出现在公式结束之后。
+AlphaGen 将公式生成建模为序列决策：状态是已有 token，动作是下一符号，主要组合奖励在完整公式生成后计算。RiskMiner 则评价合法中间表达式；两者都不通过真实 IC 对离散选择直接求导。
 
-策略梯度不穿过 IC。它提高实际采样到的动作的对数概率，并用优势或回报决定升降幅度。价值网络或一条轨迹上的回报，用来把终端奖励分到较早的 token。QFR 对此的判断是：中间状态缺少可靠监督，价值网络容易有偏，因此可以改用不带价值网络的 REINFORCE。两种做法都是在更新 \(\log\pi\)，都没有把 IC 变成对 token 的可微损失。
+策略梯度不穿过 IC。简化的 REINFORCE 更新方向为 `E[(return - baseline) * grad_theta log pi_theta(trajectory)]`；正、负优势分别提供提高、降低对应轨迹对数概率的方向，但参数共享与批内聚合会影响最终变化。PPO 另使用裁剪的概率比目标。QFR 针对中间状态价值估计偏差提出无价值网络的 REINFORCE 与贪婪基线，这是该论文的论证，不表示价值网络在所有公式任务中都不可用。
 
 奖励具体写什么，要和训练机制分开看。
 
 - AlphaGen 论文把新因子加入当前池后、线性组合 IC 的提升作为回报。池子一变，同一条公式的奖励就变。
-- 奖励也可以只用单因子绝对 IC，再用相关性门槛拒绝与池中因子过于相似的公式。这时被拒绝公式的奖励直接为 0，而不是按相关性连续加减分；策略仍然最大化期望奖励，采样会向绝对 IC 更高、且能通过门槛的公式集中。
+- 另一种条件性设计是 `reward = abs(IC)`，不通过相关性门槛时置零。若如此定义，过滤决定奖励是否为零；连续相关性惩罚则是不同目标。这不是所有强化学习方法的共同设定。
 
 ## 4. AlphaForge
 
 AlphaForge 不沿 token 逐步接收终端奖励。Generator 从高斯噪声输出整条公式每个位置的 logits。语法 mask 和 Gumbel-Softmax 把 logits 变成可微的 token 分布，因此生成器参数到公式表示之间有梯度。
 
-真实 IC 仍不可微。论文先用已评价公式训练 Predictor，使其拟合真实 fitness：
+真实 IC 仍在梯度路径之外。论文先用已评价公式训练 Predictor，拟合满足合法性与相关性条件时取绝对 IC、否则为零的 fitness：
 
-\[
-L_P
-=
-\sqrt{
-\frac{1}{n}
-\sum_{i=1}^{n}
-\left(P(x_i)-\mathrm{fitness}(x_i)\right)^2
-}.
-\]
+```text
+L_P = sqrt((1/n) * sum_i (P(x_i) - fitness(x_i))^2)
+```
 
 然后冻结 Predictor，让 Generator 最大化预测分数，并惩罚两次采样过于相似：
 
-\[
-L_G=-P(x_1)+L_{\mathrm{Diversity}}.
-\]
+```text
+L_G = -P(x_1) + L_Diversity
+```
 
-梯度来自 Predictor 这个可微代理，不来自本次新公式的 IC 算子。新公式随后还是要做真实评价，满足预测能力和低相关要求后进入 Factor Zoo，并成为以后训练 Predictor 的样本。
+两者交替训练：训练 Predictor 时使用真实标签；训练 Generator 时固定 Predictor 参数，梯度仍穿过 Predictor 回到 Generator。新公式经过真实评价后扩充评分样本，只有满足准入条件的公式才进入 Factor Zoo；评分样本集与准入库是不同集合。
 
 ## 5. AlphaSAGE
 
@@ -60,42 +54,38 @@ AlphaSAGE 也从空公式逐步采样 token。当前部分公式先还原成抽�
 
 终端奖励是
 
-\[
-R
-=
-R_{\mathrm{IC}}
-+\lambda(T)R_{SA}
-+\eta(T)\left(1-\max|\mathrm{IC}_{\mathrm{mutual}}|\right).
-\]
+```text
+R = R_IC + lambda(T) * R_SA + eta(T) * (1 - max abs(IC_mutual))
+```
 
-\(R_{\mathrm{IC}}\) 依据因子值与标签的截面 IC 评价预测能力；论文式（12）使用有符号 IC，不能改写为绝对 IC。\(R_{SA}\) 衡量结构近邻的历史行为一致性，新颖性按与已有因子的最大绝对互相关连续减分；辅助项权重随训练进度变化（原文式 12–14）。\(R\) 是训练奖励，不是股票收益本身。
+R_IC 依据因子值与标签的截面 IC 评价预测能力；论文式（12）使用有符号 IC，不能改写为绝对 IC。R_SA 衡量结构近邻的历史行为一致性，新颖性按与已有因子的最大绝对互相关连续减分；辅助项权重随训练进度变化（原文式 12–14）。R 是训练奖励，不是股票收益本身。
 
 Trajectory Balance 的目标是
 
-\[
-P(\alpha)\propto R(\alpha).
-\]
+```text
+P(alpha) = R(alpha) / Z
+Z = sum_over_all_terminal_formulas R(alpha)
+```
 
 论文的轨迹平衡损失比较前向概率、反向概率与终端奖励（式 6）：
 
-\[
-\left(
-\log Z_\theta
-+\sum_t\log P_F(s_t\mid s_{t-1})
--\log R(s_n)
--\sum_t\log P_B(s_{t-1}\mid s_t)
-\right)^2.
-\]
+```text
+residual = log Z_theta
+         + sum_t log P_F(s_t given s_(t-1))
+         - log R(s_n)
+         - sum_t log P_B(s_(t-1) given s_t)
+L_TB = residual^2
+```
 
-在标准 TB 的解释中，终端奖励作为给定匹配目标，梯度经过模型概率与总流量参数，不对离散采样或历史 IC 求导。\(P_F\)、\(P_B\) 与 \(Z_\theta\) 共同决定路径残差；不能只根据残差符号断言每个动作概率都会同向变化。AlphaSAGE 另加入前向动作熵正则，鼓励保持探索（式 15–16）。
+在标准 TB 中，终端奖励作为给定匹配目标，梯度经过模型概率与总流量参数，不对离散采样或历史 IC 求导。P_F、P_B 与 Z_theta 共同决定路径残差；不能只根据残差符号断言每个动作概率都会同向变化。AlphaSAGE 另加入前向动作熵正则，鼓励保持探索（式 15–16）。
 
-若状态定义为完整 token 前缀且每个状态只有唯一前驱，则 \(P_B=1\)，上式可以省略反向项。这是一般树状构造图的推导条件；AlphaSAGE 正文将前向与反向策略写为学习对象，但未充分展开反向策略的具体设定，不能用该简化补全。非正 IC 如何变换为适合 \(\log R\) 的奖励也未完整说明。
+标准 TB 可在同一次损失更新中联合学习前向策略、后向策略与 log Z；也允许固定合法的后向策略。若完整 token 前缀状态只有唯一前驱，则 P_B=1，反向项恒为零。AlphaSAGE 正文将前向与反向策略写为学习对象，但未充分展开反向策略的实现、参数共享及更新细节，不能用树状图的简化补全。signed IC 如何保证合成奖励满足 log R 所需的严格正值，也未完整说明。
 
 奖励比例采样是训练目标，其成立需要相应的轨迹覆盖与优化条件；新颖性参照和辅助权重变化会使目标移动。池筛选与后续动态组合是不同机制，详细范围见[AlphaSAGE 精读](../notes/deep/2025_AlphaSAGE.md)。
 
 
 ## 6. 阅读边界
 
-- 强化学习、AlphaForge、AlphaSAGE 的论文依据分别见[AlphaGen 速读卡](../notes/cards/2023_AlphaGen.md)、[AlphaForge 核心算法解读](../notes/deep/2024_AlphaForge.md) 和 [AlphaSAGE 核心算法解读](../notes/deep/2025_AlphaSAGE.md)。
+- 论文依据分别见[AlphaGen](../notes/cards/2023_AlphaGen.md)、[QFR](../notes/cards/2024_QFR.md)、[AlphaForge](../notes/deep/2024_AlphaForge.md) 和 [AlphaSAGE v3](../notes/deep/2025_AlphaSAGE.md)；一般 TB 的条件见[原方法笔记](../notes/cards/2022_TrajectoryBalance.md)。
 - 各论文的标签、股票池、算子表和池容量不同；本文只比较训练机制，不比较实验结果。
-- 训练后的动态组合是独立阶段。它不参与上面三条生成器损失。
+- AlphaForge 与 AlphaSAGE 的后续动态组合与生成器训练分阶段；AlphaGen 的池组合优化则参与训练奖励计算，不能把三者都概括为“组合不参与生成训练”。

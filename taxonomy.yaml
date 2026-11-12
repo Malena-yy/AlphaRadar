@@ -7,37 +7,37 @@ problems:
   search-space:
     code: P1
     name: 表达空间巨大，有效因子稀少
-    tension: 空间随表达式长度组合爆炸，其中大多不合法、无意义或彼此语义等价
+    tension: 表达式组合空间巨大，候选可能无效、重复或缺少预测信息
     stage: 表达与搜索
   expressiveness:
     code: P2
     name: 表达能力与可解释性的权衡
-    tension: 公式可解释、可审计但表达受限；神经因子和任意代码表达更强，却难以解释和审计
+    tension: 公式便于检查计算但表达受限，神经表示与通用代码增加解释和审计难度
     stage: 表达
   eval-cost:
     code: P3
     name: 评价成本高
-    tension: 每个候选都要在全市场长周期面板上求值，评价次数直接决定搜索规模
+    tension: 完整候选评价通常依赖行情面板求值与相关性计算，成本限制搜索范围
     stage: 评价
   learning-signal:
     code: P4
     name: 学习信号稀疏、延迟且不可微
-    tension: 只有完整因子才有奖励，IC 对生成过程没有梯度，奖励还随因子池变化
+    tension: 终端反馈难以分配到生成步骤，真实 IC 无法经离散选择直接反传，池依赖奖励还会变化
     stage: 训练
   overfitting:
     code: P5
     name: 低信噪比下的过拟合
-    tension: 收益中可预测成分很小，大规模搜索等于大量多重检验
+    tension: 低信噪比下反复评价与择优产生选择偏差，显著性判断需考虑多重比较
     stage: 评价可信度
   leakage:
     code: P6
     name: 前视偏差与信息泄漏
-    tension: 一处时间对齐错误就能制造虚假的高 IC，且很难从结果上察觉
+    tension: 决策时不可用的信息或测试期反馈可能进入研究流程，制造虚假的预测能力
     stage: 评价可信度
   redundancy:
     code: P7
     name: 因子同质化与冗余
-    tension: 搜索集中到少数高分模板，新因子与已有因子高度相关
+    tension: 搜索可能集中到少数模板，结构差异不保证信号互补或组合增量
     stage: 入池
   objective-gap:
     code: P8
@@ -47,12 +47,12 @@ problems:
   decay:
     code: P9
     name: 非平稳与因子衰减
-    tension: 市场状态在变，因子被拥挤后失效，挖掘需要持续维护
+    tension: 市场关系与拥挤程度变化可能削弱既有信号，适应机制的效果与成本需要评价
     stage: 持续使用
   reproducibility:
     code: P10
     name: 评估口径不统一、难以复现
-    tension: 各工作的股票池、切分、标签、指标和成本假设不同，很多未开源
+    tension: 市场、切分、标签、指标与成本口径不同，公开材料也未必足以复核结果
     stage: 研究方法
 
 routes:
