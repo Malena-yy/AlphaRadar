@@ -25,7 +25,7 @@ DSR 把表达式生成看作只有终端奖励的强化学习，并指出标准�
 
 ### 2.2 把“一批彼此不同的好因子”写成目标：GFlowNet 与 Trajectory Balance
 
-GFlowNet 学习按奖励成比例采样，多样性来自训练目标本身，不必在最大化目标之外另加惩罚；它可以离策略训练，适合“代理奖励打分、只把多样批次送真实评价”的多轮流程。Trajectory Balance 用整条轨迹上的一个残差同时更新各步概率。自回归生成公式时后向概率恒为 1，损失化为 \((\log Z + \sum_t \log P_F - \log R)^2\)，与[生成器如何使用真实 IC](../generator_training_with_ic.md)中对 AlphaSAGE 的说明一致。
+GFlowNet 学习按奖励成比例采样，在奖励与训练条件满足时可以保留多个高奖励模式；它可以离策略训练，适合“代理奖励打分、少量真实评价”的多轮流程。Trajectory Balance 用整条轨迹上的一个残差同时更新各步概率。若以完整 token 前缀定义状态且每个状态只有唯一前驱，后向概率为 1，损失可简化为 \((\log Z + \sum_t \log P_F - \log R)^2\)。这是树状构造图的条件性简化，不能直接视为 AlphaSAGE 的具体后向策略设定；其论文公式与披露边界见[生成器如何使用真实 IC](../generator_training_with_ic.md)。
 
 迁移时要注意：
 

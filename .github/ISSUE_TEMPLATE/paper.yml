@@ -18,12 +18,12 @@ body:
     id: problems
     attributes:
       label: 针对的问题
-      description: P1-P10 中的编号，可多个，定义见 README“出发点：因子挖掘面临的问题”；不确定可留空
+      description: P1-P10 中的编号，可多个，定义见 README“因子挖掘面临的问题”；不确定可留空
   - type: input
     id: routes
     attributes:
       label: 路线
-      description: 取值见 taxonomy.yaml 的 routes，可多个，例如 formulaic、llm-agent
+      description: 取值见 taxonomy.yaml 的 routes，可多个，例如 formulaic、llm-formula、llm-agent
   - type: textarea
     id: why
     attributes:

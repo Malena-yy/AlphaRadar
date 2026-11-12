@@ -1,0 +1,25 @@
+name: 内容勘误
+description: 纠正论文登记、笔记或专题中的事实、引用与表述错误
+title: "[correction] <工作或文件>"
+body:
+  - type: input
+    id: location
+    attributes:
+      label: 文件与位置
+      description: 文件路径及章节、段落或行号
+    validations:
+      required: true
+  - type: textarea
+    id: correction
+    attributes:
+      label: 原表述与建议修改
+      description: 说明错误及建议修改，区分事实纠正与个人解读
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: 公开依据
+      description: 原文链接及相关章节、公式或表格；仅涉及措辞或链接时说明即可
+    validations:
+      required: true
