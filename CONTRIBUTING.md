@@ -12,7 +12,7 @@
 
 ## 提交文档修改
 
-修改单篇论文时，以登记与该篇笔记为单位；专题分析可独立提交。卡片和精读分别使用 [简读卡模板](notes/_template_card.md)与[精读模板](notes/_template_deep.md)，笔记规范见 [notes/AGENTS.md](notes/AGENTS.md)。生成内容、维护流程与检查命令见 [AGENTS.md](AGENTS.md)。
+修改单篇论文时，以登记与该篇笔记为单位；专题分析可独立提交。卡片和精读分别使用 [简读卡模板](notes/_template_card.md)与[精读模板](notes/_template_deep.md)，笔记规范见 [notes/AGENTS.md](notes/AGENTS.md)。生成文件、内容更新与检查命令见 [AGENTS.md](AGENTS.md)。
 
 贡献内容应独立成立，仅使用可公开的材料。论文 PDF、图片、私有数据和内部系统信息不入库；引用公开链接，保留文献版本与证据范围。
 

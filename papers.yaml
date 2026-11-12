@@ -24,7 +24,7 @@
 #   status        inbox / triaged / card / deep-read
 #   card, deep    速读卡与精读路径
 #   added         收录日期
-#   checked       最近一次核查版本与发表状态的日期；各分项的检索步骤与核查时间记入本地 WORKLOG.md
+#   checked       版本与发表状态所据的核查日期，格式为 YYYY-MM-DD
 papers:
 - id: alpha101-2016
   short: Alpha101
