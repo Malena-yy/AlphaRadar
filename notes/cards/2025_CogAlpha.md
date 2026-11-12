@@ -30,5 +30,3 @@
   - 证据：实验以 CSI300 为主，预测目标为 10 日收益并以开盘价买卖，按训练 2011-01-01–2019-12-31、验证 2020 全年、测试 2021-01-01–2024-12-01 切分，另在 CSI500、S&P500、HSI、HSCI 上复核（第 4.1 节、附录 B.1）。表 1 将 20 个生成因子组合后与 21 个基线比较，指标为 IC、ICIR、RankIC、RankICIR、AER 与 IR（第 4.2 节）；回测在 Qlib 内按 top-50/drop-5 构建，开盘价成交、开仓成本 0.05%、平仓成本 0.15% 并设 5 CNY 最低手续费（附录 B.2）。消融覆盖 Adaptive Generation、Diversified Guidance、Seven-Level Agent Hierarchy 和 Thinking Evolution 四个组件（表 3、附录 B.7），并对筛选分位阈值做敏感性分析（附录 B.10）；泄漏方面，生成的代码需通过针对 shift(-1) 与滚动窗口错位的 temporal leakage unit test 才能入池（附录 A.3）。
 
 * **局限：** 论文 Limitations 中承认回测完全在 Qlib 内实现、可能无法充分复现实盘条件，LLM 输出的随机性使同一批因子难以精确复现，且执行时间随数据集规模增长；未来工作计划才把方法投入实盘验证（Limitations、Conclusion）。实验设置上，各数据集只采用一次固定时间切分，CSI300 测试段为 2021-01-01–2024-12-01，未做滚动重训（据实验设置）；生成与筛选依赖本地 gpt-oss-120b，论文未讨论该模型预训练语料与 2021–2024 测试区间的关系，正文也未给出官方代码仓库或复现脚本链接（据实验设置）。
-
-* **可参考点：** 1）用多层专家视角引导 LLM 产生多样假设；2）质量检查器必须覆盖代码执行、数值稳定和时间泄漏；3）code-based 表达更灵活，但要配套 DSL/AST 或 sandbox；4）thinking evolution 可与 QuantaAlpha/FactorEngine 的轨迹演化结合。

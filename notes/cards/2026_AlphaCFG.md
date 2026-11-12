@@ -29,5 +29,3 @@
   - 证据：在 CSI300 与 S&P500 成分股上，输入 open/close/high/low/volume/vwap 六个特征，标签为 20 日远期收益，训练 2010-01-01 至 2017-12-31、验证 2018-01-01 至 2019-12-31、测试 2021-01-01 至 2024-12-31（2020 年数据按设计剔除），以 IC、RankIC、ICIR、RankICIR 及 top-k/drop-n（k=60、n=5）回测的 Sharpe、Max Drawdown 评价，5 个随机种子（附录 I.1–I.3）。对比 XGBoost、LightGBM、LSTM、ALSTM、TCN、Transformer、gplearn、AlphaQCM、RPN+PPO（AlphaGen），并做 RPN+MCTS、α-Syn+MCTS、α-Sem+MCTS 的生成空间消融（表 2）。论文称 α-Sem-k+MCTS 在两个市场的相关性指标上均最优（第 5 节，表 2），并报告对 GTJA191 与 Alpha101 因子做掩码改写后 IC 提升（第 5 节，表 3）。回测指标上，CSI300 的 Sharpe 最高、最大回撤低于全部因子类基线（仍高于 XGBoost），S&P500 的最大回撤最低、Sharpe 仅次于 AlphaQCM（表 2）。生成空间的复杂度分析另给出各文法长度截断后的计数（附录 E，图 8）。
 
 * **局限：** 论文未单列 Limitations，结论的后续方向是接入程序或语法树上的 foundation model 先验（第 6 节）；实验只覆盖两个市场、单一时间切分，回测以 top-k/drop-n 限制每日换手但未给出交易成本设定，标签为 20 日远期收益，按日计算 IC 时窗口重叠（推断）（附录 I.1、I.3，据实验设置）；GP 基线只优化单因子 IC、未用组合模型（附录 I.5，据实验设置）。
-
-* **可参考点：** 1）用形式文法统一语法、语义和复杂度约束；2）树结构状态比线性 RPN 更适合处理语义等价和局部剪枝；3）可用于规范本地 DSL，减少非法表达式比例；4）适合做已有因子的语法化改写和精炼。

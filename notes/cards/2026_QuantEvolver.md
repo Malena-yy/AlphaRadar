@@ -31,5 +31,3 @@
   - 证据：在三个市场基准上评估：Benchmark A 为单资产 5 分钟方向预测（指标 DirAcc），Benchmark B 为数字资产小时级截面因子挖掘（指标 IC、RankIC、ICIR，主指标 RankIC），Benchmark Γ 为 CSI 300 ETF 成分股日频因子发现（同指标组）（第 IV-C 节）。论文第 IV-A 节称默认以 Qwen3-14B 实例化 QUANTEVOLVER，第 IV-C 节又称所有方法统一使用 Qwen-3.6-Plus 作为 backbone，并共用相同的因子表达空间、市场变量、算子定义与验证协议；下游统一为按验证集表现排序、按 0.7 相关性阈值去冗余后等权融合（第 IV-A、IV-C 节）。表 I 对比 AlphaBench、QuantaAlpha、R&D-Agent、Alpha-Jungle；表 II 在 Benchmark B 上消融 seed construction、diversity 奖励与 Factor DSL 三项；第 IV-F 节做 top-k 与相关性阈值敏感性分析，第 IV-H 节用多空组合做盈利性检验。
 
 * **局限：** 论文第 IV-H 节说明多空组合实验并非完整优化的交易系统，只作为 RankIC 能否转化为经济收益的合理性检查（第 IV-H 节）；结论未单列 Limitations 章节，也未讨论训练任务的 regime 划分与因子库的长期维护（第 VI 节）。实验设置上，三个基准未给出逐段训练/验证/测试切分的具体日期，只以“种子表达式 × 评估窗口”的任务库形式描述（第 III-A 节），多空检验未披露是否扣除手续费、滑点或资金费率；论文未报告上游种子生成所用 oracle LLM 与全部训练超参数（据实验设置）。
-
-* **可参考点：** 1）用 RFT/GRPO 替代长 prompt 反馈循环，降低上下文漂移；2）seed + regime-aware task bank 可稳定训练；3）DiCo Reward 适合同时优化预测性、多样性和互补性；4）最终产物应是因子数据库，不只是微调后的生成模型。

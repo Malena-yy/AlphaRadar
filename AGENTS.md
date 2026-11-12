@@ -8,7 +8,7 @@ AlphaRadar 是围绕“因子挖掘专题”的研究跟踪仓库：持续收录
 
 - 事实源：`papers.yaml`（论文登记，字段含义见文件开头注释）、`taxonomy.yaml`（问题、路线、标签和状态的取值），以及手写的笔记、专题和简报。
 - 生成物：README 中 `PROBLEMS`、`STATUS` 两个标记区块，`INDEX.md`，速读卡从文件开头到 `META:END` 的部分。改了事实源就运行 `python scripts/build_index.py`，不要手改生成内容。
-- 脚本同时校验：登记表取值、日期和路径；README 问题标题与 `taxonomy.yaml` 一致；`topics/problems.md` 点名的工作确实标注了对应问题；速读卡四个字段齐全，问题行的“（主要）/（涉及）”与 `problems` / `also` 一致、问题名与 `taxonomy.yaml` 一致；精读含必备章节。
+- 脚本同时校验：登记表取值、日期和路径；README 问题标题与 `taxonomy.yaml` 一致；`topics/problems.md` 点名的工作确实标注了对应问题；速读卡三个字段齐全，问题行的“（主要）/（涉及）”与 `problems` / `also` 一致、问题名与 `taxonomy.yaml` 一致；精读含必备章节。
 
 ## 目录
 
