@@ -10,7 +10,7 @@
 | 会议 / 期刊 | — |
 | 论文 | [arXiv:2602.11917](https://arxiv.org/abs/2602.11917) |
 | 代码 | [gta0804/AlphaPROBE](https://github.com/gta0804/AlphaPROBE) |
-| 作者单位 | 官方摘要页未展示单位信息；作者包含 Taian Guo、Haiyang Shen、Junyu Luo、Binqi Chen、Hongjun Ding、Jinsheng Huang、Luchen Liu、Yun Ma、Ming Zhang |
+| 作者单位 | 北京大学计算机学院 / PKU-Anker LLM Lab、北京大学人工智能研究院、Zhengren Quant、纽约市立大学 Baruch College |
 | 路线 | `formulaic` `pool-combination` |
 | 标签 | `evolutionary` `factor-lineage` |
 | 主要针对 | P1 表达空间巨大，有效因子稀少；P7 因子同质化与冗余 |
@@ -19,7 +19,7 @@
 
 <!-- META:END -->
 
-> 文献依据：arXiv v1。
+> 文献依据：[arXiv v1](https://arxiv.org/html/2602.11917v1)（作者单位见首页）。
 
 * **主要工作/创新点：** AlphaPROBE 将公式化因子研究组织为有向无环图上的有偏演化搜索。每个节点表示一个因子候选，边表示从父因子到子因子的改写、组合或变异关系；检索器综合因子自身质量、谱系深度、被检索次数、与已有因子的数值/语义/语法多样性，选择最有潜力的父节点。生成器再利用该父节点从根到当前节点的完整演化路径，生成更有上下文的新候选，避免重复做已经无效的局部修改。与传统遗传规划或强化学习只维护种群、序列轨迹不同，AlphaPROBE 显式保存因子谱系和图拓扑，有助于分析哪些结构改写带来边际收益；组合阶段使用动态因子整合器形成每日信号，回测计入交易成本。
 

@@ -10,7 +10,7 @@
 | 会议 / 期刊 | ICLR 2026（Poster） |
 | 论文 | [arXiv:2509.25055](https://arxiv.org/abs/2509.25055) |
 | 代码 | [BerkinChen/AlphaSAGE](https://github.com/BerkinChen/AlphaSAGE) |
-| 作者单位 | 官方摘要页未展示单位信息；作者为 Binqi Chen、Hongjun Ding、Ning Shen、Jinsheng Huang、Taian Guo、Luchen Liu、Ming Zhang |
+| 作者单位 | 北京大学计算机学院 / PKU-Anker LLM Lab、Zhengren Quant、纽约市立大学 Baruch College、英属哥伦比亚大学统计系 |
 | 路线 | `formulaic` |
 | 标签 | `gflownet` `gnn` |
 | 主要针对 | P4 学习信号稀疏、延迟且不可微；P7 因子同质化与冗余 |
@@ -32,4 +32,4 @@
   - P4 学习信号稀疏、延迟且不可微（主要）：预测性能、结构对齐与新颖性的多信号奖励加轨迹平衡。
   - P7 因子同质化与冗余（主要）：结构对齐与新颖性奖励下覆盖多个高奖励模式。
 
-* **局限：** 组件为累积消融，不能视为相互独立的增益；训练 signed IC、报告 absolute IC 与轨迹平衡要求正奖励之间的处理未完整披露，终止概率与算法比较方向也存在差异；每市场一个固定切分，组合与成本规则未充分展开。
+* **局限：** 组件为累积消融，不能视为相互独立的增益；式 12 对跨日平均 IC 取绝对值，但轨迹平衡所需的严格正奖励、零奖励及退化截面的处理未完整披露，终止概率与算法比较方向也存在差异；每市场一个固定切分，组合与成本规则未充分展开。

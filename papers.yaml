@@ -1,4 +1,4 @@
-# AlphaRadar 论文登记表：唯一事实源。README 的生成区块、INDEX.md 和速读卡开头的元数据都由 scripts/build_index.py 据此生成。
+# AlphaRadar 论文元数据。README 的生成区块、INDEX.md 和速读卡开头的元数据都由 scripts/build_index.py 据此生成。
 # 字段：
 #   id            唯一标识，<小写简称>-<首次公开年份>
 #   short         常用简称；在 topics/problems.md 中按简称识别论文，不能重复
@@ -18,7 +18,7 @@
 #                   markets    市场与股票池，例如 "CSI300、CSI500"、"S&P500"、"多市场"
 #                   freq       数据频率，例如 "日频"、"分钟频"、"10 分钟"
 #                   test       样本外区间，例如 "2020-01 至 2021-12"
-#                   label      预测标签与持有期，例如 "20 日收益"
+#                   label      预测标签，例如 "未来 20 日收益"；持有期另注明，不能由标签期限推定
 #                   cost       交易成本假设，例如 "买入万 5、卖出万 15"；未说明写 null
 #   routes, tags  路线与标签，多选，取值见 taxonomy.yaml
 #   status        inbox / triaged / card / deep-read
@@ -360,7 +360,7 @@ papers:
   url: https://arxiv.org/abs/2509.25055
   code: https://github.com/BerkinChen/AlphaSAGE
   code_note: null
-  affiliation: 官方摘要页未展示单位信息；作者为 Binqi Chen、Hongjun Ding、Ning Shen、Jinsheng Huang、Taian Guo、Luchen Liu、Ming Zhang
+  affiliation: 北京大学计算机学院 / PKU-Anker LLM Lab、Zhengren Quant、纽约市立大学 Baruch College、英属哥伦比亚大学统计系
   problems:
   - learning-signal
   - redundancy
@@ -498,7 +498,7 @@ papers:
   url: https://arxiv.org/abs/2507.17211
   code: null
   code_note: 未见官方开源
-  affiliation: 官方摘要页未展示单位信息；作者为 Haochen Luo、Yuan Zhang、Chen Liu
+  affiliation: 香港城市大学、上海财经大学
   problems:
   - objective-gap
   also:
@@ -524,7 +524,7 @@ papers:
 - id: alpha-r1-2025
   short: Alpha-R1
   title: 'Alpha-R1: Alpha Screening with LLM Reasoning via Reinforcement Learning'
-  summary: 用 SFT + GRPO 训练 LLM 按市场状态推理因子启停，做因子筛选。
+  summary: 用 GRPO 训练 LLM 按市场状态推理因子启停，做因子筛选。
   first_public: 2025-12
   versions: arXiv v1 2025-12；v2 2026-09
   venue: null
@@ -532,7 +532,7 @@ papers:
   url: https://arxiv.org/abs/2512.23515
   code: https://github.com/FinStep-AI/Alpha-R1
   code_note: null
-  affiliation: 官方摘要页未展示单位信息；作者包含 Zuoyou Jiang、Li Zhao、Rui Sun、Ruohan Sun、Zhongjian Li、Jing Li、Daxin Jiang、Zuo Bai、Cheng Hua
+  affiliation: 上海交通大学、StepFun、FinStep
   problems:
   - objective-gap
   - decay
@@ -568,7 +568,7 @@ papers:
   url: https://arxiv.org/abs/2602.11917
   code: https://github.com/gta0804/AlphaPROBE
   code_note: null
-  affiliation: 官方摘要页未展示单位信息；作者包含 Taian Guo、Haiyang Shen、Junyu Luo、Binqi Chen、Hongjun Ding、Jinsheng Huang、Luchen Liu、Yun Ma、Ming Zhang
+  affiliation: 北京大学计算机学院 / PKU-Anker LLM Lab、北京大学人工智能研究院、Zhengren Quant、纽约市立大学 Baruch College
   problems:
   - search-space
   - redundancy
@@ -666,7 +666,7 @@ papers:
   url: https://arxiv.org/abs/2402.09746
   code: null
   code_note: 未见官方开源
-  affiliation: 官方摘要页未展示单位信息；作者为 Hang Yuan、Saizhuo Wang、Jian Guo
+  affiliation: 香港科技大学、IDEA Research
   problems:
   - search-space
   also:
@@ -698,7 +698,7 @@ papers:
   url: https://arxiv.org/abs/2409.06289
   code: https://github.com/kouzhizhuo/Automate-Strategy-Finding-with-LLM-in-Quant-investment
   code_note: null
-  affiliation: 官方摘要页未展示单位信息；作者为 Zhizhuo Kou、Holam Yu、Jingshu Peng、Lei Chen
+  affiliation: 香港科技大学、香港科技大学（广州）、北京大学
   problems:
   - search-space
   - objective-gap
@@ -764,7 +764,7 @@ papers:
   url: https://arxiv.org/abs/2505.11122
   code: null
   code_note: 未见官方开源
-  affiliation: 官方摘要页未展示单位信息；作者为 Yu Shi、Yitong Duan、Jian Li
+  affiliation: 清华大学交叉信息研究院、中关村人工智能研究院
   problems:
   - search-space
   - redundancy
@@ -864,7 +864,7 @@ papers:
   url: https://arxiv.org/abs/2602.07085
   code: https://github.com/QuantaAlpha/QuantaAlpha
   code_note: null
-  affiliation: 官方摘要页未展示单位信息；作者包含 Jun Han、Shuo Zhang、Wei Li、Yifan Dong、Tu Hu、Yumo Zhu、Xiaomin Yu、Xin Guo、Zhaowei Liu、Kunyi Wang、Jingping Liu、Tianyi Jiang、Ruichuan An、Sen Hu、Zhi Yang、Ronghao Che、Huacan Wang
+  affiliation: QuantaAlpha、上海财经大学（SUFE）、中山大学（SYSU）、北京大学（PKU）
   problems:
   - expressiveness
   - redundancy
@@ -896,7 +896,7 @@ papers:
   url: https://arxiv.org/abs/2602.14670
   code: null
   code_note: 未见官方开源
-  affiliation: 官方摘要页未展示单位信息；作者为 Yanlong Wang、Jian Xu、Hongkang Zhang、Shao-Lun Huang、Danny Dongning Sun、Xiao-Ping Zhang
+  affiliation: 清华大学深圳国际研究生院、鹏城实验室、香港中文大学（深圳）深圳高等金融研究院
   problems:
   - redundancy
   also:
@@ -929,7 +929,7 @@ papers:
   url: https://arxiv.org/abs/2603.16365
   code: null
   code_note: 未见官方开源；方法借鉴 OpenEvolve：https://github.com/algorithmicsuperintelligence/openevolve
-  affiliation: 官方摘要页未展示单位信息；作者包含 Qinhong Lin、Ruitao Feng、Yinglun Feng、Zhenxin Huang、Yukun Chen、Zhongliang Yang、Linna Zhou、Binjie Fei、Jiaqi Liu、Yu Li
+  affiliation: 北京邮电大学、Beijing Value Simplex Technology Co., Ltd.、电子科技大学长三角研究院、Wuhan Eonray Technology Co., Ltd.
   problems:
   - search-space
   - expressiveness
@@ -963,7 +963,7 @@ papers:
   url: https://arxiv.org/abs/2604.09601
   code: null
   code_note: 未见官方开源
-  affiliation: 官方摘要页未展示单位信息；作者为 Runze Shi、Shengyu Yan、Yuecheng Cai、Chengxi Lv
+  affiliation: Celestial Quant Lab、英属哥伦比亚大学
   problems:
   - search-space
   - redundancy
@@ -999,7 +999,7 @@ papers:
   url: https://arxiv.org/abs/2605.15412
   code: https://github.com/QuantLLM/QuantEvolver
   code_note: 仓库说明仅包含可复用框架代码，不含私有市场数据、训练 checkpoint、实验日志或论文专用复现实验脚本
-  affiliation: 官方摘要页未展示单位信息；作者包含 Lingzhe Zhang、Tong Jia、Yunpeng Zhai、Zixuan Xie、Chiming Duan、Minghua He、Philip S. Yu、Ying Li
+  affiliation: 北京大学、阿里巴巴集团、南京大学、伊利诺伊大学芝加哥分校
   problems:
   - eval-cost
   - learning-signal
@@ -1034,7 +1034,7 @@ papers:
   url: https://arxiv.org/abs/2606.29194
   code: null
   code_note: 论文称将发布 Agora implementation、七个 baseline 配置和 LLM Wiki schema；论文中未给出明确仓库链接
-  affiliation: 官方摘要页未展示单位信息；作者为 Yuqi Li、Siyuan Liu、Bingjun Liu
+  affiliation: Panda AI
   problems:
   - overfitting
   - leakage
@@ -1831,7 +1831,7 @@ papers:
   arxiv: '2609.08719'
   url: https://arxiv.org/abs/2609.08719
   code: null
-  code_note: 论文未给出代码；录用状态未写明
+  code_note: 论文未给出代码
   affiliation: 明尼苏达大学、石溪大学
   problems:
   - redundancy
@@ -1848,10 +1848,14 @@ papers:
     label: 未来收益作为 RankIC 的标签（收益期限未披露）；另有执行感知净收益
     cost: 有分类别的成本模型但未披露费率公式，仅给准入门限平均有效价差 ≤25 bps
   routes:
+  - formulaic
+  - llm-agent
   - pool-combination
   - data-space
   tags:
   - quality-diversity
+  - multi-agent
+  - distillation
   - high-frequency
   - factor-screening
   status: card

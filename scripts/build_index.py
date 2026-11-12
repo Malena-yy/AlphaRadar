@@ -15,6 +15,7 @@ import os
 import re
 import sys
 from collections import Counter
+from datetime import date
 from pathlib import Path
 
 import yaml
@@ -61,7 +62,7 @@ def labelled(p, key):
 
 
 def has_note(p):
-    return p["status"] in ("card", "deep-read")
+    return p.get("status") in ("card", "deep-read")
 
 
 def mentioned(text, shorts):
@@ -120,13 +121,24 @@ def validate(papers, taxonomy):
             errors.append(f"{pid}: at most {MAX_PRIMARY} primary problems, got {len(prim)}")
         if also and not prim:
             errors.append(f"{pid}: also requires at least one primary problem")
-        errors += [f"{pid}: unknown route {r}" for r in p.get("routes") or [] if r not in routes]
-        errors += [f"{pid}: unknown tag {t}" for t in p.get("tags") or [] if t not in tags]
+        for field, allowed in (("routes", routes), ("tags", tags)):
+            values = p.get(field, [])
+            if not isinstance(values, list):
+                errors.append(f"{pid}: {field} must be a list")
+            else:
+                errors += [f"{pid}: unknown {field} value {x}" for x in values if x not in allowed]
         if p.get("status") not in status:
             errors.append(f"{pid}: unknown status {p.get('status')}")
         fp = str(p.get("first_public", ""))
         if not re.fullmatch(r"\d{4}(-\d{2})?", fp):
             errors.append(f"{pid}: first_public must be YYYY or YYYY-MM")
+        else:
+            try:
+                date.fromisoformat(fp + ("-01" if len(fp) == 7 else "-01-01"))
+            except ValueError:
+                errors.append(f"{pid}: invalid first_public date {fp}")
+        if not re.fullmatch(r"https?://[^/\s?#]+(?:[/?#][^\s]*)?", str(p.get("url", ""))):
+            errors.append(f"{pid}: url must be an HTTP(S) link")
         if p.get("arxiv"):
             a = str(p["arxiv"])
             if not re.fullmatch(r"\d{4}\.\d{4,5}", a):
@@ -134,8 +146,14 @@ def validate(papers, taxonomy):
             elif fp > f"20{a[:2]}-{a[2:4]}":
                 errors.append(f"{pid}: first_public {fp} is later than the month in arXiv id {a}")
         for key in ("added", "checked"):
-            if p.get(key) and not DATE.fullmatch(str(p[key])):
-                errors.append(f"{pid}: {key} must be YYYY-MM-DD")
+            if p.get(key):
+                value = str(p[key])
+                try:
+                    if not DATE.fullmatch(value):
+                        raise ValueError
+                    date.fromisoformat(value)
+                except ValueError:
+                    errors.append(f"{pid}: {key} must be a valid YYYY-MM-DD date")
         for key in ("card", "deep"):
             if p.get(key) and not (ROOT / p[key]).is_file():
                 errors.append(f"{pid}: {key} file not found: {p[key]}")
@@ -314,9 +332,9 @@ def render_index(papers, taxonomy, mechs):
             lines.append(f"- {p['first_public']} {name}（{label}）" + (f"：{mech}" if mech else ""))
         lines.append("")
     lines += ['<a id="setups"></a>', "", "## 3. 实验口径", "", "各篇论文实验设置的摘要；口径差异的比较见[评估口径](topics/evaluation_protocol.md)。", "", render_setup(papers, taxonomy), ""]
-    lines += ['<a id="by-route"></a>', "", "## 4. 按路线", "", "同一篇工作可以属于多条路线。", ""]
+    lines += ['<a id="by-route"></a>', "", "## 4. 按路线", "", "各路线内按首次公开时间从新到旧排列；同一篇工作可以属于多条路线。", ""]
     for key, route in taxonomy["routes"].items():
-        members = sorted((p for p in papers if key in p["routes"]), key=lambda p: (str(p["first_public"]), p["short"]))
+        members = sorted((p for p in papers if key in p["routes"]), key=lambda p: (str(p["first_public"]), p["short"]), reverse=True)
         lines += [f"### {route['name']}（`{key}`，{len(members)} 篇）", "", route["scope"], ""]
         if members:
             items = [

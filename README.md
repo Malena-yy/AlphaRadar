@@ -122,9 +122,9 @@ AlphaRadar 面向因子挖掘研究者，收录和分析公开论文，比较各
 
 | 路线 | 篇数 |
 | --- | ---: |
-| 公式 / 符号 / 代码因子挖掘（`formulaic`） | 24 |
+| 公式 / 符号 / 代码因子挖掘（`formulaic`） | 25 |
 | LLM 驱动的因子生成（`llm-formula`） | 19 |
-| LLM / Agent 研究流程（`llm-agent`） | 13 |
+| LLM / Agent 研究流程（`llm-agent`） | 14 |
 | 神经 / 隐式因子（`neural`） | 5 |
 | 因子池与组合（下游模块）（`pool-combination`） | 13 |
 | 基准与统一评测（`benchmark`） | 4 |

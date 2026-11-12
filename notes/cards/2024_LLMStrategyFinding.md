@@ -10,7 +10,7 @@
 | 会议 / 期刊 | — |
 | 论文 | [arXiv:2409.06289](https://arxiv.org/abs/2409.06289) |
 | 代码 | [kouzhizhuo/Automate-Strategy-Finding-with-LLM-in-Quant-investment](https://github.com/kouzhizhuo/Automate-Strategy-Finding-with-LLM-in-Quant-investment) |
-| 作者单位 | 官方摘要页未展示单位信息；作者为 Zhizhuo Kou、Holam Yu、Jingshu Peng、Lei Chen |
+| 作者单位 | 香港科技大学、香港科技大学（广州）、北京大学 |
 | 路线 | `llm-formula` |
 | 标签 | `llm` `multimodal` |
 | 主要针对 | P1 表达空间巨大，有效因子稀少；P8 挖掘目标与实际使用脱节 |
@@ -19,7 +19,7 @@
 
 <!-- META:END -->
 
-> 文献依据：arXiv v4。
+> 文献依据：[arXiv v4](https://arxiv.org/html/2409.06289v4)（作者单位见首页）。
 
 * **主要工作/创新点：** 该工作不是严格的强化学习公式 Alpha 生成算法，但补足了“大语言模型如何从金融文本、表格和图像研究材料中自动形成策略/因子假设”的路线。论文把多模态财经信息作为输入，用模型抽取策略关键要素形成种子 Alpha，按动量、基本面、流动性等类别组织，再通过多智能体市场评估和收益回测进行筛选，最后动态优化因子权重。与 Alpha-GPT 一类系统相比，它更强调从外部信息源抽取策略线索，而不是在固定 DSL 表达式空间内搜索。
 

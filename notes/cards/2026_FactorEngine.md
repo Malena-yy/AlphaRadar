@@ -10,7 +10,7 @@
 | 会议 / 期刊 | ICDM 2026 |
 | 论文 | [arXiv:2603.16365](https://arxiv.org/abs/2603.16365) |
 | 代码 | 未见官方开源；方法借鉴 OpenEvolve：https://github.com/algorithmicsuperintelligence/openevolve |
-| 作者单位 | 官方摘要页未展示单位信息；作者包含 Qinhong Lin、Ruitao Feng、Yinglun Feng、Zhenxin Huang、Yukun Chen、Zhongliang Yang、Linna Zhou、Binjie Fei、Jiaqi Liu、Yu Li |
+| 作者单位 | 北京邮电大学、Beijing Value Simplex Technology Co., Ltd.、电子科技大学长三角研究院、Wuhan Eonray Technology Co., Ltd. |
 | 路线 | `llm-agent` |
 | 标签 | `llm` `code-evolution` |
 | 主要针对 | P1 表达空间巨大，有效因子稀少；P2 表达能力与可解释性的权衡 |
@@ -19,7 +19,7 @@
 
 <!-- META:END -->
 
-> 文献依据：arXiv v3。
+> 文献依据：[arXiv v3](https://arxiv.org/html/2603.16365v3)（作者单位见首页）。
 
 * **主要工作/创新点：** FactorEngine 把因子表示从有限符号文法扩展到可执行的 Python 程序（带输入输出契约），并通过“宏观逻辑演化”和“微观参数优化”分离来提高表达力和效率。系统先用知识注入式启动模块，从金融研报和专家因子中抽取核心想法、伪代码和可执行 Python，形成初始程序池；演化阶段采用树结构程序池，每个节点都是一个可独立执行和评估的程序，用 UCT 准则选择高潜力节点。大语言模型负责宏观变异，即改写因子逻辑和结构；局部参数如窗口、衰减系数则交给贝叶斯优化做微观搜索。最后系统用回测反馈、经验链和多岛并行演化促进多样搜索。
 

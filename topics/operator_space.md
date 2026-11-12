@@ -43,7 +43,7 @@
 | TLRS | 明确沿用 AlphaGen 环境，正文仅以 `Abs`、`Log`、`Ref` 等说明轨迹和奖励 | 按 AlphaGen 空间理解；没有独立完整算子表 | B |
 | AlphaSAGE | `Abs/SLog1p/Inv/Sign/Log/CSRank`；`Add/Sub/Mul/Div/Pow` 与比较；`Ref`、均值、和、标准差、方差、高阶矩、极值、中位数、`TsMad`、排序、差分、比率、收益率、WMA/EMA、协方差和相关系数，以及若干价量复合统计 | 比较算子与逐元素最值是两类算子；`TsMad` 定义为滚动中位数绝对偏差（median absolute deviation） | A |
 | AlphaCFG | `Abs/Sign/Log/CSRank`、算术、`Pow`、最值；`TsRank/WMA/EMA/Ref/Mean/Sum/Std/Var/Skew/Kurt/Max/Min/Med/Mad/Delta/Cov/Corr` | 在 AlphaGen 空间上增加 `Sign`、`CSRank`、`Pow`、`TsRank` 和高阶矩 | A |
-| AlphaForge | 所引官方 action space 启用 `Inv`、`S_log1p`、算术、`Pow`、`Ref`、均值 / 和 / 标准差 / 方差 / 极值 / 中位数 / Mad、当前值除以滚动均值、收益率、差分、WMA/EMA、Cov/Corr | 官方源码口径：`ts_div` 是当前值除以滚动均值，定义但未启用的算子不计入；现有引用未固定提交，不能确认与论文实验版本一致 | A（官方源码） |
+| AlphaForge | 所引官方 action space 启用 `Inv`、`S_log1p`、算术、`Pow`、`Ref`、均值 / 和 / 标准差 / 方差 / 极值 / 中位数 / Mad、当前值除以滞后值、收益率、差分、WMA/EMA、Cov/Corr | 官方源码口径（`d0cfc27`）：启用表见[config.py](https://github.com/dulyhao/alphaforge/blob/d0cfc27df23c60f271bc885fd43027b86b787746/alphagen/config.py#L8-L38)；[`ts_div`](https://github.com/dulyhao/alphaforge/blob/d0cfc27df23c60f271bc885fd43027b86b787746/alphagen/data/expression.py#L430-L446) 为 `x[t]/x[t-d]`，`ts_pctchange` 为该比值减 1。定义但未启用的算子不计入；该提交与论文实验版本的对应关系未明确 | A（官方源码） |
 | AlphaPROBE | AlphaSAGE 主体空间，并明确区分比较 `Greater/Less` 与逐元素最值 `GetGreater/GetLess` | `TsMad` 同样定义为中位数绝对偏差 | A |
 | Alpha-Jungle | 一元变换：负号、绝对值、平方、倒数、`Sign/Sin/Cos/Tanh/Log`；时序：`Delay/Diff/Pct/Ma/Med/Sum/Std/Max/Min/Rank/Skew/Kurt/Vari/Autocorr/Zscore`；二元算术、比较、Cov/Corr | `Vari` 为滚动变异系数；时序 Z-score 和自相关以独立算子出现 | A |
 | QuantaAlpha | 时序统计、ArgMax/ArgMin、Z-score、Quantile；横截面 Rank、Z-score、Scale 和聚合统计；`Abs/Sign/Log/Exp/Sqrt/Pow/Inv`；SMA/EMA/WMA、MACD、RSI、布林带、线性衰减、回归 beta / 残差；比较、逻辑、`Where`；`Count/SumIf/Filter/Prod/HighDay/LowDay` | 包含技术指标模板和滚动回归；`ArgMax/ArgMin` 与 `HighDay/LowDay` 返回位置的方向需按定义核对 | A |
@@ -110,7 +110,7 @@
 - AlphaQCM 论文（[OpenReview](https://openreview.net/forum?id=3sXMHlhBSs)）
 - AlphaSAGE 论文（[arXiv:2509.25055](https://arxiv.org/abs/2509.25055)）与[官方仓库](https://github.com/BerkinChen/AlphaSAGE)
 - AlphaCFG 论文（[arXiv:2601.22119](https://arxiv.org/abs/2601.22119)）与[官方仓库](https://github.com/HanYang544/AlphaCFG)
-- AlphaForge 论文（[arXiv:2406.18394](https://arxiv.org/abs/2406.18394)）与[官方仓库](https://github.com/dulyhao/alphaforge)
+- AlphaForge 论文（[arXiv:2406.18394](https://arxiv.org/abs/2406.18394)）与[官方源码固定版本 d0cfc27](https://github.com/dulyhao/alphaforge/tree/d0cfc27df23c60f271bc885fd43027b86b787746)
 - AlphaPROBE 论文（[arXiv:2602.11917](https://arxiv.org/abs/2602.11917)）与[官方仓库](https://github.com/gta0804/AlphaPROBE)
 - Alpha-Jungle 论文（[arXiv:2505.11122](https://arxiv.org/abs/2505.11122)）
 - QuantaAlpha 论文（[arXiv:2602.07085](https://arxiv.org/abs/2602.07085)）与[官方仓库](https://github.com/QuantaAlpha/QuantaAlpha)

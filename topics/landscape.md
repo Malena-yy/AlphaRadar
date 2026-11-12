@@ -120,4 +120,4 @@
 
 这一组与 2.8 相邻，关注选择偏差诊断与显著性推断。经验信用校正、搜索赢家检验与候选族错误率控制有不同对象，不能据其一推断交付因子均有效。
 
-代表工作：[EvoQuantLab](../notes/cards/2026_EvoQuantLab.md)（等预算区块置换）、[AlphaMemo](../notes/cards/2026_AlphaMemo.md)（经验复用的选择偏差）、[AgenticFactorInvesting](../notes/cards/2026_AgenticFactorInvesting.md)（准入闸门与样本外冻结）、[Publication Bias](../notes/cards/2022_PublicationBias.md)（经验贝叶斯收缩与 FDR）、[Sequential Cauchy](../notes/cards/2023_SequentialCauchy.md)（强 FWER 控制）。
+代表工作：[EvoQuantLab](../notes/cards/2026_EvoQuantLab.md)（等预算区块置换）、[AlphaMemo](../notes/cards/2026_AlphaMemo.md)（经验复用的选择偏差）、[AgenticFactorInvesting](../notes/cards/2026_AgenticFactorInvesting.md)（准入闸门与样本外冻结）、[Publication Bias](../notes/cards/2022_PublicationBias.md)（经验贝叶斯收缩与 FDR）、[Sequential Cauchy](../notes/cards/2023_SequentialCauchy.md)（满足假设时的渐近强 FWER 控制）。

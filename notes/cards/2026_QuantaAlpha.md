@@ -10,7 +10,7 @@
 | 会议 / 期刊 | — |
 | 论文 | [arXiv:2602.07085](https://arxiv.org/abs/2602.07085) |
 | 代码 | [QuantaAlpha/QuantaAlpha](https://github.com/QuantaAlpha/QuantaAlpha) |
-| 作者单位 | 官方摘要页未展示单位信息；作者包含 Jun Han、Shuo Zhang、Wei Li、Yifan Dong、Tu Hu、Yumo Zhu、Xiaomin Yu、Xin Guo、Zhaowei Liu、Kunyi Wang、Jingping Liu、Tianyi Jiang、Ruichuan An、Sen Hu、Zhi Yang、Ronghao Che、Huacan Wang |
+| 作者单位 | QuantaAlpha、上海财经大学（SUFE）、中山大学（SYSU）、北京大学（PKU） |
 | 路线 | `llm-formula` |
 | 标签 | `llm` `evolutionary` |
 | 主要针对 | P2 表达能力与可解释性的权衡；P7 因子同质化与冗余 |
@@ -19,7 +19,7 @@
 
 <!-- META:END -->
 
-> 文献依据：arXiv v3。
+> 文献依据：[arXiv v3](https://arxiv.org/html/2602.07085v3)（作者单位见首页）。
 
 * **主要工作/创新点：** QuantaAlpha 将大语言模型因子挖掘过程视为可演化轨迹，而不是单轮生成表达式。每条轨迹覆盖假设生成、符号因子构造、代码实现和回测评估；系统先通过多样化规划初始化生成互补研究方向，再对高质量轨迹进行变异和交叉。变异阶段通过自反思定位导致低回报的步骤，只改写局部片段以保持轨迹连贯；交叉阶段复用不同高分轨迹中的假设模板、构造模式和修复行为。系统还对假设、语义描述、符号表达式和代码做一致性验证，并用复杂度、结构相似度和输出相关性控制冗余。
 
