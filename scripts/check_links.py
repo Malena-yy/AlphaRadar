@@ -1,6 +1,4 @@
-"""Check repository Markdown links, section anchors and image embeds.
-
-The repository keeps no image files: paper notes and topics use text, tables or Mermaid instead.
+"""Check repository Markdown links, section anchors and image paths.
 
 Usage: python scripts/check_links.py
 """
@@ -12,8 +10,8 @@ from pathlib import Path
 from urllib.parse import unquote
 
 ROOT = Path(__file__).resolve().parent.parent
-LINK = re.compile(r"(!?)\[[^\]]*\]\(([^)\s]+)\)")
-HTML_IMG = re.compile(r"<img\b", re.IGNORECASE)
+LINK = re.compile(r"!?\[[^\]]*\]\(([^)\s]+)\)")
+HTML_IMG = re.compile(r'<img\b[^>]*\bsrc=["\']([^"\']+)["\']', re.IGNORECASE)
 
 
 def section_ids(text):
@@ -48,12 +46,7 @@ def main():
         anchors[md.resolve()] = section_ids(content) | set(re.findall(r'<a\s+id=["\']([^"\']+)["\']', content))
     for md, text in sorted(docs.items()):
         rel = md.relative_to(ROOT)
-        if HTML_IMG.search(text):
-            errors.append(f"{rel}: image embed (<img>) is not allowed")
-        for bang, target in LINK.findall(text):
-            if bang:
-                errors.append(f"{rel}: image embed is not allowed: {target}")
-                continue
+        for target in LINK.findall(text) + HTML_IMG.findall(text):
             if md.name.startswith("_template") or re.match(r"^[a-z]+:", target):
                 continue
             filename, _, fragment = unquote(target).partition("#")
@@ -67,7 +60,7 @@ def main():
     if errors:
         print("\n".join(errors), file=sys.stderr)
         return 1
-    print("ok: repository links and section anchors resolve, no image embeds")
+    print("ok: repository links, image paths and section anchors resolve")
     return 0
 
 
