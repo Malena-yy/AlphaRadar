@@ -18,16 +18,16 @@ body:
     id: problems
     attributes:
       label: 针对的问题
-      description: P1-P10 中的编号，可多个，定义见 README“因子挖掘面临的问题”；不确定可留空
+      description: P1–P10 中的编号，可填多个；定义见 README“因子挖掘面临的问题”，不确定可留空
   - type: input
     id: routes
     attributes:
       label: 路线
-      description: 取值见 taxonomy.yaml 的 routes，可多个，例如 formulaic、llm-formula、llm-agent
+      description: 取值见 taxonomy.yaml 的 routes，可填多个，例如 formulaic、llm-formula、llm-agent；不确定可留空
   - type: textarea
     id: why
     attributes:
       label: 收录理由
-      description: 一两句话说明它和因子挖掘的关系、值得关注的机制
+      description: 用一两句话说明它与因子挖掘的关系，以及值得关注的机制
     validations:
       required: true
