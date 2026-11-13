@@ -1,6 +1,6 @@
 # AlphaRadar 分类体系。papers.yaml 中的 problems / routes / tags / status 只能使用这里定义的取值。
 # 问题分两级：problems 是论文动机所在、主要贡献针对的问题（至多 3 个），also 是有对应机制但不是主要贡献的问题；路线（routes）表示工作所属的研究板块，标签（tags）记录具体技术手段；都是多标签。
-# 问题的说明和跟踪关注点见 README“因子挖掘面临的问题”，各问题的应对机制见 topics/problems.md。
+# 问题总表与边界见 README“因子挖掘面临的问题”，逐条说明、跟踪关注点与应对机制见 topics/problems.md。
 # problems 的 code 是对外编号，已发布的编号不改；tension（核心矛盾）和 stage（所在环节）用于生成 README 问题总表。
 
 problems:

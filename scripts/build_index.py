@@ -1,11 +1,11 @@
 """Validate the AlphaRadar registry and regenerate everything derived from it.
 
 Sources:   papers.yaml, taxonomy.yaml, and the hand-written notes and topics.
-Generated: README.md blocks PROBLEMS and STATUS, INDEX.md, and the header of every reading card
+Generated: README.md blocks SUMMARY, PROBLEMS and STATUS, INDEX.md, and the header of every reading card
            (from the start of the file to the META:END marker).
 Checks:    taxonomy values, dates and paths in papers.yaml; primary (problems) and secondary (also)
-           labels against the problem lines of each reading card; README problem headings; works named
-           in topics/problems.md against the labels; required card fields and deep-read sections.
+           labels against the problem lines of each reading card; problem headings and tracking notes in
+           topics/problems.md, and the works it names against the labels; required card fields and deep-read sections.
 
 Usage:
     python scripts/build_index.py          # validate and rewrite generated content
@@ -164,15 +164,6 @@ def validate(papers, taxonomy):
     return errors
 
 
-def check_readme_problems(readme, taxonomy):
-    heads = dict(re.findall(r"^### (P\d+) (.+)$", readme, re.M))
-    return [
-        f"README.md: heading for {v['code']} must read '### {v['code']} {v['name']}'"
-        for v in taxonomy["problems"].values()
-        if heads.get(v["code"]) != v["name"]
-    ]
-
-
 def check_problem_doc(papers, taxonomy):
     rel = "topics/problems.md"
     parts = re.split(r"^## (P\d+) (.+)$", (ROOT / rel).read_text(), flags=re.M)
@@ -187,7 +178,9 @@ def check_problem_doc(papers, taxonomy):
         name, body = secs[code]
         if name != prob["name"]:
             errors.append(f"{rel}: heading for {code} must read '## {code} {prob['name']}'")
-        named = mentioned(body, shorts)
+        if "跟踪关注点：" not in body:
+            errors.append(f"{rel}: section {code} needs a '跟踪关注点：' paragraph")
+        named = mentioned(body.split("**应对机制**")[-1], shorts)
         tagged = {p["short"] for p in papers if labelled(p, key)}
         errors += [f"{rel}: {s} is named under {code} but not labelled {code} in papers.yaml" for s in sorted(named - tagged)]
     return errors
@@ -291,7 +284,7 @@ def render_index(papers, taxonomy, mechs):
     lines = [
         "# 论文索引",
         "",
-        "> 问题编号的含义见 [README 的问题说明](README.md#因子挖掘面临的问题)，路线范围见[按路线列表](#by-route)。",
+        "> 问题编号的含义见 [README 的问题总表](README.md#因子挖掘面临的问题)与[问题与应对机制](topics/problems.md)，路线范围见[按路线列表](#by-route)。",
         ">",
         "> 问题分两级：“主要针对”是论文动机所在、主要贡献针对的问题（至多 3 个）；“顺带涉及”是论文中有对应机制、但不是主要贡献的问题。",
         "",
@@ -299,7 +292,7 @@ def render_index(papers, taxonomy, mechs):
         "",
         "查找论文：[总表](#all-papers) · [按问题](#by-problem) · [实验口径](#setups) · [按路线](#by-route)。",
         "",
-        "理解方法：[研究全景](topics/landscape.md) · [各问题的应对机制](topics/problems.md) · [评估口径对照](topics/evaluation_protocol.md)；查看新工作与状态变化：[跟踪简报](digests/README.md)。",
+        "理解方法：[研究全景](topics/landscape.md) · [问题与应对机制](topics/problems.md) · [评估口径对照](topics/evaluation_protocol.md)；查看新工作与状态变化：[跟踪简报](digests/README.md)。",
         "",
         '<a id="all-papers"></a>',
         "",
@@ -317,7 +310,7 @@ def render_index(papers, taxonomy, mechs):
         routes = " ".join(f"`{r}`" for r in p["routes"])
         summ = p.get("summary") or "—"
         lines.append(f"| {p['first_public']} | {cell(work)} | {cell(summ)} | {problem_cell(p, taxonomy)} | {routes} | {links(p)} |")
-    lines += ["", '<a id="by-problem"></a>', "", "## 2. 按问题", "", "每个问题下的相关工作按首次公开时间从新到旧统一排列，逐篇标明时间与“主要针对 / 顺带涉及”，机制取自各自速读卡。机制的归纳与比较见[各问题的应对机制](topics/problems.md)。", ""]
+    lines += ["", '<a id="by-problem"></a>', "", "## 2. 按问题", "", "每个问题下的相关工作按首次公开时间从新到旧统一排列，逐篇标明时间与“主要针对 / 顺带涉及”，机制取自各自速读卡。机制的归纳与比较见[问题与应对机制](topics/problems.md)。", ""]
     lines += [" · ".join(f"[{v['code']} {v['name']}](#{v['code'].lower()})" for _, v in probs), ""]
     for key, v in probs:
         prim = [p for p in rows if key in (p.get("problems") or [])]
@@ -379,8 +372,14 @@ def render_problem_table(papers, taxonomy):
     return "\n".join(lines)
 
 
+def render_summary(papers, taxonomy):
+    routes = sum(any(k in p["routes"] for p in papers) for k in taxonomy["routes"])
+    return (f"{summary_line(papers, taxonomy)}，覆盖 {routes} 条研究路线与 {len(taxonomy['problems'])} 个问题，"
+            "完整列表见[论文索引](INDEX.md)。")
+
+
 def render_status(papers, taxonomy):
-    lines = [f"{summary_line(papers, taxonomy)}，完整列表见[论文索引](INDEX.md)。", "", "| 路线 | 篇数 |", "| --- | ---: |"]
+    lines = ["| 路线 | 篇数 |", "| --- | ---: |"]
     for key, route in taxonomy["routes"].items():
         lines.append(f"| {route['name']}（`{key}`） | {sum(key in p['routes'] for p in papers)} |")
     empty_routes = [f"`{k}`" for k in taxonomy["routes"] if not any(k in p["routes"] for p in papers)]
@@ -418,7 +417,6 @@ def main():
         return 1
     readme_path = ROOT / "README.md"
     readme = readme_path.read_text()
-    errors += check_readme_problems(readme, taxonomy)
     errors += check_problem_doc(papers, taxonomy)
     outputs, mechs = {}, {}
     for p in papers:
@@ -431,6 +429,7 @@ def main():
                 outputs[path] = render_card_header(p, taxonomy) + text.split(META_END, 1)[1]
         if p.get("deep"):
             errors += check_deep(p)
+    readme = replace_block(readme, "SUMMARY", render_summary(papers, taxonomy), errors)
     readme = replace_block(readme, "PROBLEMS", render_problem_table(papers, taxonomy), errors)
     readme = replace_block(readme, "STATUS", render_status(papers, taxonomy), errors)
     outputs[readme_path] = readme
